@@ -1,0 +1,57 @@
+export interface MPMIProfilePictures {
+  src: string;
+  srcLocked: string;
+  alt: string;
+  unlockLevel: number;
+}
+
+export const profilePictures: MPMIProfilePictures[] = [
+  {
+    src: "/avatar/avatar-female-1.png",
+    srcLocked: "/avatar/avatar-female-1.png",
+    alt: "profilbild-female-1",
+    unlockLevel: 1,
+  },
+  {
+    src: "/avatar/avatar-male-1.png",
+    srcLocked: "/avatar/avatar-female-1.png",
+    alt: "profilbild-male-1",
+    unlockLevel: 1,
+  },
+  {
+    src: "/avatar/avatar-female-2.png",
+    srcLocked: "/avatar/avatar-female-2-locked.png",
+    alt: "profilbild-female-2",
+    unlockLevel: 2,
+  },
+  {
+    src: "/avatar/avatar-male-2.png",
+    srcLocked: "/avatar/avatar-male-2-locked.png",
+    alt: "profilbild-male-2",
+    unlockLevel: 2,
+  },
+  {
+    src: "/avatar/avatar-female-3.png",
+    srcLocked: "/avatar/avatar-female-3-locked.png",
+    alt: "profilbild-female-3",
+    unlockLevel: 3,
+  },
+  {
+    src: "/avatar/avatar-male-3.png",
+    srcLocked: "/avatar/avatar-male-3-locked.png",
+    alt: "profilbild-male-3",
+    unlockLevel: 3,
+  },
+  {
+    src: "/avatar/avatar-female-4.png",
+    srcLocked: "/avatar/avatar-female-4-locked.png",
+    alt: "profilbild-female-4",
+    unlockLevel: 4,
+  },
+  {
+    src: "/avatar/avatar-male-4.png",
+    srcLocked: "/avatar/avatar-male-4-locked.png",
+    alt: "profilbild-male-4",
+    unlockLevel: 4,
+  },
+];

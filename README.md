@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DiNAs Lab
 
-## Getting Started
+![DiNAs Lab Logo](public/logo/dinaslab-logo-simple.svg)
 
-First, run the development server:
+DiNAs lab is a platform for teaching school students about biology. This project is part of the curriculum of our master's degree. It was developed throughout the summer semester 2023 and winter semester 2023/2024.
+
+## Quickstart
+
+1. Clone the repository and install dependencies
+
+```bash
+git clone git@github.com:cbussick/dinas-lab.git
+cd dinas-lab
+npm install
+```
+
+2. Create a `.env.local` file and add the app secrets. (Ask one of the maintainers)
+3. Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run the Project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run dev
+```
 
-## Learn More
+Runs the app in development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-To learn more about Next.js, take a look at the following resources:
+### Check the Project for Errors
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run full-check
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Checks the project for TypeScript errors, formats the code using Prettier and lints the project.
 
-## Deploy on Vercel
+You can also use the individual scripts:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run typecheck
+npm run prettify
+npm run lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Git Hooks
+
+This project uses [husky](https://github.com/typicode/husky) to run git hooks. Currently, there is only one hook that runs `npm run full-check` before every push to the repository.
+
+## Deployment
+
+The project is deployed using [Vercel](https://vercel.com/).

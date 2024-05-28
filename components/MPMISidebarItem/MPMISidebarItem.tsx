@@ -1,0 +1,65 @@
+"use client";
+
+import { MPMIRoute } from "@/helpers/routes";
+import { useSidebar } from "@/ui/useSidebar";
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  alpha,
+} from "@mui/material";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { MPMISidebarItemProps } from "./MPMISidebarItemInterfaces";
+
+export const MPMISidebarItem = ({
+  listItemButtonProps,
+  icon,
+  label,
+}: MPMISidebarItemProps): JSX.Element => {
+  const { isOpen } = useSidebar();
+  const pathname = usePathname();
+
+  let isActive = false;
+
+  if (pathname.includes(MPMIRoute.Themenwelt)) {
+    isActive = listItemButtonProps.href === MPMIRoute.Themenwelt;
+  } else if (pathname.includes(MPMIRoute.FreieUebung)) {
+    isActive = listItemButtonProps.href === MPMIRoute.FreieUebung;
+  } else {
+    isActive = listItemButtonProps.href === pathname;
+  }
+
+  return (
+    <ListItem
+      disablePadding
+      sx={{
+        overflowX: "hidden",
+        color: isActive ? (t) => t.palette.grey[900] : undefined,
+        bgcolor: isActive
+          ? (t) => alpha(t.palette.primary.main, 0.2)
+          : undefined,
+        borderRadius: 2,
+      }}
+    >
+      <ListItemButton {...listItemButtonProps} LinkComponent={Link}>
+        <ListItemIcon
+          sx={{ color: isActive ? (t) => t.palette.grey[700] : undefined }}
+        >
+          {icon}
+        </ListItemIcon>
+
+        <ListItemText
+          primary={label}
+          sx={{
+            whiteSpace: "nowrap",
+            overflowX: "hidden",
+            opacity: isOpen ? 1 : 0,
+            transition: "opacity 0.2s ease-in-out",
+          }}
+        />
+      </ListItemButton>
+    </ListItem>
+  );
+};
