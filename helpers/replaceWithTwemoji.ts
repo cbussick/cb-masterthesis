@@ -1,6 +1,6 @@
-import twemoji from "@twemoji/api";
+import { TwemojiOptions } from "@twemoji/api";
 
-const twemojiDefaults: Partial<twemoji.TwemojiOptions> = {
+const twemojiDefaults: Partial<TwemojiOptions> = {
   base: "/",
   folder: "emoji-svgs",
   ext: ".svg",

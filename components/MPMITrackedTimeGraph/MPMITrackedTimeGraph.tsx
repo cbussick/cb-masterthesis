@@ -3,8 +3,7 @@
 import { getFormattedTimeFromSeconds } from "@/helpers/getFormattedTime";
 import { getWeekdayIndex } from "@/helpers/getWeekdayIndex";
 import { useTheme } from "@mui/material";
-import { LineChart } from "@mui/x-charts";
-import { LineChartProps } from "@mui/x-charts/LineChart/LineChart";
+import { LineChart, LineChartProps } from "@mui/x-charts";
 import dayjs from "dayjs";
 import { MPMITrackedTimeGraphProps } from "./MPMITrackedTimeGraphInterfaces";
 
