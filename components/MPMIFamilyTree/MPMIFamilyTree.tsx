@@ -675,3 +675,5 @@ export const MPMIFamilyTree = forwardRef(
     );
   },
 );
+
+MPMIFamilyTree.displayName = "MPMIFamilyTree";

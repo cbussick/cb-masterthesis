@@ -136,3 +136,5 @@ export const MPMIMatchingGame = forwardRef(
     );
   },
 );
+
+MPMIMatchingGame.displayName = "MPMIMatchingGame";

@@ -119,3 +119,5 @@ export const MPMIExerciseTimer = forwardRef(
     ) : null;
   },
 );
+
+MPMIExerciseTimer.displayName = "MPMIExerciseTimer";

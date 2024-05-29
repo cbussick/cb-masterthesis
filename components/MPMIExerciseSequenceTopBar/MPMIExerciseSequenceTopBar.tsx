@@ -64,3 +64,5 @@ export const MPMIExerciseSequenceTopBar = forwardRef(
     );
   },
 );
+
+MPMIExerciseSequenceTopBar.displayName = "MPMIExerciseSequenceTopBar";
