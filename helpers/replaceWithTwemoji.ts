@@ -1,4 +1,4 @@
-import { TwemojiOptions } from "@twemoji/api";
+import twemoji, { TwemojiOptions } from "@twemoji/api";
 
 const twemojiDefaults: Partial<TwemojiOptions> = {
   base: "/",
@@ -7,6 +7,5 @@ const twemojiDefaults: Partial<TwemojiOptions> = {
 };
 
 export const replaceEmoji = (html: string | undefined): string => {
-  // @ts-ignore
   return twemoji.parse(html || "", twemojiDefaults);
 };
