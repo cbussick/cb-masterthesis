@@ -9,12 +9,10 @@
     "typecheck": "npx tsc --noEmit",
     "prettify": "npx prettier --write .",
     "lint": "next lint",
-    "full-check": "npm run typecheck && npm run prettify && npm run lint && echo \"✅ Everything is good! :) 🚀 \""
+    "full-check": "npm run typecheck && npm run prettify && npm run lint && echo \"✅ Everything is good! :) 🚀 \"",
+    "prepare": "husky"
   },
   "dependencies": {
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
     "@dagrejs/dagre": "^1.0.4",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
@@ -29,9 +27,12 @@
     "dayjs": "^1.11.10",
     "firebase": "^10.1.0",
     "framer-motion": "^10.16.5",
+    "next": "14.2.3",
     "openai": "^4.28.4",
     "prettier": "^3.1.1",
+    "react": "^18",
     "react-confetti": "^6.1.0",
+    "react-dom": "^18",
     "react-hook-form": "^7.45.4",
     "react-use": "^17.4.2",
     "reactflow": "^11.10.1"
@@ -40,11 +41,11 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "encoding": "^0.1.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
-    "typescript": "^5",
-    "encoding": "^0.1.13",
-    "husky": "^8.0.0"
+    "husky": "^9.0.11",
+    "typescript": "^5"
   }
 }
