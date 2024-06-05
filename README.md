@@ -9,8 +9,8 @@ DiNAs lab is a platform for teaching school students about biology. This project
 1. Clone the repository and install dependencies
 
 ```bash
-git clone git@github.com:cbussick/dinas-lab.git
-cd dinas-lab
+git clone git@github.com:cbussick/cb-masterthesis.git
+cd cb-masterprojekt
 npm install
 ```
 
