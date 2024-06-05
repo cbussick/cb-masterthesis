@@ -7,7 +7,7 @@ import { DateCalendar } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import { useState } from "react";
-import { MPMIDateCalendarDay } from "../MPMIDateCalendarDay/MPMIDateCalendarDay";
+import { MPMIDateCalendarDay } from "./MPMIDateCalendarDay/MPMIDateCalendarDay";
 
 const spacing = 0.5;
 
