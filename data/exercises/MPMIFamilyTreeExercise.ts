@@ -1,4 +1,4 @@
-import { MPMIFamilyTreePairGender } from "@/components/MPMIFamilyTree/MPMIFamilyTreeNode/MPMIFamilyTreeNodeInterfaces";
+import { MPMIFamilyTreePairGender } from "@/components/exercises/MPMIFamilyTree/MPMIFamilyTreeNode/MPMIFamilyTreeNodeInterfaces";
 import { MPMITopic } from "../topics";
 import { MPMIExerciseDifficulty } from "./MPMIExerciseDifficulty";
 import { MPMIExerciseType } from "./MPMIExerciseType";

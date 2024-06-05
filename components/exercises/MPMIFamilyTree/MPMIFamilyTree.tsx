@@ -47,9 +47,9 @@ import ReactFlow, {
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { MPMIConfirmation } from "../MPMIExerciseSequence/MPMIExerciseSequenceBottomBar/MPMIConfirmation";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
+import { MPMIConfirmation } from "../../MPMIExerciseSequence/MPMIExerciseSequenceBottomBar/MPMIConfirmation";
+import { MPMIExerciseSequenceType } from "../../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { useMPMIExerciseSequence } from "../../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { MPMIFamilyTreeProps, MPMINodeType } from "./MPMIFamilyTreeInterfaces";
 import { MPMIFamilyTreeNode } from "./MPMIFamilyTreeNode/MPMIFamilyTreeNode";
 import {

@@ -1,5 +1,7 @@
 "use client";
 
+import { useMPMIExerciseSequence } from "@/components/MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
+import { MPMIImage } from "@/components/MPMIImage/MPMIImage";
 import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
 import { MPMISwiperCellType } from "@/data/exercises/MPMISwiperExercise";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
@@ -8,8 +10,6 @@ import { ButtonProps, Card, Stack, Typography } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 import { DraggableProps, motion } from "framer-motion";
 import { useRef, useState } from "react";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMIImage } from "../MPMIImage/MPMIImage";
 import { MPMISwiperButton } from "./MPMISwiperButton/MPMISwiperButton";
 import { MPMISwiperButtonProps } from "./MPMISwiperButton/MPMISwiperButtonInterfaces";
 import { MPMISwiperProps } from "./MPMISwiperInterfaces";

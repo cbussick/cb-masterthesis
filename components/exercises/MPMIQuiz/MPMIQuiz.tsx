@@ -1,11 +1,11 @@
+import { useMPMIExerciseSequence } from "@/components/MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
+import { MPMIImage } from "@/components/MPMIImage/MPMIImage";
 import { useUser } from "@/firebase/useUser";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { Box, ButtonProps, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMIImage } from "../MPMIImage/MPMIImage";
 import { MPMIQuizAnswerButton } from "./MPMIQuizAnswerButton/MPMIQuizAnswerButton";
 import { MPMIQuizProps } from "./MPMIQuizInterfaces";
 

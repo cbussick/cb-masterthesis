@@ -1,5 +1,8 @@
 "use client";
 
+import { MPMIEmoji } from "@/components/MPMIEmoji/MPMIEmoji";
+import { useMPMIExerciseSequence } from "@/components/MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
+import { MPMILoadingButton } from "@/components/MPMILoadingButton/MPMILoadingButton";
 import { useUser } from "@/firebase/useUser";
 import { getOpenAIAnswerEvaluation } from "@/helpers/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
@@ -7,9 +10,6 @@ import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { MPMIEmoji } from "../MPMIEmoji/MPMIEmoji";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMILoadingButton } from "../MPMILoadingButton/MPMILoadingButton";
 import { MPMIFreeformQuestionProps } from "./MPMIFreeformQuestionInterfaces";
 
 export const MPMIFreeformQuestion = ({

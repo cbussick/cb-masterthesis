@@ -1,15 +1,15 @@
 "use client";
 
-import { MPMIMatchingGameProps } from "@/components/MPMIMatchingGame/MPMIMatchingGameInterfaces";
+import { MPMIMatchingGameProps } from "@/components/exercises/MPMIMatchingGame/MPMIMatchingGameInterfaces";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, ButtonProps, Stack } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { MPMIConfirmation } from "../MPMIExerciseSequence/MPMIExerciseSequenceBottomBar/MPMIConfirmation";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMIImage } from "../MPMIImage/MPMIImage";
+import { MPMIConfirmation } from "../../MPMIExerciseSequence/MPMIExerciseSequenceBottomBar/MPMIConfirmation";
+import { MPMIExerciseSequenceType } from "../../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { useMPMIExerciseSequence } from "../../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
+import { MPMIImage } from "../../MPMIImage/MPMIImage";
 import { MPMIMatchingGameHighlightComponentSide } from "./MPMIMatchingGameHighlightComponent";
 import { MPMIMatchingGameSelect } from "./MPMIMatchingGameSelect/MPMIMatchingGameSelect";
 

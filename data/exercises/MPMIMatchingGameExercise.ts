@@ -3,8 +3,8 @@
 import {
   MPMIMatchingGameHighlightComponent,
   MPMIMatchingGameHighlightComponentSide,
-} from "@/components/MPMIMatchingGame/MPMIMatchingGameHighlightComponent";
-import { MPMIMatchingGameOption } from "@/components/MPMIMatchingGame/MPMIMatchingGameOption";
+} from "@/components/exercises/MPMIMatchingGame/MPMIMatchingGameHighlightComponent";
+import { MPMIMatchingGameOption } from "@/components/exercises/MPMIMatchingGame/MPMIMatchingGameOption";
 import { MPMIImgWithAlt } from "@/helpers/MPMIImgWithAlt";
 import { MPMITopic } from "../topics";
 import { MPMIExerciseType } from "./MPMIExerciseType";

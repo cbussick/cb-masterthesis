@@ -1,7 +1,7 @@
 "use client";
 
+import { MPMIAnswerButton } from "@/components/MPMIAnswerButton/MPMIAnswerButton";
 import { Stack, Typography } from "@mui/material";
-import { MPMIAnswerButton } from "../../MPMIAnswerButton/MPMIAnswerButton";
 import { MPMIQuizAnswerButtonProps } from "./MPMIQuizAnswerButtonInterfaces";
 
 export const MPMIQuizAnswerButton = ({
