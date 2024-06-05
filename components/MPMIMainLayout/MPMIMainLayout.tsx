@@ -9,11 +9,11 @@ import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MPMIConfettiWrapper } from "../MPMIConfettiWrapper/MPMIConfettiWrapper";
-import { MPMILoadingView } from "../MPMILoadingView/MPMILoadingView";
-import { MPMIMobileView } from "../MPMIMobileView/MPMIMobileView";
-import { MPMINotSignedInView } from "../MPMINotSignedInView/MPMINotSignedInView";
 import { MPMISidebar } from "../MPMISidebar/MPMISidebar";
 import { MPMISnackbar } from "../MPMISnackbar/MPMISnackbar";
+import { MPMILoadingView } from "../views/MPMILoadingView/MPMILoadingView";
+import { MPMIMobileView } from "../views/MPMIMobileView/MPMIMobileView";
+import { MPMINotSignedInView } from "../views/MPMINotSignedInView/MPMINotSignedInView";
 import { MPMIMainLayoutProps } from "./MPMIMainLayoutInterfaces";
 
 const sidebarWidthOpen = 300;

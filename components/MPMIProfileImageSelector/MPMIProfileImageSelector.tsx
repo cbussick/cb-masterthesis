@@ -1,18 +1,18 @@
 "use client";
 
 import { levels } from "@/data/gamification";
+import { profilePictures } from "@/data/profilePictures";
 import { useUser } from "@/firebase/useUser";
-import { Avatar, Button, Grid } from "@mui/material";
-import React from "react";
+import { Avatar, Button } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 import {
-  MPMIProfilePictures,
-  profilePictures,
-} from "../MPMIProfilePictures/MPMIProfilePicuturesInterfaces";
-import { MPMIProfileImageSelectorProps } from "./MPMIProfileImageSelectorInterfaces";
+  MPMIProfileImageSelectorProps,
+  MPMIProfilePicture,
+} from "./MPMIProfileImageSelectorInterfaces";
 
-export const MPMIProfileImageSelector: React.FC<
-  MPMIProfileImageSelectorProps
-> = ({ onSelect }) => {
+export const MPMIProfileImageSelector = ({
+  onSelect,
+}: MPMIProfileImageSelectorProps): JSX.Element => {
   const user = useUser();
   const userPoints = user?.customData.points || 0;
   const currentLevel =
@@ -20,14 +20,14 @@ export const MPMIProfileImageSelector: React.FC<
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
     ) || levels[levels.length - 1];
 
-  const checkIsLvlUnlocked = (image: MPMIProfilePictures) => {
+  const checkIsLvlUnlocked = (image: MPMIProfilePicture) => {
     return currentLevel.level >= image.unlockLevel;
   };
 
   return (
     <Grid container spacing={2}>
       {profilePictures.map((image) => (
-        <Grid item key={image.src}>
+        <Grid key={image.src}>
           <Button
             disabled={!checkIsLvlUnlocked(image)}
             onClick={() => onSelect(image.src)}

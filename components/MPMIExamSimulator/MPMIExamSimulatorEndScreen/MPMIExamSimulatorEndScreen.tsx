@@ -1,0 +1,129 @@
+"use client";
+
+import { playResultsSound } from "@/helpers/playResultsSound";
+import { MPMIRoute } from "@/helpers/routes";
+import { DashboardRounded, RefreshRounded } from "@mui/icons-material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import { useEffect } from "react";
+import { MPMIUnstyledNextLink } from "../../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulatorInterfaces";
+import { MPMIExamSimulatorTaskCard } from "../MPMIExamSimulatorTaskCard/MPMIExamSimulatorTaskCard";
+import { MPMIExamSimulatorTopCard } from "../MPMIExamSimulatorTopCard/MPMIExamSimulatorTopCard";
+import { MPMIExamSimulatorEndScreenProps } from "./MPMIExamSimulatorEndScreenInterfaces";
+
+export const MPMIExamSimulatorEndScreen = ({
+  exercises,
+  completionTime,
+  onRetry,
+  onStartNewExam,
+}: MPMIExamSimulatorEndScreenProps): JSX.Element => {
+  const falseExercises: MPMIExerciseWithCorrectness[] = exercises.filter(
+    (e) => !e.isCorrect,
+  );
+
+  const correctExerciseAmount = exercises.filter((e) => e.isCorrect).length;
+
+  const exerciseAmountTitle =
+    correctExerciseAmount > exercises.length / 2
+      ? "Prüfung bestanden"
+      : "Prüfung nicht bestanden";
+
+  const completionTimeTitle =
+    completionTime.min >= 20
+      ? "Ausbaufähiges Zeitmanagement"
+      : "Hervorragendes Zeitmanagement";
+
+  useEffect(() => {
+    playResultsSound();
+  }, []);
+
+  return (
+    <Stack spacing={2}>
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        justifyItems="center"
+        paddingBottom={1}
+      >
+        <MPMIExamSimulatorTopCard
+          img={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
+          title={exerciseAmountTitle}
+          subTitle={`${correctExerciseAmount} / ${exercises.length} Aufgaben richtig`}
+        />
+
+        <MPMIExamSimulatorTopCard
+          img={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
+          title={completionTimeTitle}
+          subTitle={`${completionTime.min < 10 ? 0 : ""}${completionTime.min}:${
+            completionTime.sec < 10 ? 0 : ""
+          }${completionTime.sec} Minuten`}
+        />
+      </Stack>
+
+      <Divider />
+
+      <Typography padding={1}>
+        Im Folgenden findest du eine Übersicht über alle abgeschlossenen
+        Aufgaben in der Prüfungssimulation:
+      </Typography>
+
+      {/* Negative `mx` is necessary to align the grid with the other elements */}
+      <Grid container rowSpacing={1} columnSpacing={2} mx="-12px !important">
+        {exercises.map((exercise, index) => (
+          <Grid xs={12} lg={3} key={exercise.id}>
+            <MPMIExamSimulatorTaskCard
+              isCorrect={exercise.isCorrect}
+              exercise="Aufgabe"
+              exerciseNumber={index + 1}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box display="flex" justifyContent="center" paddingTop={2}>
+        <Button sx={{ width: "200px" }} onClick={onStartNewExam}>
+          Neue Prüfung starten
+        </Button>
+      </Box>
+
+      <Box display="flex" justifyContent="center">
+        <MPMIUnstyledNextLink href={MPMIRoute.Home}>
+          <Button
+            variant="text"
+            startIcon={<DashboardRounded />}
+            sx={{
+              color: (t) => t.palette.grey[700],
+              "&:hover": {
+                bgcolor: "transparent",
+                color: (t) => t.palette.primary.main,
+              },
+            }}
+          >
+            <Typography variant="body2">Zurück zum Dashboard</Typography>
+          </Button>
+        </MPMIUnstyledNextLink>
+
+        <Button
+          variant="text"
+          onClick={() => onRetry(falseExercises)}
+          startIcon={<RefreshRounded />}
+          sx={{
+            color: (t) => t.palette.grey[700],
+            "&:hover": {
+              bgcolor: "transparent",
+              color: (t) => t.palette.primary.main,
+            },
+          }}
+        >
+          <Typography variant="body2">
+            {falseExercises.length > 0
+              ? "Fehler wiederholen"
+              : "Prüfung wiederholen"}
+          </Typography>
+        </Button>
+      </Box>
+    </Stack>
+  );
+};

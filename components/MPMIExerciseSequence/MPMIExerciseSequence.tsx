@@ -9,15 +9,15 @@ import { MPMISwiperExercise } from "@/data/exercises/MPMISwiperExercise";
 import { getInformationForExercise } from "@/helpers/getInformationForExercise";
 import { Stack } from "@mui/material";
 import { useRef } from "react";
-import { MPMIExerciseSequenceBottomBar } from "../MPMIExerciseSequenceBottomBar/MPMIExerciseSequenceBottomBar";
-import { MPMIExerciseSequenceEndScreen } from "../MPMIExerciseSequenceEndScreen/MPMIExerciseSequenceEndScreen";
-import { MPMIExerciseSequenceTopBar } from "../MPMIExerciseSequenceTopBar/MPMIExerciseSequenceTopBar";
-import { MPMIFamilyTreeWithProviders } from "../MPMIFamilyTreeWithProviders/MPMIFamilyTreeWithProviders";
-import { MPMIFreeformQuestion } from "../MPMIFreeformQuestion/MPMIFreeformQuestion";
-import { MPMIMatchingGame } from "../MPMIMatchingGame/MPMIMatchingGame";
-import { MPMIQuiz } from "../MPMIQuiz/MPMIQuiz";
-import { MPMISwiper } from "../MPMISwiper/MPMISwiper";
+import { MPMIFamilyTreeWithProviders } from "../exercises/MPMIFamilyTree/MPMIFamilyTreeWithProviders/MPMIFamilyTreeWithProviders";
+import { MPMIFreeformQuestion } from "../exercises/MPMIFreeformQuestion/MPMIFreeformQuestion";
+import { MPMIMatchingGame } from "../exercises/MPMIMatchingGame/MPMIMatchingGame";
+import { MPMIQuiz } from "../exercises/MPMIQuiz/MPMIQuiz";
+import { MPMISwiper } from "../exercises/MPMISwiper/MPMISwiper";
+import { MPMIExerciseSequenceBottomBar } from "./MPMIExerciseSequenceBottomBar/MPMIExerciseSequenceBottomBar";
+import { MPMIExerciseSequenceEndScreen } from "./MPMIExerciseSequenceEndScreen/MPMIExerciseSequenceEndScreen";
 import { MPMIExerciseSequenceProps } from "./MPMIExerciseSequenceInterfaces";
+import { MPMIExerciseSequenceTopBar } from "./MPMIExerciseSequenceTopBar/MPMIExerciseSequenceTopBar";
 
 export const MPMIExerciseSequence = ({
   type,

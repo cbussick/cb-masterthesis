@@ -26,8 +26,8 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { MPMILogo } from "../MPMILogo/MPMILogo";
-import { MPMISidebarItem } from "../MPMISidebarItem/MPMISidebarItem";
 import { MPMISidebarProps } from "./MPMISidebarInterfaces";
+import { MPMISidebarItem } from "./MPMISidebarItem/MPMISidebarItem";
 
 const logoTextElementID = "text";
 const sidebarPaddingHorizontal = 2.8;

@@ -6,8 +6,8 @@ import { Search } from "@mui/icons-material";
 import { Divider, List, Stack, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { MPMIDialog } from "../MPMIDialog/MPMIDialog";
-import { MPMISearchResult } from "../MPMISearchResult/MPMISearchResult";
 import { MPMISearchMenuProps } from "./MPMISearchMenuInterfaces";
+import { MPMISearchResult } from "./MPMISearchResult/MPMISearchResult";
 
 export const MPMISearchMenu = ({
   isMenuOpen,
