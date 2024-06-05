@@ -23,10 +23,8 @@ const commonGridItemProps: Grid2Props = {
 export const MPMIDashboardStudent = (): JSX.Element => {
   const user = useUser();
   const userPoints = user?.customData.points || 0;
-  const userTimes = user?.customData.trackedTime || [];
 
-  const lastWeekTimes = getLastWeekTimes(userTimes);
-
+  const lastWeekTimes = getLastWeekTimes(user?.customData.trackedTime || []);
   const totalTime = lastWeekTimes.reduce((acc, t) => {
     return acc + t.time;
   }, 0);
