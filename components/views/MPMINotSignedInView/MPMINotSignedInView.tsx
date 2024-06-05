@@ -1,15 +1,15 @@
 "use client";
 
+import { MPMIDialog } from "@/components/MPMIDialog/MPMIDialog";
+import { MPMIEmoji } from "@/components/MPMIEmoji/MPMIEmoji";
+import { MPMILogo } from "@/components/MPMILogo/MPMILogo";
+import { MPMISignInForm } from "@/components/MPMISignInForm/MPMISignInForm";
+import { MPMISignUpForm } from "@/components/MPMISignUpForm/MPMISignUpForm";
+import { MPMISnackbar } from "@/components/MPMISnackbar/MPMISnackbar";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
-import { MPMIDialog } from "../MPMIDialog/MPMIDialog";
-import { MPMIEmoji } from "../MPMIEmoji/MPMIEmoji";
-import { MPMILogo } from "../MPMILogo/MPMILogo";
-import { MPMISignInForm } from "../MPMISignInForm/MPMISignInForm";
-import { MPMISignUpForm } from "../MPMISignUpForm/MPMISignUpForm";
-import { MPMISnackbar } from "../MPMISnackbar/MPMISnackbar";
 
 export const MPMINotSignedInView = (): JSX.Element => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);

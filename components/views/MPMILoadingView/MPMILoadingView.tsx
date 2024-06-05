@@ -1,7 +1,7 @@
 "use client";
 
+import { MPMILogo } from "@/components/MPMILogo/MPMILogo";
 import { CircularProgress, Container, Stack } from "@mui/material";
-import { MPMILogo } from "../MPMILogo/MPMILogo";
 
 export const MPMILoadingView = (): JSX.Element => {
   return (

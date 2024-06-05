@@ -1,7 +1,7 @@
 "use client";
 
+import { MPMILogo } from "@/components/MPMILogo/MPMILogo";
 import { Container, Stack, Typography } from "@mui/material";
-import { MPMILogo } from "../MPMILogo/MPMILogo";
 
 export const MPMIMobileView = (): JSX.Element => {
   return (
