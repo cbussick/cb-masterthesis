@@ -1,5 +1,5 @@
 import { MPMIRouteData } from "@/helpers/routes";
-import { MPMIDialogProps } from "../MPMIDialog/MPMIDialogInterfaces";
+import { MPMIDialogProps } from "../../MPMIDialog/MPMIDialogInterfaces";
 
 export interface MPMISearchResultProps {
   routeData: MPMIRouteData;

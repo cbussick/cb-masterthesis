@@ -8,7 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIUnstyledNextLink } from "../../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
 import { MPMISearchResultProps } from "./MPMISearchResultInterfaces";
 
 export const MPMISearchResult = ({

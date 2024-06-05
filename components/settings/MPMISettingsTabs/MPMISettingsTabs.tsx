@@ -2,10 +2,10 @@
 
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { MPMIDataSecuritySettings } from "../MPMISettings/MPMIDataSecuritySettings";
-import { MPMIGeneralSettings } from "../MPMISettings/MPMIGeneralSettings";
-import { MPMINotificationSettings } from "../MPMISettings/MPMINotificationSettings";
-import { MPMIProfileSettings } from "../MPMISettings/MPMIProfileSettings";
+import { MPMIDataSecuritySettings } from "../MPMIDataSecuritySettings";
+import { MPMIGeneralSettings } from "../MPMIGeneralSettings";
+import { MPMINotificationSettings } from "../MPMINotificationSettings";
+import { MPMIProfileSettings } from "../MPMIProfileSettings";
 import { MPMITabPanel } from "./MPMITabPanel";
 
 function a11yProps(index: number) {

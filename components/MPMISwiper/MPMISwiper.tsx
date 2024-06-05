@@ -10,8 +10,8 @@ import { DraggableProps, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { MPMIImage } from "../MPMIImage/MPMIImage";
-import { MPMISwiperButton } from "../MPMISwiperButton/MPMISwiperButton";
-import { MPMISwiperButtonProps } from "../MPMISwiperButton/MPMISwiperButtonInterfaces";
+import { MPMISwiperButton } from "./MPMISwiperButton/MPMISwiperButton";
+import { MPMISwiperButtonProps } from "./MPMISwiperButton/MPMISwiperButtonInterfaces";
 import { MPMISwiperProps } from "./MPMISwiperInterfaces";
 
 const commonGridProps: Grid2Props = {

@@ -2,7 +2,7 @@
 
 import { swiperCellTypes } from "@/data/exercises/MPMISwiperExercise";
 import { Typography } from "@mui/material";
-import { MPMIAnswerButton } from "../MPMIAnswerButton/MPMIAnswerButton";
+import { MPMIAnswerButton } from "../../MPMIAnswerButton/MPMIAnswerButton";
 import { MPMISwiperButtonProps } from "./MPMISwiperButtonInterfaces";
 
 export const MPMISwiperButton = ({
