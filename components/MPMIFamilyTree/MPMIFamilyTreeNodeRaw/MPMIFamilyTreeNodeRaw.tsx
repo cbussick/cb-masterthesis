@@ -2,17 +2,17 @@
 
 "use client";
 
+import { MPMIExerciseSequenceType } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { useMPMIExerciseSequence } from "@/components/MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { Box, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { MotionProps, motion, useAnimationControls } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useReactFlow } from "reactflow";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { useFamilyTree } from "../MPMIFamilyTree/useFamilyTree";
 import {
   MPMIFamilyTreeNodeData,
   MPMIFamilyTreePairGender,
 } from "../MPMIFamilyTreeNode/MPMIFamilyTreeNodeInterfaces";
+import { useFamilyTree } from "../useFamilyTree";
 
 export const selectWidth = 100;
 

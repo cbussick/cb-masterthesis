@@ -1,14 +1,14 @@
 "use client";
 
+import { MPMIUnstyledNextLink } from "@/components/MPMIUnstyledNextLink/MPMIUnstyledNextLink";
 import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
 import { playResultsSound } from "@/helpers/playResultsSound";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { MPMIExerciseSequenceEndCard } from "../MPMIExerciseSequenceEndCard/MPMIExerciseSequenceEndCard";
 import { MPMIExerciseSequenceEndCardProps } from "../MPMIExerciseSequenceEndCard/MPMIExerciseSequenceEndCardInterfaces";
-import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
+import { useMPMIExerciseSequence } from "../useMPMIExerciseSequenceProvider";
 import { MPMIExerciseSequenceEndScreenProps } from "./MPMIExerciseSequenceEndScreenInterfaces";
 
 const difficultyMap: Record<

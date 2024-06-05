@@ -1,7 +1,7 @@
 import { MPMIExerciseWithMetaData } from "@/data/exercises/MPMIExercise";
 import { Dispatch, SetStateAction } from "react";
-import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulator/MPMIExamSimulatorInterfaces";
-import { MPMITime } from "../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMITime } from "../../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulatorInterfaces";
 
 export interface MPMIExamSimulatorSequenceProps {
   originalExercises: MPMIExerciseWithMetaData[];

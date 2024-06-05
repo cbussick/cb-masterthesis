@@ -2,9 +2,9 @@
 
 import { Stack, Typography } from "@mui/material";
 import { forwardRef } from "react";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { MPMIExerciseTimer } from "../MPMIExerciseTimer/MPMIExerciseTimer";
-import { MPMIProgressBar } from "../MPMIProgressBar/MPMIProgressBar";
+import { MPMIExerciseTimer } from "../../MPMIExerciseTimer/MPMIExerciseTimer";
+import { MPMIProgressBar } from "../../MPMIProgressBar/MPMIProgressBar";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
 import { MPMIExerciseSequenceTopBarProps } from "./MPMIExerciseSequenceTopBarInterfaces";
 
 export const MPMIExerciseSequenceTopBar = forwardRef(

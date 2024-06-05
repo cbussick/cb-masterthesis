@@ -2,7 +2,7 @@ import { MPMIExerciseWithMetaData } from "@/data/exercises/MPMIExercise";
 import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
 import { MPMIMistakeExercise } from "@/firebase/UserCustomDataConverter";
 import { MutableRefObject } from "react";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
 
 export interface MPMIExerciseSequenceBottomBarProps {
   sequenceType: MPMIExerciseSequenceType;

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { MPMITime } from "../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMITime } from "../../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
 
 export interface MPMIExerciseSequenceTopBarProps {
   title: string;

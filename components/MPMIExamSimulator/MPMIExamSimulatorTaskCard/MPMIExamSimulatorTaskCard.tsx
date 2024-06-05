@@ -9,7 +9,7 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { MPMIExamTaskCardProps } from "./MPMIExamTaskCardInterfaces";
+import { MPMIExamSimulatorTaskCardProps } from "./MPMIExamSimulatorTaskCardInterfaces";
 
 const commonIconStyles: SxProps<Theme> = {
   fontSize: 64,
@@ -17,11 +17,11 @@ const commonIconStyles: SxProps<Theme> = {
   display: "flex",
 };
 
-export const MPMIExamTaskCard = ({
+export const MPMIExamSimulatorTaskCard = ({
   exerciseNumber,
   exercise,
   isCorrect,
-}: MPMIExamTaskCardProps): JSX.Element => {
+}: MPMIExamSimulatorTaskCardProps): JSX.Element => {
   return (
     <Card
       sx={{

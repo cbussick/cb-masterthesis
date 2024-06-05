@@ -1,8 +1,8 @@
 "use client";
 
 import { ReactFlowProvider } from "reactflow";
-import { FamilyTreeProvider } from "../MPMIFamilyTree/FamilyTreeProvider";
-import { MPMIFamilyTree } from "../MPMIFamilyTree/MPMIFamilyTree";
+import { FamilyTreeProvider } from "../FamilyTreeProvider";
+import { MPMIFamilyTree } from "../MPMIFamilyTree";
 import { MPMIFamilyTreeWithProvidersProps } from "./MPMIFamilyTreeWithProvidersInterfaces";
 
 export const MPMIFamilyTreeWithProviders = ({

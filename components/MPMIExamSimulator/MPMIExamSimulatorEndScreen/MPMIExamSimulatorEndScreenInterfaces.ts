@@ -1,5 +1,5 @@
-import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulator/MPMIExamSimulatorInterfaces";
-import { MPMITime } from "../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMITime } from "../../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
+import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulatorInterfaces";
 
 export interface MPMIExamSimulatorEndScreenProps {
   exercises: MPMIExerciseWithCorrectness[];

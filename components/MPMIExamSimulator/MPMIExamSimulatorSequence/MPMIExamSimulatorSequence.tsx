@@ -1,8 +1,8 @@
 "use client";
 
-import { MPMIExerciseSequenceProvider } from "../MPMIExerciseSequence/MPMIExerciseSequenceProvider";
-import { MPMIExerciseSequenceWrapper } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapper";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { MPMIExerciseSequenceProvider } from "../../MPMIExerciseSequence/MPMIExerciseSequenceProvider";
+import { MPMIExerciseSequenceWrapper } from "../../MPMIExerciseSequence/MPMIExerciseSequenceWrapper";
+import { MPMIExerciseSequenceType } from "../../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
 import { MPMIExamSimulatorSequenceProps } from "./MPMIExamSimulatorSequenceInterfaces";
 
 export const MPMIExamSimulatorSequence = ({

@@ -1,5 +1,5 @@
 import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
 
 export interface MPMIExerciseSequenceEndScreenProps {
   difficulty?: MPMIExerciseDifficulty;

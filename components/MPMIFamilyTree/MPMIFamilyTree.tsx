@@ -47,19 +47,19 @@ import ReactFlow, {
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import { MPMIConfirmation } from "../MPMIExerciseSequence/MPMIExerciseSequenceBottomBar/MPMIConfirmation";
 import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
 import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMIConfirmation } from "../MPMIExerciseSequenceBottomBar/MPMIConfirmation";
-import { MPMIFamilyTreeNode } from "../MPMIFamilyTreeNode/MPMIFamilyTreeNode";
+import { MPMIFamilyTreeProps, MPMINodeType } from "./MPMIFamilyTreeInterfaces";
+import { MPMIFamilyTreeNode } from "./MPMIFamilyTreeNode/MPMIFamilyTreeNode";
 import {
   MPMIFamilyTreeNodeData,
   MPMIFamilyTreeNodeType,
   MPMIFamilyTreePairGender,
-} from "../MPMIFamilyTreeNode/MPMIFamilyTreeNodeInterfaces";
-import { selectWidth } from "../MPMIFamilyTreeNodeRaw/MPMIFamilyTreeNodeRaw";
-import { MPMIFamilyTreePairNode } from "../MPMIFamilyTreePairNode/MPMIFamilyTreePairNode";
-import { MPMIFamilyTreePairNodeType } from "../MPMIFamilyTreePairNode/MPMIFamilyTreePairNodeInterfaces";
-import { MPMIFamilyTreeProps, MPMINodeType } from "./MPMIFamilyTreeInterfaces";
+} from "./MPMIFamilyTreeNode/MPMIFamilyTreeNodeInterfaces";
+import { selectWidth } from "./MPMIFamilyTreeNodeRaw/MPMIFamilyTreeNodeRaw";
+import { MPMIFamilyTreePairNode } from "./MPMIFamilyTreePairNode/MPMIFamilyTreePairNode";
+import { MPMIFamilyTreePairNodeType } from "./MPMIFamilyTreePairNode/MPMIFamilyTreePairNodeInterfaces";
 import { useFamilyTree } from "./useFamilyTree";
 
 const textFieldHeightPlusStackSpacing = 48;

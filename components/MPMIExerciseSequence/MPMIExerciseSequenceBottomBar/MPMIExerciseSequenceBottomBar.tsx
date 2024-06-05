@@ -1,5 +1,7 @@
 "use client";
 
+import { MPMIDinaHint } from "@/components/MPMIDinaHint/MPMIDinaHint";
+import { MPMIUnstyledNextLink } from "@/components/MPMIUnstyledNextLink/MPMIUnstyledNextLink";
 import { MPMIExerciseType } from "@/data/exercises/MPMIExerciseType";
 import { useUser } from "@/firebase/useUser";
 import { useConfetti } from "@/ui/useConfetti";
@@ -9,10 +11,8 @@ import {
   MeetingRoomRounded,
 } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
-import { MPMIDinaHint } from "../MPMIDinaHint/MPMIDinaHint";
-import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
-import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIExerciseSequenceType } from "../MPMIExerciseSequenceWrapperInterfaces";
+import { useMPMIExerciseSequence } from "../useMPMIExerciseSequenceProvider";
 import { MPMIConfirmation } from "./MPMIConfirmation";
 import { MPMIExerciseSequenceBottomBarProps } from "./MPMIExerciseSequenceBottomBarInterfaces";
 

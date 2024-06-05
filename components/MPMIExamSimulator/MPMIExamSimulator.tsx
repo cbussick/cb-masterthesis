@@ -6,16 +6,16 @@ import { addPointsToUser } from "@/firebase/addPointsToUser";
 import { useUser } from "@/firebase/useUser";
 import { MPMIRoute, routeMap } from "@/helpers/routes";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { MPMIExamHome } from "../MPMIExamHome/MPMIExamHome";
-import { MPMIExamSimulatorEndScreen } from "../MPMIExamSimulatorEndScreen/MPMIExamSimulatorEndScreen";
-import { MPMIExamSimulatorSequence } from "../MPMIExamSimulatorSequence/MPMIExamSimulatorSequence";
 import { MPMITime } from "../MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
 import { MPMIPageHeader } from "../MPMIPageHeader/MPMIPageHeader";
+import { MPMIExamSimulatorEndScreen } from "./MPMIExamSimulatorEndScreen/MPMIExamSimulatorEndScreen";
+import { MPMIExamSimulatorHome } from "./MPMIExamSimulatorHome/MPMIExamSimulatorHome";
 import {
   MPMIExamSimulatorProps,
   MPMIExamSimulatorState,
   MPMIExerciseWithCorrectness,
 } from "./MPMIExamSimulatorInterfaces";
+import { MPMIExamSimulatorSequence } from "./MPMIExamSimulatorSequence/MPMIExamSimulatorSequence";
 
 const pointsForSuccessfulExam = 5;
 
@@ -145,7 +145,7 @@ export const MPMIExamSimulator = ({
     }
 
     content = (
-      <MPMIExamHome
+      <MPMIExamSimulatorHome
         titleTop={`${amountFinishedExercisesText} ${
           completedExamAmount !== 1 ? "Prüfungen" : "Prüfung"
         } bisher abgeschlossen`}

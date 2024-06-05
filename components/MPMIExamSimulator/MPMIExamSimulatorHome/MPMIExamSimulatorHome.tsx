@@ -2,14 +2,14 @@
 
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { MPMIExamSimulatorState } from "../MPMIExamSimulator/MPMIExamSimulatorInterfaces";
-import { MPMIExamHomeProps } from "./MPMIExamHomeInterfaces";
+import { MPMIExamSimulatorState } from "../MPMIExamSimulatorInterfaces";
+import { MPMIExamSimulatorHomeProps } from "./MPMIExamSimulatorHomeInterfaces";
 
-export const MPMIExamHome = ({
+export const MPMIExamSimulatorHome = ({
   titleTop,
   titleCard,
   setExamState,
-}: MPMIExamHomeProps): JSX.Element => {
+}: MPMIExamSimulatorHomeProps): JSX.Element => {
   const onClickStart = () => {
     setExamState(MPMIExamSimulatorState.Started);
   };

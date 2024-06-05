@@ -6,10 +6,10 @@ import { DashboardRounded, RefreshRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect } from "react";
-import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulator/MPMIExamSimulatorInterfaces";
-import { MPMIExamTaskCard } from "../MPMIExamTaskCard/MPMIExamTaskCard";
-import { MPMIExamTopCard } from "../MPMIExamTopCard/MPMIExamTopCard";
-import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIUnstyledNextLink } from "../../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { MPMIExerciseWithCorrectness } from "../MPMIExamSimulatorInterfaces";
+import { MPMIExamSimulatorTaskCard } from "../MPMIExamSimulatorTaskCard/MPMIExamSimulatorTaskCard";
+import { MPMIExamSimulatorTopCard } from "../MPMIExamSimulatorTopCard/MPMIExamSimulatorTopCard";
 import { MPMIExamSimulatorEndScreenProps } from "./MPMIExamSimulatorEndScreenInterfaces";
 
 export const MPMIExamSimulatorEndScreen = ({
@@ -47,13 +47,13 @@ export const MPMIExamSimulatorEndScreen = ({
         justifyItems="center"
         paddingBottom={1}
       >
-        <MPMIExamTopCard
+        <MPMIExamSimulatorTopCard
           img={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
           title={exerciseAmountTitle}
           subTitle={`${correctExerciseAmount} / ${exercises.length} Aufgaben richtig`}
         />
 
-        <MPMIExamTopCard
+        <MPMIExamSimulatorTopCard
           img={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
           title={completionTimeTitle}
           subTitle={`${completionTime.min < 10 ? 0 : ""}${completionTime.min}:${
@@ -73,7 +73,7 @@ export const MPMIExamSimulatorEndScreen = ({
       <Grid container rowSpacing={1} columnSpacing={2} mx="-12px !important">
         {exercises.map((exercise, index) => (
           <Grid xs={12} lg={3} key={exercise.id}>
-            <MPMIExamTaskCard
+            <MPMIExamSimulatorTaskCard
               isCorrect={exercise.isCorrect}
               exercise="Aufgabe"
               exerciseNumber={index + 1}

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { MPMIExamSimulatorState } from "../MPMIExamSimulator/MPMIExamSimulatorInterfaces";
+import { MPMIExamSimulatorState } from "../MPMIExamSimulatorInterfaces";
 
-export interface MPMIExamHomeProps {
+export interface MPMIExamSimulatorHomeProps {
   titleCard: string;
   titleTop: string;
   setExamState: Dispatch<SetStateAction<MPMIExamSimulatorState>>;

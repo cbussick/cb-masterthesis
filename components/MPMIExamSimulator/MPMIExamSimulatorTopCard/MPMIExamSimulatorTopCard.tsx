@@ -2,13 +2,13 @@
 
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { MPMIExamTopCardProps } from "./MPMIExamTopCardInterfaces";
+import { MPMIExamSimulatorTopCardProps } from "./MPMIExamSimulatorTopCardInterfaces";
 
-export const MPMIExamTopCard = ({
+export const MPMIExamSimulatorTopCard = ({
   img,
   title,
   subTitle,
-}: MPMIExamTopCardProps): JSX.Element => {
+}: MPMIExamSimulatorTopCardProps): JSX.Element => {
   return (
     <Card sx={{ display: "flex", borderRadius: 3, height: 100, width: "100%" }}>
       <Stack direction="row">
