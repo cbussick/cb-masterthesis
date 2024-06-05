@@ -6,7 +6,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
 import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { MPMIImage } from "../MPMIImage/MPMIImage";
-import { MPMIQuizAnswerButton } from "../MPMIQuizAnswerButton/MPMIQuizAnswerButton";
+import { MPMIQuizAnswerButton } from "./MPMIQuizAnswerButton/MPMIQuizAnswerButton";
 import { MPMIQuizProps } from "./MPMIQuizInterfaces";
 
 export const MPMIQuiz = ({

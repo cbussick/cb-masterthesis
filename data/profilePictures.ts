@@ -1,11 +1,6 @@
-export interface MPMIProfilePictures {
-  src: string;
-  srcLocked: string;
-  alt: string;
-  unlockLevel: number;
-}
+import { MPMIProfilePicture } from "@/components/MPMIProfileImageSelector/MPMIProfileImageSelectorInterfaces";
 
-export const profilePictures: MPMIProfilePictures[] = [
+export const profilePictures: MPMIProfilePicture[] = [
   {
     src: "/avatar/avatar-female-1.png",
     srcLocked: "/avatar/avatar-female-1.png",

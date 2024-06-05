@@ -1,14 +1,14 @@
 "use client";
 
 import { levels } from "@/data/gamification";
+import { profilePictures } from "@/data/profilePictures";
 import { useUser } from "@/firebase/useUser";
 import { Avatar, Button, Grid } from "@mui/material";
 import React from "react";
 import {
-  MPMIProfilePictures,
-  profilePictures,
-} from "../MPMIProfilePictures/MPMIProfilePicuturesInterfaces";
-import { MPMIProfileImageSelectorProps } from "./MPMIProfileImageSelectorInterfaces";
+  MPMIProfileImageSelectorProps,
+  MPMIProfilePicture,
+} from "./MPMIProfileImageSelectorInterfaces";
 
 export const MPMIProfileImageSelector: React.FC<
   MPMIProfileImageSelectorProps
@@ -20,7 +20,7 @@ export const MPMIProfileImageSelector: React.FC<
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
     ) || levels[levels.length - 1];
 
-  const checkIsLvlUnlocked = (image: MPMIProfilePictures) => {
+  const checkIsLvlUnlocked = (image: MPMIProfilePicture) => {
     return currentLevel.level >= image.unlockLevel;
   };
 
