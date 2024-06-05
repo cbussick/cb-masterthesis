@@ -1,6 +1,6 @@
 import { SelectProps } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { MPMIMatchingGameOption } from "../MPMIMatchingGame/MPMIMatchingGameOption";
+import { MPMIMatchingGameOption } from "../MPMIMatchingGameOption";
 
 export interface MPMIMatchingGameSelectProps {
   index: number;

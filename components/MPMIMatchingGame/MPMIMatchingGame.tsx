@@ -10,8 +10,8 @@ import { MPMIConfirmation } from "../MPMIExerciseSequence/MPMIExerciseSequenceBo
 import { MPMIExerciseSequenceType } from "../MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
 import { useMPMIExerciseSequence } from "../MPMIExerciseSequence/useMPMIExerciseSequenceProvider";
 import { MPMIImage } from "../MPMIImage/MPMIImage";
-import { MPMIMatchingGameSelect } from "../MPMIMatchingGameSelect/MPMIMatchingGameSelect";
 import { MPMIMatchingGameHighlightComponentSide } from "./MPMIMatchingGameHighlightComponent";
+import { MPMIMatchingGameSelect } from "./MPMIMatchingGameSelect/MPMIMatchingGameSelect";
 
 export const MPMIMatchingGame = forwardRef(
   ({ exercise, sequenceType }: MPMIMatchingGameProps, ref): JSX.Element => {
