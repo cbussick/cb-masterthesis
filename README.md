@@ -10,7 +10,7 @@ DiNAs lab is a platform for teaching school students about biology. This project
 
 ```bash
 git clone git@github.com:cbussick/cb-masterthesis.git
-cd cb-masterprojekt
+cd cb-masterthesis
 npm install
 ```
 
