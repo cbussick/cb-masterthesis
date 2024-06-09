@@ -140,10 +140,10 @@ export const MPMIProfileSettings = (): JSX.Element => {
     if (user?.user) {
       changeProfilePicture(user.user.uid, profilePicture)
         .then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            profilePicture,
-          }));
+          // user.setCustomData((prevCustomData) => ({
+          //   ...prevCustomData,
+          //   profilePicture,
+          // }));
           showSnackbar(
             "Profilbild geändert",
             "Du hast dein Profilbild erfolgreich geändert.",
@@ -151,8 +151,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
           );
         })
         .catch((error: FirebaseError) => {
-          const errorCode = error.code;
-          const errorMessage = getAuthError(errorCode) || error.message;
+          const errorMessage = getAuthError(error.code) || error.message;
 
           showSnackbar(
             "Profilbild konnte nicht geändert werden",
