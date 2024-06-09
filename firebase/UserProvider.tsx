@@ -1,18 +1,11 @@
 "use client";
 
 import { NextOrObserver, User, onAuthStateChanged } from "firebase/auth";
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { onSnapshot } from "firebase/firestore";
+import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { MPMIUserCustomData } from "./UserCustomDataConverter";
 import { auth } from "./firebase";
-import { getUserCustomData } from "./getUserCustomData";
+import { getUserCustomDataReference } from "./getUserCustomData";
 import { MPMIUserRole } from "./userRole";
 
 interface UserProviderProps {
@@ -23,7 +16,6 @@ interface MPMIUserData {
   user: User | null;
   isUserLoaded: boolean;
   customData: MPMIUserCustomData;
-  setCustomData: Dispatch<SetStateAction<MPMIUserCustomData>>;
 }
 
 const defaultUserData: MPMIUserData = {
@@ -42,7 +34,6 @@ const defaultUserData: MPMIUserData = {
     mistakeExercises: [],
     trackedTime: [],
   },
-  setCustomData: () => {},
 };
 
 export const UserContext = createContext<MPMIUserData | null>(null);
@@ -61,8 +52,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   ) => {
     if (currentUser) {
       setUser(currentUser);
-      await getUserCustomData(currentUser.uid).then((customUserData) => {
-        const data = customUserData.data();
+
+      const userCustomDataReference = await getUserCustomDataReference(
+        currentUser.uid,
+      );
+
+      onSnapshot(userCustomDataReference, (snapshot) => {
+        const data = snapshot.data();
         if (data !== undefined) {
           setCustomData(data);
         }
@@ -80,7 +76,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   const value = useMemo(() => {
-    return { user, isUserLoaded, customData, setCustomData };
+    return { user, isUserLoaded, customData };
   }, [customData, isUserLoaded, user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

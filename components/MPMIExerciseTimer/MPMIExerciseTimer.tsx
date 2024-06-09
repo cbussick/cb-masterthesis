@@ -61,30 +61,7 @@ export const MPMIExerciseTimer = forwardRef(
           time: time.sec + time.min * 60,
         };
 
-        addTrackedTimeToUser(user.user.uid, trackedTime).then(() => {
-          user.setCustomData((prevCustomData) => {
-            const prevTrackedTime = prevCustomData.trackedTime;
-
-            const sameDateIndex = prevTrackedTime.findIndex(
-              (t) => t.date === trackedTime.date,
-            );
-
-            if (sameDateIndex === -1) {
-              return {
-                ...prevCustomData,
-                trackedTime: [...prevTrackedTime, trackedTime],
-              };
-            }
-
-            const newTrackedTime = [...prevTrackedTime];
-            newTrackedTime[sameDateIndex] = {
-              time: newTrackedTime[sameDateIndex].time + trackedTime.time,
-              date: newTrackedTime[sameDateIndex].date,
-            };
-
-            return { ...prevCustomData, trackedTime: newTrackedTime };
-          });
-        });
+        addTrackedTimeToUser(user.user.uid, trackedTime);
       }
     };
 

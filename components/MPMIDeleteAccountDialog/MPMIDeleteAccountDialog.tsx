@@ -53,8 +53,7 @@ export const MPMIDeleteAccountDialog = ({
                 );
               })
               .catch((error: FirebaseError) => {
-                const errorCode = error.code;
-                const errorMessage = getAuthError(errorCode) || error.message;
+                const errorMessage = getAuthError(error.code) || error.message;
 
                 showSnackbar(
                   "Account konnte nicht gelöscht werden",
@@ -65,8 +64,7 @@ export const MPMIDeleteAccountDialog = ({
           }
         })
         .catch((error: FirebaseError) => {
-          const errorCode = error.code;
-          const errorMessage = getAuthError(errorCode) || error.message;
+          const errorMessage = getAuthError(error.code) || error.message;
 
           showSnackbar(
             "Account konnte nicht gelöscht werden",

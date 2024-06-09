@@ -147,19 +147,7 @@ export default function FreePracticeSequencePage({
 
       if (user?.user && isNotAlreadyInMistakes) {
         const mistakeExercisesToAdd = [exercise];
-        addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd).then(
-          () => {
-            user.setCustomData((prevCustomData) => {
-              return {
-                ...prevCustomData,
-                mistakeExercises: [
-                  ...prevCustomData.mistakeExercises,
-                  exercise,
-                ],
-              };
-            });
-          },
-        );
+        addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
     },
     [user],
@@ -169,22 +157,9 @@ export default function FreePracticeSequencePage({
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
       if (user?.user) {
         const solvedExercisesToAdd = 1;
-        addSolvedExerciseToUser(user.user.uid, solvedExercisesToAdd).then(
-          () => {
-            user.setCustomData((prevCustomData) => ({
-              ...prevCustomData,
-              solvedExercises:
-                prevCustomData.solvedExercises + solvedExercisesToAdd,
-            }));
-          },
-        );
+        addSolvedExerciseToUser(user.user.uid, solvedExercisesToAdd);
         const pointsToAdd = 1;
-        addPointsToUser(user.user.uid, pointsToAdd).then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            points: prevCustomData.points + pointsToAdd,
-          }));
-        });
+        addPointsToUser(user.user.uid, pointsToAdd);
 
         // If the exercise type is not set, the user is retrying mistakes
         if (!exerciseType) {
@@ -193,18 +168,7 @@ export default function FreePracticeSequencePage({
           );
 
           if (exercise) {
-            const newMistakeExercises = user.customData.mistakeExercises.filter(
-              (e) => {
-                return e.id !== exercise.id || e.topic !== exercise.topic;
-              },
-            );
-
-            removeExercisesFromMistakes(user.user.uid, [exercise]).then(() => {
-              user.setCustomData((prevCustomData) => ({
-                ...prevCustomData,
-                mistakeExercises: newMistakeExercises,
-              }));
-            });
+            removeExercisesFromMistakes(user.user.uid, [exercise]);
           }
         }
       }
@@ -222,12 +186,7 @@ export default function FreePracticeSequencePage({
           const pointsToAdd =
             pointsToAddForSequenceCompletion[parameters.difficulty];
 
-          addPointsToUser(user.user.uid, pointsToAdd).then(() => {
-            user.setCustomData((prevCustomData) => ({
-              ...prevCustomData,
-              points: prevCustomData.points + pointsToAdd,
-            }));
-          });
+          addPointsToUser(user.user.uid, pointsToAdd);
         }
       }
     },

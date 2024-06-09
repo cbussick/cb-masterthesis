@@ -14,6 +14,7 @@ export const MPMIProfileImageSelector = ({
   onSelect,
 }: MPMIProfileImageSelectorProps): JSX.Element => {
   const user = useUser();
+
   const userPoints = user?.customData.points || 0;
   const currentLevel =
     levels.find(

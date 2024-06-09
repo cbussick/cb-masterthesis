@@ -45,8 +45,7 @@ export const MPMISignInForm = ({
         );
       })
       .catch((error: FirebaseError) => {
-        const errorCode = error.code;
-        const errorMessage = getAuthError(errorCode) || error.message;
+        const errorMessage = getAuthError(error.code) || error.message;
 
         setIsLoading(false);
         showSnackbar("Anmeldung fehlgeschlagen", errorMessage, "error");

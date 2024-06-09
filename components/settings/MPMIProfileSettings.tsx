@@ -13,7 +13,6 @@ import {
   Avatar,
   Box,
   Button,
-  CircularProgress,
   Divider,
   IconButton,
   Stack,
@@ -48,6 +47,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const { showSnackbar } = useSnackbar();
   const user = useUser();
   const theme = useTheme();
+
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string>(
@@ -74,18 +74,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const oldPassword = watchPW(oldPasswordId);
   const newPassword = watchPW(newPasswordId);
 
-  const handleProfileImageChange = (newImage: string) => {
-    setProfilePicture(newImage);
-  };
-
-  const handleEditUsernameClick = () => {
-    setIsEditingUsername(true);
-  };
-
-  const handleEditPasswordClick = () => {
-    setIsEditingPassword(true);
-  };
-
   const handleEditUsernameClose = () => {
     setIsEditingUsername(false);
   };
@@ -98,10 +86,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
     if (user?.user) {
       changeUsername(user.user.uid, username)
         .then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            username,
-          }));
           showSnackbar(
             "Benutzername geändert",
             "Du hast deinen Benutzernamen erfolgreich geändert.",
@@ -109,8 +93,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
           );
         })
         .catch((error: FirebaseError) => {
-          const errorCode = error.code;
-          const errorMessage = getAuthError(errorCode) || error.message;
+          const errorMessage = getAuthError(error.code) || error.message;
 
           showSnackbar(
             "Benutzername konnte nicht geändert werden",
@@ -135,8 +118,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
           }
         })
         .catch((error: FirebaseError) => {
-          const errorCode = error.code;
-          const errorMessage = getAuthError(errorCode) || error.message;
+          const errorMessage = getAuthError(error.code) || error.message;
 
           showSnackbar(
             "Passwort konnte nicht geändert werden",
@@ -152,10 +134,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
     if (user?.user) {
       changeProfilePicture(user.user.uid, profilePicture)
         .then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            profilePicture,
-          }));
           showSnackbar(
             "Profilbild geändert",
             "Du hast dein Profilbild erfolgreich geändert.",
@@ -163,8 +141,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
           );
         })
         .catch((error: FirebaseError) => {
-          const errorCode = error.code;
-          const errorMessage = getAuthError(errorCode) || error.message;
+          const errorMessage = getAuthError(error.code) || error.message;
 
           showSnackbar(
             "Profilbild konnte nicht geändert werden",
@@ -183,14 +160,14 @@ export const MPMIProfileSettings = (): JSX.Element => {
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Stack paddingTop={3} justifyContent="center">
+        <Stack pt={3} justifyContent="center">
           <Stack
-            spacing={1}
             direction="row"
+            spacing={1}
             width="100%"
             justifyContent="center"
             alignItems="center"
-            paddingBottom={2}
+            pb={2}
           >
             <TextField
               label="Benutzername"
@@ -200,14 +177,14 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={handleEditUsernameClick}>
+            <IconButton onClick={() => setIsEditingUsername(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>
 
           <Stack
-            spacing={1}
             direction="row"
+            spacing={1}
             width="100%"
             justifyContent="center"
             alignItems="center"
@@ -220,31 +197,27 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={handleEditPasswordClick}>
+            <IconButton onClick={() => setIsEditingPassword(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>
 
-          <Divider sx={{ padding: 1 }} />
+          <Divider sx={{ p: 1 }} />
 
-          <Grid container spacing={2} paddingTop={4}>
+          <Grid container spacing={2} pt={4}>
             <Grid xs={2} display="flex">
               <Stack spacing={2} alignItems="center">
-                {user ? (
-                  <Avatar
-                    alt="Profilbild"
-                    src={profilePicture}
-                    sx={{
-                      border: 7,
-                      borderColor: theme.palette.primary.main,
-                      boxShadow: 3,
-                      width: pictureSize,
-                      height: pictureSize,
-                    }}
-                  />
-                ) : (
-                  <CircularProgress size={pictureSize} />
-                )}
+                <Avatar
+                  alt="Profilbild"
+                  src={profilePicture}
+                  sx={{
+                    border: 7,
+                    borderColor: theme.palette.primary.main,
+                    boxShadow: 3,
+                    width: pictureSize,
+                    height: pictureSize,
+                  }}
+                />
 
                 <Button
                   onClick={handleSaveButtonClickProfilePic}
@@ -257,11 +230,11 @@ export const MPMIProfileSettings = (): JSX.Element => {
 
             <Grid xs>
               <Stack>
-                <Typography sx={{ paddingBottom: 2 }}>
-                  Wähle einen Avatar aus
-                </Typography>
+                <Typography pb={2}>Wähle einen Avatar aus</Typography>
 
-                <MPMIProfileImageSelector onSelect={handleProfileImageChange} />
+                <MPMIProfileImageSelector
+                  onSelect={(newImage) => setProfilePicture(newImage)}
+                />
               </Stack>
             </Grid>
           </Grid>

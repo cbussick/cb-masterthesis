@@ -96,24 +96,14 @@ export const MPMIExamSimulator = ({
   const onSequenceComplete = useCallback(() => {
     setExamState(MPMIExamSimulatorState.Finished);
     if (user?.user) {
-      addCompletedExamsToUser(user.user.uid, 1).then(() => {
-        user.setCustomData((prevCustomData) => ({
-          ...prevCustomData,
-          completedExams: prevCustomData.completedExams + 1,
-        }));
-      });
+      addCompletedExamsToUser(user.user.uid, 1);
 
       const correctExercisesAmount = exercises.filter(
         (e) => e.isCorrect,
       ).length;
       if (correctExercisesAmount >= exercises.length / 2) {
         const pointsToAdd = correctExercisesAmount + pointsForSuccessfulExam;
-        addPointsToUser(user.user.uid, pointsToAdd).then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            points: prevCustomData.points + pointsToAdd,
-          }));
-        });
+        addPointsToUser(user.user.uid, pointsToAdd);
       }
     }
   }, [exercises, user]);

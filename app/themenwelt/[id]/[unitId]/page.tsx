@@ -94,18 +94,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
             }
 
             if (unlockGlossaryEntries.length > 0) {
-              unlockGlossaryEntries(
-                user.user.uid,
-                unlockedGlossaryEntryIds,
-              ).then(() => {
-                user.setCustomData((prevCustomData) => ({
-                  ...prevCustomData,
-                  unlockedGlossaryEntryIDs: [
-                    ...prevCustomData.unlockedGlossaryEntryIDs,
-                    ...unlockedGlossaryEntryIds,
-                  ],
-                }));
-              });
+              unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
             }
           }
         }
@@ -113,12 +102,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
         const pointsToAdd =
           pointsToAddForSequenceCompletion[parameters.difficulty];
 
-        addPointsToUser(user.user.uid, pointsToAdd).then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            points: prevCustomData.points + pointsToAdd,
-          }));
-        });
+        addPointsToUser(user.user.uid, pointsToAdd);
       }
     }
   };
