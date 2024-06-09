@@ -13,7 +13,6 @@ import {
   Avatar,
   Box,
   Button,
-  CircularProgress,
   Divider,
   IconButton,
   Stack,
@@ -219,21 +218,17 @@ export const MPMIProfileSettings = (): JSX.Element => {
           <Grid container spacing={2} pt={4}>
             <Grid xs={2} display="flex">
               <Stack spacing={2} alignItems="center">
-                {user ? (
-                  <Avatar
-                    alt="Profilbild"
-                    src={profilePicture}
-                    sx={{
-                      border: 7,
-                      borderColor: theme.palette.primary.main,
-                      boxShadow: 3,
-                      width: pictureSize,
-                      height: pictureSize,
-                    }}
-                  />
-                ) : (
-                  <CircularProgress size={pictureSize} />
-                )}
+                <Avatar
+                  alt="Profilbild"
+                  src={profilePicture}
+                  sx={{
+                    border: 7,
+                    borderColor: theme.palette.primary.main,
+                    boxShadow: 3,
+                    width: pictureSize,
+                    height: pictureSize,
+                  }}
+                />
 
                 <Button
                   onClick={handleSaveButtonClickProfilePic}
