@@ -48,6 +48,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const { showSnackbar } = useSnackbar();
   const user = useUser();
   const theme = useTheme();
+
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string>(
@@ -73,18 +74,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const username = watch(usernameId);
   const oldPassword = watchPW(oldPasswordId);
   const newPassword = watchPW(newPasswordId);
-
-  const handleProfileImageChange = (newImage: string) => {
-    setProfilePicture(newImage);
-  };
-
-  const handleEditUsernameClick = () => {
-    setIsEditingUsername(true);
-  };
-
-  const handleEditPasswordClick = () => {
-    setIsEditingPassword(true);
-  };
 
   const handleEditUsernameClose = () => {
     setIsEditingUsername(false);
@@ -200,7 +189,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={handleEditUsernameClick}>
+            <IconButton onClick={() => setIsEditingUsername(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>
@@ -220,7 +209,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={handleEditPasswordClick}>
+            <IconButton onClick={() => setIsEditingPassword(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>
@@ -261,7 +250,9 @@ export const MPMIProfileSettings = (): JSX.Element => {
                   Wähle einen Avatar aus
                 </Typography>
 
-                <MPMIProfileImageSelector onSelect={handleProfileImageChange} />
+                <MPMIProfileImageSelector
+                  onSelect={(newImage) => setProfilePicture(newImage)}
+                />
               </Stack>
             </Grid>
           </Grid>
