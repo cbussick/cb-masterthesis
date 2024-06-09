@@ -86,10 +86,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
     if (user?.user) {
       changeUsername(user.user.uid, username)
         .then(() => {
-          user.setCustomData((prevCustomData) => ({
-            ...prevCustomData,
-            username,
-          }));
           showSnackbar(
             "Benutzername geändert",
             "Du hast deinen Benutzernamen erfolgreich geändert.",
@@ -138,10 +134,6 @@ export const MPMIProfileSettings = (): JSX.Element => {
     if (user?.user) {
       changeProfilePicture(user.user.uid, profilePicture)
         .then(() => {
-          // user.setCustomData((prevCustomData) => ({
-          //   ...prevCustomData,
-          //   profilePicture,
-          // }));
           showSnackbar(
             "Profilbild geändert",
             "Du hast dein Profilbild erfolgreich geändert.",
