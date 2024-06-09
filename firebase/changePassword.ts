@@ -17,8 +17,7 @@ export const changePassword = (
       );
     })
     .catch((error: FirebaseError) => {
-      const errorCode = error.code;
-      const errorMessage = getAuthError(errorCode) || error.message;
+      const errorMessage = getAuthError(error.code) || error.message;
 
       showSnackbar(
         "Passwort konnte nicht geändert werden",

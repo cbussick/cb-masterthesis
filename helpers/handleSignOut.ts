@@ -15,8 +15,7 @@ export const handleSignOut = (
       );
     })
     .catch((error: FirebaseError) => {
-      const errorCode = error.code;
-      const errorMessage = getAuthError(errorCode) || error.message;
+      const errorMessage = getAuthError(error.code) || error.message;
 
       showSnackbar("Abmeldung fehlgeschlagen", errorMessage, "error");
     });

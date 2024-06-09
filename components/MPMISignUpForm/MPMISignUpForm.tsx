@@ -70,8 +70,7 @@ export const MPMISignUpForm = (): JSX.Element => {
         );
       })
       .catch((error: FirebaseError) => {
-        const errorCode = error.code;
-        const errorMessage = getAuthError(errorCode) || error.message;
+        const errorMessage = getAuthError(error.code) || error.message;
 
         setIsLoading(false);
         showSnackbar("Registrierung fehlgeschlagen", errorMessage, "error");
