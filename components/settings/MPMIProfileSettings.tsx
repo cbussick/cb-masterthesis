@@ -172,14 +172,14 @@ export const MPMIProfileSettings = (): JSX.Element => {
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Stack paddingTop={3} justifyContent="center">
+        <Stack pt={3} justifyContent="center">
           <Stack
-            spacing={1}
             direction="row"
+            spacing={1}
             width="100%"
             justifyContent="center"
             alignItems="center"
-            paddingBottom={2}
+            pb={2}
           >
             <TextField
               label="Benutzername"
@@ -195,8 +195,8 @@ export const MPMIProfileSettings = (): JSX.Element => {
           </Stack>
 
           <Stack
-            spacing={1}
             direction="row"
+            spacing={1}
             width="100%"
             justifyContent="center"
             alignItems="center"
@@ -214,9 +214,9 @@ export const MPMIProfileSettings = (): JSX.Element => {
             </IconButton>
           </Stack>
 
-          <Divider sx={{ padding: 1 }} />
+          <Divider sx={{ p: 1 }} />
 
-          <Grid container spacing={2} paddingTop={4}>
+          <Grid container spacing={2} pt={4}>
             <Grid xs={2} display="flex">
               <Stack spacing={2} alignItems="center">
                 {user ? (
@@ -246,9 +246,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
 
             <Grid xs>
               <Stack>
-                <Typography sx={{ paddingBottom: 2 }}>
-                  Wähle einen Avatar aus
-                </Typography>
+                <Typography pb={2}>Wähle einen Avatar aus</Typography>
 
                 <MPMIProfileImageSelector
                   onSelect={(newImage) => setProfilePicture(newImage)}
