@@ -15,28 +15,28 @@ interface SidebarProviderProps {
 
 interface Sidebar {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   toggleIsOpen: VoidFunction;
 }
 
 const defaultSidebar: Sidebar = {
   isOpen: false,
-  setIsOpen: () => {},
+  setOpen: () => {},
   toggleIsOpen: () => {},
 };
 
 export const SidebarContext = createContext<Sidebar>(defaultSidebar);
 
 export const SidebarProvider = ({ children }: SidebarProviderProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(defaultSidebar.isOpen);
+  const [isOpen, setOpen] = useState<boolean>(defaultSidebar.isOpen);
 
   return useMemo(
     () => (
       <SidebarContext.Provider
         value={{
           isOpen,
-          setIsOpen,
-          toggleIsOpen: () => setIsOpen((open) => !open),
+          setOpen,
+          toggleIsOpen: () => setOpen((open) => !open),
         }}
       >
         {children}

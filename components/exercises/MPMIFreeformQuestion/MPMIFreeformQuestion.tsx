@@ -22,19 +22,19 @@ export const MPMIFreeformQuestion = ({
   const {
     setExercises,
     isCurrentExerciseFinished,
-    setIsCurrentExerciseFinished,
+    setCurrentExerciseFinished,
   } = useMPMIExerciseSequence();
 
   const [answer, setAnswer] = useState<string>("");
-  const [isFetchingResponse, setIsFetchingResponse] = useState<boolean>(false);
+  const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
 
   const onConfirm = () => {
-    setIsFetchingResponse(true);
+    setFetchingResponse(true);
 
     getOpenAIAnswerEvaluation(exercise.question, answer).then((response) => {
-      setIsFetchingResponse(false);
+      setFetchingResponse(false);
 
-      setIsCurrentExerciseFinished(true);
+      setCurrentExerciseFinished(true);
       const isCorrect = response.startsWith("Ja");
 
       if (isCorrect && user) {

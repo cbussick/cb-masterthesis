@@ -28,19 +28,19 @@ export const MPMISwiper = ({
 }: MPMISwiperProps): JSX.Element => {
   const {
     isCurrentExerciseFinished,
-    setIsCurrentExerciseFinished,
+    setCurrentExerciseFinished,
     setExercises,
   } = useMPMIExerciseSequence();
 
   const [clickedButton, setClickedButton] = useState<string>("");
   const [dropTarget, setDropTarget] = useState<string>("");
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isDragging, setDragging] = useState<boolean>(false);
 
   const constraintsRef = useRef(null);
 
   const onConfirm = (buttonAnswerId: string) => {
     setClickedButton(buttonAnswerId);
-    setIsCurrentExerciseFinished(true);
+    setCurrentExerciseFinished(true);
 
     const isCorrect = exercise.belongsTo === buttonAnswerId;
 
@@ -84,7 +84,7 @@ export const MPMISwiper = ({
   };
 
   const onDragEnd: DraggableProps["onDragEnd"] = () => {
-    setIsDragging(false);
+    setDragging(false);
     if (dropTarget) {
       onConfirm(dropTarget);
     }
@@ -127,7 +127,7 @@ export const MPMISwiper = ({
             dragMomentum={false}
             dragSnapToOrigin
             dragConstraints={constraintsRef}
-            onDragStart={() => setIsDragging(true)}
+            onDragStart={() => setDragging(true)}
             onDragEnd={onDragEnd}
           >
             <Stack width="100%" height="100%" alignItems="center" spacing={1}>

@@ -45,7 +45,7 @@ export const MPMIExerciseSequenceBottomBar = ({
 
   const {
     isCurrentExerciseFinished,
-    setIsCurrentExerciseFinished,
+    setCurrentExerciseFinished,
     currentExerciseIndex,
     setCurrentExerciseIndex,
     exercises,
@@ -88,7 +88,7 @@ export const MPMIExerciseSequenceBottomBar = ({
 
   const onClickNext = () => {
     moveToNextExercise();
-    setIsCurrentExerciseFinished(false);
+    setCurrentExerciseFinished(false);
   };
 
   const onClickConfirm = () => {
@@ -110,7 +110,7 @@ export const MPMIExerciseSequenceBottomBar = ({
         componentRef.current.onConfirm() as MPMIConfirmation;
 
       if (exerciseTypesWithConfirmButton.includes(currentExerciseType)) {
-        setIsCurrentExerciseFinished(exerciseConfirmationData.isFinished);
+        setCurrentExerciseFinished(exerciseConfirmationData.isFinished);
 
         if (exerciseConfirmationData.isFinished) {
           if (!exerciseConfirmationData.isCorrect && onMistake) {

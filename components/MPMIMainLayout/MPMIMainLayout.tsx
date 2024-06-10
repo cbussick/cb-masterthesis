@@ -25,7 +25,7 @@ export const MPMIMainLayout = ({
   const theme = useTheme();
   const user = useUser();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { isOpen, setIsOpen, title, message, severity } = useSnackbar();
+  const { isOpen, setOpen, title, message, severity } = useSnackbar();
 
   if (isMobile) {
     return <MPMIMobileView />;
@@ -79,7 +79,7 @@ export const MPMIMainLayout = ({
         isOpen={isOpen}
         severity={severity}
         onClose={() => {
-          setIsOpen(false);
+          setOpen(false);
         }}
         title={title}
         message={message}

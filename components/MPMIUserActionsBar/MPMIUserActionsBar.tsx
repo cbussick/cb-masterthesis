@@ -12,7 +12,7 @@ const notificationMenuIdRaw = "notification-menu";
 export const MPMIUserActionsBar = (): JSX.Element => {
   const [notificationsMenuAnchorEl, setNotificationsMenuAnchorEl] =
     useState<HTMLElement | null>(null);
-  const [isSearchMenuOpen, setIsSearchMenuOpen] = useState<boolean>(false);
+  const [isSearchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
 
   const isNotificationMenuOpen = Boolean(notificationsMenuAnchorEl);
   const notificationMenuId = isNotificationMenuOpen
@@ -40,7 +40,7 @@ export const MPMIUserActionsBar = (): JSX.Element => {
         />
 
         <MPMIIconButton
-          onClick={() => setIsSearchMenuOpen((prevOpen) => !prevOpen)}
+          onClick={() => setSearchMenuOpen((prevOpen) => !prevOpen)}
           icon={<Search />}
           ariaLabel="Suche"
         />
@@ -55,7 +55,7 @@ export const MPMIUserActionsBar = (): JSX.Element => {
 
       <MPMISearchMenu
         isMenuOpen={isSearchMenuOpen}
-        onClose={() => setIsSearchMenuOpen(false)}
+        onClose={() => setSearchMenuOpen(false)}
       />
     </>
   );

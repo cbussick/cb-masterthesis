@@ -35,7 +35,7 @@ export const MPMIExamSimulator = ({
 
   const [exercises, setExercises] = useState<MPMIExerciseWithCorrectness[]>([]);
 
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+  const [isFirstRender, setFirstRender] = useState<boolean>(true);
 
   const [completionTime, setCompletionTime] = useState<MPMITime>({
     sec: 0,
@@ -87,7 +87,7 @@ export const MPMIExamSimulator = ({
 
   useEffect(() => {
     if (isFirstRender) {
-      setIsFirstRender(false);
+      setFirstRender(false);
       const failedExercises = exercises.filter((e) => !e.isCorrect);
       resetExercises(failedExercises);
     }
@@ -149,7 +149,7 @@ export const MPMIExamSimulator = ({
   }
 
   const onRetry = (failedExercises: MPMIExerciseWithCorrectness[]) => {
-    setIsFirstRender(true);
+    setFirstRender(true);
     setExamState(MPMIExamSimulatorState.Started);
     resetExercises(failedExercises);
   };

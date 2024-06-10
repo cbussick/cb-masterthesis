@@ -29,7 +29,7 @@ const passwordId = "password";
 export const MPMISignUpForm = (): JSX.Element => {
   const { showSnackbar } = useSnackbar();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -51,7 +51,7 @@ export const MPMISignUpForm = (): JSX.Element => {
   const profilePicture = "";
 
   const handleSignUp = () => {
-    setIsLoading(true);
+    setLoading(true);
     signUpUser(
       firstName,
       lastName,
@@ -72,7 +72,7 @@ export const MPMISignUpForm = (): JSX.Element => {
       .catch((error: FirebaseError) => {
         const errorMessage = getAuthError(error.code) || error.message;
 
-        setIsLoading(false);
+        setLoading(false);
         showSnackbar("Registrierung fehlgeschlagen", errorMessage, "error");
       });
   };

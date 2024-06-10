@@ -16,8 +16,8 @@ interface SnackbarProviderProps {
 
 export interface MPMISnackbarData {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  toggleIsOpen: VoidFunction;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  toggleOpen: VoidFunction;
   title: MPMISnackbarProps["title"];
   setTitle: (title: string) => void;
   message: MPMISnackbarProps["message"];
@@ -33,8 +33,8 @@ export interface MPMISnackbarData {
 
 const defaultSnackbar: MPMISnackbarData = {
   isOpen: false,
-  setIsOpen: () => {},
-  toggleIsOpen: () => {},
+  setOpen: () => {},
+  toggleOpen: () => {},
   title: "",
   setTitle: () => {},
   message: "",
@@ -47,7 +47,7 @@ const defaultSnackbar: MPMISnackbarData = {
 export const SnackbarContext = createContext<MPMISnackbarData>(defaultSnackbar);
 
 export const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(defaultSnackbar.isOpen);
+  const [isOpen, setOpen] = useState<boolean>(defaultSnackbar.isOpen);
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [severity, setSeverity] = useState<MPMISnackbarData["severity"]>();
@@ -60,7 +60,7 @@ export const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
     setTitle(snackbarTitle);
     setMessage(snackbarMessage);
     setSeverity(snackbarSeverity);
-    setIsOpen(true);
+    setOpen(true);
   };
 
   return useMemo(
@@ -68,8 +68,8 @@ export const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
       <SnackbarContext.Provider
         value={{
           isOpen,
-          setIsOpen,
-          toggleIsOpen: () => setIsOpen((open) => !open),
+          setOpen,
+          toggleOpen: () => setOpen((open) => !open),
           title,
           setTitle,
           message,
