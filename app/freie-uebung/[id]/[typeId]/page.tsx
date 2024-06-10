@@ -183,10 +183,10 @@ export default function FreePracticeSequencePage({
     }) => {
       if (user?.user) {
         if (parameters.allExercisesCompleted && parameters.difficulty) {
-          const pointsToAdd =
-            pointsToAddForSequenceCompletion[parameters.difficulty];
-
-          addPointsToUser(user.user.uid, pointsToAdd);
+          addPointsToUser(
+            user.user.uid,
+            pointsToAddForSequenceCompletion[parameters.difficulty],
+          );
         }
       }
     },
