@@ -6,9 +6,9 @@ import { MPMIStudentDataTable } from "@/components/MPMIStudentDataTable/MPMIStud
 import { MPMIStudentOverviewGraphCard } from "@/components/MPMIStudentOverviewGraphCard/MPMIStudentOverviewGraphCard";
 import { mitoseUnits, zelleUnits } from "@/data/topicWorld";
 import { topics } from "@/data/topics";
-import theme from "@/theme/theme";
+import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
 import { Grid2Props, Stack, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Grid from "@mui/material/Unstable_Grid2";
 import { LineChart, PieChart } from "@mui/x-charts";
 
 const commonGridItemProps: Grid2Props = {

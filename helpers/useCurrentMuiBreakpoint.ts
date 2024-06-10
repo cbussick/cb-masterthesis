@@ -1,4 +1,4 @@
-import theme from "@/theme/theme";
+import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
 import { useMediaQuery } from "@mui/material";
 import { Breakpoint } from "@mui/system";
 
