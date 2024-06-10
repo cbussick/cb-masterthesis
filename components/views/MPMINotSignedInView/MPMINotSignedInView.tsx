@@ -12,9 +12,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
 
 export const MPMINotSignedInView = (): JSX.Element => {
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const { isOpen, setOpen, title, message, severity } = useSnackbar();
 
-  const { isOpen, setIsOpen, title, message, severity } = useSnackbar();
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -34,7 +34,7 @@ export const MPMINotSignedInView = (): JSX.Element => {
               bgcolor={(t) => t.palette.background.default}
               boxShadow={(t) => t.shadows[8]}
               borderRadius={5}
-              padding={5}
+              p={5}
             >
               <Container maxWidth="md">
                 <Stack spacing={10} justifyContent="center" alignItems="center">
@@ -58,7 +58,7 @@ export const MPMINotSignedInView = (): JSX.Element => {
 
                       <Button
                         variant="text"
-                        onClick={() => setIsDialogOpen(true)}
+                        onClick={() => setDialogOpen(true)}
                       >
                         <Typography>Neuen Account anlegen</Typography>
                       </Button>
@@ -75,7 +75,7 @@ export const MPMINotSignedInView = (): JSX.Element => {
         isOpen={isOpen}
         severity={severity}
         onClose={() => {
-          setIsOpen(false);
+          setOpen(false);
         }}
         title={title}
         message={message}
@@ -83,7 +83,7 @@ export const MPMINotSignedInView = (): JSX.Element => {
 
       <MPMIDialog
         isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
+        onClose={() => setDialogOpen(false)}
         title={
           <Stack direction="row" spacing={1}>
             <Typography variant="h2">Neuen Account anlegen</Typography>

@@ -32,7 +32,7 @@ export const MPMIExamSimulatorTaskCard = ({
         borderRadius: 3,
         alignItems: "center",
         justifyContent: "space-between",
-        paddingX: 2,
+        px: 2,
       }}
     >
       <Stack direction="row" spacing={2}>

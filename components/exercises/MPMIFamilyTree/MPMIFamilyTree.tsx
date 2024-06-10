@@ -133,7 +133,7 @@ export const MPMIFamilyTree = forwardRef(
     const animationControls = useAnimationControls();
     const { isCurrentExerciseFinished } = useMPMIExerciseSequence();
     const [inheritance, setInheritance] = React.useState("");
-    const [isInheritanceMistake, setIsInheritanceMistake] =
+    const [isInheritanceMistake, setInheritanceMistake] =
       React.useState<boolean>(false);
     const showInheritance = exercise.difficulty === MPMIExerciseDifficulty.Hard;
 
@@ -466,7 +466,7 @@ export const MPMIFamilyTree = forwardRef(
         }
       });
       setNodes(nodesWithHighlightedMistakes);
-      setIsInheritanceMistake(!isInheritanceCorrect);
+      setInheritanceMistake(!isInheritanceCorrect);
     };
 
     const onSuccess = () => {
@@ -632,7 +632,7 @@ export const MPMIFamilyTree = forwardRef(
                   disabled={isCurrentExerciseFinished}
                   label="Erbgang"
                   error={isInheritanceMistake}
-                  onFocus={() => setIsInheritanceMistake(false)}
+                  onFocus={() => setInheritanceMistake(false)}
                   sx={{
                     width: 300,
                     "& .MuiOutlinedInput-notchedOutline": {

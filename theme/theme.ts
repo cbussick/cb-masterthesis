@@ -1,4 +1,5 @@
 import { createTheme, responsiveFontSizes, Theme } from "@mui/material";
+import { font } from "./font";
 
 const fontWeightMedium = 500;
 
@@ -18,9 +19,7 @@ const theme = createTheme({
   },
   spacing,
   typography: {
-    // We are using `next/font` to load the font.
-    // The theme needs to inherit from `body` in order not to override the `next/font` with the Material UI default fonts.
-    fontFamily: "inherit",
+    fontFamily: font.style.fontFamily,
     fontWeightMedium,
     h1: {
       fontSize: "2.5rem", // 40px
@@ -58,9 +57,9 @@ const themeWithOverrides: Theme = {
         root: {
           textTransform: "none",
           fontWeight: "bold",
-          padding: 10,
-          paddingLeft: 20,
-          paddingRight: 20,
+          p: 10,
+          pl: 20,
+          pr: 20,
         },
       },
       defaultProps: {

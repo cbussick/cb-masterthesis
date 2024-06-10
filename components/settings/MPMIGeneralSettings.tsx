@@ -14,10 +14,10 @@ import { MPMIDeleteAccountDialog } from "../MPMIDeleteAccountDialog/MPMIDeleteAc
 
 export const MPMIGeneralSettings = (): JSX.Element => {
   const user = useUser();
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+  const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 
   const onClickDelete = () => {
-    setIsDeleteDialogOpen(true);
+    setDeleteDialogOpen(true);
   };
 
   const commonTextFieldProps: Partial<TextFieldProps> = {
@@ -34,7 +34,7 @@ export const MPMIGeneralSettings = (): JSX.Element => {
           ggfs. deinen Namen und deine E-Mail ändern.
         </Typography>
 
-        <Stack paddingTop={3} spacing={2} alignItems="center">
+        <Stack pt={3} spacing={2} alignItems="center">
           <TextField
             label="Vorname"
             value={user?.customData.firstName || ""}
@@ -79,7 +79,7 @@ export const MPMIGeneralSettings = (): JSX.Element => {
 
       <MPMIDeleteAccountDialog
         isOpen={isDeleteDialogOpen}
-        onClose={() => setIsDeleteDialogOpen(false)}
+        onClose={() => setDeleteDialogOpen(false)}
       />
     </>
   );

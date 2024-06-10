@@ -48,8 +48,8 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const user = useUser();
   const theme = useTheme();
 
-  const [isEditingUsername, setIsEditingUsername] = useState(false);
-  const [isEditingPassword, setIsEditingPassword] = useState(false);
+  const [isEditingUsername, setEditingUsername] = useState(false);
+  const [isEditingPassword, setEditingPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string>(
     user?.customData.profilePicture || "",
   );
@@ -75,11 +75,11 @@ export const MPMIProfileSettings = (): JSX.Element => {
   const newPassword = watchPW(newPasswordId);
 
   const handleEditUsernameClose = () => {
-    setIsEditingUsername(false);
+    setEditingUsername(false);
   };
 
   const handleEditPasswordClose = () => {
-    setIsEditingPassword(false);
+    setEditingPassword(false);
   };
 
   const handleSaveButtonClickUsername = () => {
@@ -177,7 +177,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={() => setIsEditingUsername(true)}>
+            <IconButton onClick={() => setEditingUsername(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>
@@ -197,7 +197,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
               sx={{ width: "50%" }}
             />
 
-            <IconButton onClick={() => setIsEditingPassword(true)}>
+            <IconButton onClick={() => setEditingPassword(true)}>
               <EditRoundedIcon />
             </IconButton>
           </Stack>

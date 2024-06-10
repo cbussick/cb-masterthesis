@@ -15,13 +15,13 @@ interface MPMIConfettiProviderProps {
 
 interface MPMIConfettiType {
   isConfettiComplete: boolean;
-  setIsConfettiComplete: Dispatch<SetStateAction<boolean>>;
+  setConfettiComplete: Dispatch<SetStateAction<boolean>>;
   startConfetti: VoidFunction;
 }
 
 const defaultConfetti: MPMIConfettiType = {
   isConfettiComplete: true,
-  setIsConfettiComplete: () => {},
+  setConfettiComplete: () => {},
   startConfetti: () => {},
 };
 
@@ -31,7 +31,7 @@ export const MPMIConfettiContext =
 export const MPMIConfettiProvider = ({
   children,
 }: MPMIConfettiProviderProps) => {
-  const [isConfettiComplete, setIsConfettiComplete] = useState<boolean>(
+  const [isConfettiComplete, setConfettiComplete] = useState<boolean>(
     defaultConfetti.isConfettiComplete,
   );
 
@@ -40,8 +40,8 @@ export const MPMIConfettiProvider = ({
       <MPMIConfettiContext.Provider
         value={{
           isConfettiComplete,
-          setIsConfettiComplete,
-          startConfetti: () => setIsConfettiComplete(false),
+          setConfettiComplete,
+          startConfetti: () => setConfettiComplete(false),
         }}
       >
         {children}

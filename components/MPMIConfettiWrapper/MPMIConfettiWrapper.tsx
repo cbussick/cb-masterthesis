@@ -11,7 +11,7 @@ export const MPMIConfettiWrapper = ({
   children,
 }: MPMIConfettiWrapperProps): JSX.Element => {
   const isServerSide = useIsServerSide();
-  const { isConfettiComplete, setIsConfettiComplete } = useConfetti();
+  const { isConfettiComplete, setConfettiComplete } = useConfetti();
   const { width, height } = useWindowSize();
   const [usableWindowSize, setUsableWindowSize] =
     useState<ReturnType<typeof useWindowSize>>();
@@ -32,7 +32,7 @@ export const MPMIConfettiWrapper = ({
         numberOfPieces={isConfettiComplete ? 0 : 1000}
         recycle={false}
         onConfettiComplete={(instance) => {
-          setIsConfettiComplete(true);
+          setConfettiComplete(true);
           instance?.reset();
         }}
         initialVelocityY={{ min: 5, max: 20 }}

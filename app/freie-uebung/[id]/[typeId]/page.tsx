@@ -56,7 +56,7 @@ export default function FreePracticeSequencePage({
     MPMIExerciseWithMetaData[]
   >([]);
 
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+  const [isFirstRender, setFirstRender] = useState<boolean>(true);
 
   const topic = params.id as MPMITopic;
   const exerciseType =
@@ -74,7 +74,7 @@ export default function FreePracticeSequencePage({
 
     if (exerciseType) {
       if (isFirstRender) {
-        setIsFirstRender(false);
+        setFirstRender(false);
 
         exercises = exercisesMap[exerciseType]
           .filter((e) => e.topic === topic)
@@ -103,7 +103,7 @@ export default function FreePracticeSequencePage({
         setOriginalExercises(randomExercises);
       }
     } else if (isFirstRender) {
-      setIsFirstRender(false);
+      setFirstRender(false);
 
       user?.customData.mistakeExercises.forEach((e) => {
         if (e.topic === topic) {
@@ -183,10 +183,10 @@ export default function FreePracticeSequencePage({
     }) => {
       if (user?.user) {
         if (parameters.allExercisesCompleted && parameters.difficulty) {
-          const pointsToAdd =
-            pointsToAddForSequenceCompletion[parameters.difficulty];
-
-          addPointsToUser(user.user.uid, pointsToAdd);
+          addPointsToUser(
+            user.user.uid,
+            pointsToAddForSequenceCompletion[parameters.difficulty],
+          );
         }
       }
     },

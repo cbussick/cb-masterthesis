@@ -24,12 +24,12 @@ export default function Glossary() {
   const [filteredGlossaryEntries, setFilteredGlossaryEntries] = useState<
     MPMIGlossaryEntry[]
   >(unlockedGlossaryEntries);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isSearching, setSearching] = useState<boolean>(false);
   const [firstLetters, setFirstLetters] = useState<string[]>([]);
 
   const handleSearch = (searchTerm: string) => {
     const searching = searchTerm !== "";
-    setIsSearching(searching);
+    setSearching(searching);
 
     const filteredLetters: string[] = [];
     setFilteredGlossaryEntries(

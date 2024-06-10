@@ -26,7 +26,7 @@ interface MPMIExerciseSequenceDataType {
    * Whether the current exercise is finished. Not necessarily correctly.
    */
   isCurrentExerciseFinished: boolean;
-  setIsCurrentExerciseFinished: Dispatch<SetStateAction<boolean>>;
+  setCurrentExerciseFinished: Dispatch<SetStateAction<boolean>>;
 }
 
 const defaultExerciseSequence: MPMIExerciseSequenceDataType = {
@@ -37,7 +37,7 @@ const defaultExerciseSequence: MPMIExerciseSequenceDataType = {
   currentExerciseIndex: 0,
   setCurrentExerciseIndex: () => {},
   isCurrentExerciseFinished: false,
-  setIsCurrentExerciseFinished: () => {},
+  setCurrentExerciseFinished: () => {},
 };
 
 export const MPMIExerciseSequenceContext =
@@ -53,7 +53,8 @@ export const MPMIExerciseSequenceProvider = ({
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(
     defaultExerciseSequence.currentExerciseIndex,
   );
-  const [isFinished, setIsCurrentExerciseFinished] = useState<boolean>(false);
+  const [isCurrentExerciseFinished, setCurrentExerciseFinished] =
+    useState<boolean>(false);
 
   return useMemo(
     () => (
@@ -65,13 +66,19 @@ export const MPMIExerciseSequenceProvider = ({
           setExercises,
           currentExerciseIndex,
           setCurrentExerciseIndex,
-          isCurrentExerciseFinished: isFinished,
-          setIsCurrentExerciseFinished,
+          isCurrentExerciseFinished,
+          setCurrentExerciseFinished,
         }}
       >
         {children}
       </MPMIExerciseSequenceContext.Provider>
     ),
-    [children, currentExerciseIndex, exercises, isFinished, type],
+    [
+      children,
+      currentExerciseIndex,
+      exercises,
+      isCurrentExerciseFinished,
+      type,
+    ],
   );
 };

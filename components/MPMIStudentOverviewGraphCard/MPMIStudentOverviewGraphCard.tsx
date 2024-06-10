@@ -9,7 +9,7 @@ export const MPMIStudentOverviewGraphCard = ({
   topBar,
 }: MPMIStudentOverviewGraphCardProps): JSX.Element => {
   return (
-    <Card sx={{ borderRadius: 3, padding: 4 }}>
+    <Card sx={{ borderRadius: 3, p: 4 }}>
       <Stack spacing={2} justifyContent="center">
         <Stack>
           {topBar}

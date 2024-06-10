@@ -17,7 +17,7 @@ export const MPMIQuiz = ({
   const user = useUser();
   const {
     isCurrentExerciseFinished,
-    setIsCurrentExerciseFinished,
+    setCurrentExerciseFinished,
     setExercises,
   } = useMPMIExerciseSequence();
 
@@ -29,7 +29,7 @@ export const MPMIQuiz = ({
 
     setClickedButton(buttonAnswerId);
 
-    setIsCurrentExerciseFinished(true);
+    setCurrentExerciseFinished(true);
 
     const isCorrect = exercise.correctAnswer === buttonAnswerId;
 

@@ -10,7 +10,7 @@ export const MPMIImage = ({
   boxProps,
   draggable,
 }: MPMIImageProps): JSX.Element => {
-  const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+  const [isImageLoading, setImageLoading] = useState<boolean>(true);
 
   return (
     <Box
@@ -27,7 +27,7 @@ export const MPMIImage = ({
         alt={image.alt}
         fill
         style={{ objectFit: "contain" }}
-        onLoad={() => setIsImageLoading(false)}
+        onLoad={() => setImageLoading(false)}
         draggable={draggable}
       />
 

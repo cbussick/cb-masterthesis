@@ -20,7 +20,7 @@ export const MPMISignInForm = ({
 }: MPMISignInFormProps): JSX.Element => {
   const theme = useTheme();
   const { showSnackbar } = useSnackbar();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState<string>("");
 
@@ -35,7 +35,7 @@ export const MPMISignInForm = ({
   const password = watch("password");
 
   const handleSignIn = () => {
-    setIsLoading(true);
+    setLoading(true);
     signInUser(email, password, afterSignIn)
       .then(() => {
         showSnackbar(
@@ -47,7 +47,7 @@ export const MPMISignInForm = ({
       .catch((error: FirebaseError) => {
         const errorMessage = getAuthError(error.code) || error.message;
 
-        setIsLoading(false);
+        setLoading(false);
         showSnackbar("Anmeldung fehlgeschlagen", errorMessage, "error");
       });
   };
@@ -143,7 +143,7 @@ export const MPMISignInForm = ({
                     variant="text"
                     onClick={handleCloseForgotPassword}
                     sx={{
-                      paddingRight: 4,
+                      pr: 4,
                       color: theme.palette.grey[700],
                       "&:hover": {
                         bgcolor: "transparent",

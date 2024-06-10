@@ -99,10 +99,10 @@ export default function ExercisePage({ params }: ExercisePageParams) {
           }
         }
 
-        const pointsToAdd =
-          pointsToAddForSequenceCompletion[parameters.difficulty];
-
-        addPointsToUser(user.user.uid, pointsToAdd);
+        addPointsToUser(
+          user.user.uid,
+          pointsToAddForSequenceCompletion[parameters.difficulty],
+        );
       }
     }
   };
