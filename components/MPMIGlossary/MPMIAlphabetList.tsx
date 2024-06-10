@@ -2,15 +2,7 @@
 
 import { alphabet } from "@/helpers/alphabet";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import { MPMILink } from "../MPMILink/MPMILink";
@@ -32,7 +24,6 @@ export const MPMIAlphabetList = ({
   isSearching,
   filteredLetters,
 }: MPMIAlphabetListProps): JSX.Element => {
-  const theme = useTheme();
   const [selectedEntry, setSelectedEntry] = useState<MPMIGlossaryEntry | null>(
     null,
   );
@@ -72,7 +63,7 @@ export const MPMIAlphabetList = ({
               <Stack key={letter} direction="row" alignItems="center">
                 <Typography
                   variant="h4"
-                  color={theme.palette.grey[800]}
+                  color={(t) => t.palette.grey[800]}
                   px={1.2}
                 >
                   <MPMIUnstyledNextLink
@@ -86,56 +77,27 @@ export const MPMIAlphabetList = ({
                   </MPMIUnstyledNextLink>
                 </Typography>
 
-                {index < filteredAlphabet.length - 1 && <span> | </span>}
+                {index < filteredAlphabet.length - 1 && "|"}
               </Stack>
             ))}
           </Stack>
 
-          <Box sx={{ overflowY: "auto", maxHeight: "60vh" }}>
+          <Box maxHeight="60vh" sx={{ overflowY: "auto" }}>
             {filteredAlphabet.map((letter) => {
               const filteredLetterEntries = filteredGlossaryEntries(letter);
-              const hasSearchResults =
-                isSearching &&
-                filteredLetterEntries.some((entry) =>
-                  filteredEntries.includes(entry),
-                );
 
               return (
                 <Box key={letter}>
-                  {!isSearching && (
-                    <>
-                      <Typography
-                        id={letter}
-                        variant="h2"
-                        sx={{
-                          color: theme.palette.grey[700],
-                          pt: 20,
-                          pb: 10,
-                        }}
-                      >
-                        {letter}
-                      </Typography>
+                  <Typography
+                    id={letter}
+                    variant="h2"
+                    color={(t) => t.palette.grey[700]}
+                    pt={4}
+                  >
+                    {letter}
+                  </Typography>
 
-                      <Divider />
-                    </>
-                  )}
-
-                  {hasSearchResults && (
-                    <>
-                      <Typography
-                        variant="h2"
-                        sx={{
-                          color: theme.palette.grey[700],
-                          pt: 20,
-                          pb: 10,
-                        }}
-                      >
-                        {letter}
-                      </Typography>
-
-                      <Divider />
-                    </>
-                  )}
+                  <Divider />
 
                   {filteredLetterEntries.map((entry) => (
                     <Box key={entry.term}>
@@ -144,8 +106,8 @@ export const MPMIAlphabetList = ({
                           <Button
                             sx={{
                               zIndex: 0,
-                              color: theme.palette.grey[800],
-                              fontSize: theme.typography.h3.fontSize,
+                              color: (t) => t.palette.grey[800],
+                              fontSize: (t) => t.typography.h3.fontSize,
                               pl: 2,
                               pt: 1.5,
                               pb: 1.5,
@@ -170,25 +132,25 @@ export const MPMIAlphabetList = ({
                           >
                             <LockRoundedIcon
                               sx={{
-                                color: theme.palette.grey[700],
+                                color: (t) => t.palette.grey[700],
                               }}
                             />
 
                             <Stack direction="row" spacing={1}>
                               <Typography>
-                                Schalte Level {entry.unlockLevel} in der
+                                {`Schalte Level ${entry.unlockLevel} in der `}
+
+                                <MPMILink
+                                  href="/themenwelt"
+                                  style={{
+                                    fontWeight: "medium",
+                                  }}
+                                >
+                                  Themenwelt
+                                </MPMILink>
+
+                                {` frei`}
                               </Typography>
-
-                              <MPMILink
-                                href="/themenwelt"
-                                style={{
-                                  fontWeight: "medium",
-                                }}
-                              >
-                                Themenwelt
-                              </MPMILink>
-
-                              <Typography> frei</Typography>
                             </Stack>
                           </Stack>
 
