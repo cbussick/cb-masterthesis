@@ -1,3 +1,5 @@
+"use client";
+
 import { createTheme, responsiveFontSizes, Theme } from "@mui/material";
 import { font } from "./font";
 
@@ -74,9 +76,7 @@ const themeWithOverrides: Theme = {
   },
 };
 
-const themeWithResponsiveFontSizes = responsiveFontSizes(
+export const themeWithResponsiveFontSizes = responsiveFontSizes(
   themeWithOverrides,
   {},
 );
-
-export default themeWithResponsiveFontSizes;
