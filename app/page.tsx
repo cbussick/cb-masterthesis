@@ -12,12 +12,13 @@ export default function Home() {
   const user = useUser();
 
   let dashboard;
+  const userRole = user?.customData.role;
 
-  if (user?.customData.role === MPMIUserRole.Student) {
+  if (userRole === MPMIUserRole.Student) {
     dashboard = <MPMIDashboardStudent />;
-  } else if (user?.customData.role === MPMIUserRole.Teacher) {
+  } else if (userRole === MPMIUserRole.Teacher) {
     dashboard = <MPMIDashboardTeacher />;
-  } else if (user?.customData.role === MPMIUserRole.Admin) {
+  } else if (userRole === MPMIUserRole.Admin) {
     dashboard = <MPMIDashboardAdmin />;
   } else {
     dashboard = <CircularProgress />;

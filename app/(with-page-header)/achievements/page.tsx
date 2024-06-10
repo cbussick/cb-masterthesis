@@ -27,8 +27,6 @@ export default function Achievements() {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         setTopicWorldProgress(progress);
       });
-    } else {
-      setTopicWorldProgress(undefined);
     }
   }, [user?.user]);
 
@@ -157,9 +155,9 @@ export default function Achievements() {
   return (
     <Grid
       container
-      display="flex"
       rowSpacing={2}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      display="flex"
       justifyContent="flex-start"
       sx={{
         overflowY: "auto",

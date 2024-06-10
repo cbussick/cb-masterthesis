@@ -1,7 +1,7 @@
 "use client";
 
-import { MPMISettingsTabs } from "@/components/settings/MPMISettingsTabs/MPMISettingsTabs";
+import { MPMISettings } from "@/components/settings/MPMISettings/MPMISettings";
 
 export default function Settings() {
-  return <MPMISettingsTabs />;
+  return <MPMISettings />;
 }

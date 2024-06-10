@@ -55,7 +55,6 @@ export default function FreePracticeSequencePage({
   const [originalExercises, setOriginalExercises] = useState<
     MPMIExerciseWithMetaData[]
   >([]);
-
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
 
   const topic = params.id as MPMITopic;
@@ -86,7 +85,7 @@ export default function FreePracticeSequencePage({
           exercises.length < desiredAmountOfExercises
             ? exercises.length
             : desiredAmountOfExercises;
-        const randomExercises = [];
+        const randomExercises: MPMIExerciseWithMetaData[] = [];
         const usedIndexes: number[] = [];
         let i = 0;
         while (i < amountOfExercises) {
@@ -120,7 +119,7 @@ export default function FreePracticeSequencePage({
       });
 
       const amountOfExercises = exercises.length < 5 ? exercises.length : 5;
-      const randomExercises = [];
+      const randomExercises: MPMIExerciseWithMetaData[] = [];
       const usedIndexes: number[] = [];
       let i = 0;
       while (i < amountOfExercises) {
