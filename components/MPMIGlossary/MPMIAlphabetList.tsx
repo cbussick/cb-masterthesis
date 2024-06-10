@@ -169,7 +169,7 @@ export const MPMIAlphabetList = ({
                             p={2}
                           >
                             <LockRoundedIcon
-                              style={{
+                              sx={{
                                 color: theme.palette.grey[700],
                               }}
                             />
