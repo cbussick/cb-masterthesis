@@ -12,18 +12,16 @@ export const MPMIDinaHint = ({
   disabled,
 }: MPMIDinaHintProps): JSX.Element => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <>
-      <Button onClick={handleOpen} disabled={disabled}>
+      <Button onClick={() => setOpen(true)} disabled={disabled}>
         <MPMIEmoji emoji="💡" fontSize="18px" />
       </Button>
 
       <MPMIDialog
         isOpen={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         fullWidth={false}
         dialogContentProps={{ sx: { py: 0 } }}
       >
@@ -39,7 +37,7 @@ export const MPMIDinaHint = ({
             ))}
           </Typography>
 
-          <Button onClick={handleClose}>Ok</Button>
+          <Button onClick={() => setOpen(false)}>Ok</Button>
         </Stack>
       </MPMIDialog>
     </>

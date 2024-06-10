@@ -15,7 +15,7 @@ function a11yProps(index: number) {
   };
 }
 
-export const MPMISettingsTabs = () => {
+export const MPMISettings = () => {
   const [value, setValue] = useState(0);
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);

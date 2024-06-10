@@ -21,10 +21,8 @@ export const MPMITopicWorld = (): JSX.Element => {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         setTopicWorldProgress(progress);
       });
-    } else {
-      setTopicWorldProgress(undefined);
     }
-  }, [user]);
+  }, [user?.user]);
 
   const topicsAsArray = Object.values(topicWorldTopics);
 

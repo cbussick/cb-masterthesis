@@ -39,10 +39,8 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         setTopicWorldProgress(progress);
       });
-    } else {
-      setTopicWorldProgress(undefined);
     }
-  }, [params.id, user]);
+  }, [user?.user]);
 
   return (
     <MPMIContentWrapper {...topicWorldContentWrapperStyles}>

@@ -1,11 +1,7 @@
 import { Box } from "@mui/material";
-import { MPMISetttingsTabsProps } from "./MPMISettingsTabsInterfaces";
+import { MPMITabPanelProps } from "./MPMISettingsInterfaces";
 
-export const MPMITabPanel = ({
-  children,
-  value,
-  index,
-}: MPMISetttingsTabsProps) => {
+export const MPMITabPanel = ({ children, value, index }: MPMITabPanelProps) => {
   return (
     <Box
       role="tabpanel"

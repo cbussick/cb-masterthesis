@@ -20,7 +20,7 @@ const yAxisId = "y";
 
 export default function LehrerUebersicht() {
   return (
-    <MPMIContentWrapper bgcolor="white">
+    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
       <MPMIPageHeader title="Lehrer Übersicht" />
 
       <Stack spacing={3}>
@@ -30,7 +30,7 @@ export default function LehrerUebersicht() {
           <Grid {...commonGridItemProps}>
             <MPMIStudentOverviewGraphCard
               topBar={
-                <Typography sx={{ color: theme.palette.grey[500] }}>
+                <Typography color={theme.palette.grey[500]}>
                   Themenwelt
                 </Typography>
               }
@@ -170,7 +170,7 @@ export default function LehrerUebersicht() {
                   colors={[theme.palette.primary.main]}
                   height={200}
                   sx={{
-                    marginLeft: 2,
+                    ml: 2,
                     overflow: "visible",
                     ".MuiChartsAxis-label": {
                       transform: "translateX(-10px) !important",

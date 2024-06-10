@@ -4,11 +4,12 @@ import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentW
 import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
 import { MPMIRoute, routeMap } from "@/helpers/routes";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 export default function WithPageHeaderLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const pathname = usePathname();
   const routeData = routeMap[pathname as MPMIRoute];

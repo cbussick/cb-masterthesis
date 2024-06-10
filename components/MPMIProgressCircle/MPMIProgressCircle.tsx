@@ -45,20 +45,10 @@ export const MPMIProgressCircle = ({
   const theme = useTheme();
   const currentBreakpoint = useCurrentMuiBreakpoint();
 
-  // Only works for `thickness = 4.5`. Also: `- 2` to close the gap
+  // Only works for `thickness = 4.5`
   const outerCircleSize =
     innerCircleSizeMap[currentBreakpoint] +
     (innerCircleSizeMap[currentBreakpoint] / 10) * 2.6;
-
-  const labelComponent = (
-    <Typography
-      variant="h3"
-      textAlign="center"
-      fontWeight={(t) => t.typography.fontWeightBold}
-    >
-      {label}
-    </Typography>
-  );
 
   return (
     <Box
@@ -67,7 +57,7 @@ export const MPMIProgressCircle = ({
       component={motion.div}
       initial={{ scale: 1 }}
       whileHover={{ scale: unlocked ? 1.025 : undefined }}
-      sx={{ zIndex: 1 }}
+      zIndex={1}
     >
       <Box
         width={outerCircleSize}
@@ -78,17 +68,18 @@ export const MPMIProgressCircle = ({
       >
         {/* Inactive part of the progress (= grey background) */}
         <Box
+          position="absolute"
+          bgcolor={(t) =>
+            unlocked ? t.palette.grey[200] : t.palette.grey[600]
+          }
+          borderRadius="50%"
+          boxShadow={(t) => t.shadows[8]}
           sx={{
-            position: "absolute",
             top: 1,
             right: 1,
             bottom: 1,
             left: 1,
-            bgcolor: (t) =>
-              unlocked ? t.palette.grey[200] : t.palette.grey[600],
             opacity: 0.5,
-            borderRadius: "50%",
-            boxShadow: (t) => t.shadows[8],
           }}
         />
 
@@ -142,7 +133,7 @@ export const MPMIProgressCircle = ({
             }}
             disabled={!unlocked}
           >
-            <Stack alignItems="center" spacing={1} marginTop={-4}>
+            <Stack alignItems="center" spacing={1} mt={-4}>
               {unlocked ? (
                 <Image src={icon.src} alt={icon.alt} width={120} height={95} />
               ) : (
@@ -154,7 +145,13 @@ export const MPMIProgressCircle = ({
                 />
               )}
 
-              {labelComponent}
+              <Typography
+                variant="h3"
+                textAlign="center"
+                fontWeight={(t) => t.typography.fontWeightBold}
+              >
+                {label}
+              </Typography>
             </Stack>
           </ButtonBase>
         </Link>

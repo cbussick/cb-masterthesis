@@ -5,7 +5,7 @@ import { MPMIInfoCard } from "@/components/MPMIInfoCard/MPMIInfoCard";
 import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
 import { MPMIStudentDataTable } from "@/components/MPMIStudentDataTable/MPMIStudentDataTable";
 import { Grid2Props, Stack } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Grid from "@mui/material/Unstable_Grid2";
 
 const commonGridItemProps: Grid2Props = {
   xs: 6,
@@ -13,7 +13,7 @@ const commonGridItemProps: Grid2Props = {
 };
 export default function Playground() {
   return (
-    <MPMIContentWrapper bgcolor="white">
+    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
       <MPMIPageHeader title="Playground" />
 
       <Stack spacing={3}>

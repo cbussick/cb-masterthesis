@@ -7,6 +7,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ReactNode } from "react";
 import { SidebarProvider } from "../ui/SidebarProvider";
 
 export const metadata: Metadata = {
@@ -14,11 +15,7 @@ export const metadata: Metadata = {
   description: "Eine Biologie Lernapp",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="de" className={font.className}>
       <body>

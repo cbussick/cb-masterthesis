@@ -31,7 +31,7 @@ export default function FreePracticeSubpage({
   params,
 }: FreePracticeSubpageParams) {
   const topic = params.id as MPMITopic;
-  const topicData = topics[params.id as MPMITopic];
+  const topicData = topics[topic];
 
   const user = useUser();
 

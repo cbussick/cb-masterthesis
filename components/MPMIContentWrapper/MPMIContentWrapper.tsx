@@ -1,10 +1,8 @@
-"use client";
-
 import {
   layoutHorizontalSpacing,
   layoutVerticalSpacing,
 } from "@/helpers/layoutSpacing";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { MPMIContentWrapperProps } from "./MPMIContentWrapperInterfaces";
 
 /**
@@ -19,16 +17,9 @@ export const MPMIContentWrapper = ({
   sxOuterContainer,
   sxInnerContainer,
 }: MPMIContentWrapperProps): JSX.Element => {
-  const theme = useTheme();
-
   return (
     <Box position="relative" height="100%" sx={{ ...sxOuterContainer }}>
       <Box
-        sx={{
-          overflowY: "auto",
-          ...sxInnerContainer,
-          scrollbarGutter: "stable",
-        }}
         bgcolor={bgcolor}
         boxShadow={(t) => (bgcolor ? t.shadows[8] : undefined)}
         borderRadius={5}
@@ -37,12 +28,17 @@ export const MPMIContentWrapper = ({
         }
         py={4}
         position="absolute"
-        top={theme.spacing(layoutVerticalSpacing)}
-        bottom={theme.spacing(layoutVerticalSpacing)}
-        right={theme.spacing(layoutHorizontalSpacing)}
+        top={(t) => t.spacing(layoutVerticalSpacing)}
+        bottom={(t) => t.spacing(layoutVerticalSpacing)}
+        right={(t) => t.spacing(layoutHorizontalSpacing)}
         left={0}
         display="flex"
         flexDirection="column"
+        sx={{
+          overflowY: "auto",
+          ...sxInnerContainer,
+          scrollbarGutter: "stable",
+        }}
       >
         {children}
       </Box>
