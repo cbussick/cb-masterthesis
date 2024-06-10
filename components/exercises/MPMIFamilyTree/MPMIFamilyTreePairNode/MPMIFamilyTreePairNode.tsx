@@ -28,7 +28,7 @@ export const MPMIFamilyTreePairNode = ({
       <Stack
         alignItems="center"
         height={data.nodeSize + data.textFieldHeightPlusStackSpacing}
-        paddingTop={3}
+        pt={3}
       >
         <Box
           width={data.nodeSize}

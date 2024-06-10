@@ -45,7 +45,7 @@ export const MPMIExamSimulatorEndScreen = ({
         spacing={2}
         alignItems="center"
         justifyItems="center"
-        paddingBottom={1}
+        pb={1}
       >
         <MPMIExamSimulatorTopCard
           img={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
@@ -64,7 +64,7 @@ export const MPMIExamSimulatorEndScreen = ({
 
       <Divider />
 
-      <Typography padding={1}>
+      <Typography p={1}>
         Im Folgenden findest du eine Übersicht über alle abgeschlossenen
         Aufgaben in der Prüfungssimulation:
       </Typography>
@@ -82,7 +82,7 @@ export const MPMIExamSimulatorEndScreen = ({
         ))}
       </Grid>
 
-      <Box display="flex" justifyContent="center" paddingTop={2}>
+      <Box display="flex" justifyContent="center" pt={2}>
         <Button sx={{ width: "200px" }} onClick={onStartNewExam}>
           Neue Prüfung starten
         </Button>

@@ -34,7 +34,7 @@ export const MPMINotSignedInView = (): JSX.Element => {
               bgcolor={(t) => t.palette.background.default}
               boxShadow={(t) => t.shadows[8]}
               borderRadius={5}
-              padding={5}
+              p={5}
             >
               <Container maxWidth="md">
                 <Stack spacing={10} justifyContent="center" alignItems="center">

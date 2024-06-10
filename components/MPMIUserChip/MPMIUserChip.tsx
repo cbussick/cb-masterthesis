@@ -27,7 +27,7 @@ export const MPMIUserChip = (): JSX.Element => {
       <Chip
         sx={{
           height: 36,
-          padding: 1,
+          p: 1,
           backgroundColor: (t) => t.palette.grey[200],
           "&:hover": {
             backgroundColor: (t) => t.palette.grey[300],

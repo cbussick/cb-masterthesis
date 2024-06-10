@@ -22,8 +22,8 @@ export const MPMIGlossarySearchbar = ({
       <TextField
         sx={{
           width: "66%",
-          paddingTop: 2,
-          paddingBottom: 1.5,
+          pt: 2,
+          pb: 1.5,
         }}
         placeholder="Suche im Glossar"
         onChange={(e) => {

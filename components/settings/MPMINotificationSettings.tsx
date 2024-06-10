@@ -31,7 +31,7 @@ export const MPMINotificationSettings = (): JSX.Element => {
           </Stack>
         </Grid>
 
-        <Grid xs={6} paddingLeft={6}>
+        <Grid xs={6} pl={6}>
           <FormGroup>
             <FormControlLabel
               componentsProps={{ typography: { variant: "h4" } }}
@@ -55,7 +55,7 @@ export const MPMINotificationSettings = (): JSX.Element => {
           </FormGroup>
         </Grid>
 
-        <Grid xs={12} paddingTop={2} paddingBottom={2}>
+        <Grid xs={12} pt={2} pb={2}>
           <Divider />
         </Grid>
 
@@ -70,7 +70,7 @@ export const MPMINotificationSettings = (): JSX.Element => {
           </Stack>
         </Grid>
 
-        <Grid xs={6} paddingLeft={6}>
+        <Grid xs={6} pl={6}>
           <FormGroup>
             <FormControlLabel
               componentsProps={{ typography: { variant: "h4" } }}
@@ -94,7 +94,7 @@ export const MPMINotificationSettings = (): JSX.Element => {
           </FormGroup>
         </Grid>
 
-        <Grid xs={12} paddingTop={2} paddingBottom={2}>
+        <Grid xs={12} pt={2} pb={2}>
           <Divider />
         </Grid>
 
@@ -109,7 +109,7 @@ export const MPMINotificationSettings = (): JSX.Element => {
           </Stack>
         </Grid>
 
-        <Grid xs={6} paddingLeft={6}>
+        <Grid xs={6} pl={6}>
           <RadioGroup defaultValue="day">
             <FormControlLabel
               componentsProps={{ typography: { variant: "h4" } }}

@@ -65,11 +65,9 @@ export const MPMIInfoCard = ({
 
         <Box display="flex" flex="1 1 auto" alignItems="center">
           <Typography
-            sx={{
-              textAlign: "center",
-              padding: 1,
-              flex: "1 1 auto",
-            }}
+            flex="1 1 auto"
+            p={1}
+            textAlign="center"
             fontWeight={(t) => t.typography.fontWeightMedium}
           >
             {text}

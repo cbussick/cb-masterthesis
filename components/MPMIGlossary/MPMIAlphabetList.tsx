@@ -107,10 +107,10 @@ export const MPMIAlphabetList = ({
                       <Typography
                         id={letter}
                         variant="h2"
-                        style={{
+                        sx={{
                           color: theme.palette.grey[700],
-                          paddingTop: 20,
-                          paddingBottom: 10,
+                          pt: 20,
+                          pb: 10,
                         }}
                       >
                         {letter}
@@ -124,10 +124,10 @@ export const MPMIAlphabetList = ({
                     <>
                       <Typography
                         variant="h2"
-                        style={{
+                        sx={{
                           color: theme.palette.grey[700],
-                          paddingTop: 20,
-                          paddingBottom: 10,
+                          pt: 20,
+                          pb: 10,
                         }}
                       >
                         {letter}
@@ -146,9 +146,9 @@ export const MPMIAlphabetList = ({
                               zIndex: 0,
                               color: theme.palette.grey[800],
                               fontSize: theme.typography.h3.fontSize,
-                              paddingLeft: 2,
-                              paddingTop: 1.5,
-                              paddingBottom: 1.5,
+                              pl: 2,
+                              pt: 1.5,
+                              pb: 1.5,
                             }}
                             variant="text"
                             onClick={() => handleOpenEntryDrawer(entry)}
@@ -166,7 +166,7 @@ export const MPMIAlphabetList = ({
                             direction="row"
                             alignItems="center"
                             spacing={2}
-                            padding={2}
+                            p={2}
                           >
                             <LockRoundedIcon
                               style={{
@@ -216,21 +216,19 @@ export const MPMIAlphabetList = ({
           },
         }}
       >
-        <Stack spacing={2} padding={4}>
+        <Stack spacing={2} p={4}>
           <Typography variant="h2">{selectedEntry?.term}</Typography>
 
-          <Typography paddingTop={1}>{selectedEntry?.definition}</Typography>
+          <Typography pt={1}>{selectedEntry?.definition}</Typography>
 
           <Box
             display="flex"
             justifyContent="center"
             alignItems="center"
-            padding={5}
-            sx={{
-              width: "100%",
-              minHeight: 250,
-              position: "relative",
-            }}
+            p={5}
+            width="100%"
+            minHeight={250}
+            position="relative"
           >
             {selectedEntry?.image && (
               <Image

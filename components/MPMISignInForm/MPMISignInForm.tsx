@@ -143,7 +143,7 @@ export const MPMISignInForm = ({
                     variant="text"
                     onClick={handleCloseForgotPassword}
                     sx={{
-                      paddingRight: 4,
+                      pr: 4,
                       color: theme.palette.grey[700],
                       "&:hover": {
                         bgcolor: "transparent",

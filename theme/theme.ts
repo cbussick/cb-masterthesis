@@ -58,9 +58,9 @@ const themeWithOverrides: Theme = {
         root: {
           textTransform: "none",
           fontWeight: "bold",
-          padding: 10,
-          paddingLeft: 20,
-          paddingRight: 20,
+          p: 10,
+          pl: 20,
+          pr: 20,
         },
       },
       defaultProps: {

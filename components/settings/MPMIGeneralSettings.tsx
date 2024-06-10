@@ -34,7 +34,7 @@ export const MPMIGeneralSettings = (): JSX.Element => {
           ggfs. deinen Namen und deine E-Mail ändern.
         </Typography>
 
-        <Stack paddingTop={3} spacing={2} alignItems="center">
+        <Stack pt={3} spacing={2} alignItems="center">
           <TextField
             label="Vorname"
             value={user?.customData.firstName || ""}
