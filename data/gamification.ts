@@ -34,6 +34,5 @@ export const levels: MPMILevel[] = [
   {
     level: 4,
     description: "Du bist DNA-Struktur-Experte",
-    // pointsToNextLevel: 500,
   },
 ];
