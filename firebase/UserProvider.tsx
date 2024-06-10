@@ -40,7 +40,7 @@ export const UserContext = createContext<MPMIUserData | null>(null);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(defaultUserData.user);
-  const [isUserLoaded, setIsUserLoaded] = useState<boolean>(
+  const [isUserLoaded, setUserLoaded] = useState<boolean>(
     defaultUserData.isUserLoaded,
   );
   const [customData, setCustomData] = useState<MPMIUserCustomData>(
@@ -67,7 +67,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       // User is signed out
       setUser(null);
     }
-    setIsUserLoaded(true);
+    setUserLoaded(true);
   };
 
   useEffect(() => {

@@ -31,7 +31,11 @@ export const MPMIMainLayout = ({
     return <MPMIMobileView />;
   }
 
-  if (!user?.isUserLoaded) {
+  // Show loading while user and custom data is not loaded
+  if (
+    !user?.isUserLoaded ||
+    (user?.user && user?.customData.firstName === "")
+  ) {
     return <MPMILoadingView />;
   }
 
