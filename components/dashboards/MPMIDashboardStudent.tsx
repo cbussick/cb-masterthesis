@@ -6,7 +6,6 @@ import { getFormattedTimeFromSeconds } from "@/helpers/getFormattedTime";
 import { getLastWeekTimes } from "@/helpers/getLastWeekTimes";
 import { Divider, Stack } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
-import { useEffect, useState } from "react";
 import { MPMIDateCalendar } from "../MPMIDateCalendar/MPMIDateCalendar";
 import { MPMIGraphCard } from "../MPMIGraphCard/MPMIGraphCard";
 import { MPMIInfoCard } from "../MPMIInfoCard/MPMIInfoCard";
@@ -31,29 +30,23 @@ export const MPMIDashboardStudent = (): JSX.Element => {
 
   const formattedTime = getFormattedTimeFromSeconds(totalTime);
 
-  const [userLvlTitleText, setUserLvlTitleText] = useState<string>("");
-  const [pointsToNextLvl, setPointsToNextLvl] = useState<number>(0);
-  const [maxLevelReached, setMaxLevelReached] = useState<boolean>(false);
+  let userLvlTitleText = "";
+  let pointsToNextLvl = 0;
+  let maxLevelReached = false;
 
-  useEffect(() => {
-    const currentLevel =
-      levels.find(
-        (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
-      ) || levels[levels.length - 1];
+  const currentLevel =
+    levels.find(
+      (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
+    ) || levels[levels.length - 1];
 
-    if (currentLevel.pointsToNextLevel) {
-      setUserLvlTitleText(
-        `Level ${currentLevel.level}: ${currentLevel.description}`,
-      );
-      setPointsToNextLvl(currentLevel.pointsToNextLevel);
-    } else {
-      setUserLvlTitleText(
-        `Level ${currentLevel.level}: ${currentLevel.description}`,
-      );
-      setPointsToNextLvl(userPoints);
-      setMaxLevelReached(true);
-    }
-  }, [userPoints]);
+  if (currentLevel.pointsToNextLevel) {
+    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
+    pointsToNextLvl = currentLevel.pointsToNextLevel;
+  } else {
+    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
+    pointsToNextLvl = userPoints;
+    maxLevelReached = true;
+  }
 
   return (
     <Stack>
