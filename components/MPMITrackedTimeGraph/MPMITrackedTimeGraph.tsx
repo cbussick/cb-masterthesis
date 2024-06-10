@@ -50,10 +50,13 @@ export const MPMITrackedTimeGraph = ({
       data: lastWeekData,
       curve: "linear",
       valueFormatter: (v) => {
-        const formatted = getFormattedTimeFromSeconds(v * 60);
-        const totalMinutes = formatted.h * 60 + formatted.min;
+        if (v) {
+          const formatted = getFormattedTimeFromSeconds(v * 60);
+          const totalMinutes = formatted.h * 60 + formatted.min;
 
-        return `${totalMinutes} ${totalMinutes === 1 ? "Minute" : "Minuten"}`;
+          return `${totalMinutes} ${totalMinutes === 1 ? "Minute" : "Minuten"}`;
+        }
+        return "0 Minuten";
       },
     },
   ];
