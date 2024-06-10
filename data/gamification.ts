@@ -12,6 +12,7 @@ export const pointsToAddForSequenceCompletion: Record<
 export interface MPMILevel {
   level: number;
   description: string;
+  // Should be there for all levels except the last one
   pointsToNextLevel?: number;
 }
 
