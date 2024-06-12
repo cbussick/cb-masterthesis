@@ -5,6 +5,7 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { MPMIEmoji } from "../MPMIEmoji/MPMIEmoji";
 import { MPMILink } from "../MPMILink/MPMILink";
 import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
 import { MPMIAlphabetListProps } from "./MPMIAlphabetListInterfaces";
@@ -53,9 +54,17 @@ export const MPMIAlphabetList = ({
   const noSearchResults = isSearching && filteredEntries.length === 0;
 
   return (
-    <Box>
+    <Stack minHeight={0} flex="1">
       {noSearchResults ? (
-        <Typography>Leider wurden keine Suchergebnisse gefunden!</Typography>
+        <Box display="flex" justifyContent="flex-start">
+          <Stack justifyContent="center" alignItems="center" spacing={1}>
+            <MPMIEmoji emoji="🔍" typographyVariant="h1" />
+
+            <Typography variant="h4">
+              Leider wurden keine Suchergebnisse gefunden.
+            </Typography>
+          </Stack>
+        </Box>
       ) : (
         <>
           <Stack direction="row">
@@ -82,7 +91,7 @@ export const MPMIAlphabetList = ({
             ))}
           </Stack>
 
-          <Box maxHeight="60vh" sx={{ overflowY: "auto" }}>
+          <Box sx={{ overflowY: "auto" }}>
             {filteredAlphabet.map((letter) => {
               const filteredLetterEntries = filteredGlossaryEntries(letter);
 
@@ -210,6 +219,6 @@ export const MPMIAlphabetList = ({
           </Button>
         </Stack>
       </Drawer>
-    </Box>
+    </Stack>
   );
 };
