@@ -16,8 +16,8 @@ export const CBGlossaryDrawer = ({
       PaperProps={{
         sx: {
           width: "33.33%",
-          borderTopLeftRadius: 15,
-          borderBottomLeftRadius: 15,
+          borderTopLeftRadius: (t) => t.shape.borderRadius * 5,
+          borderBottomLeftRadius: (t) => t.shape.borderRadius * 5,
         },
       }}
     >
