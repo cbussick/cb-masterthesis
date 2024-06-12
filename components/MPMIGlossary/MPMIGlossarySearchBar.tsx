@@ -8,21 +8,11 @@ export const MPMIGlossarySearchbar = ({
   onSearch,
 }: MPMIGlossarySearchBarProps): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>("");
+
   return (
-    <Box
-      bgcolor={(t) => t.palette.background.default}
-      sx={{
-        position: "sticky",
-        top: -32,
-        zIndex: 1,
-      }}
-    >
+    <Box>
       <TextField
-        sx={{
-          width: "66%",
-          pt: 2,
-          pb: 1.5,
-        }}
+        sx={{ width: 635 }}
         placeholder="Suche im Glossar"
         onChange={(e) => {
           setInputValue(e.target.value);

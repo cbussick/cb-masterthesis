@@ -1,14 +1,14 @@
 "use client";
 
-import { MPMIAlphabetList } from "@/components/MPMIGlossary/MPMIAlphabetList";
 import {
   MPMIGlossaryEntry,
   glossaryEntries,
 } from "@/components/MPMIGlossary/MPMIGlossaryEntries";
+import { MPMIGlossaryEntriesList } from "@/components/MPMIGlossary/MPMIGlossaryEntriesList";
 import { MPMIGlossarySearchbar } from "@/components/MPMIGlossary/MPMIGlossarySearchBar";
 import { useUser } from "@/firebase/useUser";
 import { alphabet } from "@/helpers/alphabet";
-import { Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 
 export default function Glossary() {
@@ -49,17 +49,17 @@ export default function Glossary() {
   };
 
   return (
-    <Box>
+    <Stack minHeight={0} flex="1" spacing={1}>
       <MPMIGlossarySearchbar
         onSearch={handleSearch}
         glossaryEntries={filteredGlossaryEntries}
       />
 
-      <MPMIAlphabetList
+      <MPMIGlossaryEntriesList
         filteredEntries={filteredGlossaryEntries}
         isSearching={isSearching}
         filteredLetters={firstLetters}
       />
-    </Box>
+    </Stack>
   );
 }
