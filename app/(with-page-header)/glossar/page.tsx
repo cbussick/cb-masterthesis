@@ -49,7 +49,7 @@ export default function Glossary() {
   };
 
   return (
-    <Stack minHeight={0} flex="1">
+    <Stack minHeight={0} flex="1" spacing={1}>
       <MPMIGlossarySearchbar
         onSearch={handleSearch}
         glossaryEntries={filteredGlossaryEntries}
