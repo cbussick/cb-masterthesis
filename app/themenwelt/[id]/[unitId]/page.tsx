@@ -6,7 +6,7 @@ import { MPMIExerciseSequenceProvider } from "@/components/MPMIExerciseSequence/
 import { MPMIExerciseSequenceWrapper } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceWrapper";
 import { MPMIExerciseSequenceType } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
 import { MPMITime } from "@/components/MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
-import { glossaryEntries } from "@/components/MPMIGlossary/MPMIGlossaryEntries";
+import { glossaryEntries } from "@/components/MPMIGlossary/CBGlossaryEntries";
 import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
 import { MPMIExerciseWithMetaData } from "@/data/exercises/MPMIExercise";
 import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";

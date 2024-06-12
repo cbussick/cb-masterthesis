@@ -1,6 +1,6 @@
 import { MPMITopic } from "@/data/topics";
 
-export interface MPMIGlossaryEntry {
+export interface CBGlossaryEntry {
   id: string;
   term: string;
   definition: string;
@@ -9,7 +9,7 @@ export interface MPMIGlossaryEntry {
   topic: MPMITopic;
 }
 
-export const glossaryEntries: MPMIGlossaryEntry[] = [
+export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "zellkern",
     term: "Zellkern",
