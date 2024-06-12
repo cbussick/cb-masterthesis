@@ -1,6 +1,6 @@
-import { MPMIImgWithAlt } from "@/helpers/MPMIImgWithAlt";
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 
-export enum MPMITopic {
+export enum CBTopic {
   Zelle = "zelle",
   MitoseMeiose = "mitose-meiose",
   AufbauDNA = "aufbau-dna",
@@ -9,36 +9,36 @@ export enum MPMITopic {
   Mutation = "mutationen",
 }
 
-export interface MPMITopicData {
+export interface CBTopicData {
   name: string;
-  icon: MPMIImgWithAlt;
+  icon: CBImgWithAlt;
 }
 
-export const topics: Record<MPMITopic, MPMITopicData> = {
-  [MPMITopic.Zelle]: {
+export const topics: Record<CBTopic, CBTopicData> = {
+  [CBTopic.Zelle]: {
     name: "Tierische und pflanzliche Zelle",
     icon: { src: "/topic-world/zelle-bildicon.png", alt: "Zelle" },
   },
-  [MPMITopic.MitoseMeiose]: {
+  [CBTopic.MitoseMeiose]: {
     name: "Mitose und Meiose",
     icon: {
       src: "/topic-world/mitose-meiose-bildicon.png",
       alt: "Mitose und Meiose",
     },
   },
-  [MPMITopic.AufbauDNA]: {
+  [CBTopic.AufbauDNA]: {
     name: "Aufbau der DNA",
     icon: { src: "/topic-world/dna-bildicon.png", alt: "DNA" },
   },
-  [MPMITopic.DNAReplikation]: {
+  [CBTopic.DNAReplikation]: {
     name: "DNA-Replikation",
     icon: { src: "emoji-svgs/2753.svg", alt: "DNA-Replikation" },
   },
-  [MPMITopic.Proteinbiosynthese]: {
+  [CBTopic.Proteinbiosynthese]: {
     name: "Proteinbiosynthese",
     icon: { src: "emoji-svgs/2753.svg", alt: "Proteinbiosynthese" },
   },
-  [MPMITopic.Mutation]: {
+  [CBTopic.Mutation]: {
     name: "(Gen-)Mutationen",
     icon: { src: "emoji-svgs/2753.svg", alt: "(Gen-)Mutationen" },
   },

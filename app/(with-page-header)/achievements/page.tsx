@@ -1,10 +1,10 @@
 "use client";
 
-import { MPMIAchievementCard } from "@/components/MPMIAchievementCard/MPMIAchievementCard";
-import { MPMIAchievementCardProps } from "@/components/MPMIAchievementCard/MPMIAchievementCardInterfaces";
+import { CBAchievementCard } from "@/components/CBAchievementCard/CBAchievementCard";
+import { CBAchievementCardProps } from "@/components/CBAchievementCard/CBAchievementCardInterfaces";
 import { achievements } from "@/data/achievements";
 import { topicWorldTopics } from "@/data/topicWorld";
-import { MPMITopic, topics } from "@/data/topics";
+import { CBTopic, topics } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
@@ -30,7 +30,7 @@ export default function Achievements() {
     }
   }, [user?.user]);
 
-  const isTopicCompleted = (topic: MPMITopic) => {
+  const isTopicCompleted = (topic: CBTopic) => {
     const topicsAsArray = Object.values(topicWorldTopics);
     const topicData = topicsAsArray.find(
       (t) => t.topicData.name === topics[topic].name,
@@ -55,28 +55,28 @@ export default function Achievements() {
     return topicIsCompleted;
   };
 
-  const achievementCardsData: MPMIAchievementCardProps[] = [
+  const achievementCardsData: CBAchievementCardProps[] = [
     // Themenwelt
     {
       title: achievements[0].name,
       subTitle: achievements[0].description,
       image: achievements[0].img.src,
       progressGoal: achievements[0].progressGoal,
-      progressValue: isTopicCompleted(MPMITopic.Zelle) ? 1 : 0,
+      progressValue: isTopicCompleted(CBTopic.Zelle) ? 1 : 0,
     },
     {
       title: achievements[1].name,
       subTitle: achievements[1].description,
       image: achievements[1].img.src,
       progressGoal: achievements[1].progressGoal,
-      progressValue: isTopicCompleted(MPMITopic.MitoseMeiose) ? 1 : 0,
+      progressValue: isTopicCompleted(CBTopic.MitoseMeiose) ? 1 : 0,
     },
     {
       title: achievements[2].name,
       subTitle: achievements[2].description,
       image: achievements[2].img.src,
       progressGoal: achievements[2].progressGoal,
-      progressValue: isTopicCompleted(MPMITopic.AufbauDNA) ? 1 : 0,
+      progressValue: isTopicCompleted(CBTopic.AufbauDNA) ? 1 : 0,
     },
     // Freie Übungen
     {
@@ -165,7 +165,7 @@ export default function Achievements() {
     >
       {sortedAchievementCardsData.map((achievement) => (
         <Grid key={achievement.title} xs={12} lg={6}>
-          <MPMIAchievementCard {...achievement} />
+          <CBAchievementCard {...achievement} />
         </Grid>
       ))}
     </Grid>

@@ -1,13 +1,13 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
-  MPMIMistakeExercise,
+  CBMistakeExercise,
   userCustomDataConverter,
 } from "./UserCustomDataConverter";
 import { firestore } from "./firebase";
 
 export const removeExercisesFromMistakes = async (
   uid: string,
-  exercises: MPMIMistakeExercise[],
+  exercises: CBMistakeExercise[],
 ) => {
   try {
     const documentReference = doc(firestore, `users/${uid}`).withConverter(

@@ -1,22 +1,22 @@
-import { MPMIExerciseDifficulty } from "./exercises/MPMIExerciseDifficulty";
+import { CBExerciseDifficulty } from "./exercises/CBExerciseDifficulty";
 
 export const pointsToAddForSequenceCompletion: Record<
-  MPMIExerciseDifficulty,
+  CBExerciseDifficulty,
   number
 > = {
-  [MPMIExerciseDifficulty.Easy]: 10,
-  [MPMIExerciseDifficulty.Medium]: 20,
-  [MPMIExerciseDifficulty.Hard]: 30,
+  [CBExerciseDifficulty.Easy]: 10,
+  [CBExerciseDifficulty.Medium]: 20,
+  [CBExerciseDifficulty.Hard]: 30,
 };
 
-export interface MPMILevel {
+export interface CBLevel {
   level: number;
   description: string;
   // Should be there for all levels except the last one
   pointsToNextLevel?: number;
 }
 
-export const levels: MPMILevel[] = [
+export const levels: CBLevel[] = [
   {
     level: 1,
     description: "Du bist auf dem Weg Zellenexperte zu werden",

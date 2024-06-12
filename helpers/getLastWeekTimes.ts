@@ -1,10 +1,10 @@
-import { MPMITrackedTime } from "@/firebase/UserCustomDataConverter";
+import { CBTrackedTime } from "@/firebase/UserCustomDataConverter";
 import dayjs from "dayjs";
 import { getWeekdayIndex } from "./getWeekdayIndex";
 
 export const getLastWeekTimes = (
-  userTimes: MPMITrackedTime[],
-): MPMITrackedTime[] => {
+  userTimes: CBTrackedTime[],
+): CBTrackedTime[] => {
   const today = dayjs();
   const todayIndex = getWeekdayIndex(today);
 

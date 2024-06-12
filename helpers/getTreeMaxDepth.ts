@@ -1,15 +1,12 @@
-import { MPMIFamilyTreeExerciseNode } from "@/data/exercises/MPMIFamilyTreeExercise";
+import { CBFamilyTreeExerciseNode } from "@/data/exercises/CBFamilyTreeExercise";
 
 /**
  * Returns the max depth of the given family tree.
  */
-export const getTreeMaxDepth = (nodes: MPMIFamilyTreeExerciseNode[]) => {
+export const getTreeMaxDepth = (nodes: CBFamilyTreeExerciseNode[]) => {
   let maxDepth = 0;
 
-  const depthFirstSearch = (
-    node: MPMIFamilyTreeExerciseNode,
-    depth: number,
-  ) => {
+  const depthFirstSearch = (node: CBFamilyTreeExerciseNode, depth: number) => {
     if (!node) {
       return;
     }

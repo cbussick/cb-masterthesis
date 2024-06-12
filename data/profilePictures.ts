@@ -1,6 +1,6 @@
-import { MPMIProfilePicture } from "@/components/MPMIProfileImageSelector/MPMIProfileImageSelectorInterfaces";
+import { CBProfilePicture } from "@/components/CBProfileImageSelector/CBProfileImageSelectorInterfaces";
 
-export const profilePictures: MPMIProfilePicture[] = [
+export const profilePictures: CBProfilePicture[] = [
   {
     src: "/avatar/avatar-female-1.png",
     srcLocked: "/avatar/avatar-female-1.png",

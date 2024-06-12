@@ -1,6 +1,6 @@
 "use client";
 
-import { MPMISnackbarProps } from "@/components/MPMISnackbar/MPMISnackbarInterfaces";
+import { CBSnackbarProps } from "@/components/CBSnackbar/CBSnackbarInterfaces";
 import {
   Dispatch,
   ReactNode,
@@ -14,24 +14,24 @@ interface SnackbarProviderProps {
   children: ReactNode;
 }
 
-export interface MPMISnackbarData {
+export interface CBSnackbarData {
   isOpen: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   toggleOpen: VoidFunction;
-  title: MPMISnackbarProps["title"];
+  title: CBSnackbarProps["title"];
   setTitle: (title: string) => void;
-  message: MPMISnackbarProps["message"];
+  message: CBSnackbarProps["message"];
   setMessage: (message: string) => void;
-  severity: MPMISnackbarProps["severity"];
-  setSeverity: (severity: MPMISnackbarProps["severity"]) => void;
+  severity: CBSnackbarProps["severity"];
+  setSeverity: (severity: CBSnackbarProps["severity"]) => void;
   showSnackbar: (
     title: string,
     message: string,
-    severity: MPMISnackbarProps["severity"],
+    severity: CBSnackbarProps["severity"],
   ) => void;
 }
 
-const defaultSnackbar: MPMISnackbarData = {
+const defaultSnackbar: CBSnackbarData = {
   isOpen: false,
   setOpen: () => {},
   toggleOpen: () => {},
@@ -44,18 +44,18 @@ const defaultSnackbar: MPMISnackbarData = {
   showSnackbar: () => {},
 };
 
-export const SnackbarContext = createContext<MPMISnackbarData>(defaultSnackbar);
+export const SnackbarContext = createContext<CBSnackbarData>(defaultSnackbar);
 
 export const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
   const [isOpen, setOpen] = useState<boolean>(defaultSnackbar.isOpen);
   const [title, setTitle] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const [severity, setSeverity] = useState<MPMISnackbarData["severity"]>();
+  const [severity, setSeverity] = useState<CBSnackbarData["severity"]>();
 
   const showSnackbar = (
     snackbarTitle: string,
     snackbarMessage: string,
-    snackbarSeverity: MPMISnackbarProps["severity"],
+    snackbarSeverity: CBSnackbarProps["severity"],
   ) => {
     setTitle(snackbarTitle);
     setMessage(snackbarMessage);

@@ -1,15 +1,15 @@
-import { MPMIExercise } from "./exercises/MPMIExercise";
-import { familyTreeExercises } from "./exercises/MPMIFamilyTreeExercise";
-import { matchingGameExercises } from "./exercises/MPMIMatchingGameExercise";
-import { quizExercises } from "./exercises/MPMIQuizExercise";
-import { swiperExercises } from "./exercises/MPMISwiperExercise";
+import { CBExercise } from "./exercises/CBExercise";
+import { familyTreeExercises } from "./exercises/CBFamilyTreeExercise";
+import { matchingGameExercises } from "./exercises/CBMatchingGameExercise";
+import { quizExercises } from "./exercises/CBQuizExercise";
+import { swiperExercises } from "./exercises/CBSwiperExercise";
 
-export interface MPMIExam {
+export interface CBExam {
   id: string;
-  exercises: MPMIExercise[];
+  exercises: CBExercise[];
 }
 
-export const exams: MPMIExam[] = [
+export const exams: CBExam[] = [
   {
     id: "exam-1",
     exercises: [

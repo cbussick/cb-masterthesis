@@ -1,7 +1,7 @@
 "use client";
 
-import { MPMISettings } from "@/components/settings/MPMISettings/MPMISettings";
+import { CBSettings } from "@/components/settings/CBSettings/CBSettings";
 
 export default function Settings() {
-  return <MPMISettings />;
+  return <CBSettings />;
 }

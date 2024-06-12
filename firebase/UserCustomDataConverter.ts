@@ -1,43 +1,43 @@
-import { MPMIExerciseType } from "@/data/exercises/MPMIExerciseType";
-import { MPMITopic } from "@/data/topics";
+import { CBExerciseType } from "@/data/exercises/CBExerciseType";
+import { CBTopic } from "@/data/topics";
 import {
   FirestoreDataConverter,
   PartialWithFieldValue,
 } from "firebase/firestore";
-import { MPMIUserRole } from "./userRole";
+import { CBUserRole } from "./userRole";
 
-export interface MPMIMistakeExercise {
+export interface CBMistakeExercise {
   id: string;
-  topic: MPMITopic;
-  type: MPMIExerciseType;
+  topic: CBTopic;
+  type: CBExerciseType;
 }
 
-export interface MPMITrackedTime {
+export interface CBTrackedTime {
   date: string;
   time: number;
 }
 
-export interface MPMIUserCustomData {
+export interface CBUserCustomData {
   firstName: string;
   lastName: string;
   username: string;
   points: number;
   solvedExercises: number;
   completedExams: number;
-  role: MPMIUserRole;
+  role: CBUserRole;
   unlockedGlossaryEntryIDs: string[];
   profilePicture: string;
-  mistakeExercises: MPMIMistakeExercise[];
-  trackedTime: MPMITrackedTime[];
+  mistakeExercises: CBMistakeExercise[];
+  trackedTime: CBTrackedTime[];
 }
 
 export const userCustomDataConverter: FirestoreDataConverter<
-  MPMIUserCustomData,
-  PartialWithFieldValue<MPMIUserCustomData>
+  CBUserCustomData,
+  PartialWithFieldValue<CBUserCustomData>
 > = {
   toFirestore(
-    userCustomData: PartialWithFieldValue<MPMIUserCustomData>,
-  ): PartialWithFieldValue<MPMIUserCustomData> {
+    userCustomData: PartialWithFieldValue<CBUserCustomData>,
+  ): PartialWithFieldValue<CBUserCustomData> {
     return {
       firstName: userCustomData.firstName,
       lastName: userCustomData.lastName,
@@ -52,7 +52,7 @@ export const userCustomDataConverter: FirestoreDataConverter<
       trackedTime: userCustomData.trackedTime,
     };
   },
-  fromFirestore(snapshot, options): MPMIUserCustomData {
+  fromFirestore(snapshot, options): CBUserCustomData {
     const data = snapshot.data(options);
     return {
       firstName: data.firstName,
