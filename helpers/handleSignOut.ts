@@ -1,11 +1,9 @@
 import { getAuthError } from "@/firebase/authErrors";
 import { signOutUser } from "@/firebase/signOutUser";
-import { MPMISnackbarData } from "@/ui/SnackbarProvider";
+import { CBSnackbarData } from "@/ui/SnackbarProvider";
 import { FirebaseError } from "firebase/app";
 
-export const handleSignOut = (
-  showSnackbar: MPMISnackbarData["showSnackbar"],
-) => {
+export const handleSignOut = (showSnackbar: CBSnackbarData["showSnackbar"]) => {
   signOutUser()
     .then(() => {
       showSnackbar(

@@ -1,19 +1,19 @@
 "use client";
 
-import { MPMIBreadcrumbs } from "@/components/MPMIBreadcrumbs/MPMIBreadcrumbs";
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIInfoCard } from "@/components/MPMIInfoCard/MPMIInfoCard";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { exercisesData } from "@/data/exercises/MPMIExercise";
-import { MPMIExerciseType } from "@/data/exercises/MPMIExerciseType";
-import { familyTreeExercises } from "@/data/exercises/MPMIFamilyTreeExercise";
-import { freeformQuestionExercises } from "@/data/exercises/MPMIFreeformQuestionExercise";
-import { matchingGameExercises } from "@/data/exercises/MPMIMatchingGameExercise";
-import { quizExercises } from "@/data/exercises/MPMIQuizExercise";
-import { swiperExercises } from "@/data/exercises/MPMISwiperExercise";
-import { MPMITopic, topics } from "@/data/topics";
+import { CBBreadcrumbs } from "@/components/CBBreadcrumbs/CBBreadcrumbs";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBInfoCard } from "@/components/CBInfoCard/CBInfoCard";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { exercisesData } from "@/data/exercises/CBExercise";
+import { CBExerciseType } from "@/data/exercises/CBExerciseType";
+import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
+import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
+import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
+import { quizExercises } from "@/data/exercises/CBQuizExercise";
+import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
+import { CBTopic, topics } from "@/data/topics";
 import { useUser } from "@/firebase/useUser";
-import { MPMIRoute, retryMistakesPathSegment } from "@/helpers/routes";
+import { CBRoute, retryMistakesPathSegment } from "@/helpers/routes";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 
 const commonGridItemProps: Grid2Props = {
@@ -30,18 +30,18 @@ interface FreePracticeSubpageParams {
 export default function FreePracticeSubpage({
   params,
 }: FreePracticeSubpageParams) {
-  const topic = params.id as MPMITopic;
+  const topic = params.id as CBTopic;
   const topicData = topics[topic];
 
   const user = useUser();
 
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
-      <MPMIPageHeader
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
+      <CBPageHeader
         title={
-          <MPMIBreadcrumbs
+          <CBBreadcrumbs
             previousLinks={[
-              { label: "Freie Übung", href: MPMIRoute.FreieUebung },
+              { label: "Freie Übung", href: CBRoute.FreieUebung },
             ]}
             currentLabel={topicData.name || "Thema"}
           />
@@ -51,50 +51,50 @@ export default function FreePracticeSubpage({
       <Grid container spacing={4}>
         {quizExercises.some((e) => e.topic === topic) && (
           <Grid {...commonGridItemProps}>
-            <MPMIInfoCard
-              text={exercisesData[MPMIExerciseType.Quiz].name}
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.Quiz].name}
               image="/topics/quiz.png"
-              href={`${MPMIRoute.FreieUebung}/${topic}/${MPMIExerciseType.Quiz}`}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.Quiz}`}
             />
           </Grid>
         )}
 
         {matchingGameExercises.some((e) => e.topic === topic) && (
           <Grid {...commonGridItemProps}>
-            <MPMIInfoCard
-              text={exercisesData[MPMIExerciseType.MatchingGame].name}
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.MatchingGame].name}
               image="/topics/matching-game.png"
-              href={`${MPMIRoute.FreieUebung}/${topic}/${MPMIExerciseType.MatchingGame}`}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.MatchingGame}`}
             />
           </Grid>
         )}
 
         {swiperExercises.some((e) => e.topic === topic) && (
           <Grid {...commonGridItemProps}>
-            <MPMIInfoCard
-              text={exercisesData[MPMIExerciseType.Swiper].name}
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.Swiper].name}
               image="/topics/swiper.png"
-              href={`${MPMIRoute.FreieUebung}/${topic}/${MPMIExerciseType.Swiper}`}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.Swiper}`}
             />
           </Grid>
         )}
 
         {familyTreeExercises.some((e) => e.topic === topic) && (
           <Grid {...commonGridItemProps}>
-            <MPMIInfoCard
-              text={exercisesData[MPMIExerciseType.FamilyTree].name}
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.FamilyTree].name}
               image="/topics/familytree.png"
-              href={`${MPMIRoute.FreieUebung}/${topic}/${MPMIExerciseType.FamilyTree}`}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FamilyTree}`}
             />
           </Grid>
         )}
 
         {freeformQuestionExercises.some((e) => e.topic === topic) && (
           <Grid {...commonGridItemProps}>
-            <MPMIInfoCard
-              text={exercisesData[MPMIExerciseType.FreeformQuestion].name}
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.FreeformQuestion].name}
               image="/topics/freetext.png"
-              href={`${MPMIRoute.FreieUebung}/${topic}/${MPMIExerciseType.FreeformQuestion}`}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FreeformQuestion}`}
             />
           </Grid>
         )}
@@ -103,14 +103,14 @@ export default function FreePracticeSubpage({
           user.customData.mistakeExercises.find((e) => e.topic === topic) !==
             undefined && (
             <Grid {...commonGridItemProps}>
-              <MPMIInfoCard
+              <CBInfoCard
                 text="Fehler wiederholen"
                 image="/topics/repeat.png"
-                href={`${MPMIRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
+                href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
               />
             </Grid>
           )}
       </Grid>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

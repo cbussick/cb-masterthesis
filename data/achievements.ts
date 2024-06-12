@@ -1,15 +1,15 @@
-import { MPMIImgWithAlt } from "@/helpers/MPMIImgWithAlt";
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 
-export interface MPMIAchievement {
+export interface CBAchievement {
   id: string;
   name: string;
   description: string;
-  img: MPMIImgWithAlt;
+  img: CBImgWithAlt;
   progressGoal: number;
-  achievementType: MPMIAchievementType;
+  achievementType: CBAchievementType;
 }
 
-export enum MPMIAchievementType {
+export enum CBAchievementType {
   Exercise = "exercise",
   TopicWorld = "topic-world",
   Glossary = "glossary",
@@ -17,23 +17,23 @@ export enum MPMIAchievementType {
   CellSwiper = "cell-swiper",
 }
 
-export enum MPMITopicWorldAchievement {
+export enum CBTopicWorldAchievement {
   Zelle = "achievement-zelle",
   MitoseMeiose = "achievement-mitose-meiose",
   DNA = "achievement-dna",
 }
 
-export const achievements: MPMIAchievement[] = [
+export const achievements: CBAchievement[] = [
   {
-    id: MPMITopicWorldAchievement.Zelle,
+    id: CBTopicWorldAchievement.Zelle,
     name: "Zellenexperte",
     description: "Schließe Themenwelt “Pflanzliche & tierische Zellen” ab.",
     img: { src: "/achievement/badge-5.png", alt: "Badge - Zellenexperte" },
     progressGoal: 1,
-    achievementType: MPMIAchievementType.TopicWorld,
+    achievementType: CBAchievementType.TopicWorld,
   },
   {
-    id: MPMITopicWorldAchievement.MitoseMeiose,
+    id: CBTopicWorldAchievement.MitoseMeiose,
     name: "Zellteilungsexperte",
     description: "Schließe Themenwelt “Mitose & Meiose” ab.",
     img: {
@@ -41,10 +41,10 @@ export const achievements: MPMIAchievement[] = [
       alt: "Badge - Zellteilungsexperte",
     },
     progressGoal: 1,
-    achievementType: MPMIAchievementType.TopicWorld,
+    achievementType: CBAchievementType.TopicWorld,
   },
   {
-    id: MPMITopicWorldAchievement.DNA,
+    id: CBTopicWorldAchievement.DNA,
     name: "DNA-Struktur-Experte",
     description: "Schließe Themenwelt “Aufbau der DNA” ab.",
     img: {
@@ -52,7 +52,7 @@ export const achievements: MPMIAchievement[] = [
       alt: "Badge - DNA-Struktur-Experte",
     },
     progressGoal: 1,
-    achievementType: MPMIAchievementType.TopicWorld,
+    achievementType: CBAchievementType.TopicWorld,
   },
   {
     id: "exercise-1",
@@ -60,7 +60,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe deine erste freie Übung ab.",
     img: { src: "/achievement/badge-1.png", alt: "Badge - Willkommen" },
     progressGoal: 1,
-    achievementType: MPMIAchievementType.Exercise,
+    achievementType: CBAchievementType.Exercise,
   },
   {
     id: "exercise-2",
@@ -68,7 +68,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe 10 freie Übungen ab.",
     img: { src: "/achievement/badge-2.png", alt: "Badge - Labor Assistent" },
     progressGoal: 10,
-    achievementType: MPMIAchievementType.Exercise,
+    achievementType: CBAchievementType.Exercise,
   },
   {
     id: "exercise-3",
@@ -76,7 +76,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe 25 freie Übungen ab.",
     img: { src: "/achievement/badge-3.png", alt: "Badge - Labor Profi" },
     progressGoal: 25,
-    achievementType: MPMIAchievementType.Exercise,
+    achievementType: CBAchievementType.Exercise,
   },
   {
     id: "exercise-4",
@@ -84,7 +84,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe 50 freie Übungen ab.",
     img: { src: "/achievement/badge-4.png", alt: "Badge - Labor Experte" },
     progressGoal: 50,
-    achievementType: MPMIAchievementType.Exercise,
+    achievementType: CBAchievementType.Exercise,
   },
   {
     id: "exam-1",
@@ -92,7 +92,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe deine erste Prüfungssimulation ab.",
     img: { src: "/achievement/badge-9.png", alt: "Badge - Eifriger Lerner" },
     progressGoal: 1,
-    achievementType: MPMIAchievementType.Exam,
+    achievementType: CBAchievementType.Exam,
   },
   {
     id: "exam-2",
@@ -100,7 +100,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe 5 Prüfungssimulationen ab.",
     img: { src: "/achievement/badge-10.png", alt: "Badge - Lern Profi" },
     progressGoal: 5,
-    achievementType: MPMIAchievementType.Exam,
+    achievementType: CBAchievementType.Exam,
   },
   {
     id: "exam-3",
@@ -108,7 +108,7 @@ export const achievements: MPMIAchievement[] = [
     description: "Schließe 10 Prüfungssimulationen ab.",
     img: { src: "/achievement/badge-11.png", alt: "Badge - Lernexperte" },
     progressGoal: 10,
-    achievementType: MPMIAchievementType.Exam,
+    achievementType: CBAchievementType.Exam,
   },
   {
     id: "glossary",
@@ -116,6 +116,6 @@ export const achievements: MPMIAchievement[] = [
     description: "Schalte alle Begriffe im Glossar frei.",
     img: { src: "/achievement/badge-8.png", alt: "Badge - Laufendes Lexikon" },
     progressGoal: 67,
-    achievementType: MPMIAchievementType.Glossary,
+    achievementType: CBAchievementType.Glossary,
   },
 ];

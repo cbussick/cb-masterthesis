@@ -1,24 +1,24 @@
 "use client";
 
-import { MPMIBreadcrumbs } from "@/components/MPMIBreadcrumbs/MPMIBreadcrumbs";
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIExerciseSequenceProvider } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceProvider";
-import { MPMIExerciseSequenceWrapper } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceWrapper";
-import { MPMIExerciseSequenceType } from "@/components/MPMIExerciseSequence/MPMIExerciseSequenceWrapperInterfaces";
-import { MPMITime } from "@/components/MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
-import { glossaryEntries } from "@/components/MPMIGlossary/CBGlossaryEntries";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { MPMIExerciseWithMetaData } from "@/data/exercises/MPMIExercise";
-import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
+import { CBBreadcrumbs } from "@/components/CBBreadcrumbs/CBBreadcrumbs";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBExerciseSequenceProvider } from "@/components/CBExerciseSequence/CBExerciseSequenceProvider";
+import { CBExerciseSequenceWrapper } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapper";
+import { CBExerciseSequenceType } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
+import { CBTime } from "@/components/CBExerciseTimer/CBExerciseTimerInterfaces";
+import { glossaryEntries } from "@/components/CBGlossary/CBGlossaryEntries";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { topicWorldTopics } from "@/data/topicWorld";
-import { MPMITopic } from "@/data/topics";
+import { CBTopic } from "@/data/topics";
 import { addPointsToUser } from "@/firebase/addPointsToUser";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { markExerciseAsCompleted } from "@/firebase/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase/unlockGlossaryEntries";
 import { useUser } from "@/firebase/useUser";
-import { MPMIRoute } from "@/helpers/routes";
+import { CBRoute } from "@/helpers/routes";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -33,16 +33,16 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   const user = useUser();
 
   const [exercises, setExercises] = useState<
-    MPMIExerciseWithMetaData[] | undefined
+    CBExerciseWithMetaData[] | undefined
   >(undefined);
 
-  const topicData = topicWorldTopics[params.id as MPMITopic];
+  const topicData = topicWorldTopics[params.id as CBTopic];
 
   const unit = topicData?.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
-  const [, setCompletionTime] = useState<MPMITime>({
+  const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
   });
@@ -66,28 +66,28 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     }
   }, [params.id, params.unitId, unit, unit?.exercises, user]);
 
-  const onCompleteHref = `${MPMIRoute.Themenwelt}/${params.id}`;
+  const onCompleteHref = `${CBRoute.Themenwelt}/${params.id}`;
 
   const onSequenceComplete = (parameters: {
     allExercisesCompleted: boolean;
-    difficulty: MPMIExerciseDifficulty;
+    difficulty: CBExerciseDifficulty;
   }) => {
     if (user?.user) {
       if (parameters.allExercisesCompleted && parameters.difficulty) {
-        if (parameters.difficulty === MPMIExerciseDifficulty.Hard) {
+        if (parameters.difficulty === CBExerciseDifficulty.Hard) {
           if (exercises) {
             const unlockedGlossaryEntryIds: string[] = [];
             const topic = exercises.at(0)?.topic;
 
-            if (topic === MPMITopic.Zelle) {
+            if (topic === CBTopic.Zelle) {
               glossaryEntries.forEach((entry) => {
-                if (entry.topic === MPMITopic.MitoseMeiose) {
+                if (entry.topic === CBTopic.MitoseMeiose) {
                   unlockedGlossaryEntryIds.push(entry.id);
                 }
               });
-            } else if (topic === MPMITopic.MitoseMeiose) {
+            } else if (topic === CBTopic.MitoseMeiose) {
               glossaryEntries.forEach((entry) => {
-                if (entry.topic === MPMITopic.AufbauDNA) {
+                if (entry.topic === CBTopic.AufbauDNA) {
                   unlockedGlossaryEntryIds.push(entry.id);
                 }
               });
@@ -108,13 +108,13 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   };
 
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
       <Stack spacing={1} height="100%">
-        <MPMIPageHeader
+        <CBPageHeader
           title={
-            <MPMIBreadcrumbs
+            <CBBreadcrumbs
               previousLinks={[
-                { label: "Themenwelt", href: MPMIRoute.Themenwelt },
+                { label: "Themenwelt", href: CBRoute.Themenwelt },
                 {
                   label: topicData.topicData.name || "Thema",
                   href: onCompleteHref,
@@ -125,9 +125,9 @@ export default function ExercisePage({ params }: ExercisePageParams) {
           }
         />
 
-        <MPMIExerciseSequenceProvider>
-          <MPMIExerciseSequenceWrapper
-            type={MPMIExerciseSequenceType.TopicWorld}
+        <CBExerciseSequenceProvider>
+          <CBExerciseSequenceWrapper
+            type={CBExerciseSequenceType.TopicWorld}
             exercises={exercises}
             onCompleteHref={onCompleteHref}
             onCompleteExercise={(parameters: {
@@ -147,8 +147,8 @@ export default function ExercisePage({ params }: ExercisePageParams) {
             setCompletionTime={setCompletionTime}
             difficulty={unit?.difficulty}
           />
-        </MPMIExerciseSequenceProvider>
+        </CBExerciseSequenceProvider>
       </Stack>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

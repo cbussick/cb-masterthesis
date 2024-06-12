@@ -1,21 +1,21 @@
 "use client";
 
-import { MPMITime } from "@/components/MPMIExerciseTimer/MPMIExerciseTimerInterfaces";
-import { MPMIFreePracticeExerciseSequence } from "@/components/MPMIFreePracticeExerciseSequence/MPMIFreePracticeExerciseSequence";
+import { CBTime } from "@/components/CBExerciseTimer/CBExerciseTimerInterfaces";
+import { CBFreePracticeExerciseSequence } from "@/components/CBFreePracticeExerciseSequence/CBFreePracticeExerciseSequence";
 import {
-  MPMIExercise,
-  MPMIExerciseWithMetaData,
-} from "@/data/exercises/MPMIExercise";
-import { MPMIExerciseDifficulty } from "@/data/exercises/MPMIExerciseDifficulty";
-import { MPMIExerciseType } from "@/data/exercises/MPMIExerciseType";
-import { familyTreeExercises } from "@/data/exercises/MPMIFamilyTreeExercise";
-import { freeformQuestionExercises } from "@/data/exercises/MPMIFreeformQuestionExercise";
-import { matchingGameExercises } from "@/data/exercises/MPMIMatchingGameExercise";
-import { quizExercises } from "@/data/exercises/MPMIQuizExercise";
-import { swiperExercises } from "@/data/exercises/MPMISwiperExercise";
+  CBExercise,
+  CBExerciseWithMetaData,
+} from "@/data/exercises/CBExercise";
+import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
+import { CBExerciseType } from "@/data/exercises/CBExerciseType";
+import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
+import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
+import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
+import { quizExercises } from "@/data/exercises/CBQuizExercise";
+import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
-import { MPMITopic } from "@/data/topics";
-import { MPMIMistakeExercise } from "@/firebase/UserCustomDataConverter";
+import { CBTopic } from "@/data/topics";
+import { CBMistakeExercise } from "@/firebase/UserCustomDataConverter";
 import { addExercisesToMistakes } from "@/firebase/addExercisesToMistakes";
 import { addPointsToUser } from "@/firebase/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase/addSolvedExerciseToUser";
@@ -31,20 +31,20 @@ interface FreePracticeSequenceParams {
   };
 }
 
-const exercisesMap: Record<MPMIExerciseType, MPMIExercise[]> = {
-  [MPMIExerciseType.Quiz]: quizExercises,
-  [MPMIExerciseType.FamilyTree]: familyTreeExercises,
-  [MPMIExerciseType.MatchingGame]: matchingGameExercises,
-  [MPMIExerciseType.Swiper]: swiperExercises,
-  [MPMIExerciseType.FreeformQuestion]: freeformQuestionExercises,
+const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
+  [CBExerciseType.Quiz]: quizExercises,
+  [CBExerciseType.FamilyTree]: familyTreeExercises,
+  [CBExerciseType.MatchingGame]: matchingGameExercises,
+  [CBExerciseType.Swiper]: swiperExercises,
+  [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
 };
 
-const exerciseAmountMap: Record<MPMIExerciseType, number> = {
-  [MPMIExerciseType.Quiz]: 10,
-  [MPMIExerciseType.FamilyTree]: 2,
-  [MPMIExerciseType.MatchingGame]: 5,
-  [MPMIExerciseType.Swiper]: 10,
-  [MPMIExerciseType.FreeformQuestion]: 5,
+const exerciseAmountMap: Record<CBExerciseType, number> = {
+  [CBExerciseType.Quiz]: 10,
+  [CBExerciseType.FamilyTree]: 2,
+  [CBExerciseType.MatchingGame]: 5,
+  [CBExerciseType.Swiper]: 10,
+  [CBExerciseType.FreeformQuestion]: 5,
 };
 
 export default function FreePracticeSequencePage({
@@ -53,23 +53,23 @@ export default function FreePracticeSequencePage({
   const user = useUser();
 
   const [originalExercises, setOriginalExercises] = useState<
-    MPMIExerciseWithMetaData[]
+    CBExerciseWithMetaData[]
   >([]);
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
 
-  const topic = params.id as MPMITopic;
+  const topic = params.id as CBTopic;
   const exerciseType =
     params.typeId === retryMistakesPathSegment
       ? null
-      : (params.typeId as MPMIExerciseType);
+      : (params.typeId as CBExerciseType);
 
-  const [, setCompletionTime] = useState<MPMITime>({
+  const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
   });
 
   useEffect(() => {
-    let exercises: MPMIExerciseWithMetaData[] = [];
+    let exercises: CBExerciseWithMetaData[] = [];
 
     if (exerciseType) {
       if (isFirstRender) {
@@ -85,7 +85,7 @@ export default function FreePracticeSequencePage({
           exercises.length < desiredAmountOfExercises
             ? exercises.length
             : desiredAmountOfExercises;
-        const randomExercises: MPMIExerciseWithMetaData[] = [];
+        const randomExercises: CBExerciseWithMetaData[] = [];
         const usedIndexes: number[] = [];
         let i = 0;
         while (i < amountOfExercises) {
@@ -109,7 +109,7 @@ export default function FreePracticeSequencePage({
           const exercise = exercisesMap[e.type].find((ex) => ex.id === e.id);
 
           if (exercise) {
-            const exerciseWithMetaData: MPMIExerciseWithMetaData = {
+            const exerciseWithMetaData: CBExerciseWithMetaData = {
               ...exercise,
               isCompleted: false,
             };
@@ -119,7 +119,7 @@ export default function FreePracticeSequencePage({
       });
 
       const amountOfExercises = exercises.length < 5 ? exercises.length : 5;
-      const randomExercises: MPMIExerciseWithMetaData[] = [];
+      const randomExercises: CBExerciseWithMetaData[] = [];
       const usedIndexes: number[] = [];
       let i = 0;
       while (i < amountOfExercises) {
@@ -138,7 +138,7 @@ export default function FreePracticeSequencePage({
   }, [exerciseType, isFirstRender, topic, user?.customData.mistakeExercises]);
 
   const onMistake = useCallback(
-    (exercise: MPMIMistakeExercise) => {
+    (exercise: CBMistakeExercise) => {
       const isNotAlreadyInMistakes =
         user?.customData.mistakeExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
@@ -178,7 +178,7 @@ export default function FreePracticeSequencePage({
   const onSequenceComplete = useCallback(
     (parameters: {
       allExercisesCompleted: boolean;
-      difficulty: MPMIExerciseDifficulty;
+      difficulty: CBExerciseDifficulty;
     }) => {
       if (user?.user) {
         if (parameters.allExercisesCompleted && parameters.difficulty) {
@@ -193,7 +193,7 @@ export default function FreePracticeSequencePage({
   );
 
   return (
-    <MPMIFreePracticeExerciseSequence
+    <CBFreePracticeExerciseSequence
       exercises={originalExercises}
       topic={topic}
       exerciseType={exerciseType}

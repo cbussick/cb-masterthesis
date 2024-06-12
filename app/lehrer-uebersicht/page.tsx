@@ -1,9 +1,9 @@
 "use client";
 
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { MPMIStudentDataTable } from "@/components/MPMIStudentDataTable/MPMIStudentDataTable";
-import { MPMIStudentOverviewGraphCard } from "@/components/MPMIStudentOverviewGraphCard/MPMIStudentOverviewGraphCard";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBStudentDataTable } from "@/components/CBStudentDataTable/CBStudentDataTable";
+import { CBStudentOverviewGraphCard } from "@/components/CBStudentOverviewGraphCard/CBStudentOverviewGraphCard";
 import { mitoseUnits, zelleUnits } from "@/data/topicWorld";
 import { topics } from "@/data/topics";
 import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
@@ -20,15 +20,15 @@ const yAxisId = "y";
 
 export default function LehrerUebersicht() {
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
-      <MPMIPageHeader title="Lehrer Übersicht" />
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
+      <CBPageHeader title="Lehrer Übersicht" />
 
       <Stack spacing={3}>
-        <MPMIStudentDataTable />
+        <CBStudentDataTable />
 
         <Grid container spacing={3}>
           <Grid {...commonGridItemProps}>
-            <MPMIStudentOverviewGraphCard
+            <CBStudentOverviewGraphCard
               topBar={
                 <Typography color={theme.palette.grey[500]}>
                   Themenwelt
@@ -82,7 +82,7 @@ export default function LehrerUebersicht() {
           </Grid>
 
           <Grid {...commonGridItemProps}>
-            <MPMIStudentOverviewGraphCard
+            <CBStudentOverviewGraphCard
               topBar={
                 <Stack direction="row" justifyContent="space-between">
                   <Typography sx={{ color: theme.palette.grey[500] }}>
@@ -128,7 +128,7 @@ export default function LehrerUebersicht() {
           </Grid>
 
           <Grid {...commonGridItemProps}>
-            <MPMIStudentOverviewGraphCard
+            <CBStudentOverviewGraphCard
               topBar={
                 <Stack direction="row" justifyContent="space-between">
                   <Typography sx={{ color: theme.palette.grey[500] }}>
@@ -182,6 +182,6 @@ export default function LehrerUebersicht() {
           </Grid>
         </Grid>
       </Stack>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

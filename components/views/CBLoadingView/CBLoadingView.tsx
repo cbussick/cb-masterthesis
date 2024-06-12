@@ -1,0 +1,22 @@
+"use client";
+
+import { CBLogo } from "@/components/CBLogo/CBLogo";
+import { CircularProgress, Container, Stack } from "@mui/material";
+
+export const CBLoadingView = (): JSX.Element => {
+  return (
+    <Stack
+      spacing={5}
+      height="100vh"
+      justifyContent="center"
+      alignItems="center"
+      bgcolor={(t) => t.palette.background.default}
+    >
+      <Container maxWidth="md" sx={{ px: { xs: 5, md: undefined } }}>
+        <CBLogo style={{ width: "100%" }} />
+      </Container>
+
+      <CircularProgress size={80} />
+    </Stack>
+  );
+};

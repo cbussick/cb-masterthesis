@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { MPMIConfettiContext } from "./MPMIConfettiProvider";
+import { CBConfettiContext } from "./CBConfettiProvider";
 
 export const useConfetti = () => {
-  return useContext(MPMIConfettiContext);
+  return useContext(CBConfettiContext);
 };

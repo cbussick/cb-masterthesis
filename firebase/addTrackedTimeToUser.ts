@@ -1,13 +1,13 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
-  MPMITrackedTime,
+  CBTrackedTime,
   userCustomDataConverter,
 } from "./UserCustomDataConverter";
 import { firestore } from "./firebase";
 
 export const addTrackedTimeToUser = async (
   uid: string,
-  trackedTime: MPMITrackedTime,
+  trackedTime: CBTrackedTime,
 ) => {
   try {
     const documentReference = doc(firestore, `users/${uid}`).withConverter(

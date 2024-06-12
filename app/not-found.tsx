@@ -1,12 +1,12 @@
 "use client";
 
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMILogo } from "@/components/MPMILogo/MPMILogo";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBLogo } from "@/components/CBLogo/CBLogo";
 import { Button, Container, Stack, Typography } from "@mui/material";
 
 export default function NotFound() {
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
       <Stack
         height="100%"
         spacing={6}
@@ -14,7 +14,7 @@ export default function NotFound() {
         justifyContent="center"
       >
         <Container maxWidth="xs">
-          <MPMILogo style={{ width: "100%" }} />
+          <CBLogo style={{ width: "100%" }} />
         </Container>
 
         <Stack spacing={3} alignItems="center">
@@ -31,6 +31,6 @@ export default function NotFound() {
           <Button href="/">Zur Homepage</Button>
         </Stack>
       </Stack>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

@@ -1,0 +1,140 @@
+"use client";
+
+import { CBMatchingGameProps } from "@/components/exercises/CBMatchingGame/CBMatchingGameInterfaces";
+import { playCorrectSound } from "@/helpers/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { useSnackbar } from "@/ui/useSnackbar";
+import { Box, ButtonProps, Stack } from "@mui/material";
+import { forwardRef, useImperativeHandle, useState } from "react";
+import { CBConfirmation } from "../../CBExerciseSequence/CBExerciseSequenceBottomBar/CBConfirmation";
+import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
+import { useCBExerciseSequence } from "../../CBExerciseSequence/useCBExerciseSequenceProvider";
+import { CBImage } from "../../CBImage/CBImage";
+import { CBMatchingGameHighlightComponentSide } from "./CBMatchingGameHighlightComponent";
+import { CBMatchingGameSelect } from "./CBMatchingGameSelect/CBMatchingGameSelect";
+
+export const CBMatchingGame = forwardRef(
+  ({ exercise, sequenceType }: CBMatchingGameProps, ref): JSX.Element => {
+    const { options, image, highlightedComponents, correctSelection } =
+      exercise;
+
+    const { isCurrentExerciseFinished } = useCBExerciseSequence();
+    const { showSnackbar } = useSnackbar();
+
+    const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([
+      null,
+      null,
+      null,
+      null,
+    ]);
+
+    const [showMistakes, setShowMistakes] = useState<boolean[]>([
+      false,
+      false,
+      false,
+      false,
+    ]);
+
+    const onNotFinished = () => {
+      showSnackbar(
+        "Noch nicht fertig",
+        "Du hast noch nicht alle Begriffe zugeordnet. 🤔 Ordne jedem Element im Bild einen Begriff zu.",
+        "error",
+      );
+      playIncorrectSound();
+    };
+
+    const onConfirm: ButtonProps["onClick"] = (): CBConfirmation => {
+      const isFinished =
+        selectedOptions.filter((o) => o === null).length === 0 ||
+        sequenceType === CBExerciseSequenceType.ExamSimulator;
+
+      const isCorrect =
+        isFinished &&
+        selectedOptions.every((o, index) => o === correctSelection[index]);
+
+      if (!isFinished) {
+        showSnackbar(
+          "Fehler vorhanden",
+          "Leider sind noch Fehler vorhanden. 😕 Überprüfe die rot umrandeten Textfelder.",
+          "error",
+        );
+        onNotFinished();
+        setShowMistakes(selectedOptions.map((o) => o === null));
+      } else if (isCorrect) {
+        playCorrectSound();
+      } else {
+        playIncorrectSound();
+      }
+      return { isCorrect, isFinished };
+    };
+
+    useImperativeHandle(ref, () => ({
+      onConfirm,
+    }));
+
+    return (
+      <Stack>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          position="relative"
+          width="100%"
+        >
+          <CBImage image={image} />
+
+          <Box position="absolute" left="50%" height="100%">
+            {highlightedComponents.map((component, index) => (
+              <Stack
+                key={component.id}
+                direction={
+                  component.side === CBMatchingGameHighlightComponentSide.Left
+                    ? "row-reverse"
+                    : "row"
+                }
+                alignItems="center"
+                spacing={1}
+                position="absolute"
+                left={
+                  component.side === CBMatchingGameHighlightComponentSide.Left
+                    ? undefined
+                    : component.pointer.x
+                }
+                right={
+                  component.side === CBMatchingGameHighlightComponentSide.Left
+                    ? component.pointer.x
+                    : undefined
+                }
+                top={component.pointer.y}
+              >
+                <Box
+                  width={250}
+                  borderBottom={(t) => `3px solid ${t.palette.secondary.main}`}
+                  sx={{
+                    pointerEvents: "none",
+                  }}
+                />
+
+                <CBMatchingGameSelect
+                  index={index}
+                  options={options}
+                  setSelectedOptions={setSelectedOptions}
+                  isCurrentExerciseFinished={isCurrentExerciseFinished}
+                  disabled={isCurrentExerciseFinished}
+                  showError={
+                    showMistakes[index] ||
+                    (isCurrentExerciseFinished &&
+                      selectedOptions[index] !== correctSelection[index])
+                  }
+                  setShowMistakes={setShowMistakes}
+                />
+              </Stack>
+            ))}
+          </Box>
+        </Stack>
+      </Stack>
+    );
+  },
+);
+
+CBMatchingGame.displayName = "CBMatchingGame";

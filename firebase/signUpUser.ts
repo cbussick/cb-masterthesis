@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { initializeCustomUserFields } from "./initializeCustomUserFields";
 import { initializeTopicWorldProgress } from "./initializeTopicWorldProgress";
-import { MPMIUserRole } from "./userRole";
+import { CBUserRole } from "./userRole";
 
 export const signUpUser = (
   firstName: string,
@@ -10,7 +10,7 @@ export const signUpUser = (
   email: string,
   password: string,
   name: string,
-  role: MPMIUserRole,
+  role: CBUserRole,
   unlockedGlossaryEntryIDs: string[],
   profilePicture: string,
 ) => {

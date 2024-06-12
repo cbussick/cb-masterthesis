@@ -1,8 +1,8 @@
 "use client";
 
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { MPMITopicWorld } from "@/components/MPMITopicWorld/MPMITopicWorld";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBTopicWorld } from "@/components/CBTopicWorld/CBTopicWorld";
 import {
   topicWorldContentWrapperStyles,
   topicWorldInnerBoxStyles,
@@ -13,8 +13,8 @@ import Image from "next/image";
 
 export default function TopicWorld() {
   return (
-    <MPMIContentWrapper {...topicWorldContentWrapperStyles}>
-      <MPMIPageHeader
+    <CBContentWrapper {...topicWorldContentWrapperStyles}>
+      <CBPageHeader
         title="Themenwelt"
         subTitle="Lerne Schritt für Schritt die Welt der Genetik kennen!"
         isOnTransparentBackground
@@ -22,12 +22,12 @@ export default function TopicWorld() {
       />
 
       <Box {...topicWorldInnerBoxStyles}>
-        <MPMITopicWorld />
+        <CBTopicWorld />
       </Box>
 
       <Box position="absolute" right={50} bottom={10} width={200} height={300}>
         <Image src="/logo/dina.svg" alt="DiNA" fill />
       </Box>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

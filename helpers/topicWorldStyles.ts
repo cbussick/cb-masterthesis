@@ -1,8 +1,8 @@
-import { MPMIContentWrapperProps } from "@/components/MPMIContentWrapper/MPMIContentWrapperInterfaces";
+import { CBContentWrapperProps } from "@/components/CBContentWrapper/CBContentWrapperInterfaces";
 import { BoxProps, SxProps, alpha } from "@mui/material";
 
 export const topicWorldContentWrapperStyles: Omit<
-  MPMIContentWrapperProps,
+  CBContentWrapperProps,
   "children"
 > = {
   sxInnerContainer: {

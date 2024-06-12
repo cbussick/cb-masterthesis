@@ -1,8 +1,8 @@
-import { MPMIUserRole } from "@/firebase/userRole";
+import { CBUserRole } from "@/firebase/userRole";
 
 export const retryMistakesPathSegment = "wiederholung";
 
-export enum MPMIRoute {
+export enum CBRoute {
   Home = "/",
   Themenwelt = "/themenwelt",
   FreieUebung = "/freie-uebung",
@@ -12,57 +12,57 @@ export enum MPMIRoute {
   Einstellungen = "/einstellungen",
 }
 
-export interface MPMIRouteData {
-  route: MPMIRoute;
+export interface CBRouteData {
+  route: CBRoute;
   title?: string;
   subtitle?: string;
-  forRoles: MPMIUserRole[];
+  forRoles: CBUserRole[];
 }
 
-export const routeMap: Record<MPMIRoute, MPMIRouteData> = {
-  [MPMIRoute.Home]: {
-    route: MPMIRoute.Home,
+export const routeMap: Record<CBRoute, CBRouteData> = {
+  [CBRoute.Home]: {
+    route: CBRoute.Home,
     title: "Dashboard",
     subtitle: "Hier findest du alle wichtigen Informationen auf einen Blick!",
-    forRoles: [MPMIUserRole.Student, MPMIUserRole.Teacher, MPMIUserRole.Admin],
+    forRoles: [CBUserRole.Student, CBUserRole.Teacher, CBUserRole.Admin],
   },
-  [MPMIRoute.Themenwelt]: {
-    route: MPMIRoute.Themenwelt,
+  [CBRoute.Themenwelt]: {
+    route: CBRoute.Themenwelt,
     title: "Themenwelt",
     subtitle: "Lerne Schritt für Schritt die Welt der Genetik kennen!",
-    forRoles: [MPMIUserRole.Student],
+    forRoles: [CBUserRole.Student],
   },
-  [MPMIRoute.FreieUebung]: {
-    route: MPMIRoute.FreieUebung,
+  [CBRoute.FreieUebung]: {
+    route: CBRoute.FreieUebung,
     title: "Freie Übung",
     subtitle:
       "Hier kannst du deine Schwächen angehen und dein Wissen verbessern!",
-    forRoles: [MPMIUserRole.Student],
+    forRoles: [CBUserRole.Student],
   },
-  [MPMIRoute.Pruefungssimulator]: {
-    route: MPMIRoute.Pruefungssimulator,
+  [CBRoute.Pruefungssimulator]: {
+    route: CBRoute.Pruefungssimulator,
     title: "Prüfungssimulator",
     subtitle:
       "Hier kannst du dein bisheriges Wissen testen. Bereite dich mit diesem Simulator gezielt auf die Prüfung vor.",
-    forRoles: [MPMIUserRole.Student],
+    forRoles: [CBUserRole.Student],
   },
-  [MPMIRoute.Glossar]: {
-    route: MPMIRoute.Glossar,
+  [CBRoute.Glossar]: {
+    route: CBRoute.Glossar,
     title: "Glossar",
     subtitle: "Hier kannst du alle wichtigen Begriffe der Genetik nachschlagen",
-    forRoles: [MPMIUserRole.Student],
+    forRoles: [CBUserRole.Student],
   },
-  [MPMIRoute.Achievements]: {
-    route: MPMIRoute.Achievements,
+  [CBRoute.Achievements]: {
+    route: CBRoute.Achievements,
     title: "Achievements",
     subtitle:
       "Entdecke eine Vielfalt von Achievements, von grundlegenden Meilensteinen bis hin zu anspruchsvollen Herausforderungen. ",
-    forRoles: [MPMIUserRole.Student],
+    forRoles: [CBUserRole.Student],
   },
-  [MPMIRoute.Einstellungen]: {
-    route: MPMIRoute.Einstellungen,
+  [CBRoute.Einstellungen]: {
+    route: CBRoute.Einstellungen,
     title: "Einstellungen",
     subtitle: "Hier siehst du deine Einstellungen der App",
-    forRoles: [MPMIUserRole.Student, MPMIUserRole.Teacher, MPMIUserRole.Admin],
+    forRoles: [CBUserRole.Student, CBUserRole.Teacher, CBUserRole.Admin],
   },
 };

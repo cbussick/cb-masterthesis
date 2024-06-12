@@ -1,4 +1,4 @@
-import { MPMIMainLayout } from "@/components/MPMIMainLayout/MPMIMainLayout";
+import { CBMainLayout } from "@/components/CBMainLayout/CBMainLayout";
 import { UserProvider } from "@/firebase/UserProvider";
 import { font } from "@/theme/font";
 import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     />
                   </Box>
 
-                  <MPMIMainLayout>{children}</MPMIMainLayout>
+                  <CBMainLayout>{children}</CBMainLayout>
                 </SidebarProvider>
               </SnackbarProvider>
             </UserProvider>

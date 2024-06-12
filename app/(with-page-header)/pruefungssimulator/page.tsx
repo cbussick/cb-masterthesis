@@ -1,6 +1,6 @@
-import { MPMIExamSimulator } from "@/components/MPMIExamSimulator/MPMIExamSimulator";
+import { CBExamSimulator } from "@/components/CBExamSimulator/CBExamSimulator";
 import { exams } from "@/data/examSimulator";
 
 export default function ExamSimulator() {
-  return <MPMIExamSimulator exams={exams} />;
+  return <CBExamSimulator exams={exams} />;
 }

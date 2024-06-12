@@ -1,16 +1,16 @@
 "use client";
 
-import { MPMIBreadcrumbs } from "@/components/MPMIBreadcrumbs/MPMIBreadcrumbs";
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { MPMIProgressCircle } from "@/components/MPMIProgressCircle/MPMIProgressCircle";
-import { MPMIProgressCircleConnector } from "@/components/MPMIProgressCircleConnector/MPMIProgressCircleConnector";
+import { CBBreadcrumbs } from "@/components/CBBreadcrumbs/CBBreadcrumbs";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBProgressCircle } from "@/components/CBProgressCircle/CBProgressCircle";
+import { CBProgressCircleConnector } from "@/components/CBProgressCircleConnector/CBProgressCircleConnector";
 import { topicWorldTopics } from "@/data/topicWorld";
-import { MPMITopic } from "@/data/topics";
+import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
-import { MPMIRoute } from "@/helpers/routes";
+import { CBRoute } from "@/helpers/routes";
 import {
   topicWorldContentWrapperStyles,
   topicWorldInnerBoxStyles,
@@ -27,7 +27,7 @@ interface TopicUnitPageParams {
 }
 
 export default function TopicUnit({ params }: TopicUnitPageParams) {
-  const topicData = topicWorldTopics[params.id as MPMITopic];
+  const topicData = topicWorldTopics[params.id as CBTopic];
 
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
@@ -43,13 +43,11 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
   }, [user?.user]);
 
   return (
-    <MPMIContentWrapper {...topicWorldContentWrapperStyles}>
-      <MPMIPageHeader
+    <CBContentWrapper {...topicWorldContentWrapperStyles}>
+      <CBPageHeader
         title={
-          <MPMIBreadcrumbs
-            previousLinks={[
-              { label: "Themenwelt", href: MPMIRoute.Themenwelt },
-            ]}
+          <CBBreadcrumbs
+            previousLinks={[{ label: "Themenwelt", href: CBRoute.Themenwelt }]}
             currentLabel={topicData.topicData.name || "Thema"}
           />
         }
@@ -96,10 +94,10 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
               return (
                 <Fragment key={unit.id}>
                   {index !== 0 && (
-                    <MPMIProgressCircleConnector disabled={!unlocked} />
+                    <CBProgressCircleConnector disabled={!unlocked} />
                   )}
 
-                  <MPMIProgressCircle
+                  <CBProgressCircle
                     label={unit.name}
                     progress={progress}
                     href={`/themenwelt/${params.id}/${unit.id}`}
@@ -116,6 +114,6 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
       <Box position="absolute" right={50} bottom={10} width={200} height={300}>
         <Image src="/logo/dina.svg" alt="DiNA" fill />
       </Box>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

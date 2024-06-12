@@ -1,11 +1,11 @@
 "use client";
 
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIDashboardAdmin } from "@/components/dashboards/MPMIDashboardAdmin";
-import { MPMIDashboardStudent } from "@/components/dashboards/MPMIDashboardStudent";
-import { MPMIDashboardTeacher } from "@/components/dashboards/MPMIDashboardTeacher";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBDashboardAdmin } from "@/components/dashboards/CBDashboardAdmin";
+import { CBDashboardStudent } from "@/components/dashboards/CBDashboardStudent";
+import { CBDashboardTeacher } from "@/components/dashboards/CBDashboardTeacher";
 import { useUser } from "@/firebase/useUser";
-import { MPMIUserRole } from "@/firebase/userRole";
+import { CBUserRole } from "@/firebase/userRole";
 import { CircularProgress } from "@mui/material";
 
 export default function Home() {
@@ -14,19 +14,19 @@ export default function Home() {
   let dashboard;
   const userRole = user?.customData.role;
 
-  if (userRole === MPMIUserRole.Student) {
-    dashboard = <MPMIDashboardStudent />;
-  } else if (userRole === MPMIUserRole.Teacher) {
-    dashboard = <MPMIDashboardTeacher />;
-  } else if (userRole === MPMIUserRole.Admin) {
-    dashboard = <MPMIDashboardAdmin />;
+  if (userRole === CBUserRole.Student) {
+    dashboard = <CBDashboardStudent />;
+  } else if (userRole === CBUserRole.Teacher) {
+    dashboard = <CBDashboardTeacher />;
+  } else if (userRole === CBUserRole.Admin) {
+    dashboard = <CBDashboardAdmin />;
   } else {
     dashboard = <CircularProgress />;
   }
 
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
       {dashboard}
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

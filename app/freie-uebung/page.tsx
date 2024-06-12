@@ -1,10 +1,10 @@
 "use client";
 
-import { MPMIContentWrapper } from "@/components/MPMIContentWrapper/MPMIContentWrapper";
-import { MPMIInfoCard } from "@/components/MPMIInfoCard/MPMIInfoCard";
-import { MPMIPageHeader } from "@/components/MPMIPageHeader/MPMIPageHeader";
-import { MPMITopic } from "@/data/topics";
-import { MPMIRoute } from "@/helpers/routes";
+import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBInfoCard } from "@/components/CBInfoCard/CBInfoCard";
+import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBTopic } from "@/data/topics";
+import { CBRoute } from "@/helpers/routes";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 
 const commonGridItemProps: Grid2Props = {
@@ -14,40 +14,40 @@ const commonGridItemProps: Grid2Props = {
 
 export default function FreePractice() {
   return (
-    <MPMIContentWrapper bgcolor={(t) => t.palette.background.default}>
-      <MPMIPageHeader
+    <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
+      <CBPageHeader
         title="Freie Übung"
         subTitle="Hier kannst du deine Schwächen angehen und dein Wissen verbessern!"
       />
 
       <Grid container spacing={4}>
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/topics/zelle.jpg"
             text="Tierische und pflanzliche
             Zellen"
-            href={`${MPMIRoute.FreieUebung}/${MPMITopic.Zelle}`}
+            href={`${CBRoute.FreieUebung}/${CBTopic.Zelle}`}
           />
         </Grid>
 
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/topics/mitose-meiose.png"
             text="Mitose und Meiose"
-            href={`${MPMIRoute.FreieUebung}/${MPMITopic.MitoseMeiose}`}
+            href={`${CBRoute.FreieUebung}/${CBTopic.MitoseMeiose}`}
           />
         </Grid>
 
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/topics/dna.png"
             text="Aufbau der DNA"
-            href={`${MPMIRoute.FreieUebung}/${MPMITopic.AufbauDNA}`}
+            href={`${CBRoute.FreieUebung}/${CBTopic.AufbauDNA}`}
           />
         </Grid>
 
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/coming-soon/coming-soon.jpg"
             text="DNA-Replikation"
             disabled
@@ -55,7 +55,7 @@ export default function FreePractice() {
         </Grid>
 
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/coming-soon/coming-soon.jpg"
             text="Proteinbiosynthese"
             disabled
@@ -63,13 +63,13 @@ export default function FreePractice() {
         </Grid>
 
         <Grid {...commonGridItemProps}>
-          <MPMIInfoCard
+          <CBInfoCard
             image="/coming-soon/coming-soon.jpg"
             text="(Gen-) Mutationen"
             disabled
           />
         </Grid>
       </Grid>
-    </MPMIContentWrapper>
+    </CBContentWrapper>
   );
 }

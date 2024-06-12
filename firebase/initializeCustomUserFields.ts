@@ -1,14 +1,14 @@
 import { doc, setDoc } from "firebase/firestore";
 import { userCustomDataConverter } from "./UserCustomDataConverter";
 import { firestore } from "./firebase";
-import { MPMIUserRole } from "./userRole";
+import { CBUserRole } from "./userRole";
 
 export const initializeCustomUserFields = async (
   uid: string,
   firstName: string,
   lastName: string,
   username: string,
-  role: MPMIUserRole,
+  role: CBUserRole,
   unlockedGlossaryEntryIDs: string[],
   profilePicture: string,
 ) => {

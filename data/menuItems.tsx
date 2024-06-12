@@ -1,5 +1,5 @@
-import { MPMIUserRole } from "@/firebase/userRole";
-import { MPMIRoute } from "@/helpers/routes";
+import { CBUserRole } from "@/firebase/userRole";
+import { CBRoute } from "@/helpers/routes";
 import {
   BookRounded,
   DashboardRounded,
@@ -11,61 +11,61 @@ import {
   SettingsRounded,
   SportsHandballRounded,
 } from "@mui/icons-material";
-import { SidebarMenuItem } from "../components/MPMISidebar/MPMISidebarInterfaces";
+import { SidebarMenuItem } from "../components/CBSidebar/CBSidebarInterfaces";
 
 export const menuItems: SidebarMenuItem[] = [
   {
     label: "Dashboard",
     icon: <DashboardRounded />,
-    href: MPMIRoute.Home,
-    forRoles: [MPMIUserRole.Admin, MPMIUserRole.Student, MPMIUserRole.Teacher],
+    href: CBRoute.Home,
+    forRoles: [CBUserRole.Admin, CBUserRole.Student, CBUserRole.Teacher],
   },
   {
     label: "Themenwelt",
     icon: <PublicRounded />,
-    href: MPMIRoute.Themenwelt,
-    forRoles: [MPMIUserRole.Student],
+    href: CBRoute.Themenwelt,
+    forRoles: [CBUserRole.Student],
   },
   {
     label: "Freie Übung",
     icon: <BookRounded />,
-    href: MPMIRoute.FreieUebung,
-    forRoles: [MPMIUserRole.Student],
+    href: CBRoute.FreieUebung,
+    forRoles: [CBUserRole.Student],
   },
   {
     label: "Prüfungssimulator",
     icon: <HourglassFullRounded />,
-    href: MPMIRoute.Pruefungssimulator,
-    forRoles: [MPMIUserRole.Student],
+    href: CBRoute.Pruefungssimulator,
+    forRoles: [CBUserRole.Student],
   },
   {
     label: "Glossar",
     icon: <MenuBookRounded />,
-    href: MPMIRoute.Glossar,
-    forRoles: [MPMIUserRole.Student],
+    href: CBRoute.Glossar,
+    forRoles: [CBUserRole.Student],
   },
   {
     label: "Achievements",
     icon: <EmojiEventsRounded />,
-    href: MPMIRoute.Achievements,
-    forRoles: [MPMIUserRole.Student],
+    href: CBRoute.Achievements,
+    forRoles: [CBUserRole.Student],
   },
   {
     label: "Einstellungen",
     icon: <SettingsRounded />,
-    href: MPMIRoute.Einstellungen,
-    forRoles: [MPMIUserRole.Admin, MPMIUserRole.Student, MPMIUserRole.Teacher],
+    href: CBRoute.Einstellungen,
+    forRoles: [CBUserRole.Admin, CBUserRole.Student, CBUserRole.Teacher],
   },
   {
     label: "Admin User Menü",
     icon: <PersonRounded />,
     href: "firestore-test",
-    forRoles: [MPMIUserRole.Admin],
+    forRoles: [CBUserRole.Admin],
   },
   {
     label: "Playground",
     icon: <SportsHandballRounded />,
     href: "playground",
-    forRoles: [MPMIUserRole.Admin],
+    forRoles: [CBUserRole.Admin],
   },
 ];
