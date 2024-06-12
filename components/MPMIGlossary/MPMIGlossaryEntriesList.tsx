@@ -8,8 +8,8 @@ import { useState } from "react";
 import { MPMIEmoji } from "../MPMIEmoji/MPMIEmoji";
 import { MPMILink } from "../MPMILink/MPMILink";
 import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
-import { MPMIAlphabetListProps } from "./MPMIAlphabetListInterfaces";
 import { MPMIGlossaryEntry, glossaryEntries } from "./MPMIGlossaryEntries";
+import { MPMIGlossaryEntriesListProps } from "./MPMIGlossaryEntriesListInterfaces";
 
 const scrollToLetter = (letter: string) => {
   const element = document.getElementById(letter);
@@ -20,11 +20,11 @@ const scrollToLetter = (letter: string) => {
   }
 };
 
-export const MPMIAlphabetList = ({
+export const MPMIGlossaryEntriesList = ({
   filteredEntries,
   isSearching,
   filteredLetters,
-}: MPMIAlphabetListProps): JSX.Element => {
+}: MPMIGlossaryEntriesListProps): JSX.Element => {
   const [selectedEntry, setSelectedEntry] = useState<MPMIGlossaryEntry | null>(
     null,
   );

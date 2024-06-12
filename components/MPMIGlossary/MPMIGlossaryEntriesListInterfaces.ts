@@ -1,6 +1,6 @@
 import { MPMIGlossaryEntry } from "./MPMIGlossaryEntries";
 
-export interface MPMIAlphabetListProps {
+export interface MPMIGlossaryEntriesListProps {
   // Die freigeschalteten Glossar-Einträge eines Users
   filteredEntries: MPMIGlossaryEntry[];
   isSearching: boolean;

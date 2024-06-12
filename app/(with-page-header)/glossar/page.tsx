@@ -1,10 +1,10 @@
 "use client";
 
-import { MPMIAlphabetList } from "@/components/MPMIGlossary/MPMIAlphabetList";
 import {
   MPMIGlossaryEntry,
   glossaryEntries,
 } from "@/components/MPMIGlossary/MPMIGlossaryEntries";
+import { MPMIGlossaryEntriesList } from "@/components/MPMIGlossary/MPMIGlossaryEntriesList";
 import { MPMIGlossarySearchbar } from "@/components/MPMIGlossary/MPMIGlossarySearchBar";
 import { useUser } from "@/firebase/useUser";
 import { alphabet } from "@/helpers/alphabet";
@@ -55,7 +55,7 @@ export default function Glossary() {
         glossaryEntries={filteredGlossaryEntries}
       />
 
-      <MPMIAlphabetList
+      <MPMIGlossaryEntriesList
         filteredEntries={filteredGlossaryEntries}
         isSearching={isSearching}
         filteredLetters={firstLetters}
