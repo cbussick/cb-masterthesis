@@ -56,25 +56,27 @@ export const MPMISidebar = ({
         bgcolor: (t) => t.palette.background.default,
         width: isOpen ? sidebarWidthOpen : sidebarWidthClosed,
         transition: isOpen
-          ? theme.transitions.create("width", {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.enteringScreen,
-            })
-          : theme.transitions.create("width", {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            }),
+          ? (t) =>
+              t.transitions.create("width", {
+                easing: t.transitions.easing.sharp,
+                duration: t.transitions.duration.enteringScreen,
+              })
+          : (t) =>
+              t.transitions.create("width", {
+                easing: t.transitions.easing.sharp,
+                duration: t.transitions.duration.leavingScreen,
+              }),
         borderRadius: 5,
         overflowX: "hidden",
         overflowY: "auto",
         position: "absolute",
-        top: theme.spacing(layoutVerticalSpacing),
-        bottom: theme.spacing(layoutVerticalSpacing),
-        left: theme.spacing(layoutHorizontalSpacing),
+        top: (t) => t.spacing(layoutVerticalSpacing),
+        bottom: (t) => t.spacing(layoutVerticalSpacing),
+        left: (t) => t.spacing(layoutHorizontalSpacing),
         pt: 3,
         pb: 5,
         zIndex: 999,
-        boxShadow: theme.shadows[8],
+        boxShadow: (t) => t.shadows[8],
       }}
     >
       <Stack

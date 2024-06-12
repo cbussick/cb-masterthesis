@@ -3,7 +3,7 @@ import { auth } from "@/firebase/firebase";
 import { signInUser } from "@/firebase/signIn";
 import { emailRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Button, Stack, TextField, Typography, useTheme } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
@@ -18,7 +18,6 @@ import {
 export const MPMISignInForm = ({
   afterSignIn,
 }: MPMISignInFormProps): JSX.Element => {
-  const theme = useTheme();
   const { showSnackbar } = useSnackbar();
   const [isLoading, setLoading] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -144,10 +143,10 @@ export const MPMISignInForm = ({
                     onClick={handleCloseForgotPassword}
                     sx={{
                       pr: 4,
-                      color: theme.palette.grey[700],
+                      color: (t) => t.palette.grey[700],
                       "&:hover": {
                         bgcolor: "transparent",
-                        color: theme.palette.primary.main,
+                        color: (t) => t.palette.primary.main,
                       },
                     }}
                   >

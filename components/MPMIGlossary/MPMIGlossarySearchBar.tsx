@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { MPMIGlossarySearchBarProps } from "./MPMIGlossarySearchBarInterfaces";
@@ -8,8 +8,6 @@ export const MPMIGlossarySearchbar = ({
   onSearch,
 }: MPMIGlossarySearchBarProps): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>("");
-  const theme = useTheme();
-
   return (
     <Box
       bgcolor={(t) => t.palette.background.default}
@@ -32,7 +30,9 @@ export const MPMIGlossarySearchbar = ({
         }}
         value={inputValue}
         InputProps={{
-          endAdornment: <SearchIcon sx={{ color: theme.palette.grey[700] }} />,
+          endAdornment: (
+            <SearchIcon sx={{ color: (t) => t.palette.grey[700] }} />
+          ),
         }}
       />
     </Box>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Stack, useTheme } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { Handle, Position } from "reactflow";
 import { commonHandleProps } from "../MPMIFamilyTreeNode/MPMIFamilyTreeNode";
 import { MPMIFamilyTreeNodeRaw } from "../MPMIFamilyTreeNodeRaw/MPMIFamilyTreeNodeRaw";
@@ -9,8 +9,6 @@ import { MPMIFamilyTreePairNodeProps } from "./MPMIFamilyTreePairNodeInterfaces"
 export const MPMIFamilyTreePairNode = ({
   data,
 }: MPMIFamilyTreePairNodeProps): JSX.Element => {
-  const theme = useTheme();
-
   return (
     <Stack direction="row" justifyContent="center">
       <Box position="relative">
@@ -33,13 +31,13 @@ export const MPMIFamilyTreePairNode = ({
         <Box
           width={data.nodeSize}
           height={data.lineWidth}
-          bgcolor={data.lineColor || theme.palette.grey[600]}
+          bgcolor={(t) => data.lineColor || t.palette.grey[600]}
         />
 
         <Box
           width={data.lineWidth}
           height={200}
-          bgcolor={data.lineColor || theme.palette.grey[600]}
+          bgcolor={(t) => data.lineColor || t.palette.grey[600]}
         />
 
         <Handle

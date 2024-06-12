@@ -547,7 +547,7 @@ export const MPMIFamilyTree = forwardRef(
                             : undefined
                         }
                         fontSize={`${romanNumeralFontSizeMap[currentBreakpoint]} !important`}
-                        color={theme.palette.grey[500]}
+                        color={(t) => t.palette.grey[500]}
                       >
                         {i}
                       </Typography>
