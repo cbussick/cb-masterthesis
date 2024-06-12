@@ -8,6 +8,7 @@ export const MPMIGlossarySearchbar = ({
   onSearch,
 }: MPMIGlossarySearchBarProps): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>("");
+
   return (
     <Box bgcolor={(t) => t.palette.background.default}>
       <TextField
