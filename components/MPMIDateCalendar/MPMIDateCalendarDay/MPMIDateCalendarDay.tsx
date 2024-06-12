@@ -29,9 +29,13 @@ const getFontColor = (
     : "inherit";
 };
 
-export const MPMIDateCalendarDay = (props: MPMIDateCalendarDayProps) => {
-  const { events = [], day, outsideCurrentMonth, selected, ...other } = props;
-
+export const MPMIDateCalendarDay = ({
+  events = [],
+  day,
+  outsideCurrentMonth,
+  selected,
+  ...other
+}: MPMIDateCalendarDayProps) => {
   const [informationAnchorEl, setInformationAnchorEl] =
     useState<HTMLElement | null>(null);
 

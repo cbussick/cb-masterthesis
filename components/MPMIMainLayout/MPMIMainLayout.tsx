@@ -22,8 +22,8 @@ const sidebarWidthClosed = 100;
 export const MPMIMainLayout = ({
   children,
 }: MPMIMainLayoutProps): JSX.Element => {
-  const theme = useTheme();
   const user = useUser();
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { isOpen, setOpen, title, message, severity } = useSnackbar();
 

@@ -18,7 +18,6 @@ import {
   Stack,
   TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { FirebaseError } from "firebase/app";
@@ -44,9 +43,8 @@ interface ChangePasswordFormValues {
 }
 
 export const MPMIProfileSettings = (): JSX.Element => {
-  const { showSnackbar } = useSnackbar();
   const user = useUser();
-  const theme = useTheme();
+  const { showSnackbar } = useSnackbar();
 
   const [isEditingUsername, setEditingUsername] = useState(false);
   const [isEditingPassword, setEditingPassword] = useState(false);
@@ -212,7 +210,7 @@ export const MPMIProfileSettings = (): JSX.Element => {
                   src={profilePicture}
                   sx={{
                     border: 7,
-                    borderColor: theme.palette.primary.main,
+                    borderColor: (t) => t.palette.primary.main,
                     boxShadow: 3,
                     width: pictureSize,
                     height: pictureSize,
