@@ -1,6 +1,6 @@
-import { MPMIGlossaryEntry } from "../MPMIGlossaryEntries";
+import { CBGlossaryEntry } from "../CBGlossaryEntries";
 
 export interface CBGlossaryDrawerProps {
-  selectedEntry: MPMIGlossaryEntry | null;
+  selectedEntry: CBGlossaryEntry | null;
   handleCloseEntryDrawer: () => void;
 }

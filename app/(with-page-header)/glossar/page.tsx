@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  MPMIGlossaryEntry,
+  CBGlossaryEntry,
   glossaryEntries,
-} from "@/components/MPMIGlossary/MPMIGlossaryEntries";
-import { MPMIGlossaryEntriesList } from "@/components/MPMIGlossary/MPMIGlossaryEntriesList";
-import { MPMIGlossarySearchbar } from "@/components/MPMIGlossary/MPMIGlossarySearchBar";
+} from "@/components/MPMIGlossary/CBGlossaryEntries";
+import { CBGlossaryEntriesList } from "@/components/MPMIGlossary/CBGlossaryEntriesList/CBGlossaryEntriesList";
+import { CBGlossarySearchbar } from "@/components/MPMIGlossary/CBGlossarySearchBar/CBGlossarySearchBar";
 import { useUser } from "@/firebase/useUser";
 import { alphabet } from "@/helpers/alphabet";
 import { Stack } from "@mui/material";
@@ -22,7 +22,7 @@ export default function Glossary() {
   });
 
   const [filteredGlossaryEntries, setFilteredGlossaryEntries] = useState<
-    MPMIGlossaryEntry[]
+    CBGlossaryEntry[]
   >(unlockedGlossaryEntries);
   const [isSearching, setSearching] = useState<boolean>(false);
   const [firstLetters, setFirstLetters] = useState<string[]>([]);
@@ -50,12 +50,12 @@ export default function Glossary() {
 
   return (
     <Stack minHeight={0} flex="1" spacing={1}>
-      <MPMIGlossarySearchbar
+      <CBGlossarySearchbar
         onSearch={handleSearch}
         glossaryEntries={filteredGlossaryEntries}
       />
 
-      <MPMIGlossaryEntriesList
+      <CBGlossaryEntriesList
         filteredEntries={filteredGlossaryEntries}
         isSearching={isSearching}
         filteredLetters={firstLetters}

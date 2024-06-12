@@ -4,12 +4,12 @@ import { alphabet } from "@/helpers/alphabet";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { useState } from "react";
-import { MPMIEmoji } from "../MPMIEmoji/MPMIEmoji";
-import { MPMILink } from "../MPMILink/MPMILink";
-import { MPMIUnstyledNextLink } from "../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
-import { CBGlossaryDrawer } from "./CBGlossaryDrawer/CBGlossaryDrawer";
-import { MPMIGlossaryEntry, glossaryEntries } from "./MPMIGlossaryEntries";
-import { MPMIGlossaryEntriesListProps } from "./MPMIGlossaryEntriesListInterfaces";
+import { MPMIEmoji } from "../../MPMIEmoji/MPMIEmoji";
+import { MPMILink } from "../../MPMILink/MPMILink";
+import { MPMIUnstyledNextLink } from "../../MPMIUnstyledNextLink/MPMIUnstyledNextLink";
+import { CBGlossaryDrawer } from "../CBGlossaryDrawer/CBGlossaryDrawer";
+import { CBGlossaryEntry, glossaryEntries } from "../CBGlossaryEntries";
+import { CBGlossaryEntriesListProps } from "./CBGlossaryEntriesListInterfaces";
 
 const scrollToLetter = (letter: string) => {
   const element = document.getElementById(letter);
@@ -20,12 +20,12 @@ const scrollToLetter = (letter: string) => {
   }
 };
 
-export const MPMIGlossaryEntriesList = ({
+export const CBGlossaryEntriesList = ({
   filteredEntries,
   isSearching,
   filteredLetters,
-}: MPMIGlossaryEntriesListProps): JSX.Element => {
-  const [selectedEntry, setSelectedEntry] = useState<MPMIGlossaryEntry | null>(
+}: CBGlossaryEntriesListProps): JSX.Element => {
+  const [selectedEntry, setSelectedEntry] = useState<CBGlossaryEntry | null>(
     null,
   );
 
@@ -38,7 +38,7 @@ export const MPMIGlossaryEntriesList = ({
           ),
         );
 
-  const handleOpenEntryDrawer = (entry: MPMIGlossaryEntry) => {
+  const handleOpenEntryDrawer = (entry: CBGlossaryEntry) => {
     setSelectedEntry(entry);
   };
 

@@ -9,7 +9,7 @@ import { Stack, TextField } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { glossaryEntries } from "../MPMIGlossary/MPMIGlossaryEntries";
+import { glossaryEntries } from "../MPMIGlossary/CBGlossaryEntries";
 import { MPMILoadingButton } from "../MPMILoadingButton/MPMILoadingButton";
 
 interface SignUpFormValues {

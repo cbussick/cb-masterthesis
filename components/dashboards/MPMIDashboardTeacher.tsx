@@ -9,7 +9,7 @@ import { Divider } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 import { Stack } from "@mui/system";
 import { MPMIDateCalendar } from "../MPMIDateCalendar/MPMIDateCalendar";
-import { glossaryEntries } from "../MPMIGlossary/MPMIGlossaryEntries";
+import { glossaryEntries } from "../MPMIGlossary/CBGlossaryEntries";
 import { MPMIInfoCard } from "../MPMIInfoCard/MPMIInfoCard";
 import { MPMIPageHeader } from "../MPMIPageHeader/MPMIPageHeader";
 import { MPMISimpleInfoCard } from "../MPMISimpleInfoCard/MPMISimpleInfoCard";

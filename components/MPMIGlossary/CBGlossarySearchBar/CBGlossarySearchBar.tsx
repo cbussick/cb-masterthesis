@@ -2,11 +2,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { MPMIGlossarySearchBarProps } from "./MPMIGlossarySearchBarInterfaces";
+import { CBGlossarySearchBarProps } from "./CBGlossarySearchBarInterfaces";
 
-export const MPMIGlossarySearchbar = ({
+export const CBGlossarySearchbar = ({
   onSearch,
-}: MPMIGlossarySearchBarProps): JSX.Element => {
+}: CBGlossarySearchBarProps): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>("");
 
   return (
