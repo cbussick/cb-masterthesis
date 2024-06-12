@@ -10,11 +10,9 @@ export const MPMIGlossarySearchbar = ({
   const [inputValue, setInputValue] = useState<string>("");
 
   return (
-    <Box bgcolor={(t) => t.palette.background.default}>
+    <Box>
       <TextField
-        sx={{
-          width: "66%",
-        }}
+        sx={{ width: 635 }}
         placeholder="Suche im Glossar"
         onChange={(e) => {
           setInputValue(e.target.value);
