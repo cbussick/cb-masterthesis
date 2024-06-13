@@ -1,3 +1,5 @@
+"use client";
+
 import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBTopicWorld } from "@/components/CBTopicWorld/CBTopicWorld";
