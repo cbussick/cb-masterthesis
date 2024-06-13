@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { CBGraphCardProps } from "./CBGraphCardInterfaces";

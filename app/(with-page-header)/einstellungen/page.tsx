@@ -1,5 +1,3 @@
-"use client";
-
 import { CBSettings } from "@/components/settings/CBSettings/CBSettings";
 
 export default function Settings() {

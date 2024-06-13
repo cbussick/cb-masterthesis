@@ -1,5 +1,3 @@
-"use client";
-
 import { CBLogo } from "@/components/CBLogo/CBLogo";
 import { Container, Stack, Typography } from "@mui/material";
 

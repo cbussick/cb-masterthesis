@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, Divider, Stack, Typography } from "@mui/material";
 import { CBStudentOverviewGraphCardProps } from "./CBStudentOverviewGraphCardInterfaces";
 

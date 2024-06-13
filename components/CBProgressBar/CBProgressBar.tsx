@@ -1,5 +1,3 @@
-"use client";
-
 import { LinearProgress, Stack, Typography } from "@mui/material";
 import {
   CBProgressBarHeight,

@@ -1,5 +1,3 @@
-"use client";
-
 import { SchoolRounded } from "@mui/icons-material";
 import {
   Divider,

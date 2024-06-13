@@ -1,5 +1,3 @@
-"use client";
-
 import { Popover, Stack, Typography } from "@mui/material";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBNotificationMenuProps } from "./CBNotificationMenuInterfaces";

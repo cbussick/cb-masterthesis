@@ -1,5 +1,3 @@
-"use client";
-
 import { Close } from "@mui/icons-material";
 import {
   Dialog,

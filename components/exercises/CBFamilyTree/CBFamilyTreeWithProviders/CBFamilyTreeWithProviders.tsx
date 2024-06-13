@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactFlowProvider } from "reactflow";
 import { CBFamilyTree } from "../CBFamilyTree";
 import { FamilyTreeProvider } from "../FamilyTreeProvider";
