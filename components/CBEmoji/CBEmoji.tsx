@@ -41,9 +41,9 @@ export const CBEmoji = ({
   return (
     <Box
       dangerouslySetInnerHTML={{ __html: replaceEmoji(emoji) }}
-      display="flex"
-      alignItems="center"
       sx={{
+        display: "flex",
+        alignItems: "center",
         "& img": {
           width: imgSize,
           height: imgSize,

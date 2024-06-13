@@ -158,14 +158,21 @@ export const CBProfileSettings = (): JSX.Element => {
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Stack pt={3} justifyContent="center">
+        <Stack
+          sx={{
+            justifyContent: "center",
+            pt: 3,
+          }}
+        >
           <Stack
             direction="row"
             spacing={1}
-            width="100%"
-            justifyContent="center"
-            alignItems="center"
-            pb={2}
+            sx={{
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              pb: 2,
+            }}
           >
             <TextField
               label="Benutzername"
@@ -183,9 +190,11 @@ export const CBProfileSettings = (): JSX.Element => {
           <Stack
             direction="row"
             spacing={1}
-            width="100%"
-            justifyContent="center"
-            alignItems="center"
+            sx={{
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <TextField
               label="Passwort"
@@ -202,9 +211,25 @@ export const CBProfileSettings = (): JSX.Element => {
 
           <Divider sx={{ p: 1 }} />
 
-          <Grid container spacing={2} pt={4}>
-            <Grid xs={2} display="flex">
-              <Stack spacing={2} alignItems="center">
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              pt: 4,
+            }}
+          >
+            <Grid
+              xs={2}
+              sx={{
+                display: "flex",
+              }}
+            >
+              <Stack
+                spacing={2}
+                sx={{
+                  alignItems: "center",
+                }}
+              >
                 <Avatar
                   alt="Profilbild"
                   src={profilePicture}
@@ -228,7 +253,13 @@ export const CBProfileSettings = (): JSX.Element => {
 
             <Grid xs>
               <Stack>
-                <Typography pb={2}>Wähle einen Avatar aus</Typography>
+                <Typography
+                  sx={{
+                    pb: 2,
+                  }}
+                >
+                  Wähle einen Avatar aus
+                </Typography>
 
                 <CBProfileImageSelector
                   onSelect={(newImage) => setProfilePicture(newImage)}

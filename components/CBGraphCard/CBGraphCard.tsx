@@ -19,8 +19,20 @@ export const CBGraphCard = ({
         borderRadius: 3,
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={4}>
-        <Box position="relative" minWidth={150} height="100%">
+      <Stack
+        direction="row"
+        spacing={4}
+        sx={{
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            position: "relative",
+            minWidth: 150,
+            height: "100%",
+          }}
+        >
           <Image
             src={image}
             alt={alt || ""}
@@ -29,7 +41,13 @@ export const CBGraphCard = ({
           />
         </Box>
 
-        <Stack direction="row" alignItems="center" height="100%">
+        <Stack
+          direction="row"
+          sx={{
+            height: "100%",
+            alignItems: "center",
+          }}
+        >
           <Stack spacing={0.7}>
             <Typography variant="h3">{title}</Typography>
 

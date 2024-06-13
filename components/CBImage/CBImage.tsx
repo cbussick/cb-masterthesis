@@ -14,13 +14,15 @@ export const CBImage = ({
 
   return (
     <Box
-      width="100%"
-      height={260}
+      sx={{
+        width: "100%",
+        height: 260,
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
       {...boxProps}
-      position="relative"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
     >
       <Image
         src={image.src}

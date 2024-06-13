@@ -89,9 +89,11 @@ export const CBFreeformQuestion = ({
       <Stack spacing={3}>
         <Stack
           direction="row"
-          bgcolor={(t) => t.palette.grey[200]}
-          p={2}
           spacing={2}
+          sx={{
+            bgcolor: (t) => t.palette.grey[200],
+            p: 2,
+          }}
         >
           <CBEmoji emoji="💡" typographyVariant="h1" />
 
@@ -105,15 +107,20 @@ export const CBFreeformQuestion = ({
           </Stack>
         </Stack>
 
-        <Stack spacing={2} alignItems="center">
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <TextField
             value={answer}
             label="Deine Antwort"
             onChange={(e) => setAnswer(e.target.value)}
             multiline
             rows={4}
-            sx={{ width: 350 }}
             disabled={isFetchingResponse || isCurrentExerciseFinished}
+            sx={{ width: 350 }}
           />
 
           <CBLoadingButton

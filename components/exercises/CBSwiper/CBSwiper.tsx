@@ -102,7 +102,13 @@ export const CBSwiper = ({
 
   return (
     // `pb={1}` is necessary to not have the boxshadow of the button at the bottom be cut off
-    <Stack pb={1} overflow="hidden" ref={constraintsRef}>
+    <Stack
+      ref={constraintsRef}
+      sx={{
+        pb: 1,
+        overflow: "hidden",
+      }}
+    >
       <Grid container>
         <Grid {...commonGridProps}>
           <CBSwiperButton
@@ -113,7 +119,12 @@ export const CBSwiper = ({
           />
         </Grid>
 
-        <Grid {...commonGridProps} justifyContent="center">
+        <Grid
+          {...commonGridProps}
+          sx={{
+            justifyContent: "center",
+          }}
+        >
           <Card
             sx={{
               width: "80%",
@@ -130,7 +141,14 @@ export const CBSwiper = ({
             onDragStart={() => setDragging(true)}
             onDragEnd={onDragEnd}
           >
-            <Stack width="100%" height="100%" alignItems="center" spacing={1}>
+            <Stack
+              spacing={1}
+              sx={{
+                width: "100%",
+                height: "100%",
+                alignItems: "center",
+              }}
+            >
               {difficulty === CBExerciseDifficulty.Medium ||
                 (difficulty === CBExerciseDifficulty.Easy && (
                   <Typography variant="h3">{exercise.name}</Typography>
@@ -150,7 +168,12 @@ export const CBSwiper = ({
           </Card>
         </Grid>
 
-        <Grid {...commonGridProps} justifyContent="flex-end">
+        <Grid
+          {...commonGridProps}
+          sx={{
+            justifyContent: "flex-end",
+          }}
+        >
           <CBSwiperButton
             cellType={CBSwiperCellType.Animal}
             isCorrect={exercise.belongsTo === CBSwiperCellType.Animal}
@@ -159,8 +182,20 @@ export const CBSwiper = ({
           />
         </Grid>
 
-        <Grid container xs={12} justifyContent="center" mt={3}>
-          <Grid {...commonGridProps} justifyContent="center">
+        <Grid
+          container
+          xs={12}
+          sx={{
+            justifyContent: "center",
+            mt: 3,
+          }}
+        >
+          <Grid
+            {...commonGridProps}
+            sx={{
+              justifyContent: "center",
+            }}
+          >
             <CBSwiperButton
               cellType={CBSwiperCellType.Both}
               isCorrect={exercise.belongsTo === CBSwiperCellType.Both}

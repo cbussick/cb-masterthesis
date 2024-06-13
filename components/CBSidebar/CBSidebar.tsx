@@ -80,12 +80,19 @@ export const CBSidebar = ({
       }}
     >
       <Stack
-        height="100%"
-        justifyContent="space-between"
-        pt={3}
-        px={sidebarPaddingHorizontal}
+        sx={{
+          height: "100%",
+          justifyContent: "space-between",
+          pt: 3,
+          px: sidebarPaddingHorizontal,
+        }}
       >
-        <Stack spacing={2} alignItems="flex-start">
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "flex-start",
+          }}
+        >
           <Box
             sx={{
               width: "100%",

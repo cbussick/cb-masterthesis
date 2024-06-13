@@ -137,7 +137,13 @@ export const CBSignInForm = ({
                   onChange={(e) => setForgotPasswordEmail(e.target.value)}
                 />
 
-                <Stack direction="row" spacing={1} justifyContent="flex-end">
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{
+                    justifyContent: "flex-end",
+                  }}
+                >
                   <Button
                     variant="text"
                     onClick={handleCloseForgotPassword}

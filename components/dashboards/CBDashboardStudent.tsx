@@ -53,17 +53,30 @@ export const CBDashboardStudent = (): JSX.Element => {
       <Stack spacing={3}>
         <Stack
           direction="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
           spacing={1}
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
         >
           <CBWelcomeBanner />
 
           <CBUserActionsBar />
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between" spacing={2}>
-          <Stack spacing={2} width="60%">
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Stack
+            spacing={2}
+            sx={{
+              width: "60%",
+            }}
+          >
             <CBProgressCard
               image="/topics/zelle.jpg"
               title={userLvlTitleText}

@@ -22,12 +22,20 @@ export const CBSimpleInfoCard = ({
     >
       <Stack
         direction="row"
-        alignItems="center"
-        width="100%"
-        height="100%"
         spacing={4}
+        sx={{
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+        }}
       >
-        <Box position="relative" width={150} height="100%">
+        <Box
+          sx={{
+            position: "relative",
+            width: 150,
+            height: "100%",
+          }}
+        >
           <Image
             src={image}
             alt={alt || ""}

@@ -29,7 +29,14 @@ export const CBDateCalendarDayInformation = ({
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <Stack spacing={1} justifyContent="center" alignItems="center" p={2}>
+      <Stack
+        spacing={1}
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          p: 2,
+        }}
+      >
         <List sx={{ overflowY: "auto" }}>
           {events.map((e, index) => {
             const getMinutesInCorrectFormat =

@@ -84,10 +84,12 @@ export const CBDateCalendarDay = ({
       >
         <Typography
           variant="body2"
-          bgcolor={isHighlighted ? highlightedDayColor : undefined}
-          py={0.5}
-          px={0.75}
-          borderRadius={1}
+          sx={{
+            bgcolor: isHighlighted ? highlightedDayColor : undefined,
+            py: 0.5,
+            px: 0.75,
+            borderRadius: 1,
+          }}
         >
           {day.date()}
         </Typography>

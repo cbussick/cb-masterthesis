@@ -49,7 +49,7 @@ export default function Glossary() {
   };
 
   return (
-    <Stack minHeight={0} flex="1" spacing={1}>
+    <Stack spacing={1} sx={{ flex: "1", minHeight: 0 }}>
       <CBGlossarySearchbar
         onSearch={handleSearch}
         glossaryEntries={filteredGlossaryEntries}

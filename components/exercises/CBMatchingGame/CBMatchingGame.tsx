@@ -77,13 +77,21 @@ export const CBMatchingGame = forwardRef(
       <Stack>
         <Stack
           direction="row"
-          justifyContent="center"
-          position="relative"
-          width="100%"
+          sx={{
+            justifyContent: "center",
+            position: "relative",
+            width: "100%",
+          }}
         >
           <CBImage image={image} />
 
-          <Box position="absolute" left="50%" height="100%">
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              height: "100%",
+            }}
+          >
             {highlightedComponents.map((component, index) => (
               <Stack
                 key={component.id}
@@ -92,25 +100,26 @@ export const CBMatchingGame = forwardRef(
                     ? "row-reverse"
                     : "row"
                 }
-                alignItems="center"
                 spacing={1}
-                position="absolute"
-                left={
-                  component.side === CBMatchingGameHighlightComponentSide.Left
-                    ? undefined
-                    : component.pointer.x
-                }
-                right={
-                  component.side === CBMatchingGameHighlightComponentSide.Left
-                    ? component.pointer.x
-                    : undefined
-                }
-                top={component.pointer.y}
+                sx={{
+                  alignItems: "center",
+                  position: "absolute",
+                  left:
+                    component.side === CBMatchingGameHighlightComponentSide.Left
+                      ? undefined
+                      : component.pointer.x,
+                  right:
+                    component.side === CBMatchingGameHighlightComponentSide.Left
+                      ? component.pointer.x
+                      : undefined,
+                  top: component.pointer.y,
+                }}
               >
                 <Box
-                  width={250}
-                  borderBottom={(t) => `3px solid ${t.palette.secondary.main}`}
                   sx={{
+                    width: 250,
+                    borderBottom: (t) =>
+                      `3px solid ${t.palette.secondary.main}`,
                     pointerEvents: "none",
                   }}
                 />

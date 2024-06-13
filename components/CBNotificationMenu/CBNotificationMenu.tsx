@@ -21,15 +21,23 @@ export const CBNotificationMenu = ({
     >
       <Stack
         spacing={1}
-        justifyContent="center"
-        alignItems="center"
-        width={250}
-        minHeight={300}
-        p={2}
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          width: 250,
+          minHeight: 300,
+          p: 2,
+        }}
       >
         <CBEmoji emoji="🍵" fontSize="75px" />
 
-        <Typography align="center">Keine neuen Benachrichtigungen</Typography>
+        <Typography
+          sx={{
+            textAlign: "center",
+          }}
+        >
+          Keine neuen Benachrichtigungen
+        </Typography>
       </Stack>
     </Popover>
   );

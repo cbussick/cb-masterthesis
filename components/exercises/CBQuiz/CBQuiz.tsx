@@ -66,12 +66,35 @@ export const CBQuiz = ({
 
   return (
     <Stack spacing={4}>
-      <Box display="flex" justifyContent="center">
-        <Stack spacing={5} maxWidth={1200} width="100%">
-          <Stack justifyContent="center" alignItems="center" spacing={4}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Stack
+          spacing={5}
+          sx={{
+            width: "100%",
+            maxWidth: 1200,
+          }}
+        >
+          <Stack
+            spacing={4}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {exercise.image && <CBImage image={exercise.image} />}
 
-            <Grid container width="100%" spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                width: "100%",
+              }}
+            >
               {exercise.answers.map((answer) => (
                 <Grid xs={12} lg={6} key={answer.id}>
                   <CBQuizAnswerButton

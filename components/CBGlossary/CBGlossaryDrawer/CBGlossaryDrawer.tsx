@@ -21,19 +21,32 @@ export const CBGlossaryDrawer = ({
         },
       }}
     >
-      <Stack spacing={2} p={4}>
+      <Stack
+        spacing={2}
+        sx={{
+          p: 4,
+        }}
+      >
         <Typography variant="h2">{selectedEntry?.term}</Typography>
 
-        <Typography pt={1}>{selectedEntry?.definition}</Typography>
+        <Typography
+          sx={{
+            pt: 1,
+          }}
+        >
+          {selectedEntry?.definition}
+        </Typography>
 
         <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          p={5}
-          width="100%"
-          minHeight={250}
-          position="relative"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 5,
+            width: "100%",
+            minHeight: 250,
+            position: "relative",
+          }}
         >
           {selectedEntry?.image && (
             <Image

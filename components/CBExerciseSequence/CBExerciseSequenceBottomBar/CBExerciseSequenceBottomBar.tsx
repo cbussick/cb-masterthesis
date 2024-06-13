@@ -161,7 +161,12 @@ export const CBExerciseSequenceBottomBar = ({
   );
 
   return (
-    <Stack direction="row" justifyContent="space-between">
+    <Stack
+      direction="row"
+      sx={{
+        justifyContent: "space-between",
+      }}
+    >
       {onCompleteHref ? (
         <CBUnstyledNextLink href={onCompleteHref}>
           {cancelButton}
@@ -170,7 +175,13 @@ export const CBExerciseSequenceBottomBar = ({
         cancelButton
       )}
 
-      <Stack direction="row" justifyContent="flex-end" px={4}>
+      <Stack
+        direction="row"
+        sx={{
+          justifyContent: "flex-end",
+          px: 4,
+        }}
+      >
         <Stack direction="row" spacing={2}>
           {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
             <CBDinaHint

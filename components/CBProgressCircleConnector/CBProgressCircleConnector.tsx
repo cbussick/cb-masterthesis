@@ -14,10 +14,12 @@ export const CBProgressCircleConnector = ({
 
   return (
     <Box
-      display="flex"
-      justifyContent="center"
-      position="relative"
-      height={dividerHeight}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        position: "relative",
+        height: dividerHeight,
+      }}
     >
       <Divider
         orientation="vertical"

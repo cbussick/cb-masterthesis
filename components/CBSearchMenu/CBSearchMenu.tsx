@@ -27,7 +27,12 @@ export const CBSearchMenu = ({
 
   return (
     <CBDialog isOpen={isMenuOpen} onClose={onClose}>
-      <Stack height={350} width="100%">
+      <Stack
+        sx={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
         <TextField
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
