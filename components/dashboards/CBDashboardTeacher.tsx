@@ -1,5 +1,3 @@
-"use client";
-
 import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
 import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";

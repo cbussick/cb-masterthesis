@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, CircularProgress } from "@mui/material";
 import { CBLoadingButtonProps } from "./CBLoadingButtonInterfaces";
 

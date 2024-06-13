@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { CBExamSimulatorTopCardProps } from "./CBExamSimulatorTopCardInterfaces";

@@ -123,6 +123,7 @@ export const CBSwiper = ({
           {...commonGridProps}
           sx={{
             justifyContent: "center",
+            cursor: "grabbing",
           }}
         >
           <Card
@@ -132,6 +133,7 @@ export const CBSwiper = ({
               p: 2,
               zIndex: 1,
               pointerEvents: isDragging ? "none" : "auto",
+              cursor: "grab",
             }}
             component={motion.div}
             drag={!isCurrentExerciseFinished}

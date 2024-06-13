@@ -1,5 +1,3 @@
-"use client";
-
 import { Stack } from "@mui/material";
 import { CSSProperties } from "react";
 import { Handle, HandleProps, Position } from "reactflow";

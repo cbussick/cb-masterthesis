@@ -1,5 +1,3 @@
-"use client";
-
 import { CBLogoProps } from "./CBLogoInterfaces";
 
 export const CBLogo = ({ style, textElementID }: CBLogoProps): JSX.Element => {

@@ -1,5 +1,3 @@
-"use client";
-
 import { menuItems } from "@/data/menuItems";
 import { InfoRounded } from "@mui/icons-material";
 import {

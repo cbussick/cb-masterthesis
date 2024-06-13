@@ -1,5 +1,3 @@
-"use client";
-
 import { Divider, Stack, Typography } from "@mui/material";
 
 export const CBDataSecuritySettings = (): JSX.Element => {

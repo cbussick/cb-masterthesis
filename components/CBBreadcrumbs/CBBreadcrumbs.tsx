@@ -1,5 +1,3 @@
-"use client";
-
 import { NavigateNext } from "@mui/icons-material";
 import { Breadcrumbs, Stack, Typography } from "@mui/material";
 import { CBUnstyledNextLink } from "../CBUnstyledNextLink/CBUnstyledNextLink";

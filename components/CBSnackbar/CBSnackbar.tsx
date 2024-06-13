@@ -1,5 +1,3 @@
-"use client";
-
 import { Check } from "@mui/icons-material";
 import { Alert, AlertTitle, Snackbar, Stack } from "@mui/material";
 import Image from "next/image";
