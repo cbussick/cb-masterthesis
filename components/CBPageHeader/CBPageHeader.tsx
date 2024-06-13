@@ -22,9 +22,7 @@ export const CBPageHeader = ({
         bgcolor: isOnTransparentBackground
           ? (t) => t.palette.background.default
           : undefined,
-        backgroundColor: isOnTransparentBackground
-          ? (t) => t.shadows[8]
-          : undefined,
+        boxShadow: isOnTransparentBackground ? (t) => t.shadows[8] : undefined,
         py: isOnTransparentBackground ? 4 : undefined,
         px: isOnTransparentBackground ? 6 : undefined,
         borderRadius: isOnTransparentBackground ? 5 : undefined,
