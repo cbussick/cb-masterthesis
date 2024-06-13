@@ -19,28 +19,50 @@ export const CBNotSignedInView = (): JSX.Element => {
   return (
     <>
       <Stack
-        display={{ xs: "none", sm: "flex" }}
-        alignItems="center"
-        justifyItems="center"
+        sx={{
+          display: { xs: "none", sm: "flex" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <Grid
           container
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
+          sx={{
+            minHeight: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Grid xs={3} width="100%">
+          <Grid
+            xs={3}
+            sx={{
+              width: "100%",
+            }}
+          >
             <Box
-              bgcolor={(t) => t.palette.background.default}
-              boxShadow={(t) => t.shadows[8]}
-              borderRadius={5}
-              p={5}
+              sx={{
+                bgcolor: (t) => t.palette.background.default,
+                boxShadow: (t) => t.shadows[8],
+                borderRadius: 5,
+                p: 5,
+              }}
             >
               <Container maxWidth="md">
-                <Stack spacing={10} justifyContent="center" alignItems="center">
+                <Stack
+                  spacing={10}
+                  sx={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <CBLogo style={{ width: "100%" }} />
 
-                  <Stack spacing={3} alignItems="center">
+                  <Stack
+                    spacing={3}
+                    sx={{
+                      alignItems: "center",
+                    }}
+                  >
                     <Stack direction="row" spacing={1}>
                       <Typography variant="h1">Willkommen!</Typography>
 
@@ -53,7 +75,12 @@ export const CBNotSignedInView = (): JSX.Element => {
 
                     <CBSignInForm />
 
-                    <Stack direction="row" alignItems="center">
+                    <Stack
+                      direction="row"
+                      sx={{
+                        alignItems: "center",
+                      }}
+                    >
                       <Typography>Du hast noch keinen Account?</Typography>
 
                       <Button

@@ -45,7 +45,12 @@ export const CBDialog = ({
       onClose={onClose}
       fullWidth={fullWidth === undefined ? true : fullWidth}
     >
-      <Stack p={2} pb={3}>
+      <Stack
+        sx={{
+          p: 2,
+          pb: 3,
+        }}
+      >
         <IconButton sx={{ alignSelf: "flex-end" }} onClick={onClose}>
           <Close />
         </IconButton>

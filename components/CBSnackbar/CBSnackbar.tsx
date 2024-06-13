@@ -21,12 +21,17 @@ export const CBSnackbar = ({
       action={action}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     >
-      <Stack direction="row" alignItems="flex-end">
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: "flex-end",
+        }}
+      >
         <Alert
           severity={severity}
-          sx={{ width: "100%" }}
           elevation={6}
           iconMapping={{ success: <Check /> }}
+          sx={{ width: "100%" }}
         >
           {title && <AlertTitle>{title}</AlertTitle>}
 

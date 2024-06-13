@@ -22,12 +22,20 @@ export const CBProgressCard = ({
     >
       <Stack
         direction="row"
-        alignItems="center"
-        height="100%"
         spacing={4}
-        pr={4}
+        sx={{
+          alignItems: "center",
+          height: "100%",
+          pr: 4,
+        }}
       >
-        <Box position="relative" minWidth={150} height="100%">
+        <Box
+          sx={{
+            position: "relative",
+            minWidth: 150,
+            height: "100%",
+          }}
+        >
           <Image
             src={image}
             alt={alt || ""}
@@ -36,7 +44,11 @@ export const CBProgressCard = ({
           />
         </Box>
 
-        <Stack flexGrow={1}>
+        <Stack
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           <Stack spacing={0.7}>
             <Typography variant="h3">{title}</Typography>
 

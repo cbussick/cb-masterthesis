@@ -157,9 +157,9 @@ export default function Achievements() {
       container
       rowSpacing={2}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      display="flex"
-      justifyContent="flex-start"
       sx={{
+        display: "flex",
+        justifyContent: "flex-start",
         overflowY: "auto",
       }}
     >

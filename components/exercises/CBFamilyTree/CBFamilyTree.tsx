@@ -528,26 +528,37 @@ export const CBFamilyTree = forwardRef(
 
     return (
       <Stack spacing={3}>
-        <Stack direction="row" justifyContent="center" columnGap={14}>
-          <Stack mt={4} justifySelf="flex-start !important">
+        <Stack
+          direction="row"
+          sx={{
+            justifyContent: "center",
+            columnGap: 14,
+          }}
+        >
+          <Stack
+            sx={{
+              mt: 4,
+              justifySelf: "flex-start !important",
+            }}
+          >
             {nodes.length > 0
               ? getRomanNumeralSequence(getTreeMaxDepth(exercise.nodes)).map(
                   (i, index) => {
                     return (
                       <Typography
                         key={i}
-                        height={
-                          nodeSizeMap[currentBreakpoint] +
-                          nodeSizeMap[currentBreakpoint] / 2 +
-                          textFieldHeightPlusStackSpacing
-                        }
-                        mt={
-                          index !== 0
-                            ? `${nodeSizeMap[currentBreakpoint] - 20}px`
-                            : undefined
-                        }
-                        fontSize={`${romanNumeralFontSizeMap[currentBreakpoint]} !important`}
-                        color={(t) => t.palette.grey[500]}
+                        sx={{
+                          height:
+                            nodeSizeMap[currentBreakpoint] +
+                            nodeSizeMap[currentBreakpoint] / 2 +
+                            textFieldHeightPlusStackSpacing,
+                          mt:
+                            index !== 0
+                              ? `${nodeSizeMap[currentBreakpoint] - 20}px`
+                              : undefined,
+                          fontSize: `${romanNumeralFontSizeMap[currentBreakpoint]} !important`,
+                          color: (t) => t.palette.grey[500],
+                        }}
                       >
                         {i}
                       </Typography>
@@ -558,9 +569,9 @@ export const CBFamilyTree = forwardRef(
           </Stack>
 
           <Box
-            width={(graphDimensions?.width || 0) + 100} // `+ 100` to have space for moving nodes when animating
-            height={graphDimensions?.height || 0}
             sx={{
+              width: (graphDimensions?.width || 0) + 100, // `+ 100` to have space for moving nodes when animating
+              height: graphDimensions?.height || 0,
               ".react-flow": {
                 overflow: "visible !important",
               },
@@ -610,7 +621,13 @@ export const CBFamilyTree = forwardRef(
         </Stack>
 
         {showInheritance && (
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: "center",
+            }}
+          >
             <Typography>Welcher Erbgang ist das?</Typography>
 
             <FormControl

@@ -30,7 +30,11 @@ export default function LehrerUebersicht() {
           <Grid {...commonGridItemProps}>
             <CBStudentOverviewGraphCard
               topBar={
-                <Typography color={theme.palette.grey[500]}>
+                <Typography
+                  sx={{
+                    color: (t) => t.palette.grey[500],
+                  }}
+                >
                   Themenwelt
                 </Typography>
               }
@@ -84,12 +88,12 @@ export default function LehrerUebersicht() {
           <Grid {...commonGridItemProps}>
             <CBStudentOverviewGraphCard
               topBar={
-                <Stack direction="row" justifyContent="space-between">
-                  <Typography sx={{ color: theme.palette.grey[500] }}>
+                <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+                  <Typography sx={{ color: (t) => t.palette.grey[500] }}>
                     Freie Übung
                   </Typography>
 
-                  <Typography sx={{ color: theme.palette.grey[500] }}>
+                  <Typography sx={{ color: (t) => t.palette.grey[500] }}>
                     Diese Woche
                   </Typography>
                 </Stack>
@@ -130,12 +134,12 @@ export default function LehrerUebersicht() {
           <Grid {...commonGridItemProps}>
             <CBStudentOverviewGraphCard
               topBar={
-                <Stack direction="row" justifyContent="space-between">
-                  <Typography sx={{ color: theme.palette.grey[500] }}>
+                <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+                  <Typography sx={{ color: (t) => t.palette.grey[500] }}>
                     Allgemein
                   </Typography>
 
-                  <Typography sx={{ color: theme.palette.grey[500] }}>
+                  <Typography sx={{ color: (t) => t.palette.grey[500] }}>
                     Diese Woche
                   </Typography>
                 </Stack>

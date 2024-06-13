@@ -26,15 +26,21 @@ export const CBExerciseSequenceTopBar = forwardRef(
     return (
       <Stack
         direction="row"
-        justifyContent={sessionIsFinished ? "flex-end" : "space-between"}
-        alignItems="flex-start"
         spacing={1}
+        sx={{
+          justifyContent: sessionIsFinished ? "flex-end" : "space-between",
+          alignItems: "flex-start",
+        }}
       >
         {sessionIsFinished || (
           <Typography variant="h3">{`${currentExerciseNumber}. Aufgabe: ${title}`}</Typography>
         )}
 
-        <Stack alignItems="flex-end">
+        <Stack
+          sx={{
+            alignItems: "flex-end",
+          }}
+        >
           {showProgressBar && (
             <CBProgressBar
               currentValue={currentExerciseNumber + completedExercisesAmount}

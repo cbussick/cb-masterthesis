@@ -15,7 +15,12 @@ import Grid from "@mui/material/Unstable_Grid2";
 export const CBNotificationSettings = (): JSX.Element => {
   return (
     <Stack>
-      <Typography variant="body2" mb={2}>
+      <Typography
+        variant="body2"
+        sx={{
+          mb: 2,
+        }}
+      >
         Erhalte E-Mails, um nichts zu verpassen. Du kannst die Benachrichtungen
         jederzeit ausschalten.
       </Typography>

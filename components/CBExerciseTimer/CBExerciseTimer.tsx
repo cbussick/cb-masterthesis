@@ -70,8 +70,10 @@ export const CBExerciseTimer = forwardRef(
       <Stack
         direction="row"
         spacing={1}
-        justifyItems="center"
-        alignItems="center"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <TimerIcon
           sx={{

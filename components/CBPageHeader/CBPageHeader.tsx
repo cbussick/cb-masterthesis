@@ -15,21 +15,23 @@ export const CBPageHeader = ({
     <Stack
       direction="row"
       spacing={5}
-      width="100%"
-      justifyContent="space-between"
-      alignItems="flex-start"
-      bgcolor={
-        isOnTransparentBackground
+      sx={{
+        width: "100%",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        bgcolor: isOnTransparentBackground
           ? (t) => t.palette.background.default
-          : undefined
-      }
-      boxShadow={isOnTransparentBackground ? (t) => t.shadows[8] : undefined}
-      py={isOnTransparentBackground ? 4 : undefined}
-      px={isOnTransparentBackground ? 6 : undefined}
-      borderRadius={isOnTransparentBackground ? 5 : undefined}
-      zIndex={9}
-      mb={4}
-      sx={sx}
+          : undefined,
+        backgroundColor: isOnTransparentBackground
+          ? (t) => t.shadows[8]
+          : undefined,
+        py: isOnTransparentBackground ? 4 : undefined,
+        px: isOnTransparentBackground ? 6 : undefined,
+        borderRadius: isOnTransparentBackground ? 5 : undefined,
+        zIndex: 9,
+        mb: 4,
+        ...sx,
+      }}
     >
       <Stack spacing={1}>
         {typeof title === "string" ? (
@@ -45,7 +47,13 @@ export const CBPageHeader = ({
         )}
       </Stack>
 
-      <Stack direction="row" spacing={7} alignItems="center">
+      <Stack
+        direction="row"
+        spacing={7}
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <CBUserChip />
 
         <CBUserActionsBar />

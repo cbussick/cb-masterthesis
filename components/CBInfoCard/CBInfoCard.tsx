@@ -42,14 +42,24 @@ export const CBInfoCard = ({
       whileHover={disabled ? undefined : "hover"}
       variants={cardVariants}
     >
-      <Stack flex="1 1 auto">
-        <Box overflow="hidden">
+      <Stack
+        sx={{
+          flex: "1 1 auto",
+        }}
+      >
+        <Box
+          sx={{
+            overflow: "hidden",
+          }}
+        >
           <Box
-            position="relative"
-            width="100%"
-            height={205}
             component={motion.div}
             variants={imageVariants}
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: 205,
+            }}
           >
             <Image
               src={image}
@@ -63,12 +73,20 @@ export const CBInfoCard = ({
           </Box>
         </Box>
 
-        <Box display="flex" flex="1 1 auto" alignItems="center">
+        <Box
+          sx={{
+            flex: "1 1 auto",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <Typography
-            flex="1 1 auto"
-            p={1}
-            textAlign="center"
-            fontWeight={(t) => t.typography.fontWeightMedium}
+            sx={{
+              flex: "1 1 auto",
+              p: 1,
+              textAlign: "center",
+              fontWeight: (t) => t.typography.fontWeightMedium,
+            }}
           >
             {text}
           </Typography>

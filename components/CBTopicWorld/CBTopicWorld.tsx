@@ -27,8 +27,18 @@ export const CBTopicWorld = (): JSX.Element => {
   const topicsAsArray = Object.values(topicWorldTopics);
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center">
-      <Stack width="fit-content">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Stack
+        sx={{
+          width: "fit-content",
+        }}
+      >
         {topicsAsArray.map((topic, index) => {
           const previousTopicGeneralData = topicsAsArray[index - 1];
 

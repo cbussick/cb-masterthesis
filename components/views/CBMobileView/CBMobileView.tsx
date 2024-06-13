@@ -11,20 +11,37 @@ export const CBMobileView = (): JSX.Element => {
       }}
     >
       <Stack
-        height="100%"
         spacing={4}
-        justifyContent="center"
-        alignItems="center"
-        p={4}
+        sx={{
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 4,
+        }}
       >
         <CBLogo style={{ width: "100%" }} />
 
-        <Stack spacing={1} justifyContent="center" alignItems="center">
-          <Typography variant="h1" align="center">
+        <Stack
+          spacing={1}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h1"
+            sx={{
+              align: "center",
+            }}
+          >
             Zu kleiner Bildschirm 💻
           </Typography>
 
-          <Typography align="center">
+          <Typography
+            sx={{
+              align: "center",
+            }}
+          >
             DiNAs Lab ist leider nicht für kleine Bildschirme optimiert. Bitte
             schau dir die Website auf einem größeren Bildschirm an.
           </Typography>

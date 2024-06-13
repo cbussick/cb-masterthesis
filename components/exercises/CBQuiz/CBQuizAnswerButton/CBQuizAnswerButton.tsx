@@ -25,10 +25,18 @@ export const CBQuizAnswerButton = ({
         ...sx,
       }}
     >
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Typography
           variant="h3"
-          fontWeight={(t) => t.typography.fontWeightBold}
+          sx={{
+            fontWeight: (t) => t.typography.fontWeightBold,
+          }}
         >
           {answer.id}
         </Typography>

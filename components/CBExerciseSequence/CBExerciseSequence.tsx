@@ -118,7 +118,7 @@ export const CBExerciseSequence = ({
     currentExerciseIndex > uncompletedExercises.length - 1;
 
   return (
-    <Stack sx={{ minHeight: 0 }} spacing={3} flexGrow={1}>
+    <Stack spacing={3} sx={{ minHeight: 0, flexGrow: 1 }}>
       <CBExerciseSequenceTopBar
         title={exerciseInformationToRender?.title || ""}
         currentExerciseIndex={currentExerciseIndex}
@@ -131,16 +131,16 @@ export const CBExerciseSequence = ({
       />
 
       <Stack
-        sx={{ minHeight: 0 }}
-        flex="1 1 auto"
-        justifyContent="space-between"
         spacing={3}
+        sx={{ minHeight: 0, flex: "1 1 auto", justifyContent: "center" }}
       >
         <Stack
-          flex="1 1 auto"
-          justifyContent="center"
-          sx={{ minHeight: 0 }}
-          overflow="auto"
+          sx={{
+            minHeight: 0,
+            flex: "1 1 auto",
+            justifyContent: "center",
+            overflow: "auto",
+          }}
         >
           {sessionIsFinished ? (
             <CBExerciseSequenceEndScreen

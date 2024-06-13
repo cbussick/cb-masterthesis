@@ -25,7 +25,15 @@ export default function TopicWorld() {
         <CBTopicWorld />
       </Box>
 
-      <Box position="absolute" right={50} bottom={10} width={200} height={300}>
+      <Box
+        sx={{
+          position: "absolute",
+          right: 50,
+          bottom: 10,
+          width: 200,
+          height: 300,
+        }}
+      >
         <Image src="/logo/dina.svg" alt="DiNA" fill />
       </Box>
     </CBContentWrapper>

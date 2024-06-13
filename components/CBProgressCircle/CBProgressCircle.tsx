@@ -52,29 +52,32 @@ export const CBProgressCircle = ({
 
   return (
     <Box
-      position="relative"
-      width="fit-content"
       component={motion.div}
       initial={{ scale: 1 }}
       whileHover={{ scale: unlocked ? 1.025 : undefined }}
-      zIndex={1}
+      sx={{
+        position: "relative",
+        width: "fit-content",
+        zIndex: 1,
+      }}
     >
       <Box
-        width={outerCircleSize}
-        height={outerCircleSize}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+        sx={{
+          width: outerCircleSize,
+          height: outerCircleSize,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         {/* Inactive part of the progress (= grey background) */}
         <Box
-          position="absolute"
-          bgcolor={(t) =>
-            unlocked ? t.palette.grey[200] : t.palette.grey[600]
-          }
-          borderRadius="50%"
-          boxShadow={(t) => t.shadows[8]}
           sx={{
+            position: "absolute",
+            bgcolor: (t) =>
+              unlocked ? t.palette.grey[200] : t.palette.grey[600],
+            borderRadius: "50%",
+            boxShadow: (t) => t.shadows[8],
             top: 1,
             right: 1,
             bottom: 1,
@@ -133,7 +136,13 @@ export const CBProgressCircle = ({
             }}
             disabled={!unlocked}
           >
-            <Stack alignItems="center" spacing={1} mt={-4}>
+            <Stack
+              sx={{
+                alignItems: "center",
+                mt: -4,
+              }}
+              spacing={1}
+            >
               {unlocked ? (
                 <Image src={icon.src} alt={icon.alt} width={120} height={95} />
               ) : (
@@ -147,8 +156,10 @@ export const CBProgressCircle = ({
 
               <Typography
                 variant="h3"
-                textAlign="center"
-                fontWeight={(t) => t.typography.fontWeightBold}
+                sx={{
+                  textAlign: "center",
+                  fontWeight: (t) => t.typography.fontWeightBold,
+                }}
               >
                 {label}
               </Typography>

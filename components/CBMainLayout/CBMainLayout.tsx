@@ -44,11 +44,18 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
       <Stack
-        display={{ xs: "none", sm: "flex" }}
         direction="row"
-        height="100vh"
+        sx={{
+          display: { xs: "none", sm: "flex" },
+          height: "100vh",
+        }}
       >
-        <Box position="relative" height="100%">
+        <Box
+          sx={{
+            position: "relative",
+            height: "100%",
+          }}
+        >
           <CBSidebar
             sidebarWidthOpen={sidebarWidthOpen}
             sidebarWidthClosed={sidebarWidthClosed}
@@ -60,12 +67,13 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
         <CBConfettiProvider>
           <CBConfettiWrapper>
             <Box
-              flex="1 1 auto"
-              height="100%"
-              ml={
-                layoutHorizontalSpacing * 2 +
-                sidebarWidthClosed / getSpacingFactor()
-              }
+              sx={{
+                flex: "1 1 auto",
+                height: "100%",
+                ml:
+                  layoutHorizontalSpacing * 2 +
+                  sidebarWidthClosed / getSpacingFactor(),
+              }}
             >
               {children}
             </Box>

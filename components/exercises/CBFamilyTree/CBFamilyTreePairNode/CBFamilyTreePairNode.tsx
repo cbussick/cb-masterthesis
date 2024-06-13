@@ -10,8 +10,17 @@ export const CBFamilyTreePairNode = ({
   data,
 }: CBFamilyTreePairNodeProps): JSX.Element => {
   return (
-    <Stack direction="row" justifyContent="center">
-      <Box position="relative">
+    <Stack
+      direction="row"
+      sx={{
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <Handle
           id={Position.Left}
           type="source"
@@ -24,20 +33,26 @@ export const CBFamilyTreePairNode = ({
       </Box>
 
       <Stack
-        alignItems="center"
-        height={data.nodeSize + data.textFieldHeightPlusStackSpacing}
-        pt={3}
+        sx={{
+          alignItems: "center",
+          height: data.nodeSize + data.textFieldHeightPlusStackSpacing,
+          pt: 3,
+        }}
       >
         <Box
-          width={data.nodeSize}
-          height={data.lineWidth}
-          bgcolor={(t) => data.lineColor || t.palette.grey[600]}
+          sx={{
+            width: data.nodeSize,
+            height: data.lineWidth,
+            bgcolor: (t) => data.lineColor || t.palette.grey[600],
+          }}
         />
 
         <Box
-          width={data.lineWidth}
-          height={200}
-          bgcolor={(t) => data.lineColor || t.palette.grey[600]}
+          sx={{
+            width: data.lineWidth,
+            height: 200,
+            bgcolor: (t) => data.lineColor || t.palette.grey[600],
+          }}
         />
 
         <Handle
@@ -52,7 +67,11 @@ export const CBFamilyTreePairNode = ({
         />
       </Stack>
 
-      <Box position="relative">
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <Handle
           id={Position.Right}
           type="source"

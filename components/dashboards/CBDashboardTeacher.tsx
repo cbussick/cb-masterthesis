@@ -28,7 +28,13 @@ export const CBDashboardTeacher = (): JSX.Element => {
       />
 
       <Stack spacing={2}>
-        <Stack direction="row" justifyContent="space-between" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            alignItems: "space-between",
+          }}
+        >
           <Stack spacing={2} sx={{ width: "50%" }}>
             <CBSimpleInfoCard
               image="/topics/glossar.png"

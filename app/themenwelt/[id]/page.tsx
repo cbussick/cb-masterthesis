@@ -56,8 +56,14 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
       />
 
       <Box {...topicWorldInnerBoxStyles}>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <Stack width="fit-content">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Stack sx={{ width: "fit-content" }}>
             {topicData?.units.map((unit, index) => {
               const previousUnitId =
                 index === 0 ? undefined : topicData.units[index - 1].id;
@@ -111,7 +117,15 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         </Box>
       </Box>
 
-      <Box position="absolute" right={50} bottom={10} width={200} height={300}>
+      <Box
+        sx={{
+          position: "absolute",
+          right: 50,
+          bottom: 10,
+          width: 200,
+          height: 300,
+        }}
+      >
         <Image src="/logo/dina.svg" alt="DiNA" fill />
       </Box>
     </CBContentWrapper>

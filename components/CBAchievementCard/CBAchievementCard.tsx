@@ -26,7 +26,7 @@ export const CBAchievementCard = ({
         pointerEvents: isCompleted ? "none" : "auto",
       }}
     >
-      <Box position="relative" width="30%" height={150}>
+      <Box sx={{ position: "relative", width: "30%", height: 150 }}>
         <Image
           src={image}
           alt={alt || ""}
@@ -40,7 +40,12 @@ export const CBAchievementCard = ({
           <Stack>
             <Typography variant="h5">{title}</Typography>
 
-            <Typography variant="body2" mt={0.7}>
+            <Typography
+              variant="body2"
+              sx={{
+                mt: 0.7,
+              }}
+            >
               {subTitle}
             </Typography>
           </Stack>

@@ -18,26 +18,27 @@ export const CBContentWrapper = ({
   sxInnerContainer,
 }: CBContentWrapperProps): JSX.Element => {
   return (
-    <Box position="relative" height="100%" sx={{ ...sxOuterContainer }}>
+    <Box sx={{ position: "relative", height: "100%", ...sxOuterContainer }}>
       <Box
-        bgcolor={bgcolor}
-        boxShadow={(t) => (bgcolor ? t.shadows[8] : undefined)}
-        borderRadius={5}
-        px={
-          paddingHorizontal || paddingHorizontal === 0 ? paddingHorizontal : 6
-        }
-        py={4}
-        position="absolute"
-        top={(t) => t.spacing(layoutVerticalSpacing)}
-        bottom={(t) => t.spacing(layoutVerticalSpacing)}
-        right={(t) => t.spacing(layoutHorizontalSpacing)}
-        left={0}
-        display="flex"
-        flexDirection="column"
         sx={{
+          bgcolor,
+          boxShadow: (t) => (bgcolor ? t.shadows[8] : undefined),
+          borderRadius: 5,
+          px:
+            paddingHorizontal || paddingHorizontal === 0
+              ? paddingHorizontal
+              : 6,
+          py: 4,
+          position: "absolute",
+          top: (t) => t.spacing(layoutVerticalSpacing),
+          bottom: (t) => t.spacing(layoutVerticalSpacing),
+          right: (t) => t.spacing(layoutHorizontalSpacing),
+          left: 0,
+          display: "flex",
+          flexDirection: "column",
           overflowY: "auto",
-          ...sxInnerContainer,
           scrollbarGutter: "stable",
+          ...sxInnerContainer,
         }}
       >
         {children}

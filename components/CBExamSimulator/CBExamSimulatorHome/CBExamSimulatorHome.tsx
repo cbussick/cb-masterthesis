@@ -15,8 +15,18 @@ export const CBExamSimulatorHome = ({
   };
 
   return (
-    <Stack spacing={1} flex="1 1 auto">
-      <Typography variant="h4" alignSelf="flex-end">
+    <Stack
+      spacing={1}
+      sx={{
+        flex: "1 1 auto",
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          alignSelf: "flex-end",
+        }}
+      >
         {titleTop}
       </Typography>
 
@@ -31,7 +41,13 @@ export const CBExamSimulatorHome = ({
           flex: "1 1 auto",
         }}
       >
-        <Box position="relative" width="100%" flex="1 1 auto">
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            flex: "1 1 auto",
+          }}
+        >
           <Image
             src="/exam-simulator-bg.png"
             alt="Ein Labor"

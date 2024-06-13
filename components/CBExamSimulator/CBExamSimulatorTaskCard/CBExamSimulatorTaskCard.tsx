@@ -36,7 +36,11 @@ export const CBExamSimulatorTaskCard = ({
       }}
     >
       <Stack direction="row" spacing={2}>
-        <Typography color={(t) => t.palette.grey[500]}>
+        <Typography
+          sx={{
+            color: (t) => t.palette.grey[500],
+          }}
+        >
           {exerciseNumber}
         </Typography>
 

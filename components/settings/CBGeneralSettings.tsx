@@ -34,7 +34,13 @@ export const CBGeneralSettings = (): JSX.Element => {
           ggfs. deinen Namen und deine E-Mail ändern.
         </Typography>
 
-        <Stack pt={3} spacing={2} alignItems="center">
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "center",
+            pt: 3,
+          }}
+        >
           <TextField
             label="Vorname"
             value={user?.customData.firstName || ""}

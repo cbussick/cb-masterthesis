@@ -30,7 +30,12 @@ export const CBFreePracticeExerciseSequence = ({
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
-      <Stack spacing={1} height="100%">
+      <Stack
+        spacing={1}
+        sx={{
+          height: "100%",
+        }}
+      >
         <CBPageHeader
           title={
             <CBBreadcrumbs

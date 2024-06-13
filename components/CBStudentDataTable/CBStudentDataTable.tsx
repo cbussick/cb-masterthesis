@@ -65,7 +65,7 @@ export const CBStudentDataTable = (): JSX.Element => {
   const onCellClick = () => {};
 
   return (
-    <Box sx={{ height: "60%", width: "100%" }}>
+    <Box sx={{ width: "100%", height: "60%" }}>
       <DataGrid
         rows={allUsersDataWithID}
         columns={columns}

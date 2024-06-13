@@ -23,7 +23,13 @@ export const CBProgressBar = ({
   const value = Math.round((currentValue / maxValue) * 100);
 
   return (
-    <Stack direction="row" alignItems="center" spacing={1}>
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        alignItems: "center",
+      }}
+    >
       <LinearProgress
         variant="determinate"
         color={color === undefined ? "primary" : color}
@@ -35,7 +41,11 @@ export const CBProgressBar = ({
         }}
       />
 
-      <Typography whiteSpace="nowrap">
+      <Typography
+        sx={{
+          whiteSpace: "nowrap",
+        }}
+      >
         {format === undefined || format === "fraction"
           ? `${currentValue}/${maxValue}`
           : `${value} %`}

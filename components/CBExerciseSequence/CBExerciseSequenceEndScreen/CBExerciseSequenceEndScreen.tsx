@@ -78,14 +78,29 @@ export const CBExerciseSequenceEndScreen = ({
 
   return (
     <Container maxWidth="md">
-      <Stack spacing={3} alignItems="center">
-        <Typography variant="h2" align="center">
+      <Stack
+        spacing={3}
+        sx={{
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            textAlign: "center",
+          }}
+        >
           {allExercisesCompleted
             ? "Großartig, alles richtig!"
             : "Sehr gut, nur noch ein paar Fragen, die du wiederholen musst!"}
         </Typography>
 
-        <Stack spacing={3} alignItems="center">
+        <Stack
+          spacing={3}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Stack spacing={2}>
             {difficulty !== undefined && (
               <CBExerciseSequenceEndCard {...difficultyMap[difficulty]} />

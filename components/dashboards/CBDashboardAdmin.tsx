@@ -37,16 +37,24 @@ export const CBDashboardAdmin = (): JSX.Element => {
     <Stack spacing={3}>
       <Stack
         direction="row"
-        justifyContent="space-between"
-        alignItems="flex-start"
         spacing={1}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
       >
         <CBWelcomeBanner />
 
         <CBUserActionsBar />
       </Stack>
 
-      <Typography fontSize="75px !important">🚧👷🏻‍♂️</Typography>
+      <Typography
+        sx={{
+          fontSize: "75px !important",
+        }}
+      >
+        🚧👷🏻‍♂️
+      </Typography>
 
       <Typography>In Arbeit </Typography>
 

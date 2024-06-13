@@ -55,10 +55,26 @@ export const CBGlossaryEntriesList = ({
 
   return (
     <>
-      <Stack minHeight={0} flex="1">
+      <Stack
+        sx={{
+          minHeight: 0,
+          flex: 1,
+        }}
+      >
         {noSearchResults ? (
-          <Box display="flex" justifyContent="flex-start">
-            <Stack justifyContent="center" alignItems="center" spacing={1}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Stack
+              spacing={1}
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <CBEmoji emoji="🔍" typographyVariant="h1" />
 
               <Typography variant="h4">
@@ -70,11 +86,19 @@ export const CBGlossaryEntriesList = ({
           <>
             <Stack direction="row">
               {filteredAlphabet.map((letter, index) => (
-                <Stack key={letter} direction="row" alignItems="center">
+                <Stack
+                  key={letter}
+                  direction="row"
+                  sx={{
+                    alignItems: "center",
+                  }}
+                >
                   <Typography
                     variant="h4"
-                    color={(t) => t.palette.grey[800]}
-                    px={1.2}
+                    sx={{
+                      color: (t) => t.palette.grey[800],
+                      px: 1.2,
+                    }}
                   >
                     <CBUnstyledNextLink
                       href={`#${letter}`}
@@ -101,8 +125,10 @@ export const CBGlossaryEntriesList = ({
                     <Typography
                       id={letter}
                       variant="h2"
-                      color={(t) => t.palette.grey[700]}
-                      pt={4}
+                      sx={{
+                        color: (t) => t.palette.grey[700],
+                        pt: 4,
+                      }}
                     >
                       {letter}
                     </Typography>
@@ -136,9 +162,11 @@ export const CBGlossaryEntriesList = ({
                           <>
                             <Stack
                               direction="row"
-                              alignItems="center"
                               spacing={2}
-                              p={2}
+                              sx={{
+                                alignItems: "center",
+                                p: 2,
+                              }}
                             >
                               <LockRoundedIcon
                                 sx={{

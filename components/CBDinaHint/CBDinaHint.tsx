@@ -25,8 +25,19 @@ export const CBDinaHint = ({
         fullWidth={false}
         dialogContentProps={{ sx: { py: 0 } }}
       >
-        <Stack alignItems="center" spacing={2}>
-          <Box position="relative" width={100} height={125}>
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              position: "relative",
+              width: 100,
+              height: 125,
+            }}
+          >
             <Image src="/logo/dina-bold-stroke.svg" alt="DiNA" fill />
           </Box>
 

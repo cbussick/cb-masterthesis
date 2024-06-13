@@ -82,19 +82,25 @@ export const CBFamilyTreeNodeRaw = ({
   };
 
   return (
-    <Stack spacing={1} alignItems="center">
+    <Stack
+      spacing={1}
+      sx={{
+        alignItems: "center",
+      }}
+    >
       <motion.div
         initial={{ scale: 0 }}
         animate={animationControls}
         variants={animationVariants}
       >
         <Box
-          width={size}
-          height={size}
-          bgcolor={color || ((t) => t.palette.grey[300])}
-          borderRadius={
-            gender === CBFamilyTreePairGender.Female ? "50%" : undefined
-          }
+          sx={{
+            width: size,
+            height: size,
+            bgcolor: color || ((t) => t.palette.grey[300]),
+            borderRadius:
+              gender === CBFamilyTreePairGender.Female ? "50%" : undefined,
+          }}
         />
       </motion.div>
 

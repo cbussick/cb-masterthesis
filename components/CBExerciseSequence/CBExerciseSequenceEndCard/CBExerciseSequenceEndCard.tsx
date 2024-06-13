@@ -18,12 +18,20 @@ export const CBExerciseSequenceEndCard = ({
         display: "flex",
       }}
     >
-      <Stack direction="row" flex="1" spacing={4}>
+      <Stack
+        direction="row"
+        spacing={4}
+        sx={{
+          flex: 1,
+        }}
+      >
         <Box
-          position="relative"
-          width={150}
           component={motion.div}
-          alignItems="center"
+          sx={{
+            position: "relative",
+            width: 150,
+            alignItems: "center",
+          }}
         >
           <Image
             src={image}
@@ -33,7 +41,14 @@ export const CBExerciseSequenceEndCard = ({
           />
         </Box>
 
-        <Typography variant="h3" pr={4} display="flex" alignItems="center">
+        <Typography
+          variant="h3"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            pr: 4,
+          }}
+        >
           {text}
         </Typography>
       </Stack>

@@ -12,7 +12,12 @@ export const CBExamSimulatorTopCard = ({
   return (
     <Card sx={{ display: "flex", borderRadius: 3, height: 100, width: "100%" }}>
       <Stack direction="row">
-        <Box position="relative" width={150}>
+        <Box
+          sx={{
+            position: "relative",
+            width: 150,
+          }}
+        >
           <Image
             src={img.src}
             alt={img.alt}

@@ -22,7 +22,7 @@ export const CBSettings = () => {
   };
 
   return (
-    <Stack flexGrow="1" sx={{ overflowY: "auto" }}>
+    <Stack sx={{ flexGro: 1, overflowY: "auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Allgemein" {...a11yProps(0)} />
