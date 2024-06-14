@@ -58,17 +58,16 @@ import {
   CBFamilyTreeNodeType,
   CBFamilyTreePairGender,
 } from "./CBFamilyTreeNode/CBFamilyTreeNodeInterfaces";
+import { selectWidth } from "./CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
 import {
-  selectHeight,
-  selectWidth,
-} from "./CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
-import { CBFamilyTreePairNode } from "./CBFamilyTreePairNode/CBFamilyTreePairNode";
+  CBFamilyTreePairNode,
+  selectHeightPlusStackSpacing,
+} from "./CBFamilyTreePairNode/CBFamilyTreePairNode";
 import { CBFamilyTreePairNodeType } from "./CBFamilyTreePairNode/CBFamilyTreePairNodeInterfaces";
 import { useFamilyTree } from "./useFamilyTree";
 
-const textFieldHeightPlusStackSpacing = 48;
-
 const graphBoxPadding = 2;
+const ranksep = 50;
 
 const animationVariants: MotionProps["variants"] = {
   show: {
@@ -183,12 +182,11 @@ export const CBFamilyTree = forwardRef(
 
       const commonPairNodeDataProps: Pick<
         CBFamilyTreePairNodeType["data"],
-        "nodeSize" | "lineWidth" | "textFieldHeightPlusStackSpacing"
+        "nodeSize" | "lineWidth"
       > &
         typeof commonNodeDataProps = {
         nodeSize: nodeSizeMap[currentBreakpoint],
         lineWidth: "2px",
-        textFieldHeightPlusStackSpacing,
         ...commonNodeDataProps,
       };
 
@@ -335,13 +333,12 @@ export const CBFamilyTree = forwardRef(
         layoutedEdges: Edge[];
       } => {
         dagreGraph.setGraph({
+          ranksep,
           // Remove the space at the top and bottom Dagre adds around the canvas by default
           marginy: -26,
           // Remove the space to the left and right Dagre adds around the canvas by default
           marginx: -25,
         });
-
-        const selectHeightPlusStackSpacing = selectHeight + 8;
 
         rawNodes.forEach((node) => {
           dagreGraph.setNode(node.id, {
@@ -542,7 +539,7 @@ export const CBFamilyTree = forwardRef(
         >
           <Stack
             sx={{
-              mt: 4,
+              mt: graphBoxPadding,
               justifySelf: "flex-start !important",
             }}
           >
@@ -555,12 +552,8 @@ export const CBFamilyTree = forwardRef(
                         sx={{
                           height:
                             nodeSizeMap[currentBreakpoint] +
-                            nodeSizeMap[currentBreakpoint] / 2 +
-                            textFieldHeightPlusStackSpacing,
-                          mt:
-                            index !== 0
-                              ? `${nodeSizeMap[currentBreakpoint] - 20}px`
-                              : undefined,
+                            selectHeightPlusStackSpacing,
+                          mt: index !== 0 ? `${ranksep}px` : undefined,
                           fontSize: `${romanNumeralFontSizeMap[currentBreakpoint]} !important`,
                           color: (t) => t.palette.grey[500],
                         }}

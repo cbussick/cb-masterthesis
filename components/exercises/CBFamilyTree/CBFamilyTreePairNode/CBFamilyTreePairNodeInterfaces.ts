@@ -6,7 +6,6 @@ export type CBFamilyTreePairNodeData = {
   nodeSize: number;
   lineColor?: string;
   lineWidth: BoxProps["height"];
-  textFieldHeightPlusStackSpacing: number;
   nodeLeft: CBFamilyTreeNodeData;
   nodeRight: CBFamilyTreeNodeData;
 };

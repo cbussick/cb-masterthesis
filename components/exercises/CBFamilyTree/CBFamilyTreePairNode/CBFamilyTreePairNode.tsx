@@ -3,8 +3,13 @@
 import { Box, Stack } from "@mui/material";
 import { Handle, Position } from "reactflow";
 import { commonHandleProps } from "../CBFamilyTreeNode/CBFamilyTreeNode";
-import { CBFamilyTreeNodeRaw } from "../CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
+import {
+  CBFamilyTreeNodeRaw,
+  selectHeight,
+} from "../CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
 import { CBFamilyTreePairNodeProps } from "./CBFamilyTreePairNodeInterfaces";
+
+export const selectHeightPlusStackSpacing = selectHeight + 8;
 
 export const CBFamilyTreePairNode = ({
   data,
@@ -35,8 +40,8 @@ export const CBFamilyTreePairNode = ({
       <Stack
         sx={{
           alignItems: "center",
-          height: data.nodeSize + data.textFieldHeightPlusStackSpacing,
           pt: 3,
+          height: data.nodeSize + selectHeightPlusStackSpacing,
         }}
       >
         <Box
