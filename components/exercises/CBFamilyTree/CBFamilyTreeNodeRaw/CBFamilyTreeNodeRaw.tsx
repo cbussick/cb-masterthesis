@@ -15,6 +15,7 @@ import {
 import { useFamilyTree } from "../useFamilyTree";
 
 export const selectWidth = 100;
+export const selectHeight = 44;
 
 const animationVariants: MotionProps["variants"] = {
   show: {
@@ -114,6 +115,7 @@ export const CBFamilyTreeNodeRaw = ({
           size="small"
           sx={{
             width: selectWidth,
+            height: selectHeight,
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: (t) =>
                 type === CBExerciseSequenceType.ExamSimulator &&

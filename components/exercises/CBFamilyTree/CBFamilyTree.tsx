@@ -14,6 +14,7 @@ import { getTreeMaxDepth } from "@/helpers/getTreeMaxDepth";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
+import { getSpacingFactor } from "@/theme/theme";
 import { useSnackbar } from "@/ui/useSnackbar";
 import dagre from "@dagrejs/dagre";
 import {
@@ -57,12 +58,17 @@ import {
   CBFamilyTreeNodeType,
   CBFamilyTreePairGender,
 } from "./CBFamilyTreeNode/CBFamilyTreeNodeInterfaces";
-import { selectWidth } from "./CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
+import {
+  selectHeight,
+  selectWidth,
+} from "./CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
 import { CBFamilyTreePairNode } from "./CBFamilyTreePairNode/CBFamilyTreePairNode";
 import { CBFamilyTreePairNodeType } from "./CBFamilyTreePairNode/CBFamilyTreePairNodeInterfaces";
 import { useFamilyTree } from "./useFamilyTree";
 
 const textFieldHeightPlusStackSpacing = 48;
+
+const graphBoxPadding = 2;
 
 const animationVariants: MotionProps["variants"] = {
   show: {
@@ -76,7 +82,6 @@ const animationVariants: MotionProps["variants"] = {
 };
 
 const affectedColor = "#ad4545";
-const position: Node["position"] = { x: 0, y: 0 };
 
 const nodeSizeMap: Record<Breakpoint, number> = {
   xs: 25,
@@ -107,7 +112,7 @@ const commonNodeProps: Pick<
   draggable: false,
   focusable: false,
   deletable: false,
-  position,
+  position: { x: 0, y: 0 },
 };
 
 const commonSingleNodeProps: Partial<CBFamilyTreeNodeType> &
@@ -132,23 +137,17 @@ export const CBFamilyTree = forwardRef(
     const theme = useTheme();
     const animationControls = useAnimationControls();
     const { isCurrentExerciseFinished } = useCBExerciseSequence();
-    const [inheritance, setInheritance] = React.useState("");
-    const [isInheritanceMistake, setInheritanceMistake] =
-      React.useState<boolean>(false);
-    const showInheritance = exercise.difficulty === CBExerciseDifficulty.Hard;
-
-    const handleChange = (event: SelectChangeEvent) => {
-      setInheritance(event.target.value);
-    };
-
     const currentBreakpoint = useCurrentMuiBreakpoint();
+    const { showSnackbar } = useSnackbar();
     const {
       nodeIdsWithText,
       flatArrayNodesAndSpouses,
       setFlatArrayNodesAndSpouses,
     } = useFamilyTree();
 
-    const { showSnackbar } = useSnackbar();
+    const [inheritance, setInheritance] = useState("");
+    const [isInheritanceMistake, setInheritanceMistake] =
+      useState<boolean>(false);
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges] = useEdgesState([]);
@@ -156,6 +155,8 @@ export const CBFamilyTree = forwardRef(
       width: number;
       height: number;
     }>({ width: 0, height: 0 });
+
+    const showInheritance = exercise.difficulty === CBExerciseDifficulty.Hard;
 
     useEffect(() => {
       animationControls.start("show");
@@ -334,28 +335,24 @@ export const CBFamilyTree = forwardRef(
         layoutedEdges: Edge[];
       } => {
         dagreGraph.setGraph({
-          ranksep: nodeSizeMap[currentBreakpoint],
-          nodesep: nodeSizeMap[currentBreakpoint] * 1.5,
-
-          // Remove some of the space at the top and bottom dagre.js adds around the canvas by default?
-          marginy: -25,
+          // Remove the space at the top and bottom Dagre adds around the canvas by default
+          marginy: -26,
+          // Remove the space to the left and right Dagre adds around the canvas by default
+          marginx: -25,
         });
+
+        const selectHeightPlusStackSpacing = selectHeight + 8;
 
         rawNodes.forEach((node) => {
           dagreGraph.setNode(node.id, {
             width:
               node.type === CBNodeType.FamilyTreePairNode
-                ? (nodeSizeMap[currentBreakpoint] > selectWidth
-                    ? nodeSizeMap[currentBreakpoint]
-                    : selectWidth) * 3
-                : nodeSizeMap[currentBreakpoint],
+                ? selectWidth * 2 + nodeSizeMap[currentBreakpoint]
+                : selectWidth,
             height:
               node.type === CBNodeType.FamilyTreePairNode
-                ? nodeSizeMap[currentBreakpoint] +
-                  nodeSizeMap[currentBreakpoint] / 2 +
-                  textFieldHeightPlusStackSpacing // `+ nodeSizeMap[currentBreakpoint] / 2` Because the handle is positioned at the center of the node
-                : nodeSizeMap[currentBreakpoint] +
-                  textFieldHeightPlusStackSpacing,
+                ? nodeSizeMap[currentBreakpoint] + selectHeightPlusStackSpacing
+                : nodeSizeMap[currentBreakpoint] + selectHeightPlusStackSpacing,
           });
         });
 
@@ -370,8 +367,6 @@ export const CBFamilyTree = forwardRef(
 
           // We are shifting the dagre node position (anchor=center center) to the top left
           // so it matches the ReactFlow node anchor point (top left).
-          //
-          // Disabling eslint rule here because this code is copied from the ReactFlow docs.
           // eslint-disable-next-line no-param-reassign
           node.position = {
             x: nodeWithPosition.x - nodeSizeMap[currentBreakpoint] / 2,
@@ -392,12 +387,6 @@ export const CBFamilyTree = forwardRef(
 
       setNodes(layoutedNodes);
       setEdges(layoutedEdges);
-      setGraphDimensions({
-        width:
-          (dagreGraph.graph()?.width || 0) + nodeSizeMap[currentBreakpoint],
-        height:
-          (dagreGraph.graph()?.height || 0) + textFieldHeightPlusStackSpacing,
-      });
 
       // Makes it easier to iterate over all nodes
       const nodesAndSpousesAsFlatArray: Pick<
@@ -416,7 +405,23 @@ export const CBFamilyTree = forwardRef(
       setNodes,
     ]);
 
-    // Make fields with incorrect text red
+    useEffect(() => {
+      let maxX = 0;
+      let maxY = 0;
+      nodes.forEach((node) => {
+        if (node.position.x && node.width && node.position.y && node.height) {
+          if (node.position.x + node.width > maxX) {
+            maxX = node.position.x + node.width;
+          }
+          if (node.position.y + node.height > maxY) {
+            maxY = node.position.y + node.height;
+          }
+        }
+      });
+
+      setGraphDimensions({ width: maxX, height: maxY });
+    }, [nodes]);
+
     const showErrors = (
       mistakes: Pick<CBFamilyTreeExerciseNode, "id" | "solution">[],
       isInheritanceCorrect: boolean,
@@ -570,8 +575,14 @@ export const CBFamilyTree = forwardRef(
 
           <Box
             sx={{
-              width: (graphDimensions?.width || 0) + 100, // `+ 100` to have space for moving nodes when animating
-              height: graphDimensions?.height || 0,
+              // Add some padding around the graph.
+              width:
+                graphDimensions.width +
+                graphBoxPadding * getSpacingFactor() * 2,
+              height:
+                graphDimensions.height +
+                graphBoxPadding * getSpacingFactor() * 2,
+              p: graphBoxPadding,
               ".react-flow": {
                 overflow: "visible !important",
               },
@@ -607,7 +618,7 @@ export const CBFamilyTree = forwardRef(
               defaultViewport={{ x: 0, y: 0, zoom: 1 }}
               translateExtent={[
                 [0, 0],
-                [graphDimensions?.width, graphDimensions?.height],
+                [graphDimensions.width, graphDimensions.height],
               ]}
               defaultEdgeOptions={{
                 type: "step",
@@ -645,7 +656,9 @@ export const CBFamilyTree = forwardRef(
                 <Select
                   id="inheritance"
                   value={inheritance}
-                  onChange={handleChange}
+                  onChange={(event: SelectChangeEvent) => {
+                    setInheritance(event.target.value);
+                  }}
                   disabled={isCurrentExerciseFinished}
                   label="Erbgang"
                   error={isInheritanceMistake}
