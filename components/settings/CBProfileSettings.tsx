@@ -2,14 +2,13 @@
 
 import { getAuthError } from "@/firebase/authErrors";
 import { changePassword } from "@/firebase/changePassword";
-import { changeProfilePicture } from "@/firebase/changeProfilePicture";
 import { changeUsername } from "@/firebase/changeUsername";
 import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
 import {
-  Avatar,
+  Box,
   Button,
   Container,
   Divider,
@@ -17,7 +16,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
@@ -25,8 +23,6 @@ import { useForm } from "react-hook-form";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEditTextField } from "../CBEditTextField/CBEditTextField";
 import { CBProfileImageSelector } from "../CBProfileImageSelector/CBProfileImageSelector";
-
-const pictureSize = 150;
 
 const usernameId = "username";
 const oldPasswordId = "oldPassword";
@@ -47,9 +43,6 @@ export const CBProfileSettings = (): JSX.Element => {
 
   const [isEditingUsername, setEditingUsername] = useState(false);
   const [isEditingPassword, setEditingPassword] = useState(false);
-  const [profilePicture, setProfilePicture] = useState<string>(
-    user?.customData.profilePicture || "",
-  );
 
   const oldUsername = user?.customData.username || "";
 
@@ -127,28 +120,6 @@ export const CBProfileSettings = (): JSX.Element => {
     }
   };
 
-  const handleSaveButtonClickProfilePic = () => {
-    if (user?.user) {
-      changeProfilePicture(user.user.uid, profilePicture)
-        .then(() => {
-          showSnackbar(
-            "Profilbild geändert",
-            "Du hast dein Profilbild erfolgreich geändert.",
-            "success",
-          );
-        })
-        .catch((error: FirebaseError) => {
-          const errorMessage = getAuthError(error.code) || error.message;
-
-          showSnackbar(
-            "Profilbild konnte nicht geändert werden",
-            errorMessage,
-            "error",
-          );
-        });
-    }
-  };
-
   return (
     <>
       <Stack spacing={3}>
@@ -157,86 +128,29 @@ export const CBProfileSettings = (): JSX.Element => {
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Stack
-          sx={{
-            justifyContent: "center",
-          }}
-        >
+        <Box>
           <Container maxWidth="md">
             <Stack spacing={2}>
-              <CBEditTextField
-                label="Benutzername"
-                value={oldUsername}
-                onClickIcon={() => setEditingUsername(true)}
-              />
+              <Stack spacing={2}>
+                <CBEditTextField
+                  label="Benutzername"
+                  value={oldUsername}
+                  onClickIcon={() => setEditingUsername(true)}
+                />
 
-              <CBEditTextField
-                label="Passwort"
-                value="********"
-                onClickIcon={() => setEditingPassword(true)}
-              />
+                <CBEditTextField
+                  label="Passwort"
+                  value="********"
+                  onClickIcon={() => setEditingPassword(true)}
+                />
+              </Stack>
+
+              <Divider sx={{ p: 1 }} />
+
+              <CBProfileImageSelector />
             </Stack>
           </Container>
-
-          <Divider sx={{ py: 1 }} />
-
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              pt: 4,
-            }}
-          >
-            <Grid
-              xs={2}
-              sx={{
-                display: "flex",
-              }}
-            >
-              <Stack
-                spacing={2}
-                sx={{
-                  alignItems: "center",
-                }}
-              >
-                <Avatar
-                  alt="Profilbild"
-                  src={profilePicture}
-                  sx={{
-                    border: 7,
-                    borderColor: (t) => t.palette.primary.main,
-                    boxShadow: 3,
-                    width: pictureSize,
-                    height: pictureSize,
-                  }}
-                />
-
-                <Button
-                  onClick={handleSaveButtonClickProfilePic}
-                  disabled={user?.customData.profilePicture === profilePicture}
-                >
-                  Speichern
-                </Button>
-              </Stack>
-            </Grid>
-
-            <Grid xs>
-              <Stack>
-                <Typography
-                  sx={{
-                    mb: 2,
-                  }}
-                >
-                  Wähle einen Avatar aus
-                </Typography>
-
-                <CBProfileImageSelector
-                  onSelect={(newImage) => setProfilePicture(newImage)}
-                />
-              </Stack>
-            </Grid>
-          </Grid>
-        </Stack>
+        </Box>
       </Stack>
 
       <CBDialog
