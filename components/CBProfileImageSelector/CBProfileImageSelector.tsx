@@ -113,7 +113,6 @@ export const CBProfileImageSelector = (): JSX.Element => {
                   sx={{
                     width: avatarChoiceSize,
                     height: avatarChoiceSize,
-                    borderRadius: "50%",
                   }}
                 />
               </Button>
