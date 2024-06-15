@@ -10,6 +10,7 @@ import { Avatar, Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
+import { CBAvatarChoice } from "../CBAvatarChoice/CBAvatarChoice";
 import { CBProfilePicture } from "./CBProfileImageSelectorInterfaces";
 
 const currentAvatarSize = 150;
@@ -99,21 +100,19 @@ export const CBProfileImageSelector = (): JSX.Element => {
                 disabled={!isUnlocked(image)}
                 onClick={() => setProfilePicture(image.src)}
                 sx={{
-                  bgcolor: (t) => t.palette.background.default,
+                  bgcolor: (t) => `${t.palette.background.default} !important`,
                   "&:hover": {
                     bgcolor: (t) => t.palette.background.default,
                   },
                   borderRadius: "50%",
                   p: 0.75,
+                  boxShadow: (t) => `${t.shadows[6]} !important`,
                 }}
               >
-                <Avatar
-                  alt={`Profilbild: ${image}`}
-                  src={isUnlocked(image) ? image.src : image.srcLocked}
-                  sx={{
-                    width: avatarChoiceSize,
-                    height: avatarChoiceSize,
-                  }}
+                <CBAvatarChoice
+                  image={image}
+                  imageSize={avatarChoiceSize}
+                  unlocked={isUnlocked(image)}
                 />
               </Button>
             </Grid>
