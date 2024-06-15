@@ -6,7 +6,7 @@ import { useSnackbar } from "@/ui/useSnackbar";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBLoadingButton } from "../CBLoadingButton/CBLoadingButton";
@@ -59,9 +59,7 @@ export const CBSignInForm = ({
     setOpenDialog(true);
   };
 
-  const handleForgotPasswordSubmit = (
-    event: React.FormEvent<HTMLFormElement>,
-  ) => {
+  const handleForgotPasswordSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     sendPasswordResetEmail(auth, forgotPasswordEmail)
       .then(() => {

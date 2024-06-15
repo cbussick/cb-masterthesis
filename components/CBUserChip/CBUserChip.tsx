@@ -2,7 +2,7 @@
 
 import { useUser } from "@/firebase/useUser";
 import { Avatar, Box, Chip, Typography } from "@mui/material";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { CBUserOptionsMenu } from "../CBUserOptionsMenu/CBUserOptionsMenu";
 
 const userChipId = "user-chip";
@@ -14,7 +14,7 @@ export const CBUserChip = (): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const isUserMenuOpen = Boolean(anchorEl);
-  const handleUserChipClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleUserChipClick = (event: MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
 

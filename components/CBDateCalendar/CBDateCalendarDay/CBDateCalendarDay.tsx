@@ -4,7 +4,7 @@ import { CBClassEvent } from "@/data/events";
 import { Theme, Typography, useTheme } from "@mui/material";
 import { PickersDay } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { CBDateCalendarDayInformation } from "../CBDateCalendarDayInformation/CBDateCalendarDayInformation";
 import { CBDateCalendarDayProps } from "./CBDateCalendarDayInterfaces";
 
@@ -56,7 +56,7 @@ export const CBDateCalendarDay = ({
     ? informationPopoverIdRaw
     : undefined;
 
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
     setInformationAnchorEl(event.currentTarget);
   };
 

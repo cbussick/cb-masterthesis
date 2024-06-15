@@ -31,12 +31,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { MotionProps, motion, useAnimationControls } from "framer-motion";
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import ReactFlow, {
   ConnectionMode,
   Edge,
@@ -98,10 +93,11 @@ const romanNumeralFontSizeMap: Record<Breakpoint, string> = {
   xl: "3rem",
 };
 
-export const nodeTypes: Record<CBNodeType, React.FC<NodeProps>> = {
-  [CBNodeType.FamilyTreeNode]: CBFamilyTreeNode,
-  [CBNodeType.FamilyTreePairNode]: CBFamilyTreePairNode,
-};
+export const nodeTypes: Record<CBNodeType, (props: NodeProps) => JSX.Element> =
+  {
+    [CBNodeType.FamilyTreeNode]: CBFamilyTreeNode,
+    [CBNodeType.FamilyTreePairNode]: CBFamilyTreePairNode,
+  };
 
 const commonNodeProps: Pick<
   CBFamilyTreeNodeType,

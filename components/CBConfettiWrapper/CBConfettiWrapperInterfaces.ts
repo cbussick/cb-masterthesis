@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface CBConfettiWrapperProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
