@@ -12,7 +12,8 @@ import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { CBProfilePicture } from "./CBProfileImageSelectorInterfaces";
 
-const pictureSize = 150;
+const currentAvatarSize = 150;
+const avatarChoiceSize = 110;
 
 export const CBProfileImageSelector = (): JSX.Element => {
   const user = useUser();
@@ -69,8 +70,8 @@ export const CBProfileImageSelector = (): JSX.Element => {
             border: 8,
             borderColor: (t) => t.palette.primary.light,
             boxShadow: 3,
-            width: pictureSize,
-            height: pictureSize,
+            width: currentAvatarSize,
+            height: currentAvatarSize,
           }}
         />
 
@@ -98,19 +99,20 @@ export const CBProfileImageSelector = (): JSX.Element => {
                 disabled={!isUnlocked(image)}
                 onClick={() => setProfilePicture(image.src)}
                 sx={{
-                  bgcolor: "transparent",
-                  "&:hover": { backgroundColor: "transparent" },
+                  bgcolor: (t) => t.palette.background.default,
+                  "&:hover": {
+                    backgroundColor: (t) => t.palette.background.default,
+                  },
                   borderRadius: "50%",
-                  width: 110,
-                  height: 110,
+                  p: 0.75,
                 }}
               >
                 <Avatar
                   alt={`Profilbild: ${image}`}
                   src={isUnlocked(image) ? image.src : image.srcLocked}
                   sx={{
-                    width: 100,
-                    height: 100,
+                    width: avatarChoiceSize,
+                    height: avatarChoiceSize,
                     borderRadius: "50%",
                   }}
                 />
