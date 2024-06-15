@@ -101,7 +101,7 @@ export const CBProfileImageSelector = (): JSX.Element => {
                 sx={{
                   bgcolor: (t) => t.palette.background.default,
                   "&:hover": {
-                    backgroundColor: (t) => t.palette.background.default,
+                    bgcolor: (t) => t.palette.background.default,
                   },
                   borderRadius: "50%",
                   p: 0.75,
