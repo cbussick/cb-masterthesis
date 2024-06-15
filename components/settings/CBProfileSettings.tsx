@@ -162,7 +162,7 @@ export const CBProfileSettings = (): JSX.Element => {
             justifyContent: "center",
           }}
         >
-          <Container>
+          <Container maxWidth="md">
             <Stack spacing={2}>
               <CBEditTextField
                 label="Benutzername"
