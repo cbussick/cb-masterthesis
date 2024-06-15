@@ -2,7 +2,7 @@
 
 import { NotificationsNone, Search } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { CBIconButton } from "../CBIconButton/CBIconButton";
 import { CBNotificationMenu } from "../CBNotificationMenu/CBNotificationMenu";
 import { CBSearchMenu } from "../CBSearchMenu/CBSearchMenu";
@@ -20,7 +20,7 @@ export const CBUserActionsBar = (): JSX.Element => {
     : undefined;
 
   const handleNotificationIconButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: MouseEvent<HTMLButtonElement>,
   ) => {
     setNotificationsMenuAnchorEl(event.currentTarget);
   };

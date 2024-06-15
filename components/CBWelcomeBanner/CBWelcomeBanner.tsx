@@ -1,7 +1,7 @@
 import { useUser } from "@/firebase/useUser";
 import { CBUserRole } from "@/firebase/userRole";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBUserOptionsMenu } from "../CBUserOptionsMenu/CBUserOptionsMenu";
 
@@ -18,7 +18,7 @@ export const CBWelcomeBanner = (): JSX.Element => {
   const handleUserMenuClose = () => {
     setAnchorEl(null);
   };
-  const handleAvatarClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleAvatarClick = (event: MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
