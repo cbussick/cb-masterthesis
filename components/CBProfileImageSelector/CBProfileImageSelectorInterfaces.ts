@@ -4,7 +4,6 @@ export interface CBProfileImageSelectorProps {
 
 export interface CBProfilePicture {
   src: string;
-  srcLocked: string;
   alt: string;
   unlockLevel: number;
 }

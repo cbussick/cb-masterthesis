@@ -14,7 +14,6 @@ export const CBNotificationSettings = (): JSX.Element => {
   return (
     <Stack>
       <Typography
-        variant="body2"
         sx={{
           mb: 2,
         }}

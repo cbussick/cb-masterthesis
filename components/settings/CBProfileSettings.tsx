@@ -2,32 +2,27 @@
 
 import { getAuthError } from "@/firebase/authErrors";
 import { changePassword } from "@/firebase/changePassword";
-import { changeProfilePicture } from "@/firebase/changeProfilePicture";
 import { changeUsername } from "@/firebase/changeUsername";
 import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import {
-  Avatar,
   Box,
   Button,
+  Container,
   Divider,
-  IconButton,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CBDialog } from "../CBDialog/CBDialog";
+import { CBEditTextField } from "../CBEditTextField/CBEditTextField";
 import { CBProfileImageSelector } from "../CBProfileImageSelector/CBProfileImageSelector";
-
-const pictureSize = 150;
 
 const usernameId = "username";
 const oldPasswordId = "oldPassword";
@@ -48,9 +43,6 @@ export const CBProfileSettings = (): JSX.Element => {
 
   const [isEditingUsername, setEditingUsername] = useState(false);
   const [isEditingPassword, setEditingPassword] = useState(false);
-  const [profilePicture, setProfilePicture] = useState<string>(
-    user?.customData.profilePicture || "",
-  );
 
   const oldUsername = user?.customData.username || "";
 
@@ -128,147 +120,38 @@ export const CBProfileSettings = (): JSX.Element => {
     }
   };
 
-  const handleSaveButtonClickProfilePic = () => {
-    if (user?.user) {
-      changeProfilePicture(user.user.uid, profilePicture)
-        .then(() => {
-          showSnackbar(
-            "Profilbild geändert",
-            "Du hast dein Profilbild erfolgreich geändert.",
-            "success",
-          );
-        })
-        .catch((error: FirebaseError) => {
-          const errorMessage = getAuthError(error.code) || error.message;
-
-          showSnackbar(
-            "Profilbild konnte nicht geändert werden",
-            errorMessage,
-            "error",
-          );
-        });
-    }
-  };
-
   return (
     <>
-      <Box>
-        <Typography variant="body2">
+      <Stack spacing={3}>
+        <Typography>
           Hier kannst du dein Profil deinen Wünschen entsprechend anpassen.
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Stack
-          sx={{
-            justifyContent: "center",
-            pt: 3,
-          }}
-        >
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              pb: 2,
-            }}
-          >
-            <TextField
-              label="Benutzername"
-              variant="filled"
-              value={oldUsername}
-              disabled
-              sx={{ width: "50%" }}
-            />
-
-            <IconButton onClick={() => setEditingUsername(true)}>
-              <EditRoundedIcon />
-            </IconButton>
-          </Stack>
-
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <TextField
-              label="Passwort"
-              variant="filled"
-              value="********"
-              disabled
-              sx={{ width: "50%" }}
-            />
-
-            <IconButton onClick={() => setEditingPassword(true)}>
-              <EditRoundedIcon />
-            </IconButton>
-          </Stack>
-
-          <Divider sx={{ p: 1 }} />
-
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              pt: 4,
-            }}
-          >
-            <Grid
-              xs={2}
-              sx={{
-                display: "flex",
-              }}
-            >
-              <Stack
-                spacing={2}
-                sx={{
-                  alignItems: "center",
-                }}
-              >
-                <Avatar
-                  alt="Profilbild"
-                  src={profilePicture}
-                  sx={{
-                    border: 7,
-                    borderColor: (t) => t.palette.primary.main,
-                    boxShadow: 3,
-                    width: pictureSize,
-                    height: pictureSize,
-                  }}
+        <Box>
+          <Container maxWidth="md">
+            <Stack spacing={3}>
+              <Stack spacing={2}>
+                <CBEditTextField
+                  label="Benutzername"
+                  value={oldUsername}
+                  onClickIcon={() => setEditingUsername(true)}
                 />
 
-                <Button
-                  onClick={handleSaveButtonClickProfilePic}
-                  disabled={user?.customData.profilePicture === profilePicture}
-                >
-                  Speichern
-                </Button>
-              </Stack>
-            </Grid>
-
-            <Grid xs>
-              <Stack>
-                <Typography
-                  sx={{
-                    pb: 2,
-                  }}
-                >
-                  Wähle einen Avatar aus
-                </Typography>
-
-                <CBProfileImageSelector
-                  onSelect={(newImage) => setProfilePicture(newImage)}
+                <CBEditTextField
+                  label="Passwort"
+                  value="********"
+                  onClickIcon={() => setEditingPassword(true)}
                 />
               </Stack>
-            </Grid>
-          </Grid>
-        </Stack>
-      </Box>
+
+              <Divider />
+
+              <CBProfileImageSelector />
+            </Stack>
+          </Container>
+        </Box>
+      </Stack>
 
       <CBDialog
         isOpen={isEditingUsername}
