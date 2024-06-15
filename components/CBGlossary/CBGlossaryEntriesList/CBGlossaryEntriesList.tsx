@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 
 import { alphabet } from "@/helpers/alphabet";
-import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import { LockRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { CBEmoji } from "../../CBEmoji/CBEmoji";
@@ -168,7 +168,7 @@ export const CBGlossaryEntriesList = ({
                                 p: 2,
                               }}
                             >
-                              <LockRoundedIcon
+                              <LockRounded
                                 sx={{
                                   color: (t) => t.palette.grey[700],
                                 }}

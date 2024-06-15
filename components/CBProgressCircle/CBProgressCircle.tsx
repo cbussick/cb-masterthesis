@@ -1,7 +1,7 @@
 "use client";
 
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
-import { Lock } from "@mui/icons-material";
+import { LockRounded } from "@mui/icons-material";
 import {
   Box,
   Breakpoint,
@@ -146,7 +146,7 @@ export const CBProgressCircle = ({
               {unlocked ? (
                 <Image src={icon.src} alt={icon.alt} width={120} height={95} />
               ) : (
-                <Lock
+                <LockRounded
                   sx={{
                     color: (t) => t.palette.grey[700],
                     fontSize: iconSizeMap[currentBreakpoint],
