@@ -15,6 +15,7 @@ export const CBEditTextField = ({
       direction="row"
       spacing={1}
       sx={{
+        alignItems: "center",
         ...sx,
       }}
     >
