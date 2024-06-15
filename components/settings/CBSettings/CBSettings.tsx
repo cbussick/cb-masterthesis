@@ -8,30 +8,25 @@ import { CBNotificationSettings } from "../CBNotificationSettings";
 import { CBProfileSettings } from "../CBProfileSettings";
 import { CBTabPanel } from "./CBTabPanel";
 
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    "aria-controls": `tabpanel-${index}`,
-  };
-}
-
 export const CBSettings = () => {
   const [value, setValue] = useState(0);
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
 
   return (
-    <Stack sx={{ flexGro: 1, overflowY: "auto" }}>
+    <Stack sx={{ flexGrow: 1, overflowY: "auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Allgemein" {...a11yProps(0)} />
+        <Tabs
+          value={value}
+          onChange={(event: SyntheticEvent, newValue: number) => {
+            setValue(newValue);
+          }}
+        >
+          <Tab label="Allgemein" />
 
-          <Tab label="Profil verwalten" {...a11yProps(1)} />
+          <Tab label="Profil verwalten" />
 
-          <Tab label="Benachrichtigungen" {...a11yProps(2)} />
+          <Tab label="Benachrichtigungen" />
 
-          <Tab label="Sicherheit und Datenschutz" {...a11yProps(3)} />
+          <Tab label="Sicherheit und Datenschutz" />
         </Tabs>
       </Box>
 
