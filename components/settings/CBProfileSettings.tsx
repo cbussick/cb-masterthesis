@@ -130,7 +130,7 @@ export const CBProfileSettings = (): JSX.Element => {
 
         <Box>
           <Container maxWidth="md">
-            <Stack spacing={2}>
+            <Stack spacing={3}>
               <Stack spacing={2}>
                 <CBEditTextField
                   label="Benutzername"
@@ -145,7 +145,7 @@ export const CBProfileSettings = (): JSX.Element => {
                 />
               </Stack>
 
-              <Divider sx={{ p: 1 }} />
+              <Divider />
 
               <CBProfileImageSelector />
             </Stack>
