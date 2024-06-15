@@ -8,13 +8,11 @@ import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import {
   Avatar,
-  Box,
   Button,
+  Container,
   Divider,
-  IconButton,
   Stack,
   TextField,
   Typography,
@@ -25,6 +23,7 @@ import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CBDialog } from "../CBDialog/CBDialog";
+import { CBEditTextField } from "../CBEditTextField/CBEditTextField";
 import { CBProfileImageSelector } from "../CBProfileImageSelector/CBProfileImageSelector";
 
 const pictureSize = 150;
@@ -152,7 +151,7 @@ export const CBProfileSettings = (): JSX.Element => {
 
   return (
     <>
-      <Box>
+      <Stack spacing={3}>
         <Typography>
           Hier kannst du dein Profil deinen Wünschen entsprechend anpassen.
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
@@ -161,55 +160,25 @@ export const CBProfileSettings = (): JSX.Element => {
         <Stack
           sx={{
             justifyContent: "center",
-            pt: 3,
           }}
         >
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              pb: 2,
-            }}
-          >
-            <TextField
-              label="Benutzername"
-              variant="filled"
-              value={oldUsername}
-              disabled
-              sx={{ width: "50%" }}
-            />
+          <Container>
+            <Stack spacing={2}>
+              <CBEditTextField
+                label="Benutzername"
+                value={oldUsername}
+                onClickIcon={() => setEditingUsername(true)}
+              />
 
-            <IconButton onClick={() => setEditingUsername(true)}>
-              <EditRoundedIcon />
-            </IconButton>
-          </Stack>
+              <CBEditTextField
+                label="Passwort"
+                value="********"
+                onClickIcon={() => setEditingPassword(true)}
+              />
+            </Stack>
+          </Container>
 
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <TextField
-              label="Passwort"
-              variant="filled"
-              value="********"
-              disabled
-              sx={{ width: "50%" }}
-            />
-
-            <IconButton onClick={() => setEditingPassword(true)}>
-              <EditRoundedIcon />
-            </IconButton>
-          </Stack>
-
-          <Divider sx={{ p: 1 }} />
+          <Divider sx={{ py: 1 }} />
 
           <Grid
             container
@@ -268,7 +237,7 @@ export const CBProfileSettings = (): JSX.Element => {
             </Grid>
           </Grid>
         </Stack>
-      </Box>
+      </Stack>
 
       <CBDialog
         isOpen={isEditingUsername}
