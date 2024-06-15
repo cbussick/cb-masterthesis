@@ -153,7 +153,7 @@ export const CBProfileSettings = (): JSX.Element => {
   return (
     <>
       <Box>
-        <Typography variant="body2">
+        <Typography>
           Hier kannst du dein Profil deinen Wünschen entsprechend anpassen.
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
@@ -255,7 +255,7 @@ export const CBProfileSettings = (): JSX.Element => {
               <Stack>
                 <Typography
                   sx={{
-                    pb: 2,
+                    mb: 2,
                   }}
                 >
                   Wähle einen Avatar aus

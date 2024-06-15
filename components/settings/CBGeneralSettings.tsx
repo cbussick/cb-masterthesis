@@ -29,7 +29,7 @@ export const CBGeneralSettings = (): JSX.Element => {
   return (
     <>
       <Box>
-        <Typography variant="body2">
+        <Typography>
           Hier kannst du allgemeine Informationen zu deinem Konto einsehen und
           ggfs. deinen Namen und deine E-Mail ändern.
         </Typography>
