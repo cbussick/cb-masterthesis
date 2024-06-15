@@ -73,6 +73,14 @@ const themeWithOverrides: Theme = {
         elevation: 2,
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontSize: theme.typography.body1.fontSize,
+        },
+      },
+    },
   },
 };
 
