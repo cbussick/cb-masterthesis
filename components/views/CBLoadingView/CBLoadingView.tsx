@@ -2,6 +2,7 @@
 
 import { CBLogo } from "@/components/CBLogo/CBLogo";
 import { CircularProgress, Container, Stack } from "@mui/material";
+import { motion } from "framer-motion";
 
 export const CBLoadingView = (): JSX.Element => {
   return (
@@ -14,11 +15,24 @@ export const CBLoadingView = (): JSX.Element => {
         bgcolor: (t) => t.palette.background.default,
       }}
     >
-      <Container maxWidth="md" sx={{ px: { xs: 5, md: undefined } }}>
-        <CBLogo style={{ width: "100%" }} />
-      </Container>
+      <Container maxWidth="md">
+        <motion.div
+          animate={{
+            scale: [1, 1.025, 1],
+          }}
+          transition={{
+            duration: 2,
+            times: [0, 0.5, 1],
+            repeat: Infinity,
+          }}
+        >
+          <CBLogo style={{ width: "100%" }} />
 
-      <CircularProgress size={80} />
+          <Stack sx={{ alignItems: "center" }}>
+            <CircularProgress size={80} />
+          </Stack>
+        </motion.div>
+      </Container>
     </Stack>
   );
 };
