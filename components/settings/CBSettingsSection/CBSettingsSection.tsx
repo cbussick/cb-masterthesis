@@ -1,12 +1,10 @@
-"use client";
-
 import { Box, Container, Stack, Typography } from "@mui/material";
-import { CBProfileSettingsSectionProps } from "./CBProfileSettingsSectionInterfaces";
+import { CBSettingsSectionProps } from "./CBSettingsSectionInterfaces";
 
-export const CBProfileSettingsSection = ({
+export const CBSettingsSection = ({
   title,
   children,
-}: CBProfileSettingsSectionProps): JSX.Element => {
+}: CBSettingsSectionProps): JSX.Element => {
   return (
     <Box>
       <Container maxWidth="md">

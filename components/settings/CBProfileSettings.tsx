@@ -7,7 +7,7 @@ import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
@@ -15,8 +15,7 @@ import { useForm } from "react-hook-form";
 import { CBDeleteAccountDialog } from "../CBDeleteAccountDialog/CBDeleteAccountDialog";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEditTextField } from "../CBEditTextField/CBEditTextField";
-import { CBProfileImageSelector } from "../CBProfileImageSelector/CBProfileImageSelector";
-import { CBProfileSettingsSection } from "./CBProfileSettingsSection/CBProfileSettingsSection";
+import { CBSettingsSection } from "./CBSettingsSection/CBSettingsSection";
 
 const usernameId = "username";
 const oldPasswordId = "oldPassword";
@@ -118,59 +117,48 @@ export const CBProfileSettings = (): JSX.Element => {
   return (
     <>
       <Stack spacing={3}>
-        <Typography>
-          Hier kannst du dein Profil deinen Wünschen entsprechend anpassen.
-          Erreiche das nächste Level, um mehr Avatare freizuschalten.
-        </Typography>
+        <Typography>Hier kannst du dein Profil anpassen.</Typography>
 
-        <Stack spacing={3}>
-          <CBProfileSettingsSection title="Allgemeines">
-            <Stack spacing={2}>
-              <CBEditTextField
-                label="Benutzername"
-                value={oldUsername}
-                onClickEdit={() => setEditingUsername(true)}
-              />
+        <CBSettingsSection title="Allgemeines">
+          <Stack spacing={2}>
+            <CBEditTextField
+              label="Benutzername"
+              value={oldUsername}
+              onClickEdit={() => setEditingUsername(true)}
+            />
 
-              <CBEditTextField
-                label="Passwort"
-                value="********"
-                onClickEdit={() => setEditingPassword(true)}
-              />
+            <CBEditTextField
+              label="Passwort"
+              value="********"
+              onClickEdit={() => setEditingPassword(true)}
+            />
 
-              <CBEditTextField
-                label="Vorname"
-                value={user?.customData.firstName || ""}
-              />
+            <CBEditTextField
+              label="Vorname"
+              value={user?.customData.firstName || ""}
+            />
 
-              <CBEditTextField
-                label="Nachname"
-                value={user?.customData.lastName || ""}
-              />
+            <CBEditTextField
+              label="Nachname"
+              value={user?.customData.lastName || ""}
+            />
 
-              <CBEditTextField label="E-Mail" value={user?.user?.email || ""} />
+            <CBEditTextField label="E-Mail" value={user?.user?.email || ""} />
 
-              <Button
-                variant="text"
-                sx={{
-                  color: (t) => t.palette.error.main,
-                  alignSelf: "center",
-                }}
-                onClick={() => {
-                  setDeleteDialogOpen(true);
-                }}
-              >
-                Account löschen
-              </Button>
-            </Stack>
-          </CBProfileSettingsSection>
-
-          <Divider />
-
-          <CBProfileSettingsSection title="Avatar">
-            <CBProfileImageSelector />
-          </CBProfileSettingsSection>
-        </Stack>
+            <Button
+              variant="text"
+              sx={{
+                color: (t) => t.palette.error.main,
+                alignSelf: "center",
+              }}
+              onClick={() => {
+                setDeleteDialogOpen(true);
+              }}
+            >
+              Account löschen
+            </Button>
+          </Stack>
+        </CBSettingsSection>
       </Stack>
 
       <CBDialog

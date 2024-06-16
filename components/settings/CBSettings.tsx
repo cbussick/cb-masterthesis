@@ -1,9 +1,10 @@
 "use client";
 
 import { CBTabPanel } from "@/components/CBTabPanel/CBTabPanel";
-import { PersonRounded } from "@mui/icons-material";
+import { FaceRounded, PersonRounded } from "@mui/icons-material";
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
+import { CBAvatarSettings } from "./CBAvatarSettings";
 import { CBProfileSettings } from "./CBProfileSettings";
 
 export const CBSettings = () => {
@@ -19,11 +20,17 @@ export const CBSettings = () => {
           }}
         >
           <Tab label="Profil verwalten" icon={<PersonRounded />} />
+
+          <Tab label="Avatar verwalten" icon={<FaceRounded />} />
         </Tabs>
       </Box>
 
       <CBTabPanel value={value} index={0}>
         <CBProfileSettings />
+      </CBTabPanel>
+
+      <CBTabPanel value={value} index={1}>
+        <CBAvatarSettings />
       </CBTabPanel>
     </Stack>
   );
