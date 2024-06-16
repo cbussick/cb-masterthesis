@@ -1,10 +1,9 @@
 "use client";
 
 import { CBTabPanel } from "@/components/CBTabPanel/CBTabPanel";
-import { NotificationsNoneRounded, PersonRounded } from "@mui/icons-material";
+import { PersonRounded } from "@mui/icons-material";
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { CBNotificationSettings } from "./CBNotificationSettings";
 import { CBProfileSettings } from "./CBProfileSettings";
 
 export const CBSettings = () => {
@@ -20,17 +19,11 @@ export const CBSettings = () => {
           }}
         >
           <Tab label="Profil verwalten" icon={<PersonRounded />} />
-
-          <Tab label="Benachrichtigungen" icon={<NotificationsNoneRounded />} />
         </Tabs>
       </Box>
 
       <CBTabPanel value={value} index={0}>
         <CBProfileSettings />
-      </CBTabPanel>
-
-      <CBTabPanel value={value} index={1}>
-        <CBNotificationSettings />
       </CBTabPanel>
     </Stack>
   );
