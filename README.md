@@ -2,7 +2,7 @@
 
 ![DiNAs Lab Logo](public/logo/dinaslab-logo-simple.svg)
 
-DiNAs lab is a platform for teaching school students about biology. This project is part of the curriculum of our master's degree.
+DiNAs lab is a platform for teaching school students about biology. This project is part of the curriculum of my master's degree.
 
 ## Quickstart
 
