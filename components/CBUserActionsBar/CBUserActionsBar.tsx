@@ -35,14 +35,14 @@ export const CBUserActionsBar = (): JSX.Element => {
         <CBIconButton
           onClick={(event) => handleNotificationIconButtonClick(event)}
           icon={<NotificationsNone />}
-          ariaLabel="Benachrichtigungen"
+          label="Benachrichtigungen"
           aria-describedby={notificationMenuId}
         />
 
         <CBIconButton
           onClick={() => setSearchMenuOpen((prevOpen) => !prevOpen)}
           icon={<Search />}
-          ariaLabel="Suche"
+          label="Suche"
         />
       </Stack>
 
