@@ -78,6 +78,11 @@ const themeWithOverrides: Theme = {
         },
       },
     },
+    MuiTooltip: {
+      defaultProps: {
+        arrow: true,
+      },
+    },
   },
 };
 

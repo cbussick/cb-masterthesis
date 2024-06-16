@@ -1,7 +1,7 @@
 "use client";
 
 import { EditRounded } from "@mui/icons-material";
-import { IconButton, TextField } from "@mui/material";
+import { IconButton, TextField, Tooltip } from "@mui/material";
 import { CBEditTextFieldProps } from "./CBEditTextFieldInterfaces";
 
 export const CBEditTextField = ({
@@ -19,9 +19,11 @@ export const CBEditTextField = ({
       sx={{ flexGrow: 1, ...sx }}
       InputProps={{
         endAdornment: onClickEdit && (
-          <IconButton onClick={onClickEdit}>
-            <EditRounded />
-          </IconButton>
+          <Tooltip title="Bearbeiten" placement="right">
+            <IconButton onClick={onClickEdit}>
+              <EditRounded />
+            </IconButton>
+          </Tooltip>
         ),
       }}
     />
