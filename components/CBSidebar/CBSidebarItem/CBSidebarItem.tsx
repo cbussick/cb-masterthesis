@@ -66,7 +66,7 @@ export const CBSidebarItem = ({
   );
 
   return isToolTipActive ? (
-    <Tooltip title={label} placement="right" arrow>
+    <Tooltip title={label} placement="right">
       {item}
     </Tooltip>
   ) : (

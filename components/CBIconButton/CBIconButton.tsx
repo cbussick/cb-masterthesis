@@ -9,7 +9,7 @@ export const CBIconButton = ({
   label,
 }: CBIconButtonProps): JSX.Element => {
   return (
-    <Tooltip title={label} arrow>
+    <Tooltip title={label}>
       <IconButton
         onClick={onClick}
         aria-label={label}
