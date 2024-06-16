@@ -58,7 +58,7 @@ const themeWithOverrides: Theme = {
       styleOverrides: {
         root: {
           textTransform: "none",
-          fontWeight: "bold",
+          fontWeight: theme.typography.fontWeightBold,
         },
       },
       defaultProps: {
