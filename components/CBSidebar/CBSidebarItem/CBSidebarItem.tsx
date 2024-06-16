@@ -7,6 +7,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
   alpha,
 } from "@mui/material";
 import Link from "next/link";
@@ -17,6 +18,7 @@ export const CBSidebarItem = ({
   listItemButtonProps,
   icon,
   label,
+  isToolTipActive,
 }: CBSidebarItemProps): JSX.Element => {
   const { isOpen } = useSidebar();
   const pathname = usePathname();
@@ -31,7 +33,7 @@ export const CBSidebarItem = ({
     isActive = listItemButtonProps.href === pathname;
   }
 
-  return (
+  const item: JSX.Element = (
     <ListItem
       disablePadding
       sx={{
@@ -61,5 +63,13 @@ export const CBSidebarItem = ({
         />
       </ListItemButton>
     </ListItem>
+  );
+
+  return isToolTipActive ? (
+    <Tooltip title={label} placement="right">
+      {item}
+    </Tooltip>
+  ) : (
+    item
   );
 };

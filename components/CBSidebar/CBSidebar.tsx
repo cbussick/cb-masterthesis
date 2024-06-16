@@ -19,12 +19,15 @@ import {
 import {
   Box,
   CircularProgress,
+  Collapse,
   Divider,
   List,
   Stack,
+  collapseClasses,
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
+import { useState } from "react";
 import { CBLogo } from "../CBLogo/CBLogo";
 import { CBSidebarProps } from "./CBSidebarInterfaces";
 import { CBSidebarItem } from "./CBSidebarItem/CBSidebarItem";
@@ -41,146 +44,163 @@ export const CBSidebar = ({
   sidebarWidthClosed,
 }: CBSidebarProps): JSX.Element => {
   const theme = useTheme();
+  const user = useUser();
   const { isOpen, toggleIsOpen } = useSidebar();
   const { showSnackbar } = useSnackbar();
 
-  const user = useUser();
+  const [isTransitionRunning, setTransitionRunning] = useState<boolean>(false);
 
   const settingsRouteData = menuItems.find(
     (item) => item.href === CBRoute.Einstellungen,
   );
 
+  const isToolTipActive = !isOpen && !isTransitionRunning;
+
   return (
-    <Box
+    <Collapse
+      orientation="horizontal"
+      collapsedSize={sidebarWidthClosed}
+      in={isOpen}
+      onEnter={() => {
+        setTransitionRunning(true);
+      }}
+      onEntered={() => {
+        setTransitionRunning(false);
+      }}
+      onExit={() => {
+        setTransitionRunning(true);
+      }}
+      onExited={() => {
+        setTransitionRunning(false);
+      }}
       sx={{
-        bgcolor: (t) => t.palette.background.default,
-        width: isOpen ? sidebarWidthOpen : sidebarWidthClosed,
-        transition: isOpen
-          ? (t) =>
-              t.transitions.create("width", {
-                easing: t.transitions.easing.sharp,
-                duration: t.transitions.duration.enteringScreen,
-              })
-          : (t) =>
-              t.transitions.create("width", {
-                easing: t.transitions.easing.sharp,
-                duration: t.transitions.duration.leavingScreen,
-              }),
-        borderRadius: 5,
-        overflowX: "hidden",
-        overflowY: "auto",
         position: "absolute",
         top: (t) => t.spacing(layoutVerticalSpacing),
         bottom: (t) => t.spacing(layoutVerticalSpacing),
         left: (t) => t.spacing(layoutHorizontalSpacing),
-        pt: 3,
-        pb: 5,
         zIndex: 999,
+        bgcolor: (t) => t.palette.background.default,
+        borderRadius: 5,
         boxShadow: (t) => t.shadows[8],
+        [`& .${collapseClasses.wrapperInner}`]: {
+          width: "100%",
+        },
       }}
     >
-      <Stack
+      <Box
         sx={{
           height: "100%",
-          justifyContent: "space-between",
           pt: 3,
-          px: sidebarPaddingHorizontal,
+          pb: 5,
         }}
       >
         <Stack
-          spacing={2}
           sx={{
-            alignItems: "flex-start",
+            height: "100%",
+            justifyContent: "space-between",
+            pt: 3,
+            px: sidebarPaddingHorizontal,
           }}
         >
-          <Box
+          <Stack
+            spacing={2}
             sx={{
-              width: "100%",
-              [`& #${logoTextElementID}`]: {
-                opacity: isOpen ? 1 : 0,
-                transition: "opacity 0.2s ease-in-out",
-              },
+              alignItems: "flex-start",
             }}
           >
-            <Link
-              href="/"
-              style={{
+            <Box
+              sx={{
                 width: "100%",
+                [`& #${logoTextElementID}`]: {
+                  opacity: isOpen ? 1 : 0,
+                  transition: "opacity 0.2s ease-in-out",
+                },
               }}
             >
-              <CBLogo
-                textElementID={logoTextElementID}
+              <Link
+                href="/"
                 style={{
-                  width:
-                    sidebarWidthOpen -
-                    sidebarPaddingHorizontal * getSpacingFactor() * 2 -
-                    itemsLeftPadding * getSpacingFactor(),
-                  paddingLeft: theme.spacing(itemsLeftPadding),
+                  width: "100%",
                 }}
+              >
+                <CBLogo
+                  textElementID={logoTextElementID}
+                  style={{
+                    width:
+                      sidebarWidthOpen -
+                      sidebarPaddingHorizontal * getSpacingFactor() * 2 -
+                      itemsLeftPadding * getSpacingFactor(),
+                    paddingLeft: theme.spacing(itemsLeftPadding),
+                  }}
+                />
+              </Link>
+            </Box>
+
+            <List sx={{ width: "100%" }} disablePadding>
+              <CBSidebarItem
+                listItemButtonProps={{ onClick: toggleIsOpen }}
+                icon={
+                  isOpen ? (
+                    <KeyboardDoubleArrowLeft />
+                  ) : (
+                    <KeyboardDoubleArrowRight />
+                  )
+                }
+                label="Einklappen"
+                isToolTipActive={isToolTipActive}
               />
-            </Link>
-          </Box>
+            </List>
+
+            <Divider sx={{ mx: 4, width: "100%" }} />
+
+            {user ? (
+              <List sx={{ width: "100%" }} disablePadding>
+                {menuItems.reduce<JSX.Element[]>((acc, item) => {
+                  if (
+                    item.forRoles.includes(user?.customData.role) &&
+                    item.href !== CBRoute.Einstellungen
+                  ) {
+                    acc.push(
+                      <CBSidebarItem
+                        key={item.label}
+                        listItemButtonProps={{ href: item.href }}
+                        icon={item.icon}
+                        label={item.label}
+                        isToolTipActive={isToolTipActive}
+                      />,
+                    );
+                  }
+                  return acc;
+                }, [])}
+              </List>
+            ) : (
+              <CircularProgress />
+            )}
+          </Stack>
 
           <List sx={{ width: "100%" }} disablePadding>
-            <CBSidebarItem
-              listItemButtonProps={{ onClick: toggleIsOpen }}
-              icon={
-                isOpen ? (
-                  <KeyboardDoubleArrowLeft />
-                ) : (
-                  <KeyboardDoubleArrowRight />
-                )
-              }
-              label="Einklappen"
-            />
-          </List>
+            {settingsRouteData && (
+              <CBSidebarItem
+                listItemButtonProps={{
+                  href: settingsRouteData.href,
+                }}
+                icon={settingsRouteData.icon}
+                label={settingsRouteData.label}
+                isToolTipActive={isToolTipActive}
+              />
+            )}
 
-          <Divider sx={{ mx: 4, width: "100%" }} />
-
-          {user ? (
-            <List sx={{ width: "100%" }} disablePadding>
-              {menuItems.reduce<JSX.Element[]>((acc, item) => {
-                if (
-                  item.forRoles.includes(user?.customData.role) &&
-                  item.href !== CBRoute.Einstellungen
-                ) {
-                  acc.push(
-                    <CBSidebarItem
-                      key={item.label}
-                      listItemButtonProps={{ href: item.href }}
-                      icon={item.icon}
-                      label={item.label}
-                    />,
-                  );
-                }
-                return acc;
-              }, [])}
-            </List>
-          ) : (
-            <CircularProgress />
-          )}
-        </Stack>
-
-        <List sx={{ width: "100%" }} disablePadding>
-          {settingsRouteData && (
             <CBSidebarItem
               listItemButtonProps={{
-                href: settingsRouteData.href,
+                onClick: () => handleSignOut(showSnackbar),
               }}
-              icon={settingsRouteData.icon}
-              label={settingsRouteData.label}
+              icon={<LogoutRounded />}
+              label="Abmelden"
+              isToolTipActive={isToolTipActive}
             />
-          )}
-
-          <CBSidebarItem
-            listItemButtonProps={{
-              onClick: () => handleSignOut(showSnackbar),
-            }}
-            icon={<LogoutRounded />}
-            label="Abmelden"
-          />
-        </List>
-      </Stack>
-    </Box>
+          </List>
+        </Stack>
+      </Box>
+    </Collapse>
   );
 };
