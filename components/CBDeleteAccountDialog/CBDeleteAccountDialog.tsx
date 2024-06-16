@@ -4,6 +4,7 @@ import { getAuthError } from "@/firebase/authErrors";
 import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
+import { Error } from "@mui/icons-material";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider, deleteUser } from "firebase/auth";
@@ -80,7 +81,13 @@ export const CBDeleteAccountDialog = ({
     <CBDialog
       isOpen={isOpen}
       onClose={onClose}
-      title="Konto löschen"
+      title={
+        <Stack alignItems="center" spacing={1}>
+          <Error color="error" sx={{ fontSize: 80 }} />
+
+          <Typography variant="inherit">Konto löschen</Typography>
+        </Stack>
+      }
       formProps={{
         onSubmit: handleSubmit(handleConfirmDeleteion),
         noValidate: true,
