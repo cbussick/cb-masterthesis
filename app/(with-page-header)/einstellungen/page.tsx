@@ -1,4 +1,4 @@
-import { CBSettings } from "@/components/settings/CBSettings/CBSettings";
+import { CBSettings } from "@/components/settings/CBSettings";
 
 export default function Settings() {
   return <CBSettings />;

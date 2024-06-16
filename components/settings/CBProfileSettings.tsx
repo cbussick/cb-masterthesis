@@ -7,22 +7,16 @@ import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { CBDeleteAccountDialog } from "../CBDeleteAccountDialog/CBDeleteAccountDialog";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEditTextField } from "../CBEditTextField/CBEditTextField";
 import { CBProfileImageSelector } from "../CBProfileImageSelector/CBProfileImageSelector";
+import { CBProfileSettingsSection } from "./CBProfileSettingsSection/CBProfileSettingsSection";
 
 const usernameId = "username";
 const oldPasswordId = "oldPassword";
@@ -41,8 +35,9 @@ export const CBProfileSettings = (): JSX.Element => {
   const user = useUser();
   const { showSnackbar } = useSnackbar();
 
-  const [isEditingUsername, setEditingUsername] = useState(false);
-  const [isEditingPassword, setEditingPassword] = useState(false);
+  const [isEditingUsername, setEditingUsername] = useState<boolean>(false);
+  const [isEditingPassword, setEditingPassword] = useState<boolean>(false);
+  const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 
   const oldUsername = user?.customData.username || "";
 
@@ -129,31 +124,52 @@ export const CBProfileSettings = (): JSX.Element => {
         </Typography>
 
         <Stack spacing={3}>
-          <Box>
-            <Container maxWidth="md">
-              <Stack spacing={2}>
-                <CBEditTextField
-                  label="Benutzername"
-                  value={oldUsername}
-                  onClickIcon={() => setEditingUsername(true)}
-                />
-
-                <CBEditTextField
-                  label="Passwort"
-                  value="********"
-                  onClickIcon={() => setEditingPassword(true)}
-                />
-              </Stack>
-            </Container>
-          </Box>
+          <CBProfileSettingsSection title="Avatar">
+            <CBProfileImageSelector />
+          </CBProfileSettingsSection>
 
           <Divider />
 
-          <Box>
-            <Container maxWidth="md">
-              <CBProfileImageSelector />
-            </Container>
-          </Box>
+          <CBProfileSettingsSection title="Allgemeines">
+            <Stack spacing={2}>
+              <CBEditTextField
+                label="Benutzername"
+                value={oldUsername}
+                onClickEdit={() => setEditingUsername(true)}
+              />
+
+              <CBEditTextField
+                label="Passwort"
+                value="********"
+                onClickEdit={() => setEditingPassword(true)}
+              />
+
+              <CBEditTextField
+                label="Vorname"
+                value={user?.customData.firstName || ""}
+              />
+
+              <CBEditTextField
+                label="Nachname"
+                value={user?.customData.lastName || ""}
+              />
+
+              <CBEditTextField label="E-Mail" value={user?.user?.email || ""} />
+
+              <Button
+                variant="text"
+                sx={{
+                  color: (t) => t.palette.error.main,
+                  alignSelf: "center",
+                }}
+                onClick={() => {
+                  setDeleteDialogOpen(true);
+                }}
+              >
+                Account löschen
+              </Button>
+            </Stack>
+          </CBProfileSettingsSection>
         </Stack>
       </Stack>
 
@@ -177,10 +193,10 @@ export const CBProfileSettings = (): JSX.Element => {
       >
         <Stack spacing={2}>
           <TextField
-            label="Benutzername"
+            label="Aktueller Benutzername"
             type="text"
             disabled
-            variant="filled"
+            variant="outlined"
             value={oldUsername}
           />
 
@@ -242,6 +258,11 @@ export const CBProfileSettings = (): JSX.Element => {
           />
         </Stack>
       </CBDialog>
+
+      <CBDeleteAccountDialog
+        isOpen={isDeleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      />
     </>
   );
 };
