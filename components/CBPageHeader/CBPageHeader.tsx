@@ -47,7 +47,7 @@ export const CBPageHeader = ({
 
       <Stack
         direction="row"
-        spacing={7}
+        spacing={2}
         sx={{
           alignItems: "center",
         }}
