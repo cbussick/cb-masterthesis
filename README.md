@@ -2,7 +2,7 @@
 
 ![DiNAs Lab Logo](public/logo/dinaslab-logo-simple.svg)
 
-DiNAs lab is a platform for teaching school students about biology. This project is part of the curriculum of our master's degree. It was developed throughout the summer semester 2023 and winter semester 2023/2024.
+DiNAs lab is a platform for teaching school students about biology. This project is part of the curriculum of our master's degree.
 
 ## Quickstart
 
