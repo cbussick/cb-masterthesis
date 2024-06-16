@@ -15,4 +15,5 @@ export interface CBSidebarItemProps {
   listItemButtonProps: CBListItemButtonProps;
   icon: ListItemIconProps["children"];
   label: ListItemTextProps["primary"];
+  isToolTipActive: boolean;
 }
