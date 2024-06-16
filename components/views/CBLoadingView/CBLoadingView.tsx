@@ -14,7 +14,7 @@ export const CBLoadingView = (): JSX.Element => {
         bgcolor: (t) => t.palette.background.default,
       }}
     >
-      <Container maxWidth="md" sx={{ px: { xs: 5, md: undefined } }}>
+      <Container maxWidth="md">
         <CBLogo style={{ width: "100%" }} />
       </Container>
 
