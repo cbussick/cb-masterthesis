@@ -149,8 +149,8 @@ export const CBProfileSettings = (): JSX.Element => {
 
             <Button
               variant="text"
+              color="error"
               sx={{
-                color: (t) => t.palette.error.main,
                 alignSelf: "center",
               }}
               onClick={() => {

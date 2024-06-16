@@ -4,6 +4,7 @@ import { getAuthError } from "@/firebase/authErrors";
 import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
+import { Error } from "@mui/icons-material";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider, deleteUser } from "firebase/auth";
@@ -32,7 +33,7 @@ export const CBDeleteAccountDialog = ({
 
   const password = watch("password");
 
-  const handleUltimateDelete = () => {
+  const handleConfirmDeleteion = () => {
     reset();
 
     if (user?.user && user.user.email) {
@@ -80,31 +81,31 @@ export const CBDeleteAccountDialog = ({
     <CBDialog
       isOpen={isOpen}
       onClose={onClose}
-      title="Konto löschen?"
+      title={
+        <Stack alignItems="center" spacing={1}>
+          <Error color="error" sx={{ fontSize: 80 }} />
+
+          <Typography variant="inherit">Konto löschen</Typography>
+        </Stack>
+      }
       formProps={{
-        onSubmit: handleSubmit(handleUltimateDelete),
+        onSubmit: handleSubmit(handleConfirmDeleteion),
         noValidate: true,
       }}
       actions={
         <>
-          <Button variant="text" onClick={onClose}>
+          <Button variant="text" color="error" onClick={onClose}>
             Abbrechen
           </Button>
 
-          <Button
-            type="submit"
-            sx={{
-              bgcolor: (t) => t.palette.error.main,
-              ":hover": { bgcolor: (t) => t.palette.error.dark },
-            }}
-          >
+          <Button type="submit" color="error">
             Löschen
           </Button>
         </>
       }
     >
       <Stack spacing={2}>
-        <Typography variant="body2">
+        <Typography>
           Wenn du dein Konto löschst, kannst du diesen Schritt nicht mehr
           rückgängig machen. Alle deine Daten werden gelöscht und du kannst dich
           nicht mehr anmelden.
@@ -115,9 +116,7 @@ export const CBDeleteAccountDialog = ({
             Bist du dir sicher, dass du uns verlassen möchtest?
           </Typography>
 
-          <Typography variant="body2">
-            Um fortzufahren, gib bitte dein Passwort ein.
-          </Typography>
+          <Typography>Um fortzufahren, gib bitte dein Passwort ein.</Typography>
 
           <TextField
             label="Passwort"
