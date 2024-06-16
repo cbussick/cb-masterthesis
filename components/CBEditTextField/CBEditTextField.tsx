@@ -1,35 +1,29 @@
 "use client";
 
 import { EditRounded } from "@mui/icons-material";
-import { IconButton, Stack, TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { CBEditTextFieldProps } from "./CBEditTextFieldInterfaces";
 
 export const CBEditTextField = ({
   label,
   value,
-  onClickIcon,
+  onClickEdit,
   sx,
 }: CBEditTextFieldProps): JSX.Element => {
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      sx={{
-        alignItems: "center",
-        ...sx,
+    <TextField
+      label={label}
+      variant="outlined"
+      value={value}
+      disabled
+      sx={{ flexGrow: 1, ...sx }}
+      InputProps={{
+        endAdornment: onClickEdit && (
+          <IconButton onClick={onClickEdit}>
+            <EditRounded />
+          </IconButton>
+        ),
       }}
-    >
-      <TextField
-        label={label}
-        variant="filled"
-        value={value}
-        disabled
-        sx={{ flexGrow: 1 }}
-      />
-
-      <IconButton onClick={onClickIcon}>
-        <EditRounded />
-      </IconButton>
-    </Stack>
+    />
   );
 };

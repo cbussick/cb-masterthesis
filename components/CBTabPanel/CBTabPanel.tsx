@@ -1,5 +1,7 @@
+"use client";
+
 import { Box } from "@mui/material";
-import { CBTabPanelProps } from "./CBSettingsInterfaces";
+import { CBTabPanelProps } from "./CBTabPanelInterfaces";
 
 export const CBTabPanel = ({ children, value, index }: CBTabPanelProps) => {
   return (
