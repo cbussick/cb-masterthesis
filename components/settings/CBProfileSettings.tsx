@@ -128,9 +128,9 @@ export const CBProfileSettings = (): JSX.Element => {
           Erreiche das nächste Level, um mehr Avatare freizuschalten.
         </Typography>
 
-        <Box>
-          <Container maxWidth="md">
-            <Stack spacing={3}>
+        <Stack spacing={3}>
+          <Box>
+            <Container maxWidth="md">
               <Stack spacing={2}>
                 <CBEditTextField
                   label="Benutzername"
@@ -144,13 +144,17 @@ export const CBProfileSettings = (): JSX.Element => {
                   onClickIcon={() => setEditingPassword(true)}
                 />
               </Stack>
+            </Container>
+          </Box>
 
-              <Divider />
+          <Divider />
 
+          <Box>
+            <Container maxWidth="md">
               <CBProfileImageSelector />
-            </Stack>
-          </Container>
-        </Box>
+            </Container>
+          </Box>
+        </Stack>
       </Stack>
 
       <CBDialog
