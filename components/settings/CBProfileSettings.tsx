@@ -7,7 +7,7 @@ import { reauthenticateUser } from "@/firebase/reauthenticateUser";
 import { useUser } from "@/firebase/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider } from "firebase/auth";
 import { useState } from "react";
@@ -117,7 +117,9 @@ export const CBProfileSettings = (): JSX.Element => {
   return (
     <>
       <Stack spacing={3}>
-        <Typography>Hier kannst du dein Profil anpassen.</Typography>
+        <Alert severity="info" sx={{ alignItems: "center" }}>
+          <Typography>Hier kannst du dein Profil anpassen.</Typography>
+        </Alert>
 
         <CBSettingsSection title="Allgemeines">
           <Stack spacing={2}>
