@@ -124,12 +124,6 @@ export const CBProfileSettings = (): JSX.Element => {
         </Typography>
 
         <Stack spacing={3}>
-          <CBProfileSettingsSection title="Avatar">
-            <CBProfileImageSelector />
-          </CBProfileSettingsSection>
-
-          <Divider />
-
           <CBProfileSettingsSection title="Allgemeines">
             <Stack spacing={2}>
               <CBEditTextField
@@ -169,6 +163,12 @@ export const CBProfileSettings = (): JSX.Element => {
                 Account löschen
               </Button>
             </Stack>
+          </CBProfileSettingsSection>
+
+          <Divider />
+
+          <CBProfileSettingsSection title="Avatar">
+            <CBProfileImageSelector />
           </CBProfileSettingsSection>
         </Stack>
       </Stack>
