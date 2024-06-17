@@ -35,6 +35,7 @@ export const CBQuizAnswerButton = ({
         direction="row"
         spacing={2}
         sx={{
+          width: "100%",
           alignItems: "center",
         }}
       >
@@ -47,7 +48,9 @@ export const CBQuizAnswerButton = ({
           {answerIndexToLetterMap[index]}
         </Typography>
 
-        <Typography variant="h3">{answer.text}</Typography>
+        <Typography variant="h3" textAlign="start">
+          {answer.text}
+        </Typography>
       </Stack>
     </CBAnswerButton>
   );
