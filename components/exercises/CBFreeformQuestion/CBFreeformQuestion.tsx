@@ -79,7 +79,6 @@ export const CBFreeformQuestion = ({
 
   return (
     <Container
-      maxWidth="lg"
       sx={{
         flexGrow: 1,
         display: "flex",
