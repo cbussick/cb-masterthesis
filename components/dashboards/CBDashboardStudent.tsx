@@ -41,21 +41,22 @@ export const CBDashboardStudent = (): JSX.Element => {
   const maxLevelReached = !currentLevel.pointsToNextLevel;
 
   return (
-    <Stack>
-      <Stack spacing={3}>
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-          }}
-        >
-          <CBWelcomeBanner />
+    <Stack spacing={3} sx={{ overflowY: "hidden" }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
+        <CBWelcomeBanner />
 
-          <CBUserActionsBar />
-        </Stack>
+        <CBUserActionsBar />
+      </Stack>
 
+      {/* `p` is necessary to not have the card shadows cut off */}
+      <Stack sx={{ overflowY: "auto", p: 0.5 }}>
         <Stack
           direction="row"
           spacing={5}
@@ -94,35 +95,35 @@ export const CBDashboardStudent = (): JSX.Element => {
 
           <CBDateCalendar />
         </Stack>
+
+        <Divider sx={{ mt: 3, mb: 5 }} />
+
+        <Grid container spacing={3} disableEqualOverflow>
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/lab-equipment.jpg"
+              text="Themenwelt"
+              href="/themenwelt"
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/topics/zelle.jpg"
+              text="Tierische und pflanzliche Zellen"
+              href="/freie-uebung/zelle"
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/pruefungssimulator.jpg"
+              text="Prüfungssimulator"
+              href="pruefungssimulator"
+            />
+          </Grid>
+        </Grid>
       </Stack>
-
-      <Divider sx={{ mt: 3, mb: 5 }} />
-
-      <Grid container spacing={3}>
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/lab-equipment.jpg"
-            text="Themenwelt"
-            href="/themenwelt"
-          />
-        </Grid>
-
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/topics/zelle.jpg"
-            text="Tierische und pflanzliche Zellen"
-            href="/freie-uebung/zelle"
-          />
-        </Grid>
-
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/pruefungssimulator.jpg"
-            text="Prüfungssimulator"
-            href="pruefungssimulator"
-          />
-        </Grid>
-      </Grid>
     </Stack>
   );
 };
