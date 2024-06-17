@@ -3,7 +3,7 @@ import { CBImage } from "@/components/CBImage/CBImage";
 import { useUser } from "@/firebase/useUser";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
-import { Box, ButtonProps, Stack } from "@mui/material";
+import { Box, ButtonProps, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
 import { CBQuizAnswerButton } from "./CBQuizAnswerButton/CBQuizAnswerButton";
@@ -72,13 +72,7 @@ export const CBQuiz = ({
           justifyContent: "center",
         }}
       >
-        <Stack
-          spacing={5}
-          sx={{
-            width: "100%",
-            maxWidth: 1200,
-          }}
-        >
+        <Container>
           <Stack
             spacing={4}
             sx={{
@@ -108,7 +102,7 @@ export const CBQuiz = ({
               ))}
             </Grid>
           </Stack>
-        </Stack>
+        </Container>
       </Box>
     </Stack>
   );
