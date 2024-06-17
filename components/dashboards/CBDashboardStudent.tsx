@@ -37,15 +37,8 @@ export const CBDashboardStudent = (): JSX.Element => {
     ) || levels[levels.length - 1];
 
   const userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
-  let pointsToNextLvl = 0;
-  let maxLevelReached = false;
-
-  if (currentLevel.pointsToNextLevel) {
-    pointsToNextLvl = currentLevel.pointsToNextLevel;
-  } else {
-    pointsToNextLvl = userPoints;
-    maxLevelReached = true;
-  }
+  const pointsToNextLvl = currentLevel.pointsToNextLevel || userPoints;
+  const maxLevelReached = !currentLevel.pointsToNextLevel;
 
   return (
     <Stack>
