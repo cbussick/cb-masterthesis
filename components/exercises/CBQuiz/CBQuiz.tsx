@@ -30,8 +30,7 @@ export const CBQuiz = ({
   }, [exercise.answers]);
 
   const onConfirm: ButtonProps["onClick"] = (e) => {
-    const castEventTarget = e.currentTarget as HTMLButtonElement;
-    const buttonAnswerId = castEventTarget.id;
+    const buttonAnswerId = e.currentTarget.id;
 
     setClickedButton(buttonAnswerId);
 
