@@ -17,7 +17,6 @@ export const CBQuizAnswerButton = ({
   onClick,
   isCurrentExerciseFinished,
   clickedButton,
-  sx,
   index,
 }: CBQuizAnswerButtonProps): JSX.Element => {
   return (
@@ -30,7 +29,6 @@ export const CBQuizAnswerButton = ({
       clickedButton={clickedButton}
       sx={{
         height: "100%",
-        ...sx,
       }}
     >
       <Stack
