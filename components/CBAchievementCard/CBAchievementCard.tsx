@@ -21,7 +21,6 @@ export const CBAchievementCard = ({
         flexDirection: "row",
         bgcolor: (t) =>
           isCompleted ? t.palette.background.default : t.palette.grey[200],
-        borderRadius: 3,
         opacity: isCompleted ? 1 : 0.6,
         pointerEvents: isCompleted ? "none" : "auto",
       }}

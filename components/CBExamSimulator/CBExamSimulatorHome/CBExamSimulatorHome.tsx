@@ -35,7 +35,6 @@ export const CBExamSimulatorHome = ({
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
-          borderRadius: 3,
           flex: "1 1 auto",
         }}
       >

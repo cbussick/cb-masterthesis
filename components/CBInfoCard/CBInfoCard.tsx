@@ -35,7 +35,6 @@ export const CBInfoCard = ({
     <Card
       sx={{
         height: 300,
-        borderRadius: 3,
         display: "flex",
       }}
       component={motion.div}

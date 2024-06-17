@@ -14,7 +14,6 @@ export const CBGraphCard = ({
       sx={{
         display: "flex",
         height: 150,
-        borderRadius: 3,
       }}
     >
       <Stack

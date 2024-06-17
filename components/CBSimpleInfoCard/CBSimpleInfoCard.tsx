@@ -15,7 +15,6 @@ export const CBSimpleInfoCard = ({
         flexDirection: "row",
         alignItems: "center",
         height: 150,
-        borderRadius: 3,
       }}
     >
       <Stack

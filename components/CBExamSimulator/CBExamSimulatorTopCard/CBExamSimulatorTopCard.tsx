@@ -8,7 +8,7 @@ export const CBExamSimulatorTopCard = ({
   subTitle,
 }: CBExamSimulatorTopCardProps): JSX.Element => {
   return (
-    <Card sx={{ display: "flex", borderRadius: 3, height: 100, width: "100%" }}>
+    <Card sx={{ display: "flex", height: 100, width: "100%" }}>
       <Stack direction="row">
         <Box
           sx={{

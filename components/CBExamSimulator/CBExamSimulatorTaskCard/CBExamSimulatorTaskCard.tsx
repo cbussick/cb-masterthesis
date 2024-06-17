@@ -29,7 +29,6 @@ export const CBExamSimulatorTaskCard = ({
         display: "flex",
         flexDirection: "row",
         height: 60,
-        borderRadius: 3,
         alignItems: "center",
         justifyContent: "space-between",
         px: 2,
