@@ -8,4 +8,5 @@ export interface CBQuizAnswerButtonProps {
   isCurrentExerciseFinished: boolean;
   clickedButton: string;
   sx?: ButtonProps["sx"];
+  index: number;
 }

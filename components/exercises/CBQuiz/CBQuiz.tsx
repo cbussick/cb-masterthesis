@@ -1,11 +1,12 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "@/components/CBImage/CBImage";
+import { CBAnswer } from "@/data/exercises/CBAnswer";
 import { useUser } from "@/firebase/useUser";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { Box, ButtonProps, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CBQuizAnswerButton } from "./CBQuizAnswerButton/CBQuizAnswerButton";
 import { CBQuizProps } from "./CBQuizInterfaces";
 
@@ -22,6 +23,11 @@ export const CBQuiz = ({
   } = useCBExerciseSequence();
 
   const [clickedButton, setClickedButton] = useState<string>("");
+  const [randomizedAnswers, setRandomizedAnswers] = useState<CBAnswer[]>([]);
+
+  useEffect(() => {
+    setRandomizedAnswers([...exercise.answers].sort(() => Math.random() - 0.5));
+  }, [exercise.answers]);
 
   const onConfirm: ButtonProps["onClick"] = (e) => {
     const castEventTarget = e.currentTarget as HTMLButtonElement;
@@ -89,7 +95,7 @@ export const CBQuiz = ({
                 width: "100%",
               }}
             >
-              {exercise.answers.map((answer) => (
+              {randomizedAnswers.map((answer, index) => (
                 <Grid xs={12} lg={6} key={answer.id}>
                   <CBQuizAnswerButton
                     answer={answer}
@@ -97,6 +103,7 @@ export const CBQuiz = ({
                     onClick={onConfirm}
                     isCurrentExerciseFinished={isCurrentExerciseFinished}
                     clickedButton={clickedButton}
+                    index={index}
                   />
                 </Grid>
               ))}

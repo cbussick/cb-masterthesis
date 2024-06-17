@@ -4,6 +4,13 @@ import { CBAnswerButton } from "@/components/CBAnswerButton/CBAnswerButton";
 import { Stack, Typography } from "@mui/material";
 import { CBQuizAnswerButtonProps } from "./CBQuizAnswerButtonInterfaces";
 
+const answerIndexToLetterMap: Record<number, string> = {
+  0: "A",
+  1: "B",
+  2: "C",
+  3: "D",
+};
+
 export const CBQuizAnswerButton = ({
   answer,
   isCorrect,
@@ -11,6 +18,7 @@ export const CBQuizAnswerButton = ({
   isCurrentExerciseFinished,
   clickedButton,
   sx,
+  index,
 }: CBQuizAnswerButtonProps): JSX.Element => {
   return (
     <CBAnswerButton
@@ -38,7 +46,7 @@ export const CBQuizAnswerButton = ({
             fontWeight: (t) => t.typography.fontWeightBold,
           }}
         >
-          {answer.id}
+          {answerIndexToLetterMap[index]}
         </Typography>
 
         <Typography variant="h3">{answer.text}</Typography>
