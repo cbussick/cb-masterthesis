@@ -70,46 +70,44 @@ export const CBQuiz = ({
   };
 
   return (
-    <Stack spacing={4}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Container>
-          <Stack
-            spacing={4}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Container>
+        <Stack
+          spacing={4}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {exercise.image && <CBImage image={exercise.image} />}
+
+          <Grid
+            container
+            spacing={2}
             sx={{
-              justifyContent: "center",
-              alignItems: "center",
+              width: "100%",
             }}
           >
-            {exercise.image && <CBImage image={exercise.image} />}
-
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                width: "100%",
-              }}
-            >
-              {randomizedAnswers.map((answer, index) => (
-                <Grid xs={12} lg={6} key={answer.id}>
-                  <CBQuizAnswerButton
-                    answer={answer}
-                    isCorrect={exercise.correctAnswer === answer.id}
-                    onClick={onConfirm}
-                    isCurrentExerciseFinished={isCurrentExerciseFinished}
-                    clickedButton={clickedButton}
-                    index={index}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Stack>
-        </Container>
-      </Box>
-    </Stack>
+            {randomizedAnswers.map((answer, index) => (
+              <Grid xs={12} lg={6} key={answer.id}>
+                <CBQuizAnswerButton
+                  answer={answer}
+                  isCorrect={exercise.correctAnswer === answer.id}
+                  onClick={onConfirm}
+                  isCurrentExerciseFinished={isCurrentExerciseFinished}
+                  clickedButton={clickedButton}
+                  index={index}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
