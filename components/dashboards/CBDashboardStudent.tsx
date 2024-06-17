@@ -58,17 +58,12 @@ export const CBDashboardStudent = (): JSX.Element => {
 
         <Stack
           direction="row"
-          spacing={2}
+          spacing={5}
           sx={{
             justifyContent: "space-between",
           }}
         >
-          <Stack
-            spacing={2}
-            sx={{
-              width: "60%",
-            }}
-          >
+          <Stack spacing={2}>
             <CBProgressCard
               image="/topics/zelle.jpg"
               title={userLvlTitleText}
