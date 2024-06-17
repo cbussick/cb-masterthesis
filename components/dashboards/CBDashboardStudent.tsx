@@ -16,11 +16,12 @@ import { CBWelcomeBanner } from "../CBWelcomeBanner/CBWelcomeBanner";
 
 const commonGridItemProps: Grid2Props = {
   xs: 6,
-  lg: 3,
+  lg: 4,
 };
 
 export const CBDashboardStudent = (): JSX.Element => {
   const user = useUser();
+
   const userPoints = user?.customData.points || 0;
 
   const lastWeekTimes = getLastWeekTimes(user?.customData.trackedTime || []);
@@ -30,20 +31,18 @@ export const CBDashboardStudent = (): JSX.Element => {
 
   const formattedTime = getFormattedTimeFromSeconds(totalTime);
 
-  let userLvlTitleText = "";
-  let pointsToNextLvl = 0;
-  let maxLevelReached = false;
-
   const currentLevel =
     levels.find(
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
     ) || levels[levels.length - 1];
 
+  const userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
+  let pointsToNextLvl = 0;
+  let maxLevelReached = false;
+
   if (currentLevel.pointsToNextLevel) {
-    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
     pointsToNextLvl = currentLevel.pointsToNextLevel;
   } else {
-    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
     pointsToNextLvl = userPoints;
     maxLevelReached = true;
   }
@@ -112,14 +111,6 @@ export const CBDashboardStudent = (): JSX.Element => {
       <Divider sx={{ mt: 3, mb: 5 }} />
 
       <Grid container spacing={3}>
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/coming-soon/coming-soon.jpg"
-            text="Tägliche Herausforderungen"
-            disabled
-          />
-        </Grid>
-
         <Grid {...commonGridItemProps}>
           <CBInfoCard
             image="/lab-equipment.jpg"
