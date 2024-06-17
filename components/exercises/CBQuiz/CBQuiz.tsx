@@ -1,11 +1,12 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "@/components/CBImage/CBImage";
+import { CBAnswer } from "@/data/exercises/CBAnswer";
 import { useUser } from "@/firebase/useUser";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
-import { Box, ButtonProps, Stack } from "@mui/material";
+import { Box, ButtonProps, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CBQuizAnswerButton } from "./CBQuizAnswerButton/CBQuizAnswerButton";
 import { CBQuizProps } from "./CBQuizInterfaces";
 
@@ -22,10 +23,14 @@ export const CBQuiz = ({
   } = useCBExerciseSequence();
 
   const [clickedButton, setClickedButton] = useState<string>("");
+  const [randomizedAnswers, setRandomizedAnswers] = useState<CBAnswer[]>([]);
+
+  useEffect(() => {
+    setRandomizedAnswers([...exercise.answers].sort(() => Math.random() - 0.5));
+  }, [exercise.answers]);
 
   const onConfirm: ButtonProps["onClick"] = (e) => {
-    const castEventTarget = e.currentTarget as HTMLButtonElement;
-    const buttonAnswerId = castEventTarget.id;
+    const buttonAnswerId = e.currentTarget.id;
 
     setClickedButton(buttonAnswerId);
 
@@ -65,51 +70,44 @@ export const CBQuiz = ({
   };
 
   return (
-    <Stack spacing={4}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Container>
         <Stack
-          spacing={5}
+          spacing={4}
           sx={{
-            width: "100%",
-            maxWidth: 1200,
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Stack
-            spacing={4}
+          {exercise.image && <CBImage image={exercise.image} />}
+
+          <Grid
+            container
+            spacing={2}
             sx={{
-              justifyContent: "center",
-              alignItems: "center",
+              width: "100%",
             }}
           >
-            {exercise.image && <CBImage image={exercise.image} />}
-
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                width: "100%",
-              }}
-            >
-              {exercise.answers.map((answer) => (
-                <Grid xs={12} lg={6} key={answer.id}>
-                  <CBQuizAnswerButton
-                    answer={answer}
-                    isCorrect={exercise.correctAnswer === answer.id}
-                    onClick={onConfirm}
-                    isCurrentExerciseFinished={isCurrentExerciseFinished}
-                    clickedButton={clickedButton}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Stack>
+            {randomizedAnswers.map((answer, index) => (
+              <Grid xs={12} lg={6} key={answer.id}>
+                <CBQuizAnswerButton
+                  answer={answer}
+                  isCorrect={exercise.correctAnswer === answer.id}
+                  onClick={onConfirm}
+                  isCurrentExerciseFinished={isCurrentExerciseFinished}
+                  clickedButton={clickedButton}
+                  index={index}
+                />
+              </Grid>
+            ))}
+          </Grid>
         </Stack>
-      </Box>
-    </Stack>
+      </Container>
+    </Box>
   );
 };

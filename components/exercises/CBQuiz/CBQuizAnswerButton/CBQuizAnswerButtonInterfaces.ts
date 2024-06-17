@@ -7,5 +7,5 @@ export interface CBQuizAnswerButtonProps {
   onClick: ButtonProps["onClick"];
   isCurrentExerciseFinished: boolean;
   clickedButton: string;
-  sx?: ButtonProps["sx"];
+  index: number;
 }
