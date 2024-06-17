@@ -7,7 +7,7 @@ export const CBStudentOverviewGraphCard = ({
   topBar,
 }: CBStudentOverviewGraphCardProps): JSX.Element => {
   return (
-    <Card sx={{ borderRadius: 3, p: 4 }}>
+    <Card sx={{ p: 4 }}>
       <Stack
         spacing={2}
         sx={{

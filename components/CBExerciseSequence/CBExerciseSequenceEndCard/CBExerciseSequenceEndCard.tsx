@@ -12,7 +12,6 @@ export const CBExerciseSequenceEndCard = ({
     <Card
       sx={{
         height: 100,
-        borderRadius: 3,
         display: "flex",
       }}
     >

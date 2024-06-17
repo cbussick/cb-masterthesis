@@ -34,8 +34,7 @@ export const CBInfoCard = ({
   const component: JSX.Element = (
     <Card
       sx={{
-        height: 275,
-        borderRadius: 3,
+        height: 300,
         display: "flex",
       }}
       component={motion.div}
@@ -44,11 +43,13 @@ export const CBInfoCard = ({
     >
       <Stack
         sx={{
-          flex: "1 1 auto",
+          flexGrow: 1,
         }}
       >
-        <Box
+        <Stack
           sx={{
+            flexGrow: 1,
+            bgcolor: "skyblue",
             overflow: "hidden",
           }}
         >
@@ -57,8 +58,7 @@ export const CBInfoCard = ({
             variants={imageVariants}
             sx={{
               position: "relative",
-              width: "100%",
-              height: 205,
+              height: "100%",
             }}
           >
             <Image
@@ -71,26 +71,17 @@ export const CBInfoCard = ({
               }}
             />
           </Box>
-        </Box>
+        </Stack>
 
-        <Box
+        <Typography
           sx={{
-            flex: "1 1 auto",
-            display: "flex",
-            alignItems: "center",
+            p: 2,
+            textAlign: "center",
+            fontWeight: (t) => t.typography.fontWeightMedium,
           }}
         >
-          <Typography
-            sx={{
-              flex: "1 1 auto",
-              p: 1,
-              textAlign: "center",
-              fontWeight: (t) => t.typography.fontWeightMedium,
-            }}
-          >
-            {text}
-          </Typography>
-        </Box>
+          {text}
+        </Typography>
       </Stack>
     </Card>
   );

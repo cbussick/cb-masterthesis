@@ -15,7 +15,6 @@ export const CBProgressCard = ({
     <Card
       sx={{
         height: 150,
-        borderRadius: 3,
       }}
     >
       <Stack

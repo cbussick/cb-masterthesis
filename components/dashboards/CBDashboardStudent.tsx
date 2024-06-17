@@ -16,11 +16,12 @@ import { CBWelcomeBanner } from "../CBWelcomeBanner/CBWelcomeBanner";
 
 const commonGridItemProps: Grid2Props = {
   xs: 6,
-  lg: 3,
+  lg: 4,
 };
 
 export const CBDashboardStudent = (): JSX.Element => {
   const user = useUser();
+
   const userPoints = user?.customData.points || 0;
 
   const lastWeekTimes = getLastWeekTimes(user?.customData.trackedTime || []);
@@ -30,53 +31,40 @@ export const CBDashboardStudent = (): JSX.Element => {
 
   const formattedTime = getFormattedTimeFromSeconds(totalTime);
 
-  let userLvlTitleText = "";
-  let pointsToNextLvl = 0;
-  let maxLevelReached = false;
-
   const currentLevel =
     levels.find(
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
     ) || levels[levels.length - 1];
 
-  if (currentLevel.pointsToNextLevel) {
-    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
-    pointsToNextLvl = currentLevel.pointsToNextLevel;
-  } else {
-    userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
-    pointsToNextLvl = userPoints;
-    maxLevelReached = true;
-  }
+  const userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
+  const pointsToNextLvl = currentLevel.pointsToNextLevel || userPoints;
+  const maxLevelReached = !currentLevel.pointsToNextLevel;
 
   return (
-    <Stack>
-      <Stack spacing={3}>
+    <Stack spacing={3} sx={{ overflowY: "hidden" }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
+        <CBWelcomeBanner />
+
+        <CBUserActionsBar />
+      </Stack>
+
+      {/* `p` is necessary to not have the card shadows cut off */}
+      <Stack sx={{ overflowY: "auto", p: 0.5 }}>
         <Stack
           direction="row"
-          spacing={1}
-          sx={{
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-          }}
-        >
-          <CBWelcomeBanner />
-
-          <CBUserActionsBar />
-        </Stack>
-
-        <Stack
-          direction="row"
-          spacing={2}
+          spacing={5}
           sx={{
             justifyContent: "space-between",
           }}
         >
-          <Stack
-            spacing={2}
-            sx={{
-              width: "60%",
-            }}
-          >
+          <Stack spacing={2}>
             <CBProgressCard
               image="/topics/zelle.jpg"
               title={userLvlTitleText}
@@ -107,43 +95,35 @@ export const CBDashboardStudent = (): JSX.Element => {
 
           <CBDateCalendar />
         </Stack>
+
+        <Divider sx={{ mt: 3, mb: 5 }} />
+
+        <Grid container spacing={3} disableEqualOverflow>
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/lab-equipment.jpg"
+              text="Themenwelt"
+              href="/themenwelt"
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/topics/zelle.jpg"
+              text="Tierische und pflanzliche Zellen"
+              href="/freie-uebung/zelle"
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image="/pruefungssimulator.jpg"
+              text="Prüfungssimulator"
+              href="pruefungssimulator"
+            />
+          </Grid>
+        </Grid>
       </Stack>
-
-      <Divider sx={{ mt: 3, mb: 5 }} />
-
-      <Grid container spacing={3}>
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/coming-soon/coming-soon.jpg"
-            text="Tägliche Herausforderungen"
-            disabled
-          />
-        </Grid>
-
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/lab-equipment.jpg"
-            text="Themenwelt"
-            href="/themenwelt"
-          />
-        </Grid>
-
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/topics/zelle.jpg"
-            text="Tierische und pflanzliche Zellen"
-            href="/freie-uebung/zelle"
-          />
-        </Grid>
-
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image="/pruefungssimulator.jpg"
-            text="Prüfungssimulator"
-            href="pruefungssimulator"
-          />
-        </Grid>
-      </Grid>
     </Stack>
   );
 };

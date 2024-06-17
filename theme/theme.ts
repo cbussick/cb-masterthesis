@@ -69,6 +69,11 @@ const themeWithOverrides: Theme = {
       defaultProps: {
         elevation: 2,
       },
+      styleOverrides: {
+        root: {
+          borderRadius: theme.shape.borderRadius * 3,
+        },
+      },
     },
     MuiTab: {
       styleOverrides: {
