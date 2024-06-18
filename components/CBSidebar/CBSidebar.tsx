@@ -152,7 +152,7 @@ export const CBSidebar = ({
                     <KeyboardDoubleArrowRight />
                   )
                 }
-                label="Einklappen"
+                label={isOpen ? "Einklappen" : "Ausklappen"}
                 isExpansionTransitionRunning={isTransitionRunning}
               />
             </List>
