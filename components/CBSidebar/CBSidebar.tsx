@@ -8,7 +8,7 @@ import {
   layoutVerticalSpacing,
 } from "@/helpers/layoutSpacing";
 import { CBRoute } from "@/helpers/routes";
-import { getSpacingFactor } from "@/theme/theme";
+import { themeSpacingFactor } from "@/theme/theme";
 import { useSidebar } from "@/ui/useSidebar";
 import { useSnackbar } from "@/ui/useSnackbar";
 import {
@@ -134,8 +134,8 @@ export const CBSidebar = ({
                   style={{
                     width:
                       sidebarWidthOpen -
-                      sidebarPaddingHorizontal * getSpacingFactor() * 2 -
-                      itemsLeftPadding * getSpacingFactor(),
+                      sidebarPaddingHorizontal * themeSpacingFactor * 2 -
+                      itemsLeftPadding * themeSpacingFactor,
                     paddingLeft: theme.spacing(itemsLeftPadding),
                   }}
                 />

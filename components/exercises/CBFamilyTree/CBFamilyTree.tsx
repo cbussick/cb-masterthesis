@@ -14,7 +14,7 @@ import { getTreeMaxDepth } from "@/helpers/getTreeMaxDepth";
 import { playCorrectSound } from "@/helpers/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/playIncorrectSound";
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
-import { getSpacingFactor } from "@/theme/theme";
+import { themeSpacingFactor } from "@/theme/theme";
 import { useSnackbar } from "@/ui/useSnackbar";
 import dagre from "@dagrejs/dagre";
 import {
@@ -567,10 +567,10 @@ export const CBFamilyTree = forwardRef(
               // Add some padding around the graph.
               width:
                 graphDimensions.width +
-                graphBoxPadding * getSpacingFactor() * 2,
+                graphBoxPadding * themeSpacingFactor * 2,
               height:
                 graphDimensions.height +
-                graphBoxPadding * getSpacingFactor() * 2,
+                graphBoxPadding * themeSpacingFactor * 2,
               p: graphBoxPadding,
               ".react-flow": {
                 overflow: "visible !important",
