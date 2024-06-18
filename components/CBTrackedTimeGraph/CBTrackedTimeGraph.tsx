@@ -1,7 +1,7 @@
 "use client";
 
-import { getFormattedTimeFromSeconds } from "@/helpers/getFormattedTime";
-import { getWeekdayIndex } from "@/helpers/getWeekdayIndex";
+import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
+import { getWeekdayIndex } from "@/helpers/time-tracking/getWeekdayIndex";
 import { useTheme } from "@mui/material";
 import { LineChart, LineChartProps } from "@mui/x-charts";
 import dayjs from "dayjs";

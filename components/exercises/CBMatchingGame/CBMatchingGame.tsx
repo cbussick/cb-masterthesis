@@ -1,8 +1,8 @@
 "use client";
 
 import { CBMatchingGameProps } from "@/components/exercises/CBMatchingGame/CBMatchingGameInterfaces";
-import { playCorrectSound } from "@/helpers/playCorrectSound";
-import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, ButtonProps, Stack } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";

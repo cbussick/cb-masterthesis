@@ -27,55 +27,64 @@ export const CBFreeformQuestion = ({
 
   const [answer, setAnswer] = useState<string>("");
   const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
+  const [isError, setError] = useState<boolean>(false);
 
   const onConfirm = () => {
     setFetchingResponse(true);
 
-    getOpenAIAnswerEvaluation(exercise.question, answer).then((response) => {
-      setFetchingResponse(false);
+    getOpenAIAnswerEvaluation(exercise.question, answer)
+      .then((response) => {
+        setFetchingResponse(false);
 
-      setCurrentExerciseFinished(true);
-      const isCorrect = response.startsWith("Ja");
+        setCurrentExerciseFinished(true);
+        const isCorrect = response.startsWith("Ja");
 
-      if (isCorrect && user) {
-        onCompleteExercise({ exerciseId: exercise.id, isCorrect });
+        if (isCorrect && user) {
+          onCompleteExercise({ exerciseId: exercise.id, isCorrect });
 
-        setExercises((previousExercises) => {
-          const newExercises = previousExercises.map((ex) => {
-            if (ex.id === exercise.id) {
-              return {
-                ...ex,
-                isCompleted: true,
-              };
-            }
-            return ex;
+          setExercises((previousExercises) => {
+            const newExercises = previousExercises.map((ex) => {
+              if (ex.id === exercise.id) {
+                return {
+                  ...ex,
+                  isCompleted: true,
+                };
+              }
+              return ex;
+            });
+
+            return newExercises;
           });
 
-          return newExercises;
-        });
+          playCorrectSound();
+        } else {
+          if (onMistake) {
+            onMistake({
+              id: exercise.id,
+              topic: exercise.topic,
+              type: exercise.type,
+            });
+          }
 
-        playCorrectSound();
-      } else {
-        if (onMistake) {
-          onMistake({
-            id: exercise.id,
-            topic: exercise.topic,
-            type: exercise.type,
-          });
+          playIncorrectSound();
         }
 
-        playIncorrectSound();
-      }
+        const responseText = response.split(";; ")[1];
 
-      const responseText = response.split(";; ")[1];
-
-      showSnackbar(
-        isCorrect ? "Richtige Antwort" : "Falsche Antwort",
-        responseText,
-        isCorrect ? "success" : "error",
-      );
-    });
+        showSnackbar(
+          isCorrect ? "Richtige Antwort" : "Falsche Antwort",
+          responseText,
+          isCorrect ? "success" : "error",
+        );
+      })
+      .catch((error) => {
+        setFetchingResponse(false);
+        setError(true);
+        showSnackbar("Problem bei der Auswertung", error.message, "error");
+      });
   };
+
+  const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
 
   return (
     <Container
@@ -118,14 +127,14 @@ export const CBFreeformQuestion = ({
             onChange={(e) => setAnswer(e.target.value)}
             multiline
             rows={4}
-            disabled={isFetchingResponse || isCurrentExerciseFinished}
+            disabled={disabled}
             sx={{ width: 350 }}
           />
 
           <CBLoadingButton
             onClick={onConfirm}
             isLoading={isFetchingResponse}
-            disabled={isFetchingResponse || isCurrentExerciseFinished}
+            disabled={disabled}
             sx={{ width: 150 }}
           >
             Abschicken

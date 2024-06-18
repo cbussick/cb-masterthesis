@@ -8,11 +8,11 @@ import {
   CBErbgangRules,
   CBFamilyTreeExerciseNode,
 } from "@/data/exercises/CBFamilyTreeExercise";
-import { getFamilyTreePairNodeId } from "@/helpers/getFamilyTreePairNodeId";
-import { getRomanNumeralSequence } from "@/helpers/getRomanNumeralSequence";
-import { getTreeMaxDepth } from "@/helpers/getTreeMaxDepth";
-import { playCorrectSound } from "@/helpers/playCorrectSound";
-import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { getFamilyTreePairNodeId } from "@/helpers/family-tree/getFamilyTreePairNodeId";
+import { getRomanNumeralSequence } from "@/helpers/family-tree/getRomanNumeralSequence";
+import { getTreeMaxDepth } from "@/helpers/family-tree/getTreeMaxDepth";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
 import { themeSpacingFactor } from "@/theme/theme";
 import { useSnackbar } from "@/ui/useSnackbar";
