@@ -6,9 +6,7 @@ import { font } from "./font";
 const fontWeightMedium = 500;
 
 // Is the MUI default, but to access this factor somewhere else, we need to define it here explicitly.
-const spacing = 8;
-
-export const getSpacingFactor = () => spacing;
+export const themeSpacingFactor = 8;
 
 const theme = createTheme({
   palette: {
@@ -19,7 +17,7 @@ const theme = createTheme({
     },
     secondary: { main: "#8E4E94" },
   },
-  spacing,
+  spacing: themeSpacingFactor,
   typography: {
     fontFamily: font.style.fontFamily,
     fontWeightMedium,

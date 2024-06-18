@@ -2,7 +2,7 @@
 
 import { useUser } from "@/firebase/useUser";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
-import { getSpacingFactor } from "@/theme/theme";
+import { themeSpacingFactor } from "@/theme/theme";
 import { CBConfettiProvider } from "@/ui/CBConfettiProvider";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
@@ -72,7 +72,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
                 height: "100%",
                 ml:
                   layoutHorizontalSpacing * 2 +
-                  sidebarWidthClosed / getSpacingFactor(),
+                  sidebarWidthClosed / themeSpacingFactor,
               }}
             >
               {children}
