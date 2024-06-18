@@ -18,7 +18,7 @@ export const CBSidebarItem = ({
   listItemButtonProps,
   icon,
   label,
-  isToolTipActive,
+  isExpansionTransitionRunning,
 }: CBSidebarItemProps): JSX.Element => {
   const { isOpen } = useSidebar();
   const pathname = usePathname();
@@ -43,6 +43,7 @@ export const CBSidebarItem = ({
           ? (t) => alpha(t.palette.primary.main, 0.2)
           : undefined,
         borderRadius: 2,
+        pointerEvents: isExpansionTransitionRunning ? "none" : undefined,
       }}
     >
       <ListItemButton {...listItemButtonProps} LinkComponent={Link}>
@@ -64,6 +65,8 @@ export const CBSidebarItem = ({
       </ListItemButton>
     </ListItem>
   );
+
+  const isToolTipActive = !isOpen;
 
   return isToolTipActive ? (
     <Tooltip title={label} placement="right">
