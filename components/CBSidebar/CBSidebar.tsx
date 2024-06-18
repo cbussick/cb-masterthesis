@@ -22,6 +22,7 @@ import {
   Collapse,
   Divider,
   List,
+  ListProps,
   Stack,
   collapseClasses,
   useTheme,
@@ -35,6 +36,13 @@ import { CBSidebarItem } from "./CBSidebarItem/CBSidebarItem";
 const logoTextElementID = "text";
 const sidebarPaddingHorizontal = 2.8;
 const itemsLeftPadding = 2;
+
+const commonListProps: ListProps = {
+  sx: {
+    width: "100%",
+  },
+  disablePadding: true,
+};
 
 /**
  * The sidebar on the left side of the app.
@@ -53,8 +61,6 @@ export const CBSidebar = ({
   const settingsRouteData = menuItems.find(
     (item) => item.href === CBRoute.Einstellungen,
   );
-
-  const isToolTipActive = !isOpen && !isTransitionRunning;
 
   return (
     <Collapse
@@ -136,7 +142,7 @@ export const CBSidebar = ({
               </Link>
             </Box>
 
-            <List sx={{ width: "100%" }} disablePadding>
+            <List {...commonListProps}>
               <CBSidebarItem
                 listItemButtonProps={{ onClick: toggleIsOpen }}
                 icon={
@@ -147,14 +153,14 @@ export const CBSidebar = ({
                   )
                 }
                 label="Einklappen"
-                isToolTipActive={isToolTipActive}
+                isExpansionTransitionRunning={isTransitionRunning}
               />
             </List>
 
             <Divider sx={{ mx: 4, width: "100%" }} />
 
             {user ? (
-              <List sx={{ width: "100%" }} disablePadding>
+              <List {...commonListProps}>
                 {menuItems.reduce<JSX.Element[]>((acc, item) => {
                   if (
                     item.forRoles.includes(user?.customData.role) &&
@@ -166,7 +172,7 @@ export const CBSidebar = ({
                         listItemButtonProps={{ href: item.href }}
                         icon={item.icon}
                         label={item.label}
-                        isToolTipActive={isToolTipActive}
+                        isExpansionTransitionRunning={isTransitionRunning}
                       />,
                     );
                   }
@@ -178,7 +184,7 @@ export const CBSidebar = ({
             )}
           </Stack>
 
-          <List sx={{ width: "100%" }} disablePadding>
+          <List {...commonListProps}>
             {settingsRouteData && (
               <CBSidebarItem
                 listItemButtonProps={{
@@ -186,7 +192,7 @@ export const CBSidebar = ({
                 }}
                 icon={settingsRouteData.icon}
                 label={settingsRouteData.label}
-                isToolTipActive={isToolTipActive}
+                isExpansionTransitionRunning={isTransitionRunning}
               />
             )}
 
@@ -196,7 +202,7 @@ export const CBSidebar = ({
               }}
               icon={<LogoutRounded />}
               label="Abmelden"
-              isToolTipActive={isToolTipActive}
+              isExpansionTransitionRunning={isTransitionRunning}
             />
           </List>
         </Stack>
