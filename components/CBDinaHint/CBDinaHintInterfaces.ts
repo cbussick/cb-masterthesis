@@ -1,4 +1,8 @@
+import { CBLoadingButtonProps } from "../CBLoadingButton/CBLoadingButtonInterfaces";
+
 export interface CBDinaHintProps {
+  onClick: VoidFunction;
   hint: string;
-  disabled: boolean;
+  isLoading: CBLoadingButtonProps["isLoading"];
+  disabled: CBLoadingButtonProps["disabled"];
 }

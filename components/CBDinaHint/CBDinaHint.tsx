@@ -5,22 +5,34 @@ import Image from "next/image";
 import { useState } from "react";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
+import { CBLoadingButton } from "../CBLoadingButton/CBLoadingButton";
 import { CBDinaHintProps } from "./CBDinaHintInterfaces";
 
 export const CBDinaHint = ({
+  onClick,
   hint,
+  isLoading,
   disabled,
 }: CBDinaHintProps): JSX.Element => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} disabled={disabled}>
+      <CBLoadingButton
+        onClick={() => {
+          setOpen(true);
+          if (!hint) {
+            onClick();
+          }
+        }}
+        disabled={disabled}
+        isLoading={isLoading}
+      >
         <CBEmoji emoji="💡" fontSize="18px" />
-      </Button>
+      </CBLoadingButton>
 
       <CBDialog
-        isOpen={open}
+        isOpen={hint !== "" && isOpen}
         onClose={() => setOpen(false)}
         fullWidth={false}
         dialogContentProps={{ sx: { py: 0 } }}
@@ -41,12 +53,7 @@ export const CBDinaHint = ({
             <Image src="/logo/dina-bold-stroke.svg" alt="DiNA" fill />
           </Box>
 
-          <Typography>
-            {hint.split("\n").map((str, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <p key={index}>{str}</p>
-            ))}
-          </Typography>
+          <Typography>{hint}</Typography>
 
           <Button onClick={() => setOpen(false)}>Ok</Button>
         </Stack>

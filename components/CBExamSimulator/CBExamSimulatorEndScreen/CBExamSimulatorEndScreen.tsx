@@ -1,7 +1,7 @@
 "use client";
 
-import { playResultsSound } from "@/helpers/playResultsSound";
 import { CBRoute } from "@/helpers/routes";
+import { playResultsSound } from "@/helpers/sounds/playResultsSound";
 import { DashboardRounded, RefreshRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";

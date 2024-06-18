@@ -2,8 +2,8 @@
 
 import { levels } from "@/data/gamification";
 import { useUser } from "@/firebase/useUser";
-import { getFormattedTimeFromSeconds } from "@/helpers/getFormattedTime";
-import { getLastWeekTimes } from "@/helpers/getLastWeekTimes";
+import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
+import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";
 import { Divider, Stack } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";

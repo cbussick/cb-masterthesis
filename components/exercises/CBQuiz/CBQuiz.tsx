@@ -2,8 +2,8 @@ import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExer
 import { CBImage } from "@/components/CBImage/CBImage";
 import { CBAnswer } from "@/data/exercises/CBAnswer";
 import { useUser } from "@/firebase/useUser";
-import { playCorrectSound } from "@/helpers/playCorrectSound";
-import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { Box, ButtonProps, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";

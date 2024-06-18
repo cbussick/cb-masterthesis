@@ -2,7 +2,7 @@
 
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
-import { playResultsSound } from "@/helpers/playResultsSound";
+import { playResultsSound } from "@/helpers/sounds/playResultsSound";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { CBExerciseSequenceEndCard } from "../CBExerciseSequenceEndCard/CBExerciseSequenceEndCard";

@@ -4,8 +4,8 @@ import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExer
 import { CBImage } from "@/components/CBImage/CBImage";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { CBSwiperCellType } from "@/data/exercises/CBSwiperExercise";
-import { playCorrectSound } from "@/helpers/playCorrectSound";
-import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { ButtonProps, Card, Stack, Typography } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 import { DraggableProps, motion } from "framer-motion";
