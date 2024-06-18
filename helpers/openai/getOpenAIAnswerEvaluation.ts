@@ -15,5 +15,6 @@ export const getOpenAIAnswerEvaluation = async (
       "Leider ist bei der Auswertung deiner Antwort etwas schief gegangen. Lade die Seite neu und versuche es erneut.",
     );
   });
+
   return evaluation;
 };

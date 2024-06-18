@@ -4,9 +4,9 @@ import { CBEmoji } from "@/components/CBEmoji/CBEmoji";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { useUser } from "@/firebase/useUser";
-import { getOpenAIAnswerEvaluation } from "@/helpers/getOpenAIAnswerEvaluation";
-import { playCorrectSound } from "@/helpers/playCorrectSound";
-import { playIncorrectSound } from "@/helpers/playIncorrectSound";
+import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
@@ -105,9 +105,7 @@ export const CBFreeformQuestion = ({
         >
           <CBEmoji emoji="💡" typographyVariant="h1" />
 
-          <Stack>
-            <Typography variant="h3">Beta</Typography>
-
+          <Stack justifyContent="center">
             <Typography>
               Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI)
               eingesetzt. Hierbei kann es zu Fehlern kommen.

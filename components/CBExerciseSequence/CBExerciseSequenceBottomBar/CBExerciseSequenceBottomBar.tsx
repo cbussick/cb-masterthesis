@@ -4,13 +4,16 @@ import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { useUser } from "@/firebase/useUser";
+import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useConfetti } from "@/ui/useConfetti";
+import { useSnackbar } from "@/ui/useSnackbar";
 import {
   CheckRounded,
   ChevronRightRounded,
   MeetingRoomRounded,
 } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
+import { useState } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../useCBExerciseSequenceProvider";
 import { CBConfirmation } from "./CBConfirmation";
@@ -42,6 +45,7 @@ export const CBExerciseSequenceBottomBar = ({
 }: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
   const user = useUser();
   const { startConfetti } = useConfetti();
+  const { showSnackbar } = useSnackbar();
 
   const {
     isCurrentExerciseFinished,
@@ -51,6 +55,10 @@ export const CBExerciseSequenceBottomBar = ({
     exercises,
     setExercises,
   } = useCBExerciseSequence();
+
+  const [isFetchingHint, setFetchingHint] = useState<boolean>(false);
+  const [isErrorFetchingHint, setErrorFetchingHint] = useState<boolean>(false);
+  const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
 
@@ -89,6 +97,8 @@ export const CBExerciseSequenceBottomBar = ({
   const onClickNext = () => {
     moveToNextExercise();
     setCurrentExerciseFinished(false);
+
+    setHint("");
   };
 
   const onClickConfirm = () => {
@@ -160,6 +170,28 @@ export const CBExerciseSequenceBottomBar = ({
     </Button>
   );
 
+  const onClickHint = () => {
+    if ("question" in currentExercise) {
+      setFetchingHint(true);
+      getOpenAIDiNAsHintForQuestion(currentExercise.question)
+        .then((response) => {
+          setFetchingHint(false);
+          setHint(response);
+        })
+        .catch((error) => {
+          setFetchingHint(false);
+          setErrorFetchingHint(true);
+          showSnackbar(
+            "Problem beim Erfragen eines Tipps",
+            error.message,
+            "error",
+          );
+        });
+    } else {
+      setHint(currentExercise.hint);
+    }
+  };
+
   return (
     <Stack
       direction="row"
@@ -185,8 +217,14 @@ export const CBExerciseSequenceBottomBar = ({
         <Stack direction="row" spacing={2}>
           {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
             <CBDinaHint
-              hint={currentExercise?.hint}
-              disabled={isCurrentExerciseFinished}
+              onClick={onClickHint}
+              hint={hint}
+              isLoading={isFetchingHint}
+              disabled={
+                isFetchingHint ||
+                isErrorFetchingHint ||
+                isCurrentExerciseFinished
+              }
             />
           )}
 

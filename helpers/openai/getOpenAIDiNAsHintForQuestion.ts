@@ -1,10 +1,10 @@
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
 import { makeOpenAIAPIRequest } from "./makeOpenAIAPIRequest";
 
-export const getOpenAIAnswerEvaluation = async (question: string) => {
+export const getOpenAIDiNAsHintForQuestion = async (question: string) => {
   const prompt = `Gib mir einen Tipp für die Frage "${question}".`;
 
-  const evaluation = await makeOpenAIAPIRequest(
+  const hint = await makeOpenAIAPIRequest(
     prompt,
     apiRouteMap[CBAPIRoute.FreeformQuestion],
   ).catch(() => {
@@ -12,5 +12,6 @@ export const getOpenAIAnswerEvaluation = async (question: string) => {
       "Leider ist beim Erfragen eines Tipps etwas schief gegangen. Lade die Seite neu und versuche es erneut.",
     );
   });
-  return evaluation;
+
+  return hint;
 };

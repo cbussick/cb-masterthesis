@@ -1,7 +1,7 @@
 export const makeOpenAIAPIRequest = async (
   prompt: string,
   apiRoute: string,
-) => {
+): Promise<string> => {
   const response = await fetch(apiRoute, {
     method: "POST",
     headers: {
