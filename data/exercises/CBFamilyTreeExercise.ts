@@ -4,6 +4,12 @@ import { CBExerciseDifficulty } from "./CBExerciseDifficulty";
 import { CBExerciseType } from "./CBExerciseType";
 import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
 
+const familyTreeHint =
+  'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
+  "Rezessive Vererbung: Ein Merkmal ist rezessiv vererbt, wenn zwei Kopien des rezessiven Gens notwendig sind, damit das Merkmal zum Ausdruck kommt.\n\n" +
+  "Geschlechtsgebundene Vererbung: Ein Merkmal ist geschlechtsgebunden, wenn es auf einem Geschlechtschromosom (X oder Y) lokalisiert ist und seine Expression von der Geschlechtszugehörigkeit abhängt.\n\n" +
+  'Genotypen: "AA" zeigt einen homozygot dominanten Genotypen, "Aa" zeigt einen heterozygoten Genotypen und "aa" zeigt einen homozygot rezessiven Genotypen.';
+
 export enum CBErbgang {
   AutosomalRezessiv = "autosomal-rezessiv",
   AutosomalDominant = "autosomal-dominant",
@@ -46,11 +52,7 @@ export const familyTreeExercises: CBFamilyTreeExercise[] = [
     choices: ["AA", "Aa", "aa", "XaXa", "XAXa", "XaXA", "XAXA"],
     description:
       "Das ist der Stammbaum einer Familie mit einer autosomal-rezessiv vererbten Erkrankung. Bestimme die Genotypen aller Individuen.",
-    hint:
-      'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
-      "Rezessive Vererbung: Ein Merkmal ist rezessiv vererbt, wenn zwei Kopien des rezessiven Gens notwendig sind, damit das Merkmal zum Ausdruck kommt.\n\n" +
-      "Geschlechtsgebundene Vererbung: Ein Merkmal ist geschlechtsgebunden, wenn es auf einem Geschlechtschromosom (X oder Y) lokalisiert ist und seine Expression von der Geschlechtszugehörigkeit abhängt.\n\n" +
-      'Genotypen: "AA" zeigt einen homozygot dominanten Genotypen, "Aa" zeigt einen heterozygoten Genotypen und "aa" zeigt einen homozygot rezessiven Genotypen.',
+    hint: familyTreeHint,
     nodes: [
       {
         id: 1,
@@ -114,11 +116,7 @@ export const familyTreeExercises: CBFamilyTreeExercise[] = [
     choices: ["AA", "Aa", "aa", "AA/Aa", "XaXa", "XAXa", "XaXA", "XAXA"],
     description:
       "Das ist der Stammbaum einer Familie mit einer autosomal-dominant vererbten Erkrankung. Bestimme die Genotypen aller Individuen.",
-    hint:
-      'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
-      "Rezessive Vererbung: Ein Merkmal ist rezessiv vererbt, wenn zwei Kopien des rezessiven Gens notwendig sind, damit das Merkmal zum Ausdruck kommt.\n\n" +
-      "Geschlechtsgebundene Vererbung: Ein Merkmal ist geschlechtsgebunden, wenn es auf einem Geschlechtschromosom (X oder Y) lokalisiert ist und seine Expression von der Geschlechtszugehörigkeit abhängt.\n\n" +
-      'Genotypen: "AA" zeigt einen homozygot dominanten Genotypen, "Aa" zeigt einen heterozygoten Genotypen und "aa" zeigt einen homozygot rezessiven Genotypen.',
+    hint: familyTreeHint,
     nodes: [
       {
         id: 1,
@@ -176,11 +174,7 @@ export const familyTreeExercises: CBFamilyTreeExercise[] = [
     choices: ["AA", "Aa", "aa", "AA/Aa", "XaXa", "XAXa", "XaXA", "XAXA"],
     description:
       "Das ist der Stammbaum einer Familie mit einer autosomal-dominant vererbten Erkrankung. Bestimme die Genotypen aller Individuen.",
-    hint:
-      'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
-      "Rezessive Vererbung: Ein Merkmal ist rezessiv vererbt, wenn zwei Kopien des rezessiven Gens notwendig sind, damit das Merkmal zum Ausdruck kommt.\n\n" +
-      "Geschlechtsgebundene Vererbung: Ein Merkmal ist geschlechtsgebunden, wenn es auf einem Geschlechtschromosom (X oder Y) lokalisiert ist und seine Expression von der Geschlechtszugehörigkeit abhängt.\n\n" +
-      'Genotypen: "AA" zeigt einen homozygot dominanten Genotypen, "Aa" zeigt einen heterozygoten Genotypen und "aa" zeigt einen homozygot rezessiven Genotypen.',
+    hint: familyTreeHint,
     nodes: [
       {
         id: 1,
@@ -247,11 +241,7 @@ export const familyTreeExercises: CBFamilyTreeExercise[] = [
     choices: ["AA", "Aa", "aa", "AA/Aa", "XaXa", "XAXa", "XaXA", "XAXA"],
     description:
       "Bestimme die Genotypen aller Personen in diesem Stammbaum und gebe den Erbgang an.",
-    hint:
-      'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
-      "Rezessive Vererbung: Ein Merkmal ist rezessiv vererbt, wenn zwei Kopien des rezessiven Gens notwendig sind, damit das Merkmal zum Ausdruck kommt.\n\n" +
-      "Geschlechtsgebundene Vererbung: Ein Merkmal ist geschlechtsgebunden, wenn es auf einem Geschlechtschromosom (X oder Y) lokalisiert ist und seine Expression von der Geschlechtszugehörigkeit abhängt.\n\n" +
-      'Genotypen: "AA" zeigt einen homozygot dominanten Genotypen, "Aa" zeigt einen heterozygoten Genotypen und "aa" zeigt einen homozygot rezessiven Genotypen.',
+    hint: familyTreeHint,
     nodes: [
       {
         id: 1,
