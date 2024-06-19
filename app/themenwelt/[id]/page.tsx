@@ -29,10 +29,10 @@ interface TopicUnitPageParams {
 export default function TopicUnit({ params }: TopicUnitPageParams) {
   const topicData = topicWorldTopics[params.id as CBTopic];
 
+  const user = useUser();
+
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
-
-  const user = useUser();
 
   useEffect(() => {
     if (user?.user) {
