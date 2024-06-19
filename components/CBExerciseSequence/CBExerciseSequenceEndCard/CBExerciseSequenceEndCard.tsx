@@ -1,5 +1,4 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { CBExerciseSequenceEndCardProps } from "./CBExerciseSequenceEndCardInterfaces";
 
@@ -23,7 +22,6 @@ export const CBExerciseSequenceEndCard = ({
         }}
       >
         <Box
-          component={motion.div}
           sx={{
             position: "relative",
             width: 150,
