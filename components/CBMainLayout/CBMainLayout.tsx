@@ -1,8 +1,8 @@
 "use client";
 
 import { useUser } from "@/firebase/useUser";
-import { useRouteData } from "@/helpers/getRouteData";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
+import { useRouteData } from "@/helpers/useRouteData";
 import { themeSpacingFactor } from "@/theme/theme";
 import { CBConfettiProvider } from "@/ui/CBConfettiProvider";
 import { useSnackbar } from "@/ui/useSnackbar";

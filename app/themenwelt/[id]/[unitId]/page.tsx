@@ -20,8 +20,8 @@ import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress"
 import { markExerciseAsCompleted } from "@/firebase/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase/unlockGlossaryEntries";
 import { useUser } from "@/firebase/useUser";
-import { isUnitUnlocked } from "@/helpers/isUnitUnlocked";
 import { CBRoute } from "@/helpers/routes";
+import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";

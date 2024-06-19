@@ -11,14 +11,14 @@ import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
-import { isTopicUnlocked } from "@/helpers/isTopicUnlocked";
-import { isUnitUnlocked } from "@/helpers/isUnitUnlocked";
 import { CBRoute } from "@/helpers/routes";
+import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
+import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import {
   topicWorldContentWrapperStyles,
   topicWorldInnerBoxStyles,
   topicWorldPageHeaderStyles,
-} from "@/helpers/topicWorldStyles";
+} from "@/helpers/topic-world/topicWorldStyles";
 import { Box, Stack } from "@mui/material";
 import Image from "next/image";
 import { notFound } from "next/navigation";
