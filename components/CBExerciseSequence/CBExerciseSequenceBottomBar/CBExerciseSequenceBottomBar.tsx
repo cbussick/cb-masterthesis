@@ -133,7 +133,7 @@ export const CBExerciseSequenceBottomBar = ({
 
           if (
             exerciseConfirmationData.isCorrect &&
-            user?.user?.uid &&
+            user &&
             currentExerciseIndex !== undefined
           ) {
             onCompleteExercise({

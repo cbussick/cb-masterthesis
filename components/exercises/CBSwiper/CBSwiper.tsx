@@ -46,7 +46,6 @@ export const CBSwiper = ({
 
     if (isCorrect) {
       onCompleteExercise({ exerciseId: exercise.id, isCorrect });
-      onCompleteExercise(exercise.id);
 
       setExercises((previousExercises) => {
         const newExercises = previousExercises.map((ex) => {
