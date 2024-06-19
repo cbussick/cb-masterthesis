@@ -43,7 +43,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
       <Stack
         direction="row"
         sx={{
-          display: { xs: "none", sm: "flex" },
+          display: "flex",
           height: "100vh",
         }}
       >
