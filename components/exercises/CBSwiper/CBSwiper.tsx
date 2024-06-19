@@ -101,10 +101,10 @@ export const CBSwiper = ({
   };
 
   return (
-    // `p={0.5}` is necessary to not have the boxshadow of the cards cut off
+    // `p={1.5}` is necessary to not have the boxshadow of the cards cut off
     <Stack
       sx={{
-        p: 0.5,
+        p: 1.5,
         overflow: "hidden",
         cursor: isDragging ? "grabbing" : "auto",
       }}
