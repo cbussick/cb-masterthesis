@@ -11,9 +11,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
 import { CBSidebar } from "../CBSidebar/CBSidebar";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
-import { CBLoadingView } from "../views/CBLoadingView/CBLoadingView";
-import { CBMobileView } from "../views/CBMobileView/CBMobileView";
-import { CBNotSignedInView } from "../views/CBNotSignedInView/CBNotSignedInView";
+import { CBLoadingView } from "../views/CBLoadingView";
+import { CBMobileView } from "../views/CBMobileView";
+import { CBNotSignedInView } from "../views/CBNotSignedInView";
 import { CBMainLayoutProps } from "./CBMainLayoutInterfaces";
 
 const sidebarWidthOpen = 300;
