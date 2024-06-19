@@ -21,12 +21,12 @@ export default function NotFound() {
           </Typography>
 
           <Typography sx={{ textAlign: "center" }}>
-            Irgendetwas ist hier schief gelaufen. Geh am besten zur Homepage
+            Irgendetwas ist hier schief gelaufen. Geh am besten zum Dashboard
             zurück, indem du den Button unten klickst oder benutze die
             Menüpunkte in der Sidebar links.
           </Typography>
 
-          <Button href="/">Zur Homepage</Button>
+          <Button href="/">Zum Dashboard</Button>
         </Stack>
       </Stack>
     </CBContentWrapper>
