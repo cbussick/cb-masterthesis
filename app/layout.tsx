@@ -12,7 +12,7 @@ import { SidebarProvider } from "../ui/SidebarProvider";
 
 export const metadata: Metadata = {
   title: "DiNAs Lab",
-  description: "Eine Biologie Lernapp",
+  description: "Die Biologie Lernapp",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
