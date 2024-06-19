@@ -30,10 +30,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   }
 
   // Show loading while user and custom data is not loaded
-  if (
-    !user?.isUserLoaded ||
-    (user?.user && user?.customData.firstName === "")
-  ) {
+  if (!user?.isUserLoaded || (user.user && user.customData.firstName === "")) {
     return <CBLoadingView />;
   }
 
