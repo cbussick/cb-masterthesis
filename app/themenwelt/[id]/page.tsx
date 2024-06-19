@@ -20,6 +20,7 @@ import {
 } from "@/helpers/topicWorldStyles";
 import { Box, Stack } from "@mui/material";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 
 interface TopicUnitPageParams {
@@ -30,7 +31,10 @@ interface TopicUnitPageParams {
 
 export default function TopicUnit({ params }: TopicUnitPageParams) {
   const topicId = params.id as CBTopic;
-  const topicData = topicWorldTopics[topicId];
+  const topicData =
+    topicWorldTopics[topicId] === undefined
+      ? undefined
+      : topicWorldTopics[topicId];
 
   const user = useUser();
 
@@ -45,6 +49,10 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
     }
   }, [user?.user]);
 
+  if (!topicData) {
+    notFound();
+  }
+
   const hasAccess =
     topicWorldProgress && isTopicUnlocked(topicId, topicWorldProgress);
 
@@ -54,7 +62,7 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         title={
           <CBBreadcrumbs
             previousLinks={[{ label: "Themenwelt", href: CBRoute.Themenwelt }]}
-            currentLabel={topicData.topicData.name || "Thema"}
+            currentLabel={topicData?.topicData.name || "Thema"}
           />
         }
         isOnTransparentBackground
