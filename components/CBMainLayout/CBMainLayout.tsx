@@ -1,15 +1,14 @@
 "use client";
 
 import { useUser } from "@/firebase/useUser";
+import { useRouteData } from "@/helpers/getRouteData";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
-import { CBRoute, routeMap } from "@/helpers/routes";
 import { themeSpacingFactor } from "@/theme/theme";
 import { CBConfettiProvider } from "@/ui/CBConfettiProvider";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { usePathname } from "next/navigation";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
 import { CBSidebar } from "../CBSidebar/CBSidebar";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
@@ -23,7 +22,7 @@ const sidebarWidthOpen = 300;
 const sidebarWidthClosed = 100;
 
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
-  const pathname = usePathname();
+  const routeData = useRouteData();
   const user = useUser();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -47,11 +46,6 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   if (!user.user) {
     return <CBNotSignedInView />;
   }
-
-  const routeData =
-    routeMap[pathname as CBRoute] === undefined
-      ? undefined
-      : routeMap[pathname as CBRoute];
 
   const hasAccess = routeData?.forRoles.includes(user.customData.role);
   const notFound = hasAccess === undefined;
