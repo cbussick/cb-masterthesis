@@ -4,6 +4,7 @@ import { handleSignOut } from "@/helpers/handleSignOut";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Logout, Settings } from "@mui/icons-material";
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { CBUnstyledNextLink } from "../CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBUserOptionsMenuProps } from "./CBUserOptionsMenuInterfaces";
 
@@ -15,9 +16,10 @@ export const CBUserOptionsMenu = ({
   onClose,
 }: CBUserOptionsMenuProps): JSX.Element => {
   const { showSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const onClickLogOut = () => {
-    handleSignOut(showSnackbar);
+    handleSignOut(showSnackbar, router);
     onClose();
   };
 
