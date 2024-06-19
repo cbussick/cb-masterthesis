@@ -12,6 +12,7 @@ import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
 import { isTopicUnlocked } from "@/helpers/isTopicUnlocked";
+import { isUnitUnlocked } from "@/helpers/isUnitUnlocked";
 import { CBRoute } from "@/helpers/routes";
 import {
   topicWorldContentWrapperStyles,
@@ -30,16 +31,20 @@ interface TopicUnitPageParams {
 }
 
 export default function TopicUnit({ params }: TopicUnitPageParams) {
+  const user = useUser();
+
+  const [topicWorldProgress, setTopicWorldProgress] =
+    useState<TopicWorldProgress>();
+
   const topicId = params.id as CBTopic;
   const topicData =
     topicWorldTopics[topicId] === undefined
       ? undefined
       : topicWorldTopics[topicId];
 
-  const user = useUser();
-
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
+  if (!topicData) {
+    notFound();
+  }
 
   useEffect(() => {
     if (user?.user) {
@@ -48,10 +53,6 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
       });
     }
   }, [user?.user]);
-
-  if (!topicData) {
-    notFound();
-  }
 
   const hasAccess =
     topicWorldProgress && isTopicUnlocked(topicId, topicWorldProgress);
@@ -81,30 +82,18 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
           >
             <Stack sx={{ width: "fit-content" }}>
               {topicData?.units.map((unit, index) => {
-                const previousUnitId =
-                  index === 0 ? undefined : topicData.units[index - 1].id;
-
-                const generalPreviousUnitData = topicData.units.find(
-                  (u) => u.id === previousUnitId,
+                const isUnlocked = isUnitUnlocked(
+                  topicId,
+                  unit,
+                  topicWorldProgress,
                 );
 
                 const generalUnitData = topicData.units.find(
                   (u2) => u2.id === unit.id,
                 );
 
-                const previousUnitCompletedExercises =
-                  previousUnitId &&
-                  topicWorldProgress?.topics[params.id]?.units[previousUnitId]
-                    ?.completedExercises?.length;
-
-                const isPreviousUnitCompleted =
-                  previousUnitCompletedExercises ===
-                  generalPreviousUnitData?.exercises.length;
-
-                const unlocked = index === 0 || isPreviousUnitCompleted;
-
                 const completedExercises =
-                  topicWorldProgress?.topics[params.id]?.units[unit.id]
+                  topicWorldProgress?.topics[topicId]?.units[unit.id]
                     ?.completedExercises?.length;
 
                 const progress =
@@ -116,14 +105,14 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
                 return (
                   <Fragment key={unit.id}>
                     {index !== 0 && (
-                      <CBProgressCircleConnector disabled={!unlocked} />
+                      <CBProgressCircleConnector disabled={!isUnlocked} />
                     )}
 
                     <CBProgressCircle
                       label={unit.name}
                       progress={progress}
-                      href={`/themenwelt/${params.id}/${unit.id}`}
-                      unlocked={unlocked || false}
+                      href={`${CBRoute.Themenwelt}/${topicId}/${unit.id}`}
+                      unlocked={isUnlocked || false}
                       icon={unit.icon}
                     />
                   </Fragment>

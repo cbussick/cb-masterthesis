@@ -7,6 +7,7 @@ import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress"
 import { useUser } from "@/firebase/useUser";
 import { getEnumKeyByValue } from "@/helpers/getEnumByValue";
 import { isTopicUnlocked } from "@/helpers/isTopicUnlocked";
+import { CBRoute } from "@/helpers/routes";
 import { Box, Stack } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { CBProgressCircle } from "../CBProgressCircle/CBProgressCircle";
@@ -78,7 +79,7 @@ export const CBTopicWorld = (): JSX.Element => {
                   label={topic.topicData.name}
                   icon={topic.topicData.icon}
                   progress={Number.isNaN(progress) ? 0 : progress}
-                  href={`themenwelt/${topicId}`}
+                  href={`${CBRoute.Themenwelt}/${topicId}`}
                   unlocked={unlocked || false}
                 />
               </Fragment>

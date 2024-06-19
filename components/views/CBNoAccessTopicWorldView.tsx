@@ -1,6 +1,6 @@
 "use client";
 
-import { CBRoute, routeMap } from "@/helpers/routes";
+import { CBRoute } from "@/helpers/routes";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBLogo } from "../CBLogo/CBLogo";
@@ -30,9 +30,7 @@ export const CBNoAccessTopicWorldView = (): JSX.Element => {
           Menüpunkte in der Sidebar links.
         </Typography>
 
-        <Button href={routeMap[CBRoute.Themenwelt].route}>
-          Zur Übersicht der Themen
-        </Button>
+        <Button href={CBRoute.Themenwelt}>Zur Übersicht der Themen</Button>
       </Stack>
     </Stack>
   );
