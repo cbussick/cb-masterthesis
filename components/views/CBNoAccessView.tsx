@@ -1,11 +1,11 @@
 "use client";
 
-import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
-import { CBEmoji } from "@/components/CBEmoji/CBEmoji";
-import { CBLogo } from "@/components/CBLogo/CBLogo";
 import { Button, Container, Stack, Typography } from "@mui/material";
+import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
+import { CBEmoji } from "../CBEmoji/CBEmoji";
+import { CBLogo } from "../CBLogo/CBLogo";
 
-export default function NotFound() {
+export const CBNoAccessView = (): JSX.Element => {
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
       <Stack
@@ -19,10 +19,10 @@ export default function NotFound() {
         <Stack spacing={3} sx={{ alignItems: "center" }}>
           <Stack direction="row" spacing={1}>
             <Typography variant="h1" sx={{ textAlign: "center" }}>
-              Hier ist leider nichts
+              Du hast leider keinen Zugriff auf diese Seite
             </Typography>
 
-            <CBEmoji emoji="🤔" typographyVariant="h1" />
+            <CBEmoji emoji="🔒" typographyVariant="h1" />
           </Stack>
 
           <Typography sx={{ textAlign: "center" }}>
@@ -36,4 +36,4 @@ export default function NotFound() {
       </Stack>
     </CBContentWrapper>
   );
-}
+};
