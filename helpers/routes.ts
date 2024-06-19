@@ -50,7 +50,7 @@ export const routeMap: Record<CBRoute, CBRouteData> = {
     route: CBRoute.Glossar,
     title: "Glossar",
     subtitle: "Hier kannst du alle wichtigen Begriffe der Genetik nachschlagen",
-    forRoles: [CBUserRole.Teacher],
+    forRoles: [CBUserRole.Student],
   },
   [CBRoute.Achievements]: {
     route: CBRoute.Achievements,
