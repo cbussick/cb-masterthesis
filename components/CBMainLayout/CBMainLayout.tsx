@@ -23,7 +23,13 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const user = useUser();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { isOpen, setOpen, title, message, severity } = useSnackbar();
+  const {
+    isOpen: isSnackbarOpen,
+    setOpen: setSnackbarOpen,
+    title,
+    message,
+    severity,
+  } = useSnackbar();
 
   if (isMobile) {
     return <CBMobileView />;
@@ -78,10 +84,10 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
       </Stack>
 
       <CBSnackbar
-        isOpen={isOpen}
+        isOpen={isSnackbarOpen}
         severity={severity}
         onClose={() => {
-          setOpen(false);
+          setSnackbarOpen(false);
         }}
         title={title}
         message={message}
