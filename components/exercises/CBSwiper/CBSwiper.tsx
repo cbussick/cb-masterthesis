@@ -36,7 +36,7 @@ export const CBSwiper = ({
   const [dropTarget, setDropTarget] = useState<string>("");
   const [isDragging, setDragging] = useState<boolean>(false);
 
-  const constraintsRef = useRef(null);
+  const constraintsRef = useRef<HTMLDivElement>(null);
 
   const onConfirm = (buttonAnswerId: string) => {
     setClickedButton(buttonAnswerId);
@@ -101,15 +101,14 @@ export const CBSwiper = ({
   };
 
   return (
-    // `pb={1}` is necessary to not have the boxshadow of the button at the bottom be cut off
+    // `p={0.5}` is necessary to not have the boxshadow of the cards cut off
     <Stack
-      ref={constraintsRef}
       sx={{
-        pb: 1,
+        p: 0.5,
         overflow: "hidden",
       }}
     >
-      <Grid container>
+      <Grid container ref={constraintsRef}>
         <Grid {...commonGridProps}>
           <CBSwiperButton
             cellType={CBSwiperCellType.Plant}
@@ -137,9 +136,10 @@ export const CBSwiper = ({
             }}
             component={motion.div}
             drag={!isCurrentExerciseFinished}
-            dragMomentum={false}
             dragSnapToOrigin
             dragConstraints={constraintsRef}
+            // Can not be 0, otherwise the snapping to origin is not animated and the card jumps back instantly
+            dragElastic={{}}
             onDragStart={() => setDragging(true)}
             onDragEnd={onDragEnd}
           >
