@@ -14,7 +14,7 @@ export enum CBRoute {
 
 export interface CBRouteData {
   route: CBRoute;
-  title?: string;
+  title: string;
   subtitle?: string;
   forRoles: CBUserRole[];
 }
@@ -50,7 +50,7 @@ export const routeMap: Record<CBRoute, CBRouteData> = {
     route: CBRoute.Glossar,
     title: "Glossar",
     subtitle: "Hier kannst du alle wichtigen Begriffe der Genetik nachschlagen",
-    forRoles: [CBUserRole.Student],
+    forRoles: [CBUserRole.Teacher],
   },
   [CBRoute.Achievements]: {
     route: CBRoute.Achievements,

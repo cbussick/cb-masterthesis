@@ -6,7 +6,7 @@ export interface CBSidebarProps {
   sidebarHorizontalSpacing: number;
 }
 
-export type SidebarMenuItem = {
+export type CBSidebarMenuItem = {
   label: string;
   icon: JSX.Element;
   href: string;

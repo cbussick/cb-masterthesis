@@ -1,71 +1,54 @@
-import { CBUserRole } from "@/firebase/userRole";
-import { CBRoute } from "@/helpers/routes";
+import { CBRoute, routeMap } from "@/helpers/routes";
 import {
   BookRounded,
   DashboardRounded,
   EmojiEventsRounded,
   HourglassFullRounded,
   MenuBookRounded,
-  PersonRounded,
   PublicRounded,
   SettingsRounded,
-  SportsHandballRounded,
 } from "@mui/icons-material";
-import { SidebarMenuItem } from "../components/CBSidebar/CBSidebarInterfaces";
+import { CBSidebarMenuItem } from "../components/CBSidebar/CBSidebarInterfaces";
 
-export const menuItems: SidebarMenuItem[] = [
+const makeSidebarMenuItemFromRoute = (
+  route: CBRoute,
+): Omit<CBSidebarMenuItem, "icon"> => {
+  const routeData = routeMap[route];
+
+  return {
+    label: routeData.title,
+    href: routeData.route,
+    forRoles: routeData.forRoles,
+  };
+};
+
+export const menuItems: CBSidebarMenuItem[] = [
   {
-    label: "Dashboard",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Home),
     icon: <DashboardRounded />,
-    href: CBRoute.Home,
-    forRoles: [CBUserRole.Admin, CBUserRole.Student, CBUserRole.Teacher],
   },
   {
-    label: "Themenwelt",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Themenwelt),
     icon: <PublicRounded />,
-    href: CBRoute.Themenwelt,
-    forRoles: [CBUserRole.Student],
   },
   {
-    label: "Freie Übung",
+    ...makeSidebarMenuItemFromRoute(CBRoute.FreieUebung),
     icon: <BookRounded />,
-    href: CBRoute.FreieUebung,
-    forRoles: [CBUserRole.Student],
   },
   {
-    label: "Prüfungssimulator",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Pruefungssimulator),
     icon: <HourglassFullRounded />,
-    href: CBRoute.Pruefungssimulator,
-    forRoles: [CBUserRole.Student],
   },
   {
-    label: "Glossar",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Glossar),
     icon: <MenuBookRounded />,
-    href: CBRoute.Glossar,
-    forRoles: [CBUserRole.Student],
   },
   {
-    label: "Achievements",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Achievements),
     icon: <EmojiEventsRounded />,
-    href: CBRoute.Achievements,
-    forRoles: [CBUserRole.Student],
   },
   {
-    label: "Einstellungen",
+    ...makeSidebarMenuItemFromRoute(CBRoute.Einstellungen),
     icon: <SettingsRounded />,
-    href: CBRoute.Einstellungen,
-    forRoles: [CBUserRole.Admin, CBUserRole.Student, CBUserRole.Teacher],
-  },
-  {
-    label: "Admin User Menü",
-    icon: <PersonRounded />,
-    href: "firestore-test",
-    forRoles: [CBUserRole.Admin],
-  },
-  {
-    label: "Playground",
-    icon: <SportsHandballRounded />,
-    href: "playground",
-    forRoles: [CBUserRole.Admin],
   },
 ];
