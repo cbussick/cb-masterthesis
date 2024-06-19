@@ -5,11 +5,13 @@ import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBProgressCircle } from "@/components/CBProgressCircle/CBProgressCircle";
 import { CBProgressCircleConnector } from "@/components/CBProgressCircleConnector/CBProgressCircleConnector";
+import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
+import { isTopicUnlocked } from "@/helpers/isTopicUnlocked";
 import { CBRoute } from "@/helpers/routes";
 import {
   topicWorldContentWrapperStyles,
@@ -27,7 +29,8 @@ interface TopicUnitPageParams {
 }
 
 export default function TopicUnit({ params }: TopicUnitPageParams) {
-  const topicData = topicWorldTopics[params.id as CBTopic];
+  const topicId = params.id as CBTopic;
+  const topicData = topicWorldTopics[topicId];
 
   const user = useUser();
 
@@ -42,6 +45,9 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
     }
   }, [user?.user]);
 
+  const hasAccess =
+    topicWorldProgress && isTopicUnlocked(topicId, topicWorldProgress);
+
   return (
     <CBContentWrapper {...topicWorldContentWrapperStyles}>
       <CBPageHeader
@@ -55,67 +61,72 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         sx={topicWorldPageHeaderStyles}
       />
 
-      <Box {...topicWorldInnerBoxStyles}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Stack sx={{ width: "fit-content" }}>
-            {topicData?.units.map((unit, index) => {
-              const previousUnitId =
-                index === 0 ? undefined : topicData.units[index - 1].id;
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {hasAccess ? (
+        <Box {...topicWorldInnerBoxStyles}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Stack sx={{ width: "fit-content" }}>
+              {topicData?.units.map((unit, index) => {
+                const previousUnitId =
+                  index === 0 ? undefined : topicData.units[index - 1].id;
 
-              const generalPreviousUnitData = topicData.units.find(
-                (u) => u.id === previousUnitId,
-              );
+                const generalPreviousUnitData = topicData.units.find(
+                  (u) => u.id === previousUnitId,
+                );
 
-              const generalUnitData = topicData.units.find(
-                (u2) => u2.id === unit.id,
-              );
+                const generalUnitData = topicData.units.find(
+                  (u2) => u2.id === unit.id,
+                );
 
-              const previousUnitCompletedExercises =
-                previousUnitId &&
-                topicWorldProgress?.topics[params.id]?.units[previousUnitId]
-                  ?.completedExercises?.length;
+                const previousUnitCompletedExercises =
+                  previousUnitId &&
+                  topicWorldProgress?.topics[params.id]?.units[previousUnitId]
+                    ?.completedExercises?.length;
 
-              const isPreviousUnitCompleted =
-                previousUnitCompletedExercises ===
-                generalPreviousUnitData?.exercises.length;
+                const isPreviousUnitCompleted =
+                  previousUnitCompletedExercises ===
+                  generalPreviousUnitData?.exercises.length;
 
-              const unlocked = index === 0 || isPreviousUnitCompleted;
+                const unlocked = index === 0 || isPreviousUnitCompleted;
 
-              const completedExercises =
-                topicWorldProgress?.topics[params.id]?.units[unit.id]
-                  ?.completedExercises?.length;
+                const completedExercises =
+                  topicWorldProgress?.topics[params.id]?.units[unit.id]
+                    ?.completedExercises?.length;
 
-              const progress =
-                completedExercises && generalUnitData?.exercises
-                  ? (100 * completedExercises) /
-                    generalUnitData.exercises.length
-                  : 0;
+                const progress =
+                  completedExercises && generalUnitData?.exercises
+                    ? (100 * completedExercises) /
+                      generalUnitData.exercises.length
+                    : 0;
 
-              return (
-                <Fragment key={unit.id}>
-                  {index !== 0 && (
-                    <CBProgressCircleConnector disabled={!unlocked} />
-                  )}
+                return (
+                  <Fragment key={unit.id}>
+                    {index !== 0 && (
+                      <CBProgressCircleConnector disabled={!unlocked} />
+                    )}
 
-                  <CBProgressCircle
-                    label={unit.name}
-                    progress={progress}
-                    href={`/themenwelt/${params.id}/${unit.id}`}
-                    unlocked={unlocked || false}
-                    icon={unit.icon}
-                  />
-                </Fragment>
-              );
-            })}
-          </Stack>
+                    <CBProgressCircle
+                      label={unit.name}
+                      progress={progress}
+                      href={`/themenwelt/${params.id}/${unit.id}`}
+                      unlocked={unlocked || false}
+                      icon={unit.icon}
+                    />
+                  </Fragment>
+                );
+              })}
+            </Stack>
+          </Box>
         </Box>
-      </Box>
+      ) : hasAccess === undefined ? null : (
+        <CBNoAccessTopicWorldView />
+      )}
 
       <Box
         sx={{
