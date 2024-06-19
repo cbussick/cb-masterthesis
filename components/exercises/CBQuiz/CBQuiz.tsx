@@ -38,7 +38,7 @@ export const CBQuiz = ({
 
     const isCorrect = exercise.correctAnswer === buttonAnswerId;
 
-    if (isCorrect && user?.user?.uid) {
+    if (isCorrect && user) {
       onCompleteExercise({ exerciseId: exercise.id, isCorrect });
 
       setExercises((previousExercises) => {
