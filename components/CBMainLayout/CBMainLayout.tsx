@@ -34,7 +34,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
     return <CBLoadingView />;
   }
 
-  if (!user?.user) {
+  if (!user.user) {
     return <CBNotSignedInView />;
   }
 
