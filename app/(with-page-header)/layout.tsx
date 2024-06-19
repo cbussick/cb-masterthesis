@@ -2,8 +2,9 @@
 
 import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
-import { CBRoute, routeMap } from "@/helpers/routes";
-import { usePathname } from "next/navigation";
+import { CBRoute } from "@/helpers/routes";
+import { useRouteData } from "@/helpers/useRouteData";
+import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 
 export default function WithPageHeaderLayout({
@@ -11,8 +12,11 @@ export default function WithPageHeaderLayout({
 }: {
   children: ReactNode;
 }) {
-  const pathname = usePathname();
-  const routeData = routeMap[pathname as CBRoute];
+  const routeData = useRouteData();
+
+  if (!routeData) {
+    notFound();
+  }
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>

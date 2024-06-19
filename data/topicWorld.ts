@@ -135,7 +135,10 @@ export const proteinbiosyntheseUnits: CBTopicWorldUnit[] = [];
 export const mutationUnits: CBTopicWorldUnit[] = [];
 
 export const topicWorldTopics: Record<CBTopic, CBTopicWorldTopicData> = {
-  [CBTopic.Zelle]: { topicData: topics[CBTopic.Zelle], units: zelleUnits },
+  [CBTopic.Zelle]: {
+    topicData: topics[CBTopic.Zelle],
+    units: zelleUnits,
+  },
   [CBTopic.MitoseMeiose]: {
     topicData: topics[CBTopic.MitoseMeiose],
     units: mitoseUnits,

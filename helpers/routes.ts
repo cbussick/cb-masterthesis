@@ -14,7 +14,7 @@ export enum CBRoute {
 
 export interface CBRouteData {
   route: CBRoute;
-  title?: string;
+  title: string;
   subtitle?: string;
   forRoles: CBUserRole[];
 }

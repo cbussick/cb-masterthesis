@@ -7,7 +7,7 @@ import {
   topicWorldContentWrapperStyles,
   topicWorldInnerBoxStyles,
   topicWorldPageHeaderStyles,
-} from "@/helpers/topicWorldStyles";
+} from "@/helpers/topic-world/topicWorldStyles";
 import { Box } from "@mui/material";
 import Image from "next/image";
 

@@ -13,6 +13,7 @@ export const CBConfettiWrapper = ({
   const isServerSide = useIsServerSide();
   const { isConfettiComplete, setConfettiComplete } = useConfetti();
   const { width, height } = useWindowSize();
+
   const [usableWindowSize, setUsableWindowSize] =
     useState<ReturnType<typeof useWindowSize>>();
 

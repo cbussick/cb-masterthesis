@@ -8,18 +8,22 @@ import { CBExerciseSequenceType } from "@/components/CBExerciseSequence/CBExerci
 import { CBTime } from "@/components/CBExerciseTimer/CBExerciseTimerInterfaces";
 import { glossaryEntries } from "@/components/CBGlossary/CBGlossaryEntries";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
+import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
+import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { addPointsToUser } from "@/firebase/addPointsToUser";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { markExerciseAsCompleted } from "@/firebase/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase/unlockGlossaryEntries";
 import { useUser } from "@/firebase/useUser";
 import { CBRoute } from "@/helpers/routes";
+import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
+import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface ExercisePageParams {
@@ -35,17 +39,26 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   const [exercises, setExercises] = useState<
     CBExerciseWithMetaData[] | undefined
   >(undefined);
+  const [, setCompletionTime] = useState<CBTime>({
+    sec: 0,
+    min: 0,
+  });
+  const [topicWorldProgress, setTopicWorldProgress] =
+    useState<TopicWorldProgress>();
 
-  const topicData = topicWorldTopics[params.id as CBTopic];
+  const topicId = params.id as CBTopic;
+  const topicData =
+    topicWorldTopics[topicId] === undefined
+      ? undefined
+      : topicWorldTopics[topicId];
 
   const unit = topicData?.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
-  const [, setCompletionTime] = useState<CBTime>({
-    sec: 0,
-    min: 0,
-  });
+  if (!unit) {
+    notFound();
+  }
 
   useEffect(() => {
     if (user?.user) {
@@ -55,16 +68,22 @@ export default function ExercisePage({ params }: ExercisePageParams) {
             ?.completedExercises || [];
 
         setExercises(
-          unit
-            ? unit?.exercises.map((exercise) => ({
-                ...exercise,
-                isCompleted: userCompletedExercises.includes(exercise.id),
-              }))
-            : [],
+          unit.exercises.map((exercise) => ({
+            ...exercise,
+            isCompleted: userCompletedExercises.includes(exercise.id),
+          })),
         );
       });
     }
-  }, [params.id, params.unitId, unit, unit?.exercises, user]);
+  }, [params.id, params.unitId, unit, user]);
+
+  useEffect(() => {
+    if (user?.user) {
+      getUserTopicWorldProgress(user.user.uid).then((progress) => {
+        setTopicWorldProgress(progress);
+      });
+    }
+  }, [user?.user]);
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${params.id}`;
 
@@ -106,6 +125,8 @@ export default function ExercisePage({ params }: ExercisePageParams) {
       }
     }
   };
+  const hasAccess =
+    topicWorldProgress && isUnitUnlocked(topicId, unit, topicWorldProgress);
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
@@ -116,38 +137,43 @@ export default function ExercisePage({ params }: ExercisePageParams) {
               previousLinks={[
                 { label: "Themenwelt", href: CBRoute.Themenwelt },
                 {
-                  label: topicData.topicData.name || "Thema",
+                  label: topicData?.topicData.name || "Thema",
                   href: onCompleteHref,
                 },
               ]}
-              currentLabel={unit?.name || "Einheit"}
+              currentLabel={unit.name || "Einheit"}
             />
           }
         />
 
-        <CBExerciseSequenceProvider>
-          <CBExerciseSequenceWrapper
-            type={CBExerciseSequenceType.TopicWorld}
-            exercises={exercises}
-            onCompleteHref={onCompleteHref}
-            onCompleteExercise={(parameters: {
-              exerciseId: string;
-              isCorrect: boolean;
-            }): void => {
-              if (user?.user) {
-                markExerciseAsCompleted(
-                  user.user.uid,
-                  params.id,
-                  params.unitId,
-                  parameters.exerciseId,
-                );
-              }
-            }}
-            onSequenceComplete={onSequenceComplete}
-            setCompletionTime={setCompletionTime}
-            difficulty={unit?.difficulty}
-          />
-        </CBExerciseSequenceProvider>
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {hasAccess ? (
+          <CBExerciseSequenceProvider>
+            <CBExerciseSequenceWrapper
+              type={CBExerciseSequenceType.TopicWorld}
+              exercises={exercises}
+              onCompleteHref={onCompleteHref}
+              onCompleteExercise={(parameters: {
+                exerciseId: string;
+                isCorrect: boolean;
+              }): void => {
+                if (user?.user) {
+                  markExerciseAsCompleted(
+                    user.user.uid,
+                    params.id,
+                    params.unitId,
+                    parameters.exerciseId,
+                  );
+                }
+              }}
+              onSequenceComplete={onSequenceComplete}
+              setCompletionTime={setCompletionTime}
+              difficulty={unit.difficulty}
+            />
+          </CBExerciseSequenceProvider>
+        ) : hasAccess === undefined ? null : (
+          <CBNoAccessTopicWorldView />
+        )}
       </Stack>
     </CBContentWrapper>
   );

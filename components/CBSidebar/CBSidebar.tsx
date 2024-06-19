@@ -28,6 +28,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CBLogo } from "../CBLogo/CBLogo";
 import { CBSidebarProps } from "./CBSidebarInterfaces";
@@ -55,6 +56,7 @@ export const CBSidebar = ({
   const user = useUser();
   const { isOpen, toggleIsOpen } = useSidebar();
   const { showSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const [isTransitionRunning, setTransitionRunning] = useState<boolean>(false);
 
@@ -198,7 +200,7 @@ export const CBSidebar = ({
 
             <CBSidebarItem
               listItemButtonProps={{
-                onClick: () => handleSignOut(showSnackbar),
+                onClick: () => handleSignOut(showSnackbar, router),
               }}
               icon={<LogoutRounded />}
               label="Abmelden"

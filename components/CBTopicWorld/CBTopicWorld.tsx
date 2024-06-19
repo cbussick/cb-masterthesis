@@ -1,10 +1,13 @@
 "use client";
 
 import { topicWorldTopics } from "@/data/topicWorld";
+import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
 import { getEnumKeyByValue } from "@/helpers/getEnumByValue";
+import { CBRoute } from "@/helpers/routes";
+import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
 import { Box, Stack } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { CBProgressCircle } from "../CBProgressCircle/CBProgressCircle";
@@ -34,76 +37,56 @@ export const CBTopicWorld = (): JSX.Element => {
         alignItems: "center",
       }}
     >
-      <Stack
-        sx={{
-          width: "fit-content",
-        }}
-      >
-        {topicsAsArray.map((topic, index) => {
-          const previousTopicGeneralData = topicsAsArray[index - 1];
+      {topicWorldProgress ? (
+        <Stack
+          sx={{
+            width: "fit-content",
+          }}
+        >
+          {topicsAsArray.map((topic, index) => {
+            const topicId = getEnumKeyByValue(
+              topicWorldTopics,
+              topic,
+            ) as CBTopic;
+            const unlocked = isTopicUnlocked(topicId, topicWorldProgress);
 
-          const previousTopicId =
-            index === 0
-              ? undefined
-              : getEnumKeyByValue(topicWorldTopics, previousTopicGeneralData);
+            let completedUnits = 0;
 
-          const isPreviousTopicCompleted =
-            previousTopicId &&
-            previousTopicGeneralData?.units?.length > 0 &&
-            previousTopicGeneralData.units.every((unit) => {
-              const userUnitProgress =
-                topicWorldProgress?.topics[previousTopicId]?.units[unit.id];
+            topic?.units.forEach((unit) => {
+              const completedExercises =
+                topicWorldProgress?.topics[topicId]?.units[unit.id]
+                  ?.completedExercises?.length;
 
-              return (
-                unit.exercises.length > 0 &&
-                unit.exercises.every((exercise) => {
-                  return userUnitProgress?.completedExercises.includes(
-                    exercise.id,
-                  );
-                })
-              );
+              if (
+                completedExercises &&
+                completedExercises === unit?.exercises.length
+              ) {
+                completedUnits += 1;
+              }
             });
 
-          const unlocked = index === 0 || isPreviousTopicCompleted;
+            const progress = topic?.units
+              ? (100 * completedUnits) / topic.units.length
+              : 0;
 
-          const topicId = getEnumKeyByValue(topicWorldTopics, topic);
+            return (
+              <Fragment key={topicId}>
+                {index !== 0 && (
+                  <CBProgressCircleConnector disabled={!unlocked} />
+                )}
 
-          let completedUnits = 0;
-
-          topic?.units.forEach((unit) => {
-            const completedExercises =
-              topicWorldProgress?.topics[topicId]?.units[unit.id]
-                ?.completedExercises?.length;
-
-            if (
-              completedExercises &&
-              completedExercises === unit?.exercises.length
-            ) {
-              completedUnits += 1;
-            }
-          });
-
-          const progress = topic?.units
-            ? (100 * completedUnits) / topic.units.length
-            : 0;
-
-          return (
-            <Fragment key={topicId}>
-              {index !== 0 && (
-                <CBProgressCircleConnector disabled={!unlocked} />
-              )}
-
-              <CBProgressCircle
-                label={topic.topicData.name}
-                icon={topic.topicData.icon}
-                progress={Number.isNaN(progress) ? 0 : progress}
-                href={`themenwelt/${topicId}`}
-                unlocked={unlocked || false}
-              />
-            </Fragment>
-          );
-        })}
-      </Stack>
+                <CBProgressCircle
+                  label={topic.topicData.name}
+                  icon={topic.topicData.icon}
+                  progress={Number.isNaN(progress) ? 0 : progress}
+                  href={`${CBRoute.Themenwelt}/${topicId}`}
+                  unlocked={unlocked || false}
+                />
+              </Fragment>
+            );
+          })}
+        </Stack>
+      ) : null}
     </Box>
   );
 };

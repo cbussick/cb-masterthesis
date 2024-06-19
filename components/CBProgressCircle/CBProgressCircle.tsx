@@ -53,7 +53,9 @@ export const CBProgressCircle = ({
   return (
     <Box
       component={motion.div}
-      initial={{ scale: 1 }}
+      initial={{ scale: 0.5, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 20 }}
       whileHover={{ scale: unlocked ? 1.025 : undefined }}
       sx={{
         position: "relative",
