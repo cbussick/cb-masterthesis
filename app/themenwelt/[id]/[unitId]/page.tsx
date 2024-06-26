@@ -57,7 +57,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
-  if (!unit || !topicData) {
+  if (!unit) {
     notFound();
   }
 
