@@ -23,7 +23,10 @@ export default function FreePractice() {
       <Grid container spacing={4}>
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/topics/zelle.jpg"
+            image={{
+              src: "/topics/zelle.jpg",
+              alt: "Zelle",
+            }}
             text="Tierische und pflanzliche
             Zellen"
             href={`${CBRoute.FreieUebung}/${CBTopic.Zelle}`}
@@ -32,7 +35,10 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/topics/mitose-meiose.png"
+            image={{
+              src: "/topics/mitose-meiose.png",
+              alt: "Mitose und Meiose",
+            }}
             text="Mitose und Meiose"
             href={`${CBRoute.FreieUebung}/${CBTopic.MitoseMeiose}`}
           />
@@ -40,7 +46,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/topics/dna.png"
+            image={{ src: "/topics/dna.png", alt: "DNA" }}
             text="Aufbau der DNA"
             href={`${CBRoute.FreieUebung}/${CBTopic.AufbauDNA}`}
           />
@@ -48,7 +54,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/coming-soon/coming-soon.jpg"
+            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
             text="DNA-Replikation"
             disabled
           />
@@ -56,7 +62,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/coming-soon/coming-soon.jpg"
+            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
             text="Proteinbiosynthese"
             disabled
           />
@@ -64,7 +70,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image="/coming-soon/coming-soon.jpg"
+            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
             text="(Gen-) Mutationen"
             disabled
           />

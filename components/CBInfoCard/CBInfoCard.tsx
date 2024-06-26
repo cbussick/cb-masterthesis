@@ -26,7 +26,6 @@ const imageVariants: MotionProps["variants"] = {
 
 export const CBInfoCard = ({
   image,
-  alt,
   text,
   href,
   disabled,
@@ -62,8 +61,8 @@ export const CBInfoCard = ({
             }}
           >
             <Image
-              src={image}
-              alt={alt || ""}
+              src={image.src}
+              alt={image.alt}
               fill
               style={{
                 objectFit: "cover",

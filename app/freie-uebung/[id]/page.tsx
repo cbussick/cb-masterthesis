@@ -59,7 +59,7 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.Quiz].name}
-              image="/topics/quiz.png"
+              image={{ src: "/topics/quiz.png", alt: "Quiz" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.Quiz}`}
             />
           </Grid>
@@ -69,7 +69,7 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.MatchingGame].name}
-              image="/topics/matching-game.png"
+              image={{ src: "/topics/matching-game.png", alt: "Puzzleteile" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.MatchingGame}`}
             />
           </Grid>
@@ -79,7 +79,7 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.Swiper].name}
-              image="/topics/swiper.png"
+              image={{ src: "/topics/swiper.png", alt: "Swiper" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.Swiper}`}
             />
           </Grid>
@@ -89,7 +89,10 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.FamilyTree].name}
-              image="/topics/familytree.png"
+              image={{
+                src: "/topics/familytree.png",
+                alt: "Familienstammbaum",
+              }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FamilyTree}`}
             />
           </Grid>
@@ -99,7 +102,7 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.FreeformQuestion].name}
-              image="/topics/freetext.png"
+              image={{ src: "/topics/freetext.png", alt: "Freitext" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FreeformQuestion}`}
             />
           </Grid>
@@ -111,7 +114,7 @@ export default function FreePracticeSubpage({
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text="Fehler wiederholen"
-                image="/topics/repeat.png"
+                image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
                 href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
               />
             </Grid>

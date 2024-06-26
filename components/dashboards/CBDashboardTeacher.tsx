@@ -35,13 +35,13 @@ export const CBDashboardTeacher = (): JSX.Element => {
         >
           <Stack spacing={2} sx={{ width: "50%" }}>
             <CBSimpleInfoCard
-              image="/topics/glossar.png"
+              image={{ src: "/topics/glossar.png", alt: "Glossar bearbeiten" }}
               title="Glossar bearbeiten"
               subTitle={`Anzahl der Glossareinträge: ${glossaryEntries.length}`}
             />
 
             <CBSimpleInfoCard
-              image="/topics/exercise.png"
+              image={{ src: "/topics/exercise.png", alt: "Übungen bearbeiten" }}
               title="Übungen bearbeiten"
               subTitle={`Anzahl der Übungen: ${
                 quizExercises.length +
@@ -61,7 +61,7 @@ export const CBDashboardTeacher = (): JSX.Element => {
         <Grid container spacing={3}>
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/classroom/classroom-2.jpg"
+              image={{ src: "/classroom/classroom-2.jpg", alt: "Klasse 11a" }}
               text="Klasse 11a"
               href="/lehrer-uebersicht"
             />
@@ -69,7 +69,7 @@ export const CBDashboardTeacher = (): JSX.Element => {
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/classroom/classroom-1.jpg"
+              image={{ src: "/classroom/classroom-1.jpg", alt: "Klasse 11b" }}
               text="Klasse 11b"
               href="/lehrer-uebersicht"
             />
@@ -77,7 +77,7 @@ export const CBDashboardTeacher = (): JSX.Element => {
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/classroom/classroom-3.jpg"
+              image={{ src: "/classroom/classroom-3.jpg", alt: "Klasse 11c" }}
               text="Klasse 11c"
               href="/lehrer-uebersicht"
             />
@@ -85,8 +85,8 @@ export const CBDashboardTeacher = (): JSX.Element => {
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/classroom/classroom-4.jpg"
-              text="Klasse 11c"
+              image={{ src: "/classroom/classroom-4.jpg", alt: "Klasse 11d" }}
+              text="Klasse 11d"
               href="/lehrer-uebersicht"
             />
           </Grid>

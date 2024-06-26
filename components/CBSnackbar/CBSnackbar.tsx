@@ -36,7 +36,7 @@ export const CBSnackbar = ({
           {message}
         </Alert>
 
-        <Image src="/logo/dina.svg" alt="DiNA" width="100" height="100" />
+        <Image src="/logo/dina.svg" alt="DiNA" width={100} height={100} />
       </Stack>
     </Snackbar>
   );

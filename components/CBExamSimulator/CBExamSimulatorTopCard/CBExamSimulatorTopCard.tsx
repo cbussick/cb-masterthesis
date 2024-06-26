@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CBExamSimulatorTopCardProps } from "./CBExamSimulatorTopCardInterfaces";
 
 export const CBExamSimulatorTopCard = ({
-  img,
+  image,
   title,
   subTitle,
 }: CBExamSimulatorTopCardProps): JSX.Element => {
@@ -17,8 +17,8 @@ export const CBExamSimulatorTopCard = ({
           }}
         >
           <Image
-            src={img.src}
-            alt={img.alt}
+            src={image.src}
+            alt={image.alt}
             fill
             style={{ objectFit: "cover" }}
           />

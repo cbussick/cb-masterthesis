@@ -7,7 +7,6 @@ export const CBGraphCard = ({
   title,
   subTitle,
   graph,
-  alt,
 }: CBGraphCardProps): JSX.Element => {
   return (
     <Card
@@ -31,8 +30,8 @@ export const CBGraphCard = ({
           }}
         >
           <Image
-            src={image}
-            alt={alt || ""}
+            src={image.src}
+            alt={image.alt}
             fill
             style={{ objectFit: "cover" }}
           />

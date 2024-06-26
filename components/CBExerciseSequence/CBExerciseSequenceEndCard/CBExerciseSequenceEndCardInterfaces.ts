@@ -1,5 +1,6 @@
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
+
 export interface CBExerciseSequenceEndCardProps {
-  image: string;
-  alt?: string;
+  image: CBImgWithAlt;
   text: string;
 }

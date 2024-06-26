@@ -7,7 +7,6 @@ export const CBProgressCard = ({
   title,
   subTitle,
   image,
-  alt,
   progressValue,
   maxValue,
 }: CBProgressCardProps): JSX.Element => {
@@ -34,8 +33,8 @@ export const CBProgressCard = ({
           }}
         >
           <Image
-            src={image}
-            alt={alt || ""}
+            src={image.src}
+            alt={image.alt}
             fill
             style={{ objectFit: "cover" }}
           />

@@ -4,7 +4,6 @@ import { CBExerciseSequenceEndCardProps } from "./CBExerciseSequenceEndCardInter
 
 export const CBExerciseSequenceEndCard = ({
   image,
-  alt,
   text,
 }: CBExerciseSequenceEndCardProps): JSX.Element => {
   return (
@@ -29,8 +28,8 @@ export const CBExerciseSequenceEndCard = ({
           }}
         >
           <Image
-            src={image}
-            alt={alt || ""}
+            src={image.src}
+            alt={image.alt}
             fill
             style={{ objectFit: "cover" }}
           />

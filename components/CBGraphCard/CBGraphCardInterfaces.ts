@@ -1,7 +1,8 @@
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
+
 export interface CBGraphCardProps {
-  image: string;
+  image: CBImgWithAlt;
   title: string;
   subTitle: string;
   graph: JSX.Element;
-  alt?: string;
 }

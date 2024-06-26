@@ -6,7 +6,6 @@ export const CBSimpleInfoCard = ({
   title,
   subTitle,
   image,
-  alt,
 }: CBSimpleInfoCardProps): JSX.Element => {
   return (
     <Card
@@ -34,8 +33,8 @@ export const CBSimpleInfoCard = ({
           }}
         >
           <Image
-            src={image}
-            alt={alt || ""}
+            src={image.src}
+            alt={image.alt}
             fill
             style={{ objectFit: "cover" }}
           />

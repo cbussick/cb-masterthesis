@@ -7,7 +7,6 @@ export const CBAchievementCard = ({
   title,
   subTitle,
   image,
-  alt,
   progressValue,
   progressGoal,
 }: CBAchievementCardProps): JSX.Element => {
@@ -27,8 +26,8 @@ export const CBAchievementCard = ({
     >
       <Box sx={{ position: "relative", width: "30%", height: 150 }}>
         <Image
-          src={image}
-          alt={alt || ""}
+          src={image.src}
+          alt={image.alt}
           fill
           style={{ objectFit: "cover" }}
         />

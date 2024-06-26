@@ -2,6 +2,7 @@
 
 import { levels } from "@/data/gamification";
 import { useUser } from "@/firebase/useUser";
+import { CBRoute } from "@/helpers/routes";
 import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
 import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";
 import { Divider, Stack } from "@mui/material";
@@ -66,7 +67,7 @@ export const CBDashboardStudent = (): JSX.Element => {
         >
           <Stack spacing={2}>
             <CBProgressCard
-              image="/topics/zelle.jpg"
+              image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
               title={userLvlTitleText}
               subTitle={
                 maxLevelReached
@@ -82,7 +83,7 @@ export const CBDashboardStudent = (): JSX.Element => {
             />
 
             <CBGraphCard
-              image="/flask.jpg"
+              image={{ src: "/flask.jpg", alt: "Erlenmeyerkolben" }}
               title={`${formattedTime.h}h ${formattedTime.min}min`}
               subTitle={`Du hast diese Woche bislang ${formattedTime.h} ${
                 formattedTime.h === 1 ? "Stunde" : "Stunden"
@@ -101,25 +102,28 @@ export const CBDashboardStudent = (): JSX.Element => {
         <Grid container spacing={3} disableEqualOverflow>
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/lab-equipment.jpg"
+              image={{ src: "/lab-equipment.jpg", alt: "Laborausstattung" }}
               text="Themenwelt"
-              href="/themenwelt"
+              href={CBRoute.Themenwelt}
             />
           </Grid>
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/topics/zelle.jpg"
+              image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
               text="Tierische und pflanzliche Zellen"
-              href="/freie-uebung/zelle"
+              href={`${CBRoute.FreieUebung}/zelle`}
             />
           </Grid>
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              image="/pruefungssimulator.jpg"
+              image={{
+                src: "/pruefungssimulator.jpg",
+                alt: "Prüfungssimulator",
+              }}
               text="Prüfungssimulator"
-              href="pruefungssimulator"
+              href={CBRoute.Pruefungssimulator}
             />
           </Grid>
         </Grid>
