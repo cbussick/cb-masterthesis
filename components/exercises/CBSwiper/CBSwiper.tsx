@@ -131,7 +131,12 @@ export const CBSwiper = ({
               p: 2,
               zIndex: 1,
               pointerEvents: isDragging ? "none" : "auto",
-              cursor: isDragging ? "grabbing" : "grab",
+              // eslint-disable-next-line no-nested-ternary
+              cursor: isCurrentExerciseFinished
+                ? "auto"
+                : isDragging
+                  ? "grabbing"
+                  : "grab",
             }}
             component={motion.div}
             drag={!isCurrentExerciseFinished}
