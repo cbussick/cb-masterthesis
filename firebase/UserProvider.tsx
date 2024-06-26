@@ -59,7 +59,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
       onSnapshot(userCustomDataReference, (snapshot) => {
         const data = snapshot.data();
-        if (data !== undefined) {
+        if (data) {
           setCustomData(data);
         }
       });
