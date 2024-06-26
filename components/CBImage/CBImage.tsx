@@ -8,29 +8,30 @@ import { CBImageProps } from "./CBImageInterfaces";
 export const CBImage = ({
   image,
   boxProps,
-  draggable,
+  imageProps,
 }: CBImageProps): JSX.Element => {
   const [isImageLoading, setImageLoading] = useState<boolean>(true);
 
   return (
     <Box
+      {...boxProps}
       sx={{
-        width: "100%",
-        height: 260,
         position: "relative",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
+        height: 260,
+        ...boxProps?.sx,
       }}
-      {...boxProps}
     >
       <Image
         src={image.src}
         alt={image.alt}
         fill
-        style={{ objectFit: "contain" }}
         onLoad={() => setImageLoading(false)}
-        draggable={draggable}
+        {...imageProps}
+        style={{ objectFit: "contain", ...imageProps?.style }}
       />
 
       {isImageLoading && <CircularProgress size={80} />}

@@ -1,6 +1,7 @@
 "use client";
 
 import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBImage } from "@/components/CBImage/CBImage";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBTopicWorld } from "@/components/CBTopicWorld/CBTopicWorld";
 import {
@@ -9,7 +10,6 @@ import {
   topicWorldPageHeaderStyles,
 } from "@/helpers/topic-world/topicWorldStyles";
 import { Box } from "@mui/material";
-import Image from "next/image";
 
 export default function TopicWorld() {
   return (
@@ -25,17 +25,21 @@ export default function TopicWorld() {
         <CBTopicWorld />
       </Box>
 
-      <Box
-        sx={{
-          position: "absolute",
-          right: 50,
-          bottom: 10,
-          width: 200,
-          height: 300,
+      <CBImage
+        image={{
+          src: "/logo/dina.svg",
+          alt: "DiNA",
         }}
-      >
-        <Image src="/logo/dina.svg" alt="DiNA" fill />
-      </Box>
+        boxProps={{
+          sx: {
+            position: "absolute",
+            right: 50,
+            bottom: 10,
+            width: 200,
+            height: 300,
+          },
+        }}
+      />
     </CBContentWrapper>
   );
 }

@@ -1,5 +1,5 @@
-import { Box, Card, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Card, Stack, Typography } from "@mui/material";
+import { CBImage } from "../CBImage/CBImage";
 import { CBGraphCardProps } from "./CBGraphCardInterfaces";
 
 export const CBGraphCard = ({
@@ -22,20 +22,20 @@ export const CBGraphCard = ({
           alignItems: "center",
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            minWidth: 150,
-            height: "100%",
+        <CBImage
+          image={image}
+          boxProps={{
+            sx: {
+              width: 150,
+              height: "100%",
+            },
           }}
-        >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </Box>
+          imageProps={{
+            style: {
+              objectFit: "cover",
+            },
+          }}
+        />
 
         <Stack
           direction="row"

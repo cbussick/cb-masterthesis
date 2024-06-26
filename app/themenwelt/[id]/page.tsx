@@ -2,6 +2,7 @@
 
 import { CBBreadcrumbs } from "@/components/CBBreadcrumbs/CBBreadcrumbs";
 import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
+import { CBImage } from "@/components/CBImage/CBImage";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBProgressCircle } from "@/components/CBProgressCircle/CBProgressCircle";
 import { CBProgressCircleConnector } from "@/components/CBProgressCircleConnector/CBProgressCircleConnector";
@@ -21,7 +22,6 @@ import {
   topicWorldPageHeaderStyles,
 } from "@/helpers/topic-world/topicWorldStyles";
 import { Box, Stack } from "@mui/material";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 
@@ -126,17 +126,21 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         <CBNoAccessTopicWorldView />
       )}
 
-      <Box
-        sx={{
-          position: "absolute",
-          right: 50,
-          bottom: 10,
-          width: 200,
-          height: 300,
+      <CBImage
+        image={{
+          src: "/logo/dina.svg",
+          alt: "DiNA",
         }}
-      >
-        <Image src="/logo/dina.svg" alt="DiNA" fill />
-      </Box>
+        boxProps={{
+          sx: {
+            position: "absolute",
+            right: 50,
+            bottom: 10,
+            width: 200,
+            height: 300,
+          },
+        }}
+      />
     </CBContentWrapper>
   );
 }

@@ -1,5 +1,5 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { CBImage } from "../CBImage/CBImage";
 import { CBProgressBar } from "../CBProgressBar/CBProgressBar";
 import { CBAchievementCardProps } from "./CBAchievementCardInterfaces";
 
@@ -21,31 +21,24 @@ export const CBAchievementCard = ({
         bgcolor: (t) =>
           isCompleted ? t.palette.background.default : t.palette.grey[200],
         opacity: isCompleted ? 1 : 0.6,
-        pointerEvents: isCompleted ? "none" : "auto",
       }}
     >
-      <Box sx={{ position: "relative", width: "30%", height: 150 }}>
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          style={{ objectFit: "cover" }}
-        />
-      </Box>
+      <CBImage
+        image={image}
+        boxProps={{ sx: { width: "30%", height: 150 } }}
+        imageProps={{
+          style: {
+            objectFit: "cover",
+          },
+        }}
+      />
 
       <CardContent sx={{ width: "70%" }}>
         <Stack spacing={1}>
           <Stack>
             <Typography variant="h5">{title}</Typography>
 
-            <Typography
-              variant="body2"
-              sx={{
-                mt: 0.7,
-              }}
-            >
-              {subTitle}
-            </Typography>
+            <Typography variant="body2">{subTitle}</Typography>
           </Stack>
 
           <CBProgressBar
@@ -53,7 +46,6 @@ export const CBAchievementCard = ({
             maxValue={progressGoal}
             width="100%"
             height="small"
-            color="primary"
           />
         </Stack>
       </CardContent>

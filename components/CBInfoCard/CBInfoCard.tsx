@@ -2,7 +2,7 @@
 
 import { Box, Card, Stack, Typography } from "@mui/material";
 import { MotionProps, motion } from "framer-motion";
-import Image from "next/image";
+import { CBImage } from "../CBImage/CBImage";
 import { CBUnstyledNextLink } from "../CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBInfoCardProps } from "./CBInfoCardInterfaces";
 
@@ -48,25 +48,18 @@ export const CBInfoCard = ({
         <Stack
           sx={{
             flexGrow: 1,
-            bgcolor: "skyblue",
             overflow: "hidden",
           }}
         >
-          <Box
-            component={motion.div}
-            variants={imageVariants}
-            sx={{
-              position: "relative",
-              height: "100%",
-            }}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              style={{
-                objectFit: "cover",
-                filter: disabled ? "grayscale(0.9)" : undefined,
+          <Box component={motion.div} variants={imageVariants}>
+            <CBImage
+              image={image}
+              boxProps={{ height: "100%" }}
+              imageProps={{
+                style: {
+                  objectFit: "cover",
+                  filter: disabled ? "grayscale(0.9)" : undefined,
+                },
               }}
             />
           </Box>
