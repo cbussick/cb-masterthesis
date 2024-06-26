@@ -1,8 +1,8 @@
-import { getUserDocumentReference } from "@/helpers/getUserDocumentReference";
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserDocumentReference";
 import { updateDoc } from "firebase/firestore";
 
 export const changeUsername = async (uid: string, username: string) => {
-  const documentReference = getUserDocumentReference(uid);
+  const documentReference = getUserCustomDataDocumentReference(uid);
 
   updateDoc(documentReference, {
     username,

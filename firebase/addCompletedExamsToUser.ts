@@ -1,11 +1,11 @@
-import { getUserDocumentReference } from "@/helpers/getUserDocumentReference";
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserDocumentReference";
 import { getDoc, updateDoc } from "firebase/firestore";
 
 export const addCompletedExamsToUser = async (
   uid: string,
   completedExamsAmount: number,
 ) => {
-  const documentReference = getUserDocumentReference(uid);
+  const documentReference = getUserCustomDataDocumentReference(uid);
 
   const documentSnapshot = await getDoc(documentReference);
 
