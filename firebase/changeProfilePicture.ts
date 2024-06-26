@@ -1,4 +1,4 @@
-import { getUserCustomDataDocumentReference } from "@/helpers/getUserDocumentReference";
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
 import { updateDoc } from "firebase/firestore";
 
 export const changeProfilePicture = async (

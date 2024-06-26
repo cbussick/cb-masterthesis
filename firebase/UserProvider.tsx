@@ -1,6 +1,6 @@
 "use client";
 
-import { getUserCustomDataDocumentReference } from "@/helpers/getUserDocumentReference";
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
 import { NextOrObserver, User, onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";

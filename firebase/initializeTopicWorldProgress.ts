@@ -1,9 +1,9 @@
-import { doc, setDoc } from "firebase/firestore";
-import { firestore } from "./firebase";
+import { getTopicWorldDocumentReference } from "@/helpers/getTopicWorldDocumentReference";
+import { setDoc } from "firebase/firestore";
 
 export const initializeTopicWorldProgress = async (uid: string) => {
   try {
-    const documentReference = doc(firestore, `topicWorldProgress/${uid}`);
+    const documentReference = getTopicWorldDocumentReference(uid);
 
     await setDoc(documentReference, { topics: {} });
   } catch (error) {
