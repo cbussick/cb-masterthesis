@@ -4,6 +4,7 @@ import { createTheme, responsiveFontSizes, Theme } from "@mui/material";
 import { font } from "./font";
 
 const fontWeightMedium = 500;
+const fontWeightBold = 700;
 
 // Is the MUI default, but to access this factor somewhere else, we need to define it here explicitly.
 export const themeSpacingFactor = 8;
@@ -21,6 +22,7 @@ const theme = createTheme({
   typography: {
     fontFamily: font.style.fontFamily,
     fontWeightMedium,
+    fontWeightBold,
     h1: {
       fontSize: "2.5rem", // 40px
       fontWeight: fontWeightMedium,
@@ -46,6 +48,10 @@ const theme = createTheme({
     caption: {
       fontSize: "0.625rem", // 10px
     },
+    button: {
+      textTransform: "none",
+      fontWeight: fontWeightBold,
+    },
   },
 });
 
@@ -53,12 +59,6 @@ const themeWithOverrides: Theme = {
   ...theme,
   components: {
     MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: "none",
-          fontWeight: theme.typography.fontWeightBold,
-        },
-      },
       defaultProps: {
         variant: "contained",
       },

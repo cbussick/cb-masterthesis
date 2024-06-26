@@ -27,8 +27,10 @@ export const CBDinaHint = ({
         }}
         disabled={disabled}
         isLoading={isLoading}
+        variant="outlined"
+        endIcon={<CBEmoji emoji="💡" />}
       >
-        <CBEmoji emoji="💡" fontSize="18px" />
+        Tipp
       </CBLoadingButton>
 
       <CBDialog
