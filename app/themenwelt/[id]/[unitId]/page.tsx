@@ -65,8 +65,8 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     if (user?.user) {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         const userCompletedExercises =
-          progress?.topics[params.id]?.units[params.unitId]
-            ?.completedExercises || [];
+          progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
+          [];
 
         setExercises(
           unit.exercises.map((exercise) => ({
@@ -76,7 +76,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
         );
       });
     }
-  }, [params.id, params.unitId, unit, user]);
+  }, [params.unitId, topicId, unit, user]);
 
   useEffect(() => {
     if (user?.user) {
@@ -86,7 +86,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     }
   }, [user?.user]);
 
-  const onCompleteHref = `${CBRoute.Themenwelt}/${params.id}`;
+  const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
   const onSequenceComplete = (parameters: {
     allExercisesCompleted: boolean;
@@ -161,7 +161,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
                 if (user?.user) {
                   markExerciseAsCompleted(
                     user.user.uid,
-                    params.id,
+                    topicId,
                     params.unitId,
                     parameters.exerciseId,
                   );
