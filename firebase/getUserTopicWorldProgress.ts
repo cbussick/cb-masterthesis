@@ -10,7 +10,7 @@ export const getUserTopicWorldProgress = async (
     const documentSnapshot = await getDoc(documentReference);
 
     if (documentSnapshot.exists()) {
-      return documentSnapshot.data() as TopicWorldProgress;
+      return documentSnapshot.data();
     }
 
     return undefined;
