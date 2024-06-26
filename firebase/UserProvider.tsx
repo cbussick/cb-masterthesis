@@ -1,11 +1,11 @@
 "use client";
 
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserDocumentReference";
 import { NextOrObserver, User, onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import { CBUserCustomData } from "./UserCustomDataConverter";
 import { auth } from "./firebase";
-import { getUserCustomDataReference } from "./getUserCustomData";
 import { CBUserRole } from "./userRole";
 
 interface UserProviderProps {
@@ -53,7 +53,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     if (currentUser) {
       setUser(currentUser);
 
-      const userCustomDataReference = await getUserCustomDataReference(
+      const userCustomDataReference = getUserCustomDataDocumentReference(
         currentUser.uid,
       );
 
