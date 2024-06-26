@@ -16,18 +16,15 @@ const difficultyMap: Record<
   CBExerciseSequenceEndCardProps
 > = {
   [CBExerciseDifficulty.Easy]: {
-    image: "/difficulty-easy.png",
-    alt: "Kleine Pflanze",
+    image: { src: "/difficulty-easy.png", alt: "Kleine Pflanze" },
     text: "Schwierigkeit Leicht",
   },
   [CBExerciseDifficulty.Medium]: {
-    image: "/difficulty-medium.png",
-    alt: "Mittelgroße Pflanze",
+    image: { src: "/difficulty-medium.png", alt: "Mittelgroße Pflanze" },
     text: "Schwierigkeit Mittel",
   },
   [CBExerciseDifficulty.Hard]: {
-    image: "/difficulty-hard.png",
-    alt: "Große Pflanze",
+    image: { src: "/difficulty-hard.png", alt: "Große Pflanze" },
     text: "Schwierigkeit Schwer",
   },
 };
@@ -107,8 +104,7 @@ export const CBExerciseSequenceEndScreen = ({
             )}
 
             <CBExerciseSequenceEndCard
-              image="/star.png"
-              alt="Stern"
+              image={{ src: "/star.png", alt: "Stern" }}
               text={`${shortenedPercentage}% richtig beantwortet`}
             />
           </Stack>

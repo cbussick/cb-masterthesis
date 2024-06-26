@@ -1,12 +1,11 @@
-import { Box, Card, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Card, Stack, Typography } from "@mui/material";
+import { CBImage } from "../CBImage/CBImage";
 import { CBSimpleInfoCardProps } from "./CBSimpleInfoCardInterfaces";
 
 export const CBSimpleInfoCard = ({
   title,
   subTitle,
   image,
-  alt,
 }: CBSimpleInfoCardProps): JSX.Element => {
   return (
     <Card
@@ -26,20 +25,20 @@ export const CBSimpleInfoCard = ({
           height: "100%",
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            width: 150,
-            height: "100%",
+        <CBImage
+          image={image}
+          boxProps={{
+            sx: {
+              width: 150,
+              height: "100%",
+            },
           }}
-        >
-          <Image
-            src={image}
-            alt={alt || ""}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </Box>
+          imageProps={{
+            style: {
+              objectFit: "cover",
+            },
+          }}
+        />
 
         <Stack
           spacing={0.7}

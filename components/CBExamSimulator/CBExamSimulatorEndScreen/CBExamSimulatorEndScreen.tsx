@@ -50,13 +50,13 @@ export const CBExamSimulatorEndScreen = ({
         }}
       >
         <CBExamSimulatorTopCard
-          img={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
+          image={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
           title={exerciseAmountTitle}
           subTitle={`${correctExerciseAmount} / ${exercises.length} Aufgaben richtig`}
         />
 
         <CBExamSimulatorTopCard
-          img={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
+          image={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
           title={completionTimeTitle}
           subTitle={`${completionTime.min < 10 ? 0 : ""}${completionTime.min}:${
             completionTime.sec < 10 ? 0 : ""

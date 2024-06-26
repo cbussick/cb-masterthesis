@@ -1,8 +1,9 @@
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
+
 export interface CBProgressCardProps {
-  image: string;
+  image: CBImgWithAlt;
   title: string;
   subTitle: string;
-  alt?: string;
   progressValue: number;
   maxValue: number;
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import { Box, Button, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Button, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
+import { CBImage } from "../CBImage/CBImage";
 import { CBLoadingButton } from "../CBLoadingButton/CBLoadingButton";
 import { CBDinaHintProps } from "./CBDinaHintInterfaces";
 
@@ -45,15 +45,15 @@ export const CBDinaHint = ({
             alignItems: "center",
           }}
         >
-          <Box
-            sx={{
-              position: "relative",
-              width: 100,
-              height: 125,
+          <CBImage
+            image={{ src: "/logo/dina-bold-stroke.svg", alt: "DiNA" }}
+            boxProps={{
+              sx: {
+                width: 100,
+                height: 125,
+              },
             }}
-          >
-            <Image src="/logo/dina-bold-stroke.svg" alt="DiNA" fill />
-          </Box>
+          />
 
           <Typography>{hint}</Typography>
 

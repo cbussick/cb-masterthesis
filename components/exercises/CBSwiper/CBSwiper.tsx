@@ -167,7 +167,7 @@ export const CBSwiper = ({
                     flexGrow: 1,
                     height: undefined,
                   }}
-                  draggable={false}
+                  imageProps={{ draggable: false }}
                 />
               )}
             </Stack>

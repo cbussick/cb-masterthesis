@@ -1,6 +1,7 @@
+import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
+
 export interface CBInfoCardProps {
-  image: string;
-  alt?: string;
+  image: CBImgWithAlt;
   text: string;
   href?: string;
   disabled?: boolean;

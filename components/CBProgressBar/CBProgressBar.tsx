@@ -14,7 +14,6 @@ export const CBProgressBar = ({
   maxValue,
   height,
   width,
-  color,
   rounded,
   format,
 }: CBProgressBarProps): JSX.Element => {
@@ -30,7 +29,6 @@ export const CBProgressBar = ({
     >
       <LinearProgress
         variant="determinate"
-        color={color === undefined ? "primary" : color}
         value={value}
         sx={{
           width: width === undefined ? 300 : width,

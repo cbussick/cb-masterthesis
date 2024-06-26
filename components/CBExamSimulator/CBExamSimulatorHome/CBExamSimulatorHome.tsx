@@ -1,5 +1,5 @@
-import { Box, Button, Card, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { CBImage } from "@/components/CBImage/CBImage";
+import { Button, Card, Stack, Typography } from "@mui/material";
 import { CBExamSimulatorState } from "../CBExamSimulatorInterfaces";
 import { CBExamSimulatorHomeProps } from "./CBExamSimulatorHomeInterfaces";
 
@@ -38,21 +38,22 @@ export const CBExamSimulatorHome = ({
           flex: "1 1 auto",
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
+        <CBImage
+          image={{
+            src: "/exam-simulator-bg.png",
+            alt: "Ein Labor",
+          }}
+          boxProps={{
             width: "100%",
             flex: "1 1 auto",
           }}
-        >
-          <Image
-            src="/exam-simulator-bg.png"
-            alt="Ein Labor"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-          />
-        </Box>
+          imageProps={{
+            style: {
+              objectFit: "cover",
+            },
+            priority: true,
+          }}
+        />
 
         <Stack
           spacing={2}

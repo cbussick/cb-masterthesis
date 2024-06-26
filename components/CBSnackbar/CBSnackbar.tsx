@@ -1,6 +1,6 @@
 import { Check } from "@mui/icons-material";
 import { Alert, AlertTitle, Snackbar, Stack } from "@mui/material";
-import Image from "next/image";
+import { CBImage } from "../CBImage/CBImage";
 import { CBSnackbarProps } from "./CBSnackbarInterfaces";
 
 export const CBSnackbar = ({
@@ -36,7 +36,18 @@ export const CBSnackbar = ({
           {message}
         </Alert>
 
-        <Image src="/logo/dina.svg" alt="DiNA" width="100" height="100" />
+        <CBImage
+          image={{
+            src: "/logo/dina.svg",
+            alt: "DiNA",
+          }}
+          boxProps={{
+            sx: {
+              width: 100,
+              height: 100,
+            },
+          }}
+        />
       </Stack>
     </Snackbar>
   );

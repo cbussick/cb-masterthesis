@@ -13,8 +13,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import { CBImage } from "../CBImage/CBImage";
 import { CBProgressCircleProps } from "./CBProgressCircleInterfaces";
 
 const thickness = 4.5;
@@ -146,7 +146,10 @@ export const CBProgressCircle = ({
               spacing={1}
             >
               {unlocked ? (
-                <Image src={icon.src} alt={icon.alt} width={120} height={95} />
+                <CBImage
+                  image={icon}
+                  boxProps={{ sx: { width: 120, height: 95 } }}
+                />
               ) : (
                 <LockRounded
                   sx={{

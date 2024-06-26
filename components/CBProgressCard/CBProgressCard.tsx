@@ -1,5 +1,5 @@
-import { Box, Card, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Card, Stack, Typography } from "@mui/material";
+import { CBImage } from "../CBImage/CBImage";
 import { CBProgressBar } from "../CBProgressBar/CBProgressBar";
 import { CBProgressCardProps } from "./CBProgressCardInterfaces";
 
@@ -7,7 +7,6 @@ export const CBProgressCard = ({
   title,
   subTitle,
   image,
-  alt,
   progressValue,
   maxValue,
 }: CBProgressCardProps): JSX.Element => {
@@ -26,20 +25,16 @@ export const CBProgressCard = ({
           pr: 4,
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            minWidth: 150,
-            height: "100%",
+        <CBImage
+          image={image}
+          boxProps={{
+            sx: {
+              width: 150,
+              height: "100%",
+            },
           }}
-        >
-          <Image
-            src={image}
-            alt={alt || ""}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </Box>
+          imageProps={{ style: { objectFit: "cover" } }}
+        />
 
         <Stack
           sx={{
@@ -56,7 +51,6 @@ export const CBProgressCard = ({
             currentValue={progressValue}
             maxValue={maxValue}
             height="small"
-            color="primary"
             width="100%"
             format="percent"
           />

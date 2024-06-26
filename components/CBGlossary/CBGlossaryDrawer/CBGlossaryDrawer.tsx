@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, Button, Drawer, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { CBImage } from "@/components/CBImage/CBImage";
+import { Button, Drawer, Stack, Typography } from "@mui/material";
 import { CBGlossaryDrawerProps } from "./CBGlossaryDrawerInterfaces";
 
 export const CBGlossaryDrawer = ({
@@ -29,34 +29,13 @@ export const CBGlossaryDrawer = ({
       >
         <Typography variant="h2">{selectedEntry?.term}</Typography>
 
-        <Typography
-          sx={{
-            pt: 1,
-          }}
-        >
-          {selectedEntry?.definition}
-        </Typography>
+        <Typography>{selectedEntry?.definition}</Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            p: 5,
-            width: "100%",
-            minHeight: 250,
-            position: "relative",
-          }}
-        >
-          {selectedEntry?.image && (
-            <Image
-              src={selectedEntry.image}
-              alt={selectedEntry.term}
-              fill
-              style={{ objectFit: "contain" }}
-            />
-          )}
-        </Box>
+        {selectedEntry?.image && (
+          <CBImage
+            image={{ src: selectedEntry.image, alt: selectedEntry.term }}
+          />
+        )}
 
         <Button
           onClick={handleCloseEntryDrawer}

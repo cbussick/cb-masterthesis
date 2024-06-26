@@ -1,10 +1,9 @@
-import { Box, Card, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { CBImage } from "@/components/CBImage/CBImage";
+import { Card, Stack, Typography } from "@mui/material";
 import { CBExerciseSequenceEndCardProps } from "./CBExerciseSequenceEndCardInterfaces";
 
 export const CBExerciseSequenceEndCard = ({
   image,
-  alt,
   text,
 }: CBExerciseSequenceEndCardProps): JSX.Element => {
   return (
@@ -21,20 +20,20 @@ export const CBExerciseSequenceEndCard = ({
           flex: 1,
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            width: 150,
-            alignItems: "center",
+        <CBImage
+          image={image}
+          boxProps={{
+            sx: {
+              width: 150,
+              height: "100%",
+            },
           }}
-        >
-          <Image
-            src={image}
-            alt={alt || ""}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </Box>
+          imageProps={{
+            style: {
+              objectFit: "cover",
+            },
+          }}
+        />
 
         <Typography
           variant="h3"
