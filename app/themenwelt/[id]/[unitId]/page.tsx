@@ -20,6 +20,7 @@ import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress"
 import { markExerciseAsCompleted } from "@/firebase/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase/unlockGlossaryEntries";
 import { useUser } from "@/firebase/useUser";
+import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { CBRoute } from "@/helpers/routes";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
@@ -47,16 +48,16 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     useState<TopicWorldProgress>();
 
   const topicId = params.id as CBTopic;
-  const topicData =
-    topicWorldTopics[topicId] === undefined
-      ? undefined
-      : topicWorldTopics[topicId];
+  const topicData = getEnumRecordObjectValueByStringKey(
+    topicWorldTopics,
+    topicId,
+  );
 
   const unit = topicData?.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
-  if (!unit) {
+  if (!unit || !topicData) {
     notFound();
   }
 

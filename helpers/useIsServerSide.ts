@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 /**
- * Checks if the code is running on the server side.
+ * Checks if the code is running on the server.
  */
 export const useIsServerSide = () => {
   const [isServerSide, setServerSide] = useState(true);

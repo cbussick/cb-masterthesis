@@ -1,14 +1,14 @@
 "use client";
 
 import { topicWorldTopics } from "@/data/topicWorld";
-import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
-import { getEnumKeyByValue } from "@/helpers/getEnumByValue";
+import { getEnumRecordKeyByValue } from "@/helpers/getEnumRecordKeyByValue";
 import { CBRoute } from "@/helpers/routes";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
 import { Box, Stack } from "@mui/material";
+import { notFound } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { CBProgressCircle } from "../CBProgressCircle/CBProgressCircle";
 import { CBProgressCircleConnector } from "../CBProgressCircleConnector/CBProgressCircleConnector";
@@ -44,10 +44,12 @@ export const CBTopicWorld = (): JSX.Element => {
           }}
         >
           {topicsAsArray.map((topic, index) => {
-            const topicId = getEnumKeyByValue(
-              topicWorldTopics,
-              topic,
-            ) as CBTopic;
+            const topicId = getEnumRecordKeyByValue(topicWorldTopics, topic);
+
+            if (!topicId) {
+              notFound();
+            }
+
             const unlocked = isTopicUnlocked(topicId, topicWorldProgress);
 
             let completedUnits = 0;

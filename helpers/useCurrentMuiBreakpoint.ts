@@ -4,9 +4,6 @@ import { Breakpoint } from "@mui/system";
 
 const defaultBreakpoint: Breakpoint = "xs";
 
-/**
- * Returns the current MUI breakpoint.
- */
 export const useCurrentMuiBreakpoint = (): Breakpoint => {
   const breakpoints: Record<Breakpoint, boolean> = {
     xs: useMediaQuery(theme.breakpoints.only("xs")),

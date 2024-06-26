@@ -11,6 +11,7 @@ import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
 import { useUser } from "@/firebase/useUser";
+import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { CBRoute } from "@/helpers/routes";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
@@ -37,10 +38,10 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
     useState<TopicWorldProgress>();
 
   const topicId = params.id as CBTopic;
-  const topicData =
-    topicWorldTopics[topicId] === undefined
-      ? undefined
-      : topicWorldTopics[topicId];
+  const topicData = getEnumRecordObjectValueByStringKey(
+    topicWorldTopics,
+    topicId,
+  );
 
   if (!topicData) {
     notFound();

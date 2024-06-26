@@ -21,7 +21,9 @@ import { addPointsToUser } from "@/firebase/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase/addSolvedExerciseToUser";
 import { removeExercisesFromMistakes } from "@/firebase/removeExercisesFromMistakes";
 import { useUser } from "@/firebase/useUser";
+import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { retryMistakesPathSegment } from "@/helpers/routes";
+import { notFound } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface FreePracticeSequenceParams {
@@ -57,7 +59,12 @@ export default function FreePracticeSequencePage({
   >([]);
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
 
-  const topic = params.id as CBTopic;
+  const topic = getEnumValueByStringValue(CBTopic, params.id);
+
+  if (!topic) {
+    notFound();
+  }
+
   const exerciseType =
     params.typeId === retryMistakesPathSegment
       ? null
