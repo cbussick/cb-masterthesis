@@ -10,6 +10,7 @@ import {
 import { CBFamilyTreePairNodeProps } from "./CBFamilyTreePairNodeInterfaces";
 
 export const selectHeightPlusStackSpacing = selectHeight + 8;
+export const familyNodeSpacing = 50;
 
 export const CBFamilyTreePairNode = ({
   data,
@@ -46,7 +47,7 @@ export const CBFamilyTreePairNode = ({
       >
         <Box
           sx={{
-            width: data.nodeSize,
+            width: familyNodeSpacing,
             height: data.lineWidth,
             bgcolor: (t) => data.lineColor || t.palette.grey[600],
           }}
