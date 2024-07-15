@@ -1,5 +1,5 @@
-export const playCorrectSound = () => {
-  const audio = new Audio("/sounds/correct.mp3");
+import { playSound } from "./playSound";
 
-  audio.play();
+export const playCorrectSound = () => {
+  playSound("correct.mp3");
 };
