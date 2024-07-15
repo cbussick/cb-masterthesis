@@ -1,5 +1,5 @@
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
-import { makeOpenAIAPIRequest } from "./makeOpenAIAPIRequest";
+import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
 
 export const getOpenAIAnswerEvaluation = async (
   question: string,
@@ -7,7 +7,7 @@ export const getOpenAIAnswerEvaluation = async (
 ) => {
   const prompt = `Ist die Antwort "${answer}" eine korrekte Antwort auf die Frage "${question}"? Beginne deine Antwort mit "Ja;;" oder "Nein;;". Gib danach nur den Grund an.`;
 
-  const evaluation = await makeOpenAIAPIRequest(
+  const evaluation = await makeOpenAITextGenerationAPIRequest(
     prompt,
     apiRouteMap[CBAPIRoute.FreeformQuestion],
   ).catch(() => {

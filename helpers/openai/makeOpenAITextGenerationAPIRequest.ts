@@ -1,4 +1,4 @@
-export const makeOpenAIAPIRequest = async (
+export const makeOpenAITextGenerationAPIRequest = async (
   prompt: string,
   apiRoute: string,
 ): Promise<string> => {

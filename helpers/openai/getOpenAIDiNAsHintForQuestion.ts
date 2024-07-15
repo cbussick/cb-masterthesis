@@ -1,10 +1,10 @@
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
-import { makeOpenAIAPIRequest } from "./makeOpenAIAPIRequest";
+import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
 
 export const getOpenAIDiNAsHintForQuestion = async (question: string) => {
   const prompt = `Gib mir einen Tipp für die Frage "${question}".`;
 
-  const hint = await makeOpenAIAPIRequest(
+  const hint = await makeOpenAITextGenerationAPIRequest(
     prompt,
     apiRouteMap[CBAPIRoute.FreeformQuestion],
   ).catch(() => {
