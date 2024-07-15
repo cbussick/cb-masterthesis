@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-
 "use client";
 
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
@@ -56,6 +54,7 @@ import {
 import { selectWidth } from "./CBFamilyTreeNodeRaw/CBFamilyTreeNodeRaw";
 import {
   CBFamilyTreePairNode,
+  familyNodeSpacing,
   selectHeightPlusStackSpacing,
 } from "./CBFamilyTreePairNode/CBFamilyTreePairNode";
 import { CBFamilyTreePairNodeType } from "./CBFamilyTreePairNode/CBFamilyTreePairNodeInterfaces";
@@ -330,22 +329,16 @@ export const CBFamilyTree = forwardRef(
       } => {
         dagreGraph.setGraph({
           ranksep,
-          // Remove the space at the top and bottom Dagre adds around the canvas by default
-          marginy: -26,
-          // Remove the space to the left and right Dagre adds around the canvas by default
-          marginx: -25,
         });
 
         rawNodes.forEach((node) => {
           dagreGraph.setNode(node.id, {
             width:
               node.type === CBNodeType.FamilyTreePairNode
-                ? selectWidth * 2 + nodeSizeMap[currentBreakpoint]
+                ? selectWidth * 2 + familyNodeSpacing
                 : selectWidth,
             height:
-              node.type === CBNodeType.FamilyTreePairNode
-                ? nodeSizeMap[currentBreakpoint] + selectHeightPlusStackSpacing
-                : nodeSizeMap[currentBreakpoint] + selectHeightPlusStackSpacing,
+              nodeSizeMap[currentBreakpoint] + selectHeightPlusStackSpacing,
           });
         });
 
@@ -362,8 +355,8 @@ export const CBFamilyTree = forwardRef(
           // so it matches the ReactFlow node anchor point (top left).
           // eslint-disable-next-line no-param-reassign
           node.position = {
-            x: nodeWithPosition.x - nodeSizeMap[currentBreakpoint] / 2,
-            y: nodeWithPosition.y - nodeSizeMap[currentBreakpoint] / 2,
+            x: nodeWithPosition.x - nodeWithPosition.width / 2,
+            y: nodeWithPosition.y - nodeWithPosition.height / 2,
           };
         });
 
@@ -402,7 +395,7 @@ export const CBFamilyTree = forwardRef(
       let maxX = 0;
       let maxY = 0;
       nodes.forEach((node) => {
-        if (node.position.x && node.width && node.position.y && node.height) {
+        if (node.width && node.height) {
           if (node.position.x + node.width > maxX) {
             maxX = node.position.x + node.width;
           }
@@ -564,7 +557,8 @@ export const CBFamilyTree = forwardRef(
 
           <Box
             sx={{
-              // Add some padding around the graph.
+              // Add padding around the graph.
+              // `* 2` to have padding on all sides, not just top and left.
               width:
                 graphDimensions.width +
                 graphBoxPadding * themeSpacingFactor * 2,
@@ -587,7 +581,7 @@ export const CBFamilyTree = forwardRef(
               // Disable cursor change on edges
               // In V12 of ReactFlow it should be possible to make edges not selectable with the selectable prop
               ".react-flow__edge": {
-                cursor: "initial",
+                pointerEvents: "none",
               },
             }}
           >
@@ -656,6 +650,7 @@ export const CBFamilyTree = forwardRef(
                     width: 300,
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: (t) =>
+                        // eslint-disable-next-line no-nested-ternary
                         sequenceType === CBExerciseSequenceType.ExamSimulator &&
                         isCurrentExerciseFinished
                           ? isInheritanceMistake
