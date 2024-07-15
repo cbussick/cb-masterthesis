@@ -1,7 +1,10 @@
 "use client";
 
-import { Button, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { getOpenAITextToSpeech } from "@/helpers/openai/getOpenAITextToSpeech";
+import { useSnackbar } from "@/ui/useSnackbar";
+import { MicRounded } from "@mui/icons-material";
+import { Alert, Button, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBImage } from "../CBImage/CBImage";
@@ -14,7 +17,23 @@ export const CBDinaHint = ({
   isLoading,
   disabled,
 }: CBDinaHintProps): JSX.Element => {
+  const { showSnackbar } = useSnackbar();
+
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [isFetchingSpeech, setFetchingSpeech] = useState<boolean>(false);
+  const [audio, setAudio] = useState<HTMLAudioElement>();
+
+  const onClose = () => {
+    setOpen(false);
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
+
+  useEffect(() => {
+    setAudio(undefined);
+  }, [hint]);
 
   return (
     <>
@@ -35,7 +54,7 @@ export const CBDinaHint = ({
 
       <CBDialog
         isOpen={hint !== "" && isOpen}
-        onClose={() => setOpen(false)}
+        onClose={onClose}
         fullWidth={false}
         dialogContentProps={{ sx: { py: 0 } }}
       >
@@ -57,7 +76,43 @@ export const CBDinaHint = ({
 
           <Typography>{hint}</Typography>
 
-          <Button onClick={() => setOpen(false)}>Ok</Button>
+          <Stack spacing={3} alignItems="center">
+            <Stack direction="row" spacing={1}>
+              <CBLoadingButton
+                variant="outlined"
+                isLoading={isFetchingSpeech}
+                onClick={() => {
+                  if (audio) {
+                    audio.play();
+                  } else {
+                    setFetchingSpeech(true);
+                    getOpenAITextToSpeech(hint)
+                      .then((res) => {
+                        setFetchingSpeech(false);
+
+                        const speech = new Audio(res);
+                        setAudio(speech);
+                        speech.play();
+                      })
+                      .catch((err) => {
+                        setFetchingSpeech(false);
+                        showSnackbar("Fehler beim Vorlesen", err, "error");
+                      });
+                  }
+                }}
+                endIcon={<MicRounded />}
+              >
+                Tipp vorlesen
+              </CBLoadingButton>
+
+              <Button onClick={onClose}>Ok</Button>
+            </Stack>
+
+            <Alert severity="info">
+              Die Stimme, die den Tipp vorliest, stammt nicht von einer echten
+              Person. Sie wird durch künstliche Intelligenz erzeugt.
+            </Alert>
+          </Stack>
         </Stack>
       </CBDialog>
     </>
