@@ -12,7 +12,7 @@ export const CBLoadingButton = ({
   const [width, setWidth] = useState<number>();
 
   useEffect(() => {
-    // Probably only works like this, when the button starts with `isLoading` set to `true
+    // Probably only works like this when the button starts with `isLoading` set to `true
     setWidth(ref.current?.offsetWidth);
   }, []);
 
