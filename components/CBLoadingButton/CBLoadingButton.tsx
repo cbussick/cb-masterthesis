@@ -13,7 +13,7 @@ export const CBLoadingButton = ({
 
   useEffect(() => {
     // Probably only works like this when the button starts with `isLoading` set to `true
-    setWidth(ref.current?.offsetWidth);
+    setWidth(ref.current?.getBoundingClientRect().width);
   }, []);
 
   return (
@@ -22,7 +22,7 @@ export const CBLoadingButton = ({
       {...props}
       ref={ref}
       sx={{
-        width,
+        minWidth: width,
         [`& .${buttonClasses.endIcon}`]: {
           // To keep the endIcon on the right side of the button while loading
           marginLeft: isLoading ? "auto" : undefined,
