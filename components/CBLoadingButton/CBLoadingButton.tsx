@@ -34,7 +34,7 @@ export const CBLoadingButton = ({
           size={24.5}
           sx={{
             // To center the Spinner while loading
-            marginLeft: "auto",
+            marginLeft: props.endIcon ? "auto" : undefined,
           }}
         />
       ) : (
