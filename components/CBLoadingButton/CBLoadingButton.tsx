@@ -13,7 +13,7 @@ export const CBLoadingButton = ({
 
   useEffect(() => {
     // Probably only works like this when the button starts with `isLoading` set to `true
-    setWidth(ref.current?.offsetWidth);
+    setWidth(ref.current?.getBoundingClientRect().width);
   }, []);
 
   return (
