@@ -4,7 +4,7 @@ import { getOpenAITextToSpeech } from "@/helpers/openai/getOpenAITextToSpeech";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { MicRounded } from "@mui/icons-material";
 import { Alert, Button, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBImage } from "../CBImage/CBImage";
@@ -22,6 +22,12 @@ export const CBDinaHint = ({
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isFetchingSpeech, setFetchingSpeech] = useState<boolean>(false);
   const [audio, setAudio] = useState<HTMLAudioElement>();
+
+  // Necessary, because the the callback for the promise to fetch the speech will always
+  // have the value of `isOpen` stored from when it was created. A ref will always have the up-to-date value.
+  // This way, the audio will not play if the dialog was closed while fetching the speech.
+  const openStateRef = useRef(false);
+  openStateRef.current = isOpen;
 
   const onClose = () => {
     setOpen(false);
@@ -92,7 +98,10 @@ export const CBDinaHint = ({
 
                         const speech = new Audio(res);
                         setAudio(speech);
-                        speech.play();
+
+                        if (openStateRef.current) {
+                          speech.play();
+                        }
                       })
                       .catch((err) => {
                         setFetchingSpeech(false);
