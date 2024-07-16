@@ -22,7 +22,7 @@ export const CBLoadingButton = ({
       {...props}
       ref={ref}
       sx={{
-        minWidth: width,
+        width,
         [`& .${buttonClasses.endIcon}`]: {
           // To keep the endIcon on the right side of the button while loading
           marginLeft: isLoading ? "auto" : undefined,
