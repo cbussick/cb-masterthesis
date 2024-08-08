@@ -32,7 +32,7 @@ export const CBSwiperButton = ({
         ...sx,
       }}
     >
-      <Typography variant="h3">{cellTypeData.name}</Typography>
+      <Typography>{cellTypeData.name}</Typography>
     </CBAnswerButton>
   );
 };

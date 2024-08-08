@@ -40,7 +40,6 @@ export const CBQuizAnswerButton = ({
         }}
       >
         <Typography
-          variant="h3"
           sx={{
             fontWeight: (t) => t.typography.fontWeightBold,
           }}
@@ -48,9 +47,7 @@ export const CBQuizAnswerButton = ({
           {answerIndexToLetterMap[index]}
         </Typography>
 
-        <Typography variant="h3" textAlign="start">
-          {answer.text}
-        </Typography>
+        <Typography textAlign="start">{answer.text}</Typography>
       </Stack>
     </CBAnswerButton>
   );
