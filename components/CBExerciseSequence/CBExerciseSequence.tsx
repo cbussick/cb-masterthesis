@@ -7,8 +7,10 @@ import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise"
 import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExercise } from "@/data/exercises/CBSwiperExercise";
 import { getInformationForExercise } from "@/helpers/getInformationForExercise";
+import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Stack } from "@mui/material";
 import { useRef } from "react";
+import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
 import { CBFamilyTreeWithProviders } from "../exercises/CBFamilyTree/CBFamilyTreeWithProviders/CBFamilyTreeWithProviders";
 import { CBFreeformQuestion } from "../exercises/CBFreeformQuestion/CBFreeformQuestion";
 import { CBMatchingGame } from "../exercises/CBMatchingGame/CBMatchingGame";
@@ -31,6 +33,9 @@ export const CBExerciseSequence = ({
   difficulty,
   onCancel,
 }: CBExerciseSequenceProps): JSX.Element | null => {
+  const { isOpen, setOpen, title, message, severity } =
+    useExerciseSequenceSnackbar();
+
   const componentRef = useRef();
   const timerRef = useRef();
 
@@ -118,54 +123,69 @@ export const CBExerciseSequence = ({
     currentExerciseIndex > uncompletedExercises.length - 1;
 
   return (
-    <Stack spacing={3} sx={{ minHeight: 0, flexGrow: 1 }}>
-      <CBExerciseSequenceTopBar
-        title={exerciseInformationToRender?.title || ""}
-        currentExerciseIndex={currentExerciseIndex}
-        completedExercisesAmount={completedExercises.length}
-        totalExercisesAmount={originalExercises.length}
-        type={type}
-        sessionIsFinished={sessionIsFinished}
-        setCompletionTime={setCompletionTime}
-        ref={timerRef}
-      />
-
-      <Stack
-        spacing={3}
-        sx={{ minHeight: 0, flex: "1 1 auto", justifyContent: "center" }}
-      >
-        <Stack
-          sx={{
-            minHeight: 0,
-            flex: "1 1 auto",
-            justifyContent: "center",
-            overflow: "auto",
-          }}
-        >
-          {sessionIsFinished ? (
-            <CBExerciseSequenceEndScreen
-              difficulty={difficulty}
-              type={type}
-              onCompleteHref={onCompleteHref}
-            />
-          ) : (
-            componentToRender
-          )}
-        </Stack>
-
-        <CBExerciseSequenceBottomBar
-          sequenceType={type}
-          uncompletedExercises={uncompletedExercises}
-          onMistake={onMistake}
-          onCompleteExercise={onCompleteExercise}
-          onSequenceComplete={onSequenceComplete}
-          difficulty={difficulty}
-          onCompleteHref={onCompleteHref}
-          onCancel={onCancel}
-          componentRef={componentRef}
-          timerRef={timerRef}
+    <>
+      <Stack spacing={3} sx={{ minHeight: 0, flexGrow: 1 }}>
+        <CBExerciseSequenceTopBar
+          title={exerciseInformationToRender?.title || ""}
+          currentExerciseIndex={currentExerciseIndex}
+          completedExercisesAmount={completedExercises.length}
+          totalExercisesAmount={originalExercises.length}
+          type={type}
+          sessionIsFinished={sessionIsFinished}
+          setCompletionTime={setCompletionTime}
+          ref={timerRef}
         />
+
+        <Stack
+          spacing={3}
+          sx={{ minHeight: 0, flex: "1 1 auto", justifyContent: "center" }}
+        >
+          <Stack
+            sx={{
+              minHeight: 0,
+              flex: "1 1 auto",
+              justifyContent: "center",
+              overflow: "auto",
+            }}
+          >
+            {sessionIsFinished ? (
+              <CBExerciseSequenceEndScreen
+                difficulty={difficulty}
+                type={type}
+                onCompleteHref={onCompleteHref}
+              />
+            ) : (
+              componentToRender
+            )}
+          </Stack>
+
+          <CBExerciseSequenceBottomBar
+            sequenceType={type}
+            uncompletedExercises={uncompletedExercises}
+            onMistake={onMistake}
+            onCompleteExercise={onCompleteExercise}
+            onSequenceComplete={onSequenceComplete}
+            difficulty={difficulty}
+            onCompleteHref={onCompleteHref}
+            onCancel={onCancel}
+            componentRef={componentRef}
+            timerRef={timerRef}
+          />
+        </Stack>
       </Stack>
-    </Stack>
+
+      <CBSnackbar
+        isOpen={isOpen}
+        severity={severity}
+        onClose={() => {
+          setOpen(false);
+        }}
+        title={title}
+        message={message}
+        autoHideDuration={null}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        sx={{ position: "absolute" }}
+      />
+    </>
   );
 };

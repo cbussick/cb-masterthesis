@@ -7,4 +7,8 @@ export interface CBSnackbarProps {
   severity?: AlertProps["severity"];
   title?: AlertProps["children"];
   message?: AlertProps["children"];
+  autoHideDuration?: SnackbarProps["autoHideDuration"];
+  anchorOrigin?: SnackbarProps["anchorOrigin"];
+  elevation?: AlertProps["elevation"];
+  sx?: SnackbarProps["sx"];
 }

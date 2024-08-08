@@ -13,7 +13,7 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
 import { themeSpacingFactor } from "@/theme/theme";
-import { useSnackbar } from "@/ui/useSnackbar";
+import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import dagre from "@dagrejs/dagre";
 import {
   Box,
@@ -132,7 +132,7 @@ export const CBFamilyTree = forwardRef(
     const animationControls = useAnimationControls();
     const { isCurrentExerciseFinished } = useCBExerciseSequence();
     const currentBreakpoint = useCurrentMuiBreakpoint();
-    const { showSnackbar } = useSnackbar();
+    const { showSnackbar } = useExerciseSequenceSnackbar();
     const {
       nodeIdsWithText,
       flatArrayNodesAndSpouses,

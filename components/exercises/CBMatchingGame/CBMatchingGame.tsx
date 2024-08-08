@@ -3,7 +3,7 @@
 import { CBMatchingGameProps } from "@/components/exercises/CBMatchingGame/CBMatchingGameInterfaces";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
-import { useSnackbar } from "@/ui/useSnackbar";
+import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Box, ButtonProps, Stack } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { CBConfirmation } from "../../CBExerciseSequence/CBExerciseSequenceBottomBar/CBConfirmation";
@@ -19,7 +19,7 @@ export const CBMatchingGame = forwardRef(
       exercise;
 
     const { isCurrentExerciseFinished } = useCBExerciseSequence();
-    const { showSnackbar } = useSnackbar();
+    const { showSnackbar } = useExerciseSequenceSnackbar();
 
     const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([
       null,

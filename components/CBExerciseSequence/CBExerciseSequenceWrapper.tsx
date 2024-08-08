@@ -1,3 +1,4 @@
+import { CBExerciseSequenceSnackbarProvider } from "@/ui/CBExerciseSequenceSnackbarProvider";
 import { CircularProgress } from "@mui/material";
 import { useEffect, useMemo } from "react";
 import { CBExerciseSequence } from "./CBExerciseSequence";
@@ -37,18 +38,20 @@ export const CBExerciseSequenceWrapper = ({
   return useMemo(
     () =>
       originalExercises ? (
-        <CBExerciseSequence
-          type={type}
-          originalExercises={originalExercises}
-          currentExerciseIndex={currentExerciseIndex}
-          onMistake={onMistake}
-          onCompleteHref={onCompleteHref}
-          onCompleteExercise={onCompleteExercise}
-          onSequenceComplete={onSequenceComplete}
-          setCompletionTime={setCompletionTime}
-          difficulty={difficulty}
-          onCancel={onCancel}
-        />
+        <CBExerciseSequenceSnackbarProvider>
+          <CBExerciseSequence
+            type={type}
+            originalExercises={originalExercises}
+            currentExerciseIndex={currentExerciseIndex}
+            onMistake={onMistake}
+            onCompleteHref={onCompleteHref}
+            onCompleteExercise={onCompleteExercise}
+            onSequenceComplete={onSequenceComplete}
+            setCompletionTime={setCompletionTime}
+            difficulty={difficulty}
+            onCancel={onCancel}
+          />
+        </CBExerciseSequenceSnackbarProvider>
       ) : (
         <CircularProgress />
       ),
