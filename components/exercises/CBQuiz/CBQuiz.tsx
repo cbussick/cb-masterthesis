@@ -6,7 +6,7 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { Box, ButtonProps, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CBQuizAnswerButton } from "./CBQuizAnswerButton/CBQuizAnswerButton";
 import { CBQuizProps } from "./CBQuizInterfaces";
 
@@ -29,44 +29,84 @@ export const CBQuiz = ({
     setRandomizedAnswers([...exercise.answers].sort(() => Math.random() - 0.5));
   }, [exercise.answers]);
 
+  const confirmAnswer = useCallback(
+    (buttonAnswerId: string) => {
+      setClickedButton(buttonAnswerId);
+
+      setCurrentExerciseFinished(true);
+
+      const isCorrect = exercise.correctAnswer === buttonAnswerId;
+
+      if (isCorrect && user) {
+        onCompleteExercise({ exerciseId: exercise.id, isCorrect });
+
+        setExercises((previousExercises) => {
+          const newExercises = previousExercises.map((ex) => {
+            if (ex.id === exercise.id) {
+              return {
+                ...ex,
+                isCompleted: true,
+              };
+            }
+            return ex;
+          });
+
+          return newExercises;
+        });
+
+        playCorrectSound();
+      } else {
+        if (onMistake) {
+          onMistake({
+            id: exercise.id,
+            topic: exercise.topic,
+            type: exercise.type,
+          });
+        }
+
+        playIncorrectSound();
+      }
+    },
+    [
+      exercise.correctAnswer,
+      exercise.id,
+      exercise.topic,
+      exercise.type,
+      onCompleteExercise,
+      onMistake,
+      setCurrentExerciseFinished,
+      setExercises,
+      user,
+    ],
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "A" || event.key === "a") {
+        const buttonId = randomizedAnswers[0].id;
+        confirmAnswer(buttonId);
+      } else if (event.key === "B" || event.key === "b") {
+        const buttonId = randomizedAnswers[1].id;
+        confirmAnswer(buttonId);
+      } else if (event.key === "C" || event.key === "c") {
+        const buttonId = randomizedAnswers[2].id;
+        confirmAnswer(buttonId);
+      } else if (event.key === "D" || event.key === "d") {
+        const buttonId = randomizedAnswers[3].id;
+        confirmAnswer(buttonId);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [confirmAnswer, randomizedAnswers]);
+
   const onConfirm: ButtonProps["onClick"] = (e) => {
     const buttonAnswerId = e.currentTarget.id;
-
-    setClickedButton(buttonAnswerId);
-
-    setCurrentExerciseFinished(true);
-
-    const isCorrect = exercise.correctAnswer === buttonAnswerId;
-
-    if (isCorrect && user) {
-      onCompleteExercise({ exerciseId: exercise.id, isCorrect });
-
-      setExercises((previousExercises) => {
-        const newExercises = previousExercises.map((ex) => {
-          if (ex.id === exercise.id) {
-            return {
-              ...ex,
-              isCompleted: true,
-            };
-          }
-          return ex;
-        });
-
-        return newExercises;
-      });
-
-      playCorrectSound();
-    } else {
-      if (onMistake) {
-        onMistake({
-          id: exercise.id,
-          topic: exercise.topic,
-          type: exercise.type,
-        });
-      }
-
-      playIncorrectSound();
-    }
+    confirmAnswer(buttonAnswerId);
   };
 
   return (
