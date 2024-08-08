@@ -28,6 +28,7 @@ export const CBGraphCard = ({
             sx: {
               width: 150,
               height: "100%",
+              flexShrink: 0,
             },
           }}
           imageProps={{
