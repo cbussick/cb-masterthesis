@@ -31,6 +31,7 @@ export const CBProgressCard = ({
             sx: {
               width: 150,
               height: "100%",
+              flexShrink: 0,
             },
           }}
           imageProps={{ style: { objectFit: "cover" } }}
