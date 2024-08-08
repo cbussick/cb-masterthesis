@@ -211,7 +211,6 @@ export const CBExerciseSequenceBottomBar = ({
         direction="row"
         sx={{
           justifyContent: "flex-end",
-          px: 4,
         }}
       >
         <Stack direction="row" spacing={2}>
