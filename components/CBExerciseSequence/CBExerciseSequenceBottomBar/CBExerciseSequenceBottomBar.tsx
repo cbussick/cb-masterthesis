@@ -207,44 +207,35 @@ export const CBExerciseSequenceBottomBar = ({
         cancelButton
       )}
 
-      <Stack
-        direction="row"
-        sx={{
-          justifyContent: "flex-end",
-        }}
-      >
-        <Stack direction="row" spacing={2}>
-          {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
-            <CBDinaHint
-              onClick={onClickHint}
-              hint={hint}
-              isLoading={isFetchingHint}
-              disabled={
-                isFetchingHint ||
-                isErrorFetchingHint ||
-                isCurrentExerciseFinished
-              }
-            />
-          )}
+      <Stack direction="row" spacing={2}>
+        {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
+          <CBDinaHint
+            onClick={onClickHint}
+            hint={hint}
+            isLoading={isFetchingHint}
+            disabled={
+              isFetchingHint || isErrorFetchingHint || isCurrentExerciseFinished
+            }
+          />
+        )}
 
-          {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
-            <Button
-              onClick={onClickConfirm}
-              disabled={isCurrentExerciseFinished}
-              endIcon={<CheckRounded />}
-            >
-              Auswerten
-            </Button>
-          )}
-
+        {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
           <Button
-            onClick={onClickNext}
-            disabled={!isCurrentExerciseFinished}
-            endIcon={<ChevronRightRounded />}
+            onClick={onClickConfirm}
+            disabled={isCurrentExerciseFinished}
+            endIcon={<CheckRounded />}
           >
-            Weiter
+            Auswerten
           </Button>
-        </Stack>
+        )}
+
+        <Button
+          onClick={onClickNext}
+          disabled={!isCurrentExerciseFinished}
+          endIcon={<ChevronRightRounded />}
+        >
+          Weiter
+        </Button>
       </Stack>
     </Stack>
   );
