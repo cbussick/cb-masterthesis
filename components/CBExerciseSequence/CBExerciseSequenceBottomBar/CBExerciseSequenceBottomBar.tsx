@@ -6,7 +6,7 @@ import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { useUser } from "@/firebase/useUser";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useConfetti } from "@/ui/useConfetti";
-import { useSnackbar } from "@/ui/useSnackbar";
+import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import {
   CheckRounded,
   ChevronRightRounded,
@@ -45,7 +45,7 @@ export const CBExerciseSequenceBottomBar = ({
 }: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
   const user = useUser();
   const { startConfetti } = useConfetti();
-  const { showSnackbar } = useSnackbar();
+  const { showSnackbar, setOpen } = useExerciseSequenceSnackbar();
 
   const {
     isCurrentExerciseFinished,
@@ -97,8 +97,8 @@ export const CBExerciseSequenceBottomBar = ({
   const onClickNext = () => {
     moveToNextExercise();
     setCurrentExerciseFinished(false);
-
     setHint("");
+    setOpen(false);
   };
 
   const onClickConfirm = () => {
@@ -162,7 +162,14 @@ export const CBExerciseSequenceBottomBar = ({
 
   const cancelButton: JSX.Element = (
     <Button
-      onClick={onCancel || undefined}
+      onClick={
+        onCancel
+          ? () => {
+              onCancel();
+              setOpen(false);
+            }
+          : undefined
+      }
       variant="outlined"
       startIcon={<MeetingRoomRounded />}
     >
@@ -207,45 +214,35 @@ export const CBExerciseSequenceBottomBar = ({
         cancelButton
       )}
 
-      <Stack
-        direction="row"
-        sx={{
-          justifyContent: "flex-end",
-          px: 4,
-        }}
-      >
-        <Stack direction="row" spacing={2}>
-          {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
-            <CBDinaHint
-              onClick={onClickHint}
-              hint={hint}
-              isLoading={isFetchingHint}
-              disabled={
-                isFetchingHint ||
-                isErrorFetchingHint ||
-                isCurrentExerciseFinished
-              }
-            />
-          )}
+      <Stack direction="row" spacing={2}>
+        {sequenceType !== CBExerciseSequenceType.ExamSimulator && (
+          <CBDinaHint
+            onClick={onClickHint}
+            hint={hint}
+            isLoading={isFetchingHint}
+            disabled={
+              isFetchingHint || isErrorFetchingHint || isCurrentExerciseFinished
+            }
+          />
+        )}
 
-          {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
-            <Button
-              onClick={onClickConfirm}
-              disabled={isCurrentExerciseFinished}
-              endIcon={<CheckRounded />}
-            >
-              Auswerten
-            </Button>
-          )}
-
+        {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
           <Button
-            onClick={onClickNext}
-            disabled={!isCurrentExerciseFinished}
-            endIcon={<ChevronRightRounded />}
+            onClick={onClickConfirm}
+            disabled={isCurrentExerciseFinished}
+            endIcon={<CheckRounded />}
           >
-            Weiter
+            Auswerten
           </Button>
-        </Stack>
+        )}
+
+        <Button
+          onClick={onClickNext}
+          disabled={!isCurrentExerciseFinished}
+          endIcon={<ChevronRightRounded />}
+        >
+          Weiter
+        </Button>
       </Stack>
     </Stack>
   );

@@ -100,9 +100,9 @@ export const CBSwiper = ({
   };
 
   return (
-    // `p={1.5}` is necessary to not have the boxshadow of the cards cut off
     <Stack
       sx={{
+        // `p={1.5}` is necessary to not have the boxshadow of the cards cut off
         p: 1.5,
         overflow: "hidden",
         cursor: isDragging ? "grabbing" : "auto",
@@ -165,7 +165,9 @@ export const CBSwiper = ({
                   image={exercise.image}
                   boxProps={{
                     flexGrow: 1,
-                    height: undefined,
+                    sx: {
+                      height: undefined,
+                    },
                   }}
                   imageProps={{ draggable: false }}
                 />

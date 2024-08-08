@@ -84,7 +84,12 @@ export const CBQuiz = ({
             alignItems: "center",
           }}
         >
-          {exercise.image && <CBImage image={exercise.image} />}
+          {exercise.image && (
+            <CBImage
+              image={exercise.image}
+              boxProps={{ sx: { height: 200 } }}
+            />
+          )}
 
           <Grid
             container

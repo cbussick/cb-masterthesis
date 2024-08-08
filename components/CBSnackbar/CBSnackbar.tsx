@@ -16,6 +16,9 @@ export const CBSnackbar = ({
   severity,
   title,
   message,
+  autoHideDuration,
+  anchorOrigin,
+  sx,
 }: CBSnackbarProps): JSX.Element => {
   const preparedOnClose = (
     event?: React.SyntheticEvent | Event,
@@ -32,10 +35,13 @@ export const CBSnackbar = ({
     <Snackbar
       open={isOpen}
       onClose={preparedOnClose}
-      autoHideDuration={6000}
+      autoHideDuration={
+        autoHideDuration || (autoHideDuration === null ? null : 6000)
+      }
       message={message}
       action={action}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      anchorOrigin={anchorOrigin || { vertical: "bottom", horizontal: "right" }}
+      sx={sx}
     >
       <Stack
         direction="row"
