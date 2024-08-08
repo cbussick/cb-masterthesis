@@ -2,7 +2,7 @@ import { AlertProps, SnackbarProps } from "@mui/material";
 
 export interface CBSnackbarProps {
   isOpen: SnackbarProps["open"];
-  onClose: SnackbarProps["onClose"];
+  onClose: VoidFunction;
   action?: SnackbarProps["action"];
   severity?: AlertProps["severity"];
   title?: AlertProps["children"];

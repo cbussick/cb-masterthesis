@@ -1,5 +1,11 @@
 import { Check } from "@mui/icons-material";
-import { Alert, AlertTitle, Snackbar, Stack } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Snackbar,
+  SnackbarCloseReason,
+  Stack,
+} from "@mui/material";
 import { CBImage } from "../CBImage/CBImage";
 import { CBSnackbarProps } from "./CBSnackbarInterfaces";
 
@@ -11,10 +17,22 @@ export const CBSnackbar = ({
   title,
   message,
 }: CBSnackbarProps): JSX.Element => {
+  const preparedOnClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    // If you click away from the Snackbar, it should not close
+    if (reason === "clickaway") {
+      return;
+    }
+    onClose();
+  };
+
   return (
     <Snackbar
       open={isOpen}
-      onClose={onClose}
+      onClose={preparedOnClose}
+      autoHideDuration={6000}
       message={message}
       action={action}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -26,6 +44,7 @@ export const CBSnackbar = ({
         }}
       >
         <Alert
+          onClose={onClose}
           severity={severity}
           elevation={6}
           iconMapping={{ success: <Check /> }}
