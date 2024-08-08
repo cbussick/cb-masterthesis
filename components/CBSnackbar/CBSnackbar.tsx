@@ -35,7 +35,7 @@ export const CBSnackbar = ({
       autoHideDuration={6000}
       message={message}
       action={action}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
       <Stack
         direction="row"
