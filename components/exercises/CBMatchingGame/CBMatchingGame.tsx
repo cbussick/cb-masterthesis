@@ -5,18 +5,18 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Box, ButtonProps, Stack } from "@mui/material";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { CBConfirmation } from "../../CBExerciseSequence/CBExerciseSequenceBottomBar/CBConfirmation";
 import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../../CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "../../CBImage/CBImage";
 import { CBMatchingGameHighlightComponentSide } from "./CBMatchingGameHighlightComponent";
+import { CBMatchingGameOption } from "./CBMatchingGameOption";
 import { CBMatchingGameSelect } from "./CBMatchingGameSelect/CBMatchingGameSelect";
 
 export const CBMatchingGame = forwardRef(
   ({ exercise, sequenceType }: CBMatchingGameProps, ref): JSX.Element => {
-    const { options, image, highlightedComponents, correctSelection } =
-      exercise;
+    const { image, highlightedComponents, correctSelection } = exercise;
 
     const { isCurrentExerciseFinished } = useCBExerciseSequence();
     const { showSnackbar } = useExerciseSequenceSnackbar();
@@ -34,6 +34,16 @@ export const CBMatchingGame = forwardRef(
       false,
       false,
     ]);
+
+    const [randomizedOptions, setRandomizedOptions] = useState<
+      CBMatchingGameOption[]
+    >([]);
+
+    useEffect(() => {
+      setRandomizedOptions(
+        [...exercise.options].sort(() => Math.random() - 0.5),
+      );
+    }, [exercise.options]);
 
     const onNotFinished = () => {
       showSnackbar(
@@ -126,7 +136,7 @@ export const CBMatchingGame = forwardRef(
 
                 <CBMatchingGameSelect
                   index={index}
-                  options={options}
+                  options={randomizedOptions}
                   setSelectedOptions={setSelectedOptions}
                   isCurrentExerciseFinished={isCurrentExerciseFinished}
                   disabled={isCurrentExerciseFinished}
