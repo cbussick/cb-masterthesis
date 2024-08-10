@@ -9,7 +9,7 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Container, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
 
 export const CBFreeformQuestion = ({
@@ -25,11 +25,16 @@ export const CBFreeformQuestion = ({
     setCurrentExerciseFinished,
   } = useCBExerciseSequence();
 
+  const textAreaRef = useRef<HTMLDivElement>(null);
+
   const [answer, setAnswer] = useState<string>("");
   const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
+  const [isTextAreaFocused, setTextAreaFocused] = useState<boolean>(false);
 
-  const onConfirm = () => {
+  const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
+
+  const onConfirm = useCallback(() => {
     setFetchingResponse(true);
 
     getOpenAIAnswerEvaluation(exercise.question, answer)
@@ -37,7 +42,7 @@ export const CBFreeformQuestion = ({
         setFetchingResponse(false);
 
         setCurrentExerciseFinished(true);
-        const isCorrect = response.startsWith("Ja");
+        const isCorrect = response.evaluation;
 
         if (isCorrect && user) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });
@@ -69,11 +74,9 @@ export const CBFreeformQuestion = ({
           playIncorrectSound();
         }
 
-        const responseText = response.split(";; ")[1];
-
         showSnackbar(
           isCorrect ? "Richtige Antwort" : "Falsche Antwort",
-          responseText,
+          response.reason,
           isCorrect ? "success" : "error",
         );
       })
@@ -82,9 +85,37 @@ export const CBFreeformQuestion = ({
         setError(true);
         showSnackbar("Problem bei der Auswertung", error.message, "error");
       });
-  };
+  }, [
+    answer,
+    exercise.id,
+    exercise.question,
+    exercise.topic,
+    exercise.type,
+    onCompleteExercise,
+    onMistake,
+    setCurrentExerciseFinished,
+    setExercises,
+    showSnackbar,
+    user,
+  ]);
 
-  const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!disabled) {
+        const { key, ctrlKey } = event;
+
+        if (isTextAreaFocused && key === "Enter" && ctrlKey) {
+          onConfirm();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [disabled, isTextAreaFocused, onConfirm]);
 
   return (
     <Container
@@ -127,6 +158,9 @@ export const CBFreeformQuestion = ({
             rows={4}
             disabled={disabled}
             sx={{ width: 350 }}
+            ref={textAreaRef}
+            onFocus={() => setTextAreaFocused(true)}
+            onBlur={() => setTextAreaFocused(false)}
           />
 
           <CBLoadingButton

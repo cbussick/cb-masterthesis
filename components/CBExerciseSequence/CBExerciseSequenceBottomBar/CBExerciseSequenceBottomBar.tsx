@@ -183,7 +183,7 @@ export const CBExerciseSequenceBottomBar = ({
       getOpenAIDiNAsHintForQuestion(currentExercise.question)
         .then((response) => {
           setFetchingHint(false);
-          setHint(response);
+          setHint(response.hint);
         })
         .catch((error) => {
           setFetchingHint(false);
