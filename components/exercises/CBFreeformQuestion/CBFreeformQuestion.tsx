@@ -9,7 +9,7 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Container, Stack, TextField, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
 
 export const CBFreeformQuestion = ({
@@ -25,9 +25,12 @@ export const CBFreeformQuestion = ({
     setCurrentExerciseFinished,
   } = useCBExerciseSequence();
 
+  const textAreaRef = useRef<HTMLDivElement>(null);
+
   const [answer, setAnswer] = useState<string>("");
   const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
+  const [isTextAreaFocused, setTextAreaFocused] = useState<boolean>(false);
 
   const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
 
@@ -101,7 +104,7 @@ export const CBFreeformQuestion = ({
       if (!disabled) {
         const { key, ctrlKey } = event;
 
-        if (key === "Enter" && ctrlKey) {
+        if (isTextAreaFocused && key === "Enter" && ctrlKey) {
           onConfirm();
         }
       }
@@ -112,7 +115,7 @@ export const CBFreeformQuestion = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [disabled, onConfirm]);
+  }, [disabled, isTextAreaFocused, onConfirm]);
 
   return (
     <Container
@@ -155,6 +158,9 @@ export const CBFreeformQuestion = ({
             rows={4}
             disabled={disabled}
             sx={{ width: 350 }}
+            ref={textAreaRef}
+            onFocus={() => setTextAreaFocused(true)}
+            onBlur={() => setTextAreaFocused(false)}
           />
 
           <CBLoadingButton
