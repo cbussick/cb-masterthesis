@@ -1,6 +1,5 @@
 "use client";
 
-import { CBEmoji } from "@/components/CBEmoji/CBEmoji";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { useUser } from "@/firebase/useUser";
@@ -8,8 +7,8 @@ import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvalu
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
-import { Container, Stack, TextField, Typography } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Alert, Container, Stack, TextField, Typography } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
 
 export const CBFreeformQuestion = ({
@@ -24,8 +23,6 @@ export const CBFreeformQuestion = ({
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
   } = useCBExerciseSequence();
-
-  const textAreaRef = useRef<HTMLDivElement>(null);
 
   const [answer, setAnswer] = useState<string>("");
   const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
@@ -119,6 +116,8 @@ export const CBFreeformQuestion = ({
 
   return (
     <Container
+      maxWidth={false}
+      disableGutters
       sx={{
         flexGrow: 1,
         display: "flex",
@@ -126,23 +125,12 @@ export const CBFreeformQuestion = ({
       }}
     >
       <Stack spacing={3}>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{
-            bgcolor: (t) => t.palette.grey[200],
-            p: 2,
-          }}
-        >
-          <CBEmoji emoji="💡" typographyVariant="h1" />
-
-          <Stack justifyContent="center">
-            <Typography>
-              Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI)
-              eingesetzt. Hierbei kann es zu Fehlern kommen.
-            </Typography>
-          </Stack>
-        </Stack>
+        <Alert severity="info" sx={{ alignItems: "center" }}>
+          <Typography>
+            Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI)
+            eingesetzt. Hierbei kann es zu Fehlern kommen.
+          </Typography>
+        </Alert>
 
         <Stack
           spacing={2}
@@ -155,10 +143,9 @@ export const CBFreeformQuestion = ({
             label="Deine Antwort"
             onChange={(e) => setAnswer(e.target.value)}
             multiline
-            rows={4}
+            rows={5}
             disabled={disabled}
-            sx={{ width: 350 }}
-            ref={textAreaRef}
+            sx={{ width: 550 }}
             onFocus={() => setTextAreaFocused(true)}
             onBlur={() => setTextAreaFocused(false)}
           />
