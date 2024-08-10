@@ -37,7 +37,7 @@ export const CBFreeformQuestion = ({
         setFetchingResponse(false);
 
         setCurrentExerciseFinished(true);
-        const isCorrect = response.startsWith("Ja");
+        const isCorrect = response.evaluation;
 
         if (isCorrect && user) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });
@@ -69,11 +69,9 @@ export const CBFreeformQuestion = ({
           playIncorrectSound();
         }
 
-        const responseText = response.split(";; ")[1];
-
         showSnackbar(
           isCorrect ? "Richtige Antwort" : "Falsche Antwort",
-          responseText,
+          response.reason,
           isCorrect ? "success" : "error",
         );
       })

@@ -1,7 +1,7 @@
 export const makeOpenAITextGenerationAPIRequest = async (
   prompt: string,
   apiRoute: string,
-): Promise<string> => {
+) => {
   const response = await fetch(apiRoute, {
     method: "POST",
     headers: {
@@ -13,7 +13,8 @@ export const makeOpenAITextGenerationAPIRequest = async (
 
   if (response.ok) {
     const data = await response.json();
-    return data.output[0].message.content;
+
+    return data.output[0].message.parsed;
   }
 
   throw new Error(
