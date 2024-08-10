@@ -9,7 +9,7 @@ import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import { Container, Stack, TextField, Typography } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
 
 export const CBFreeformQuestion = ({
@@ -24,8 +24,6 @@ export const CBFreeformQuestion = ({
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
   } = useCBExerciseSequence();
-
-  const textAreaRef = useRef<HTMLDivElement>(null);
 
   const [answer, setAnswer] = useState<string>("");
   const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
@@ -158,7 +156,6 @@ export const CBFreeformQuestion = ({
             rows={4}
             disabled={disabled}
             sx={{ width: 350 }}
-            ref={textAreaRef}
             onFocus={() => setTextAreaFocused(true)}
             onBlur={() => setTextAreaFocused(false)}
           />
