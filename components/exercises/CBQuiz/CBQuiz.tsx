@@ -82,16 +82,17 @@ export const CBQuiz = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "A" || event.key === "a") {
+      const { key } = event;
+      if (key === "A" || key === "a") {
         const buttonId = randomizedAnswers[0].id;
         confirmAnswer(buttonId);
-      } else if (event.key === "B" || event.key === "b") {
+      } else if (key === "B" || key === "b") {
         const buttonId = randomizedAnswers[1].id;
         confirmAnswer(buttonId);
-      } else if (event.key === "C" || event.key === "c") {
+      } else if (key === "C" || key === "c") {
         const buttonId = randomizedAnswers[2].id;
         confirmAnswer(buttonId);
-      } else if (event.key === "D" || event.key === "d") {
+      } else if (key === "D" || key === "d") {
         const buttonId = randomizedAnswers[3].id;
         confirmAnswer(buttonId);
       }
