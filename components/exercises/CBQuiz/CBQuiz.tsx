@@ -117,7 +117,7 @@ export const CBQuiz = ({
         justifyContent: "center",
       }}
     >
-      <Container>
+      <Container disableGutters>
         <Stack
           spacing={4}
           sx={{
