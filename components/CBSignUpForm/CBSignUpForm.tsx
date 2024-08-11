@@ -1,8 +1,8 @@
 "use client";
 
-import { getAuthError } from "@/firebase/client/authErrors";
-import { signUpUser } from "@/firebase/client/signUpUser";
-import { CBUserRole } from "@/firebase/client/userRole";
+import { getAuthError } from "@/firebase-client/authErrors";
+import { signUpUser } from "@/firebase-client/signUpUser";
+import { CBUserRole } from "@/firebase-client/userRole";
 import { emailRegex, nameRegex, usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Stack, TextField } from "@mui/material";

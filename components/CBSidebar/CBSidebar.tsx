@@ -1,7 +1,7 @@
 "use client";
 
 import { menuItems } from "@/data/menuItems";
-import { useUser } from "@/firebase/client/useUser";
+import { useUser } from "@/firebase-client/useUser";
 import { handleSignOut } from "@/helpers/handleSignOut";
 import {
   layoutHorizontalSpacing,

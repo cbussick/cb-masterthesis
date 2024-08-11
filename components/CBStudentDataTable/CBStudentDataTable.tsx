@@ -1,7 +1,7 @@
 "use client";
 
-import { CBUserCustomData } from "@/firebase/client/UserCustomDataConverter";
-import { getUsers } from "@/firebase/client/getUsers";
+import { CBUserCustomData } from "@/firebase-client/UserCustomDataConverter";
+import { getUsers } from "@/firebase-client/getUsers";
 import { Box } from "@mui/material";
 import { DataGrid, GridColDef, deDE } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";

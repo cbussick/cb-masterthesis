@@ -1,6 +1,6 @@
-import { getAuthError } from "@/firebase/client/authErrors";
-import { auth } from "@/firebase/client/firebase";
-import { signInUser } from "@/firebase/client/signIn";
+import { getAuthError } from "@/firebase-client/authErrors";
+import { auth } from "@/firebase-client/firebase";
+import { signInUser } from "@/firebase-client/signIn";
 import { emailRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Button, Stack, TextField, Typography } from "@mui/material";

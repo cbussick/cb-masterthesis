@@ -1,4 +1,4 @@
-import { CBUserRole } from "@/firebase/client/userRole";
+import { CBUserRole } from "@/firebase-client/userRole";
 
 export interface CBSidebarProps {
   sidebarWidthOpen: number;

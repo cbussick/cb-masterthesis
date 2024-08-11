@@ -1,8 +1,8 @@
 "use client";
 
-import { getAuthError } from "@/firebase/client/authErrors";
-import { reauthenticateUser } from "@/firebase/client/reauthenticateUser";
-import { useUser } from "@/firebase/client/useUser";
+import { getAuthError } from "@/firebase-client/authErrors";
+import { reauthenticateUser } from "@/firebase-client/reauthenticateUser";
+import { useUser } from "@/firebase-client/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Error } from "@mui/icons-material";
 import { Button, Stack, TextField, Typography } from "@mui/material";

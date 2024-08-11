@@ -1,5 +1,5 @@
-import { getAuthError } from "@/firebase/client/authErrors";
-import { signOutUser } from "@/firebase/client/signOutUser";
+import { getAuthError } from "@/firebase-client/authErrors";
+import { signOutUser } from "@/firebase-client/signOutUser";
 import { CBSnackbarData } from "@/ui/SnackbarProvider";
 import { FirebaseError } from "firebase/app";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";

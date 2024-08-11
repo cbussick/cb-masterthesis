@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/firebase/client/useUser";
+import { useUser } from "@/firebase-client/useUser";
 import { Avatar, Box, Chip, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import { CBUserOptionsMenu } from "../CBUserOptionsMenu/CBUserOptionsMenu";

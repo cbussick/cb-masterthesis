@@ -1,5 +1,5 @@
-import { useUser } from "@/firebase/client/useUser";
-import { CBUserRole } from "@/firebase/client/userRole";
+import { useUser } from "@/firebase-client/useUser";
+import { CBUserRole } from "@/firebase-client/userRole";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import { CBEmoji } from "../CBEmoji/CBEmoji";

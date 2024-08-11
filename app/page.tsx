@@ -4,8 +4,8 @@ import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper
 import { CBDashboardAdmin } from "@/components/dashboards/CBDashboardAdmin";
 import { CBDashboardStudent } from "@/components/dashboards/CBDashboardStudent";
 import { CBDashboardTeacher } from "@/components/dashboards/CBDashboardTeacher";
-import { useUser } from "@/firebase/client/useUser";
-import { CBUserRole } from "@/firebase/client/userRole";
+import { useUser } from "@/firebase-client/useUser";
+import { CBUserRole } from "@/firebase-client/userRole";
 import { CircularProgress } from "@mui/material";
 
 export default function Home() {

@@ -1,5 +1,5 @@
 import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
-import { CBMistakeExercise } from "@/firebase/client/UserCustomDataConverter";
+import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 
 export interface CBFreeformQuestionProps {
   exercise: CBFreeformQuestionExercise;

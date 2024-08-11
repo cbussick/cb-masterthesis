@@ -1,6 +1,6 @@
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase/client/TopicWorldProgressConverter";
+import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { getEnumRecordKeyByValue } from "../getEnumRecordKeyByValue";
 
 export const isTopicUnlocked = (

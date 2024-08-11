@@ -1,10 +1,10 @@
 "use client";
 
-import { getAuthError } from "@/firebase/client/authErrors";
-import { changePassword } from "@/firebase/client/changePassword";
-import { changeUsername } from "@/firebase/client/changeUsername";
-import { reauthenticateUser } from "@/firebase/client/reauthenticateUser";
-import { useUser } from "@/firebase/client/useUser";
+import { getAuthError } from "@/firebase-client/authErrors";
+import { changePassword } from "@/firebase-client/changePassword";
+import { changeUsername } from "@/firebase-client/changeUsername";
+import { reauthenticateUser } from "@/firebase-client/reauthenticateUser";
+import { useUser } from "@/firebase-client/useUser";
 import { usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Alert, Button, Stack, TextField, Typography } from "@mui/material";

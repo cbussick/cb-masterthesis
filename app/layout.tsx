@@ -1,5 +1,5 @@
 import { CBMainLayout } from "@/components/CBMainLayout/CBMainLayout";
-import { UserProvider } from "@/firebase/client/UserProvider";
+import { UserProvider } from "@/firebase-client/UserProvider";
 import { font } from "@/theme/font";
 import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
 import { SnackbarProvider } from "@/ui/SnackbarProvider";
