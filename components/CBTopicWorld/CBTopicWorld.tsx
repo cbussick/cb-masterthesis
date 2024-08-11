@@ -1,9 +1,9 @@
 "use client";
 
 import { topicWorldTopics } from "@/data/topicWorld";
-import { TopicWorldProgress } from "@/firebase/client/TopicWorldProgressConverter";
-import { getUserTopicWorldProgress } from "@/firebase/client/getUserTopicWorldProgress";
-import { useUser } from "@/firebase/client/useUser";
+import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
+import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordKeyByValue } from "@/helpers/getEnumRecordKeyByValue";
 import { CBRoute } from "@/helpers/routes";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";

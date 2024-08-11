@@ -2,7 +2,7 @@
 
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
-import { useUser } from "@/firebase/client/useUser";
+import { useUser } from "@/firebase-client/useUser";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";

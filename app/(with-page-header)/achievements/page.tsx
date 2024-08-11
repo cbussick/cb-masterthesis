@@ -5,9 +5,9 @@ import { CBAchievementCardProps } from "@/components/CBAchievementCard/CBAchieve
 import { achievements } from "@/data/achievements";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic, topics } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase/client/TopicWorldProgressConverter";
-import { getUserTopicWorldProgress } from "@/firebase/client/getUserTopicWorldProgress";
-import { useUser } from "@/firebase/client/useUser";
+import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
+import { useUser } from "@/firebase-client/useUser";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 

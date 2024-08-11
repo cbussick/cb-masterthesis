@@ -1,8 +1,8 @@
 "use client";
 
-import { CBTrackedTime } from "@/firebase/client/UserCustomDataConverter";
-import { addTrackedTimeToUser } from "@/firebase/client/addTrackedTimeToUser";
-import { useUser } from "@/firebase/client/useUser";
+import { CBTrackedTime } from "@/firebase-client/UserCustomDataConverter";
+import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
+import { useUser } from "@/firebase-client/useUser";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";

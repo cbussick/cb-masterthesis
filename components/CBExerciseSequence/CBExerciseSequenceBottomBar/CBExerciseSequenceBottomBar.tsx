@@ -3,7 +3,7 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { useUser } from "@/firebase/client/useUser";
+import { useUser } from "@/firebase-client/useUser";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useConfetti } from "@/ui/useConfetti";
 import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
