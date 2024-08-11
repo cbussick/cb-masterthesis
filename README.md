@@ -48,6 +48,14 @@ npm run prettify
 npm run lint
 ```
 
+## Firebase Cloud Functions
+
+### Setup
+
+1. Navigate into the `cloud-functions/functions` folder.
+2. Run `firebase login` if you are not yet logged in.
+3. Run `npm run init`. This will create the `firestore.rules` file locally.
+
 ## Git Hooks
 
 This project uses [husky](https://github.com/typicode/husky) to run git hooks. Currently, there is only one hook that runs `npm run full-check` before every push to the repository.

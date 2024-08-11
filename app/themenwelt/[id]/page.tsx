@@ -9,9 +9,9 @@ import { CBProgressCircleConnector } from "@/components/CBProgressCircleConnecto
 import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase/TopicWorldProgressConverter";
-import { getUserTopicWorldProgress } from "@/firebase/getUserTopicWorldProgress";
-import { useUser } from "@/firebase/useUser";
+import { TopicWorldProgress } from "@/firebase/client/TopicWorldProgressConverter";
+import { getUserTopicWorldProgress } from "@/firebase/client/getUserTopicWorldProgress";
+import { useUser } from "@/firebase/client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { CBRoute } from "@/helpers/routes";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";

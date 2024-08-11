@@ -2,9 +2,9 @@
 
 import { levels } from "@/data/gamification";
 import { profilePictures } from "@/data/profilePictures";
-import { getAuthError } from "@/firebase/authErrors";
-import { changeProfilePicture } from "@/firebase/changeProfilePicture";
-import { useUser } from "@/firebase/useUser";
+import { getAuthError } from "@/firebase/client/authErrors";
+import { changeProfilePicture } from "@/firebase/client/changeProfilePicture";
+import { useUser } from "@/firebase/client/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Avatar, Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";

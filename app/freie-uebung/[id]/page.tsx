@@ -12,7 +12,7 @@ import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
 import { CBTopic, topics } from "@/data/topics";
-import { useUser } from "@/firebase/useUser";
+import { useUser } from "@/firebase/client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { CBRoute, retryMistakesPathSegment } from "@/helpers/routes";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";

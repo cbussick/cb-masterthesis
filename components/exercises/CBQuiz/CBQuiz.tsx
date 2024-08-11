@@ -1,7 +1,7 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "@/components/CBImage/CBImage";
 import { CBAnswer } from "@/data/exercises/CBAnswer";
-import { useUser } from "@/firebase/useUser";
+import { useUser } from "@/firebase/client/useUser";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { Box, ButtonProps, Container, Stack } from "@mui/material";

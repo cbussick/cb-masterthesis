@@ -1,6 +1,6 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
-import { CBMistakeExercise } from "@/firebase/UserCustomDataConverter";
+import { CBMistakeExercise } from "@/firebase/client/UserCustomDataConverter";
 import { MutableRefObject } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 
