@@ -1,7 +1,7 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBTopic } from "@/data/topics";
-import { CBMistakeExercise } from "@/firebase/UserCustomDataConverter";
+import { CBMistakeExercise } from "@/firebase/client/UserCustomDataConverter";
 import { Dispatch, SetStateAction } from "react";
 import { CBTime } from "../CBExerciseTimer/CBExerciseTimerInterfaces";
 

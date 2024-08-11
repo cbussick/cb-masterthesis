@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/firebase/useUser";
+import { useUser } from "@/firebase/client/useUser";
 import { routeMap } from "@/helpers/routes";
 import { Search } from "@mui/icons-material";
 import { Divider, List, Stack, TextField } from "@mui/material";

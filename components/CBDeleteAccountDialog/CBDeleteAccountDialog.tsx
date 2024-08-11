@@ -1,13 +1,14 @@
 "use client";
 
-import { getAuthError } from "@/firebase/authErrors";
-import { reauthenticateUser } from "@/firebase/reauthenticateUser";
-import { useUser } from "@/firebase/useUser";
+import { getAuthError } from "@/firebase/client/authErrors";
+import { reauthenticateUser } from "@/firebase/client/reauthenticateUser";
+import { useUser } from "@/firebase/client/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Error } from "@mui/icons-material";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider, deleteUser } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { CBDialog } from "../CBDialog/CBDialog";
 import { CBDeleteAccountDialogProps } from "./CBDeleteAccountDialogInterfaces";
@@ -22,6 +23,7 @@ export const CBDeleteAccountDialog = ({
 }: CBDeleteAccountDialogProps): JSX.Element => {
   const user = useUser();
   const { showSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const {
     register,
@@ -47,6 +49,8 @@ export const CBDeleteAccountDialog = ({
           if (user.user) {
             deleteUser(user.user)
               .then(() => {
+                router.push("/");
+
                 showSnackbar(
                   "Account gelöscht",
                   "Dein Account wurde erfolgreich gelöscht. Wir hoffen, dass du uns bald wieder besuchst. Bis zum nächsten Mal!",

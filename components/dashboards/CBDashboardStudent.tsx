@@ -1,7 +1,7 @@
 "use client";
 
 import { levels } from "@/data/gamification";
-import { useUser } from "@/firebase/useUser";
+import { useUser } from "@/firebase/client/useUser";
 import { CBRoute } from "@/helpers/routes";
 import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
 import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";

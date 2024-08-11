@@ -6,7 +6,7 @@ import {
 } from "@/components/CBGlossary/CBGlossaryEntries";
 import { CBGlossaryEntriesList } from "@/components/CBGlossary/CBGlossaryEntriesList/CBGlossaryEntriesList";
 import { CBGlossarySearchbar } from "@/components/CBGlossary/CBGlossarySearchBar/CBGlossarySearchBar";
-import { useUser } from "@/firebase/useUser";
+import { useUser } from "@/firebase/client/useUser";
 import { alphabet } from "@/helpers/alphabet";
 import { Stack } from "@mui/material";
 import { useState } from "react";

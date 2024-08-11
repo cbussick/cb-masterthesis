@@ -1,9 +1,9 @@
 "use client";
 
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
-import { addCompletedExamsToUser } from "@/firebase/addCompletedExamsToUser";
-import { addPointsToUser } from "@/firebase/addPointsToUser";
-import { useUser } from "@/firebase/useUser";
+import { addCompletedExamsToUser } from "@/firebase/client/addCompletedExamsToUser";
+import { addPointsToUser } from "@/firebase/client/addPointsToUser";
+import { useUser } from "@/firebase/client/useUser";
 import { CBRoute, routeMap } from "@/helpers/routes";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CBTime } from "../CBExerciseTimer/CBExerciseTimerInterfaces";

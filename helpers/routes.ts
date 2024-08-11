@@ -1,4 +1,4 @@
-import { CBUserRole } from "@/firebase/userRole";
+import { CBUserRole } from "@/firebase/client/userRole";
 
 export const retryMistakesPathSegment = "wiederholung";
 
