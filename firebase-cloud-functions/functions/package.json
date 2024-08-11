@@ -2,8 +2,8 @@
   "name": "functions",
   "private": true,
   "scripts": {
-    "serve": "firebase emulators:start",
-    "shell": "firebase functions:shell",
+    "serve": "tsc && firebase emulators:start",
+    "shell": "tsc && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
