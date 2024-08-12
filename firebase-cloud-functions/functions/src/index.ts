@@ -1,14 +1,12 @@
-import { firestore, initializeApp } from "firebase-admin";
-import { getApps } from "firebase-admin/app";
+import { firestore } from "firebase-admin";
+import { getApp, getApps, initializeApp } from "firebase-admin/app";
 import { auth, logger } from "firebase-functions";
+
+!getApps.length ? initializeApp() : getApp();
+const db = firestore();
 
 export const deleteUserData = auth.user().onDelete(async (user) => {
   const { uid } = user;
-  if (!getApps().length) {
-    initializeApp();
-  }
-
-  const db = firestore();
 
   logger.info(`User ${uid} deleted.`);
 
