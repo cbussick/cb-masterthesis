@@ -19,6 +19,8 @@ export const authErrors: Record<AuthErrorCode, string> = {
     "Die angegebene E-Mail-Adresse ist ungültig. Bitte gib eine gültige E-Mail-Adresse ein.",
   "auth/requires-recent-login":
     "Bitte melde dich erneut an, um diese Aktion durchzuführen.",
+  "auth/invalid-credential":
+    "Deine Anmeldedaten sind leider nicht richtig. Entweder es existiert kein Account mit dieser E-Mail-Adresse oder dein Passwort ist nicht korrekt.",
 
   // Uncustomized error codes
   "auth/admin-restricted-operation": "",
@@ -50,7 +52,6 @@ export const authErrors: Record<AuthErrorCode, string> = {
   "auth/invalid-custom-token": "",
   "auth/invalid-dynamic-link-domain": "",
   "auth/invalid-emulator-scheme": "",
-  "auth/invalid-credential": "",
   "auth/invalid-message-payload": "",
   "auth/invalid-multi-factor-session": "",
   "auth/invalid-oauth-client-id": "",
