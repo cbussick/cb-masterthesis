@@ -52,7 +52,7 @@ npm run lint
 
 ### Setup
 
-1. Navigate into the `cloud-functions/functions` folder.
+1. Navigate into the `firebase-cloud-functions/functions` folder.
 2. Run `firebase login` if you are not yet logged in.
 3. Run `firebase init firestore`. This will create the `firestore.rules` file locally.
 
