@@ -6,7 +6,7 @@ import { useUser } from "@/firebase-client/useUser";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
-import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Alert, Container, Stack, TextField, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
@@ -17,7 +17,7 @@ export const CBFreeformQuestion = ({
   onMistake,
 }: CBFreeformQuestionProps): JSX.Element => {
   const user = useUser();
-  const { showSnackbar } = useExerciseSequenceSnackbar();
+  const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const {
     setExercises,
     isCurrentExerciseFinished,

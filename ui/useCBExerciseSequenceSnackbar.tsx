@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CBExerciseSequenceSnackbarContext } from "./CBExerciseSequenceSnackbarProvider";
 
-export const useExerciseSequenceSnackbar = () => {
+export const useCBExerciseSequenceSnackbar = () => {
   return useContext(CBExerciseSequenceSnackbarContext);
 };

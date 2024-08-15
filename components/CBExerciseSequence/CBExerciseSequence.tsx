@@ -7,7 +7,7 @@ import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise"
 import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExercise } from "@/data/exercises/CBSwiperExercise";
 import { getInformationForExercise } from "@/helpers/getInformationForExercise";
-import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Stack } from "@mui/material";
 import { useRef } from "react";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
@@ -34,7 +34,7 @@ export const CBExerciseSequence = ({
   onCancel,
 }: CBExerciseSequenceProps): JSX.Element | null => {
   const { isOpen, setOpen, title, message, severity } =
-    useExerciseSequenceSnackbar();
+    useCBExerciseSequenceSnackbar();
 
   const componentRef = useRef();
   const timerRef = useRef();

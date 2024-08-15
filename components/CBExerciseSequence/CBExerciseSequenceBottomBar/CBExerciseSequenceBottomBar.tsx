@@ -5,8 +5,8 @@ import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNe
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { useUser } from "@/firebase-client/useUser";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { useConfetti } from "@/ui/useConfetti";
-import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import {
   CheckRounded,
   ChevronRightRounded,
@@ -45,7 +45,7 @@ export const CBExerciseSequenceBottomBar = ({
 }: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
   const user = useUser();
   const { startConfetti } = useConfetti();
-  const { showSnackbar, setOpen } = useExerciseSequenceSnackbar();
+  const { showSnackbar, setOpen } = useCBExerciseSequenceSnackbar();
 
   const {
     isCurrentExerciseFinished,
