@@ -134,7 +134,7 @@ export const CBExerciseSequence = ({
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
           type={type}
-          sessionIsFinished={isSequenceFinished}
+          isSequenceFinished={isSequenceFinished}
           setCompletionTime={setCompletionTime}
           ref={timerRef}
         />

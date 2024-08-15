@@ -15,24 +15,24 @@ export const CBExerciseSequenceTopBar = forwardRef(
       completedExercisesAmount,
       totalExercisesAmount,
       type,
-      sessionIsFinished,
+      isSequenceFinished,
       setCompletionTime,
     }: CBExerciseSequenceTopBarProps,
     ref,
   ): JSX.Element => {
     const currentExerciseNumber = currentExerciseIndex + 1;
-    const showProgressBar = !sessionIsFinished;
+    const showProgressBar = !isSequenceFinished;
 
     return (
       <Stack
         direction="row"
         spacing={1}
         sx={{
-          justifyContent: sessionIsFinished ? "flex-end" : "space-between",
+          justifyContent: isSequenceFinished ? "flex-end" : "space-between",
           alignItems: "flex-start",
         }}
       >
-        {sessionIsFinished || (
+        {isSequenceFinished || (
           <Typography variant="h3">{`${currentExerciseNumber}. Aufgabe: ${title}`}</Typography>
         )}
 
