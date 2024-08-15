@@ -43,7 +43,7 @@ export const CBExerciseSequenceBottomBar = ({
   onCancel,
   componentRef,
   timerRef,
-}: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
+}: CBExerciseSequenceBottomBarProps): JSX.Element => {
   const user = useUser();
   const { startConfetti } = useConfetti();
   const { showSnackbar, setOpen: setSnackbarOpen } =
