@@ -3,7 +3,6 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { useUser } from "@/firebase-client/useUser";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -17,7 +16,6 @@ import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../useCBExerciseSequenceProvider";
-import { CBConfirmation } from "./CBConfirmation";
 import { CBExerciseSequenceBottomBarProps } from "./CBExerciseSequenceBottomBarInterfaces";
 
 const exerciseTypesWithConfirmButton = [
@@ -35,8 +33,6 @@ const cancelButtonLabelMap: Record<CBExerciseSequenceType, string> = {
 export const CBExerciseSequenceBottomBar = ({
   sequenceType,
   uncompletedExercises,
-  onMistake,
-  onCompleteExercise,
   onSequenceComplete,
   difficulty,
   onCompleteHref,
@@ -44,7 +40,6 @@ export const CBExerciseSequenceBottomBar = ({
   componentRef,
   timerRef,
 }: CBExerciseSequenceBottomBarProps): JSX.Element => {
-  const user = useUser();
   const { startConfetti } = useConfetti();
   const { showSnackbar, setOpen: setSnackbarOpen } =
     useCBExerciseSequenceSnackbar();
@@ -54,7 +49,6 @@ export const CBExerciseSequenceBottomBar = ({
     currentExerciseIndex,
     setCurrentExerciseIndex,
     exercises,
-    setExercises,
   } = useCBExerciseSequence();
 
   const [hintAPIRequestState, setHintAPIRequestState] =
@@ -92,55 +86,22 @@ export const CBExerciseSequenceBottomBar = ({
     setSnackbarOpen(false);
   };
 
+  /**
+   * Not ideal, but works for now.
+   * Make sure to have the following code inside each exercise component which is
+   * evaluated by pushing the "Auswerten"-button:
+   *
+   * ```
+   * useImperativeHandle(ref, () => ({
+   *     onConfirm,
+   * }));
+   * ```
+   *
+   * And use an appropriate `onConfirm` function inside each exercise component.
+   */
   const onConfirm = () => {
-    /**
-     * Not ideal, but works for now.
-     * Make sure to have the following code inside each child exercise component which is
-     * evaluated by pushing the "Auswerten"-button:
-     * ```
-     * useImperativeHandle(ref, () => ({
-     *     onConfirm,
-     * }));
-     * ```
-     *
-     * And use an appropriate `onConfirm` function. See `CBFamilyTree` for example.
-     */
     if (componentRef.current?.onConfirm) {
-      const { isFinished, isCorrect } =
-        componentRef.current.onConfirm() as CBConfirmation;
-
-      setCurrentExerciseFinished(isFinished);
-
-      if (isFinished) {
-        if (!isCorrect && onMistake) {
-          onMistake({
-            id: currentExercise.id,
-            topic: currentExercise.topic,
-            type: currentExercise.type,
-          });
-        }
-
-        if (isCorrect && user && currentExerciseIndex !== undefined) {
-          onCompleteExercise({
-            exerciseId: uncompletedExercises[currentExerciseIndex].id,
-            isCorrect,
-          });
-
-          setExercises((previousExercises) => {
-            const newExercises = previousExercises.map((ex) => {
-              if (ex.id === currentExercise?.id) {
-                return {
-                  ...ex,
-                  isCompleted: true,
-                };
-              }
-              return ex;
-            });
-
-            return newExercises;
-          });
-        }
-      }
+      componentRef.current.onConfirm();
     }
   };
 

@@ -6,7 +6,6 @@ import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Box, ButtonProps, Stack } from "@mui/material";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { CBConfirmation } from "../../CBExerciseSequence/CBExerciseSequenceBottomBar/CBConfirmation";
 import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../../CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "../../CBImage/CBImage";
@@ -15,10 +14,18 @@ import { CBMatchingGameOption } from "./CBMatchingGameOption";
 import { CBMatchingGameSelect } from "./CBMatchingGameSelect/CBMatchingGameSelect";
 
 export const CBMatchingGame = forwardRef(
-  ({ exercise }: CBMatchingGameProps, ref): JSX.Element => {
+  (
+    { exercise, onCompleteExercise, onMistake }: CBMatchingGameProps,
+    ref,
+  ): JSX.Element => {
     const { image, highlightedComponents, correctSelection } = exercise;
 
-    const { isCurrentExerciseFinished, type } = useCBExerciseSequence();
+    const {
+      setExercises,
+      isCurrentExerciseFinished,
+      setCurrentExerciseFinished,
+      type,
+    } = useCBExerciseSequence();
     const { showSnackbar } = useCBExerciseSequenceSnackbar();
 
     const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([
@@ -54,7 +61,7 @@ export const CBMatchingGame = forwardRef(
       playIncorrectSound();
     };
 
-    const onConfirm: ButtonProps["onClick"] = (): CBConfirmation => {
+    const onConfirm: ButtonProps["onClick"] = () => {
       const isFinished =
         selectedOptions.filter((o) => o === null).length === 0 ||
         type === CBExerciseSequenceType.ExamSimulator;
@@ -71,12 +78,39 @@ export const CBMatchingGame = forwardRef(
         );
         onNotFinished();
         setShowMistakes(selectedOptions.map((o) => o === null));
-      } else if (isCorrect) {
-        playCorrectSound();
       } else {
-        playIncorrectSound();
+        setCurrentExerciseFinished(true);
+
+        if (isCorrect) {
+          onCompleteExercise({ exerciseId: exercise.id, isCorrect });
+
+          setExercises((previousExercises) => {
+            const newExercises = previousExercises.map((ex) => {
+              if (ex.id === exercise.id) {
+                return {
+                  ...ex,
+                  isCompleted: true,
+                };
+              }
+              return ex;
+            });
+
+            return newExercises;
+          });
+
+          playCorrectSound();
+        } else {
+          if (onMistake) {
+            onMistake({
+              id: exercise.id,
+              topic: exercise.topic,
+              type: exercise.type,
+            });
+          }
+
+          playIncorrectSound();
+        }
       }
-      return { isCorrect, isFinished };
     };
 
     useImperativeHandle(ref, () => ({

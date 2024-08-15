@@ -41,7 +41,6 @@ import ReactFlow, {
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { CBConfirmation } from "../../CBExerciseSequence/CBExerciseSequenceBottomBar/CBConfirmation";
 import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../../CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBFamilyTreeProps, CBNodeType } from "./CBFamilyTreeInterfaces";
@@ -127,10 +126,18 @@ const commonParentToChildEdgeProps: Partial<Edge> = {
 };
 
 export const CBFamilyTree = forwardRef(
-  ({ exercise }: CBFamilyTreeProps, ref): JSX.Element => {
+  (
+    { exercise, onCompleteExercise, onMistake }: CBFamilyTreeProps,
+    ref,
+  ): JSX.Element => {
     const theme = useTheme();
     const animationControls = useAnimationControls();
-    const { isCurrentExerciseFinished, type } = useCBExerciseSequence();
+    const {
+      setExercises,
+      isCurrentExerciseFinished,
+      setCurrentExerciseFinished,
+      type,
+    } = useCBExerciseSequence();
     const currentBreakpoint = useCurrentMuiBreakpoint();
     const { showSnackbar } = useCBExerciseSequenceSnackbar();
     const {
@@ -460,32 +467,7 @@ export const CBFamilyTree = forwardRef(
       setInheritanceMistake(!isInheritanceCorrect);
     };
 
-    const onSuccess = () => {
-      showSnackbar(
-        "Alles richtig!",
-        "Du hast die Übung erfolgreich abgeschlossen.",
-        "success",
-      );
-      playCorrectSound();
-    };
-
-    const onError = (
-      mistakes: Pick<CBFamilyTreeExerciseNode, "id" | "solution">[],
-      isInheritanceCorrect: boolean,
-    ) => {
-      showErrors(mistakes, isInheritanceCorrect);
-
-      if (type !== CBExerciseSequenceType.ExamSimulator) {
-        showSnackbar(
-          "Fehler vorhanden",
-          "Leider sind noch Fehler vorhanden. 😕 Überprüfe die rot umrandeten Textfelder.",
-          "error",
-        );
-      }
-      playIncorrectSound();
-    };
-
-    const onConfirm: ButtonProps["onClick"] = (): CBConfirmation => {
+    const onConfirm: ButtonProps["onClick"] = () => {
       const mistakes = flatArrayNodesAndSpouses.filter((node) => {
         const nodeIdAndText = nodeIdsWithText.find(
           (n) => n.id === node.id.toString(),
@@ -498,19 +480,59 @@ export const CBFamilyTree = forwardRef(
 
       const isInheritanceCorrect = inheritance === exercise.affectedRule;
 
-      if (
+      const isCorrect =
         mistakes.length === 0 &&
-        (showInheritance ? isInheritanceCorrect : true)
-      ) {
-        onSuccess();
-        return { isCorrect: true, isFinished: true };
-      }
-      onError(mistakes, isInheritanceCorrect);
+        (showInheritance ? isInheritanceCorrect : true);
 
-      return {
-        isCorrect: false,
-        isFinished: type === CBExerciseSequenceType.ExamSimulator,
-      };
+      const isFinished =
+        isCorrect || type === CBExerciseSequenceType.ExamSimulator;
+
+      if (isCorrect) {
+        setCurrentExerciseFinished(true);
+
+        onCompleteExercise({ exerciseId: exercise.id, isCorrect });
+
+        setExercises((previousExercises) => {
+          const newExercises = previousExercises.map((ex) => {
+            if (ex.id === exercise.id) {
+              return {
+                ...ex,
+                isCompleted: true,
+              };
+            }
+            return ex;
+          });
+
+          return newExercises;
+        });
+
+        showSnackbar(
+          "Alles richtig!",
+          "Du hast die Übung erfolgreich abgeschlossen.",
+          "success",
+        );
+        playCorrectSound();
+      } else {
+        if (isFinished) {
+          setCurrentExerciseFinished(true);
+          
+          if (onMistake) {
+            onMistake({
+              id: exercise.id,
+              topic: exercise.topic,
+              type: exercise.type,
+            });
+          }
+        } else {
+          showSnackbar(
+            "Fehler vorhanden",
+            "Leider sind noch Fehler vorhanden. 😕 Überprüfe die rot umrandeten Textfelder.",
+            "error",
+          );
+        }
+        showErrors(mistakes, isInheritanceCorrect);
+        playIncorrectSound();
+      }
     };
 
     useImperativeHandle(ref, () => ({
