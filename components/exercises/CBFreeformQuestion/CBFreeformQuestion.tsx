@@ -3,6 +3,7 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
@@ -25,18 +26,21 @@ export const CBFreeformQuestion = ({
   } = useCBExerciseSequence();
 
   const [answer, setAnswer] = useState<string>("");
-  const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
-  const [isError, setError] = useState<boolean>(false);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
   const [isTextAreaFocused, setTextAreaFocused] = useState<boolean>(false);
 
-  const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
+  const disabled =
+    apiRequestState === CBAPIRequestState.Fetching ||
+    apiRequestState === CBAPIRequestState.Error ||
+    isCurrentExerciseFinished;
 
   const onConfirm = useCallback(() => {
-    setFetchingResponse(true);
-
+    setAPIRequestState(CBAPIRequestState.Fetching);
     getOpenAIAnswerEvaluation(exercise.question, answer)
       .then((response) => {
-        setFetchingResponse(false);
+        setAPIRequestState(CBAPIRequestState.Success);
 
         setCurrentExerciseFinished(true);
         const isCorrect = response.evaluation;
@@ -78,8 +82,7 @@ export const CBFreeformQuestion = ({
         );
       })
       .catch((error) => {
-        setFetchingResponse(false);
-        setError(true);
+        setAPIRequestState(CBAPIRequestState.Error);
         showSnackbar("Problem bei der Auswertung", error.message, "error");
       });
   }, [
@@ -152,7 +155,7 @@ export const CBFreeformQuestion = ({
 
           <CBLoadingButton
             onClick={onConfirm}
-            isLoading={isFetchingResponse}
+            isLoading={apiRequestState === CBAPIRequestState.Fetching}
             disabled={disabled}
             sx={{ width: 150 }}
           >

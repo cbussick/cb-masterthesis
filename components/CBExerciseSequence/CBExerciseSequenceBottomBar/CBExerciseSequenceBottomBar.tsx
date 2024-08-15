@@ -4,6 +4,7 @@ import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { useConfetti } from "@/ui/useConfetti";
@@ -55,8 +56,10 @@ export const CBExerciseSequenceBottomBar = ({
     setExercises,
   } = useCBExerciseSequence();
 
-  const [isFetchingHint, setFetchingHint] = useState<boolean>(false);
-  const [isErrorFetchingHint, setErrorFetchingHint] = useState<boolean>(false);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
+
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
@@ -174,15 +177,14 @@ export const CBExerciseSequenceBottomBar = ({
 
   const onClickHint = () => {
     if ("question" in currentExercise) {
-      setFetchingHint(true);
+      setAPIRequestState(CBAPIRequestState.Fetching);
       getOpenAIDiNAsHintForQuestion(currentExercise.question)
         .then((response) => {
-          setFetchingHint(false);
+          setAPIRequestState(CBAPIRequestState.Success);
           setHint(response.hint);
         })
         .catch((error) => {
-          setFetchingHint(false);
-          setErrorFetchingHint(true);
+          setAPIRequestState(CBAPIRequestState.Error);
           showSnackbar(
             "Problem beim Erfragen eines Tipps",
             error.message,
@@ -214,9 +216,11 @@ export const CBExerciseSequenceBottomBar = ({
           <CBDinaHint
             onClick={onClickHint}
             hint={hint}
-            isLoading={isFetchingHint}
+            isLoading={apiRequestState === CBAPIRequestState.Fetching}
             disabled={
-              isFetchingHint || isErrorFetchingHint || isCurrentExerciseFinished
+              apiRequestState === CBAPIRequestState.Fetching ||
+              apiRequestState === CBAPIRequestState.Error ||
+              isCurrentExerciseFinished
             }
           />
         )}
