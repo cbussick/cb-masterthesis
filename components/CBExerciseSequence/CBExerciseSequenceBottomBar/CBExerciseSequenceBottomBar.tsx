@@ -92,7 +92,7 @@ export const CBExerciseSequenceBottomBar = ({
     setSnackbarOpen(false);
   };
 
-  const onClickConfirm = () => {
+  const onConfirm = () => {
     /**
      * Not ideal, but works for now.
      * Make sure to have the following code inside each child exercise component which is
@@ -105,43 +105,40 @@ export const CBExerciseSequenceBottomBar = ({
      *
      * And use an appropriate `onConfirm` function. See `CBFamilyTree` for example.
      */
-    // @ts-ignore
     if (componentRef.current?.onConfirm) {
       const { isFinished, isCorrect } =
         componentRef.current.onConfirm() as CBConfirmation;
 
-      if (exerciseTypesWithConfirmButton.includes(currentExerciseType)) {
-        setCurrentExerciseFinished(isFinished);
+      setCurrentExerciseFinished(isFinished);
 
-        if (isFinished) {
-          if (!isCorrect && onMistake) {
-            onMistake({
-              id: currentExercise.id,
-              topic: currentExercise.topic,
-              type: currentExercise.type,
+      if (isFinished) {
+        if (!isCorrect && onMistake) {
+          onMistake({
+            id: currentExercise.id,
+            topic: currentExercise.topic,
+            type: currentExercise.type,
+          });
+        }
+
+        if (isCorrect && user && currentExerciseIndex !== undefined) {
+          onCompleteExercise({
+            exerciseId: uncompletedExercises[currentExerciseIndex].id,
+            isCorrect,
+          });
+
+          setExercises((previousExercises) => {
+            const newExercises = previousExercises.map((ex) => {
+              if (ex.id === currentExercise?.id) {
+                return {
+                  ...ex,
+                  isCompleted: true,
+                };
+              }
+              return ex;
             });
-          }
 
-          if (isCorrect && user && currentExerciseIndex !== undefined) {
-            onCompleteExercise({
-              exerciseId: uncompletedExercises[currentExerciseIndex].id,
-              isCorrect,
-            });
-
-            setExercises((previousExercises) => {
-              const newExercises = previousExercises.map((ex) => {
-                if (ex.id === currentExercise?.id) {
-                  return {
-                    ...ex,
-                    isCompleted: true,
-                  };
-                }
-                return ex;
-              });
-
-              return newExercises;
-            });
-          }
+            return newExercises;
+          });
         }
       }
     }
@@ -216,7 +213,7 @@ export const CBExerciseSequenceBottomBar = ({
 
         {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
           <Button
-            onClick={onClickConfirm}
+            onClick={onConfirm}
             disabled={isCurrentExerciseFinished}
             endIcon={<CheckRounded />}
           >
