@@ -107,14 +107,14 @@ export const CBExerciseSequenceBottomBar = ({
      */
     // @ts-ignore
     if (componentRef.current?.onConfirm) {
-      const exerciseConfirmationData =
+      const { isFinished, isCorrect } =
         componentRef.current.onConfirm() as CBConfirmation;
 
       if (exerciseTypesWithConfirmButton.includes(currentExerciseType)) {
-        setCurrentExerciseFinished(exerciseConfirmationData.isFinished);
+        setCurrentExerciseFinished(isFinished);
 
-        if (exerciseConfirmationData.isFinished) {
-          if (!exerciseConfirmationData.isCorrect && onMistake) {
+        if (isFinished) {
+          if (!isCorrect && onMistake) {
             onMistake({
               id: currentExercise.id,
               topic: currentExercise.topic,
@@ -122,14 +122,10 @@ export const CBExerciseSequenceBottomBar = ({
             });
           }
 
-          if (
-            exerciseConfirmationData.isCorrect &&
-            user &&
-            currentExerciseIndex !== undefined
-          ) {
+          if (isCorrect && user && currentExerciseIndex !== undefined) {
             onCompleteExercise({
               exerciseId: uncompletedExercises[currentExerciseIndex].id,
-              isCorrect: exerciseConfirmationData.isCorrect,
+              isCorrect,
             });
 
             setExercises((previousExercises) => {
