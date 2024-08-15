@@ -46,7 +46,8 @@ export const CBExerciseSequenceBottomBar = ({
 }: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
   const user = useUser();
   const { startConfetti } = useConfetti();
-  const { showSnackbar, setOpen } = useCBExerciseSequenceSnackbar();
+  const { showSnackbar, setOpen: setSnackbarOpen } =
+    useCBExerciseSequenceSnackbar();
   const {
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
@@ -70,7 +71,7 @@ export const CBExerciseSequenceBottomBar = ({
     (exercise) => exercise.isCompleted,
   );
 
-  const moveToNextExercise = () => {
+  const onClickNext = () => {
     if (currentExerciseIndex === uncompletedExercises.length - 1) {
       // The last exercise was completed. The whole sequence is completed.
       if (onSequenceComplete) {
@@ -90,13 +91,9 @@ export const CBExerciseSequenceBottomBar = ({
     }
 
     setCurrentExerciseIndex((prev) => prev + 1);
-  };
-
-  const onClickNext = () => {
-    moveToNextExercise();
     setCurrentExerciseFinished(false);
     setHint("");
-    setOpen(false);
+    setSnackbarOpen(false);
   };
 
   const onClickConfirm = () => {
@@ -164,7 +161,7 @@ export const CBExerciseSequenceBottomBar = ({
         onCancel
           ? () => {
               onCancel();
-              setOpen(false);
+              setSnackbarOpen(false);
             }
           : undefined
       }
