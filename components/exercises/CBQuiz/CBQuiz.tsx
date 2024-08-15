@@ -1,7 +1,6 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBImage } from "@/components/CBImage/CBImage";
 import { CBAnswer } from "@/data/exercises/CBAnswer";
-import { useUser } from "@/firebase-client/useUser";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { Box, ButtonProps, Container, Stack } from "@mui/material";
@@ -15,7 +14,6 @@ export const CBQuiz = ({
   onMistake,
   onCompleteExercise,
 }: CBQuizProps): JSX.Element => {
-  const user = useUser();
   const {
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
@@ -37,7 +35,7 @@ export const CBQuiz = ({
 
       const isCorrect = exercise.correctAnswer === buttonAnswerId;
 
-      if (isCorrect && user) {
+      if (isCorrect) {
         onCompleteExercise({ exerciseId: exercise.id, isCorrect });
         setExercises((previousExercises) => {
           const newExercises = previousExercises.map((ex) => {
@@ -75,7 +73,6 @@ export const CBQuiz = ({
       onMistake,
       setCurrentExerciseFinished,
       setExercises,
-      user,
     ],
   );
 

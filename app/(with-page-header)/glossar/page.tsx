@@ -14,11 +14,10 @@ import { useState } from "react";
 export default function Glossary() {
   const user = useUser();
 
-  const unlockedGlossaryEntryIds =
-    user?.customData.unlockedGlossaryEntryIDs || [];
+  const { unlockedGlossaryEntryIDs } = user.customData;
 
   const unlockedGlossaryEntries = glossaryEntries.filter((entry) => {
-    return unlockedGlossaryEntryIds.includes(entry.id);
+    return unlockedGlossaryEntryIDs.includes(entry.id);
   });
 
   const [filteredGlossaryEntries, setFilteredGlossaryEntries] = useState<

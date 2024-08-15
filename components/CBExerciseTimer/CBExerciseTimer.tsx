@@ -52,7 +52,7 @@ export const CBExerciseTimer = forwardRef(
       const today = dayjs();
       const formattedDate = today.format("YYYY-MM-DD");
 
-      if (user?.user) {
+      if (user.user) {
         const trackedTime: CBTrackedTime = {
           date: formattedDate,
           time: time.sec + time.min * 60,

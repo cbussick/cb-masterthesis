@@ -34,7 +34,7 @@ export const CBUserChip = (): JSX.Element => {
           },
         }}
         avatar={
-          <Avatar src={user?.customData.profilePicture} alt="Profilbild" />
+          <Avatar src={user.customData.profilePicture} alt="Profilbild" />
         }
         label={
           <Typography
@@ -42,7 +42,7 @@ export const CBUserChip = (): JSX.Element => {
               fontWeight: (t) => t.typography.fontWeightMedium,
             }}
           >
-            {user && user.customData.username}
+            {user.customData.username}
           </Typography>
         }
         id={userChipId}

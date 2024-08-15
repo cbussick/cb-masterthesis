@@ -27,7 +27,7 @@ export const CBWelcomeBanner = (): JSX.Element => {
       <Stack direction="row" spacing={2}>
         <Box>
           <Avatar
-            src={user?.customData.profilePicture}
+            src={user.customData.profilePicture}
             alt="Profilbild"
             onClick={handleAvatarClick}
             sx={{ width: avatarSize, height: avatarSize, cursor: "pointer" }}
@@ -37,13 +37,13 @@ export const CBWelcomeBanner = (): JSX.Element => {
         <Stack>
           <Stack direction="row" spacing={1}>
             <Typography variant="h2">
-              {`Hallo, ${user?.customData.username}`}
+              {`Hallo, ${user.customData.username}`}
             </Typography>
 
             <CBEmoji emoji="🌱" typographyVariant="h2" />
           </Stack>
 
-          {user?.customData.role === CBUserRole.Student && (
+          {user.customData.role === CBUserRole.Student && (
             <Typography variant="h4">Lass uns lernen!</Typography>
           )}
         </Stack>

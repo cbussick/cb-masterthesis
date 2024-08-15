@@ -38,7 +38,7 @@ export const CBProfileSettings = (): JSX.Element => {
   const [isEditingPassword, setEditingPassword] = useState<boolean>(false);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 
-  const oldUsername = user?.customData.username || "";
+  const oldUsername = user.customData.username;
 
   const {
     register,
@@ -67,7 +67,7 @@ export const CBProfileSettings = (): JSX.Element => {
   };
 
   const handleSaveButtonClickUsername = () => {
-    if (user?.user) {
+    if (user.user) {
       changeUsername(user.user.uid, username)
         .then(() => {
           showSnackbar(
@@ -90,7 +90,7 @@ export const CBProfileSettings = (): JSX.Element => {
   };
 
   const handleSaveButtonClickPassword = () => {
-    if (user?.user && user.user.email) {
+    if (user.user && user.user.email) {
       const credential = EmailAuthProvider.credential(
         user.user.email,
         oldPassword,
@@ -137,15 +137,15 @@ export const CBProfileSettings = (): JSX.Element => {
 
             <CBEditTextField
               label="Vorname"
-              value={user?.customData.firstName || ""}
+              value={user.customData.firstName}
             />
 
             <CBEditTextField
               label="Nachname"
-              value={user?.customData.lastName || ""}
+              value={user.customData.lastName}
             />
 
-            <CBEditTextField label="E-Mail" value={user?.user?.email || ""} />
+            <CBEditTextField label="E-Mail" value={user.user?.email || ""} />
 
             <Button
               variant="text"

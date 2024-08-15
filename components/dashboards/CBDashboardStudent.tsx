@@ -23,9 +23,9 @@ const commonGridItemProps: Grid2Props = {
 export const CBDashboardStudent = (): JSX.Element => {
   const user = useUser();
 
-  const userPoints = user?.customData.points || 0;
+  const userPoints = user.customData.points;
 
-  const lastWeekTimes = getLastWeekTimes(user?.customData.trackedTime || []);
+  const lastWeekTimes = getLastWeekTimes(user.customData.trackedTime);
   const totalTime = lastWeekTimes.reduce((acc, t) => {
     return acc + t.time;
   }, 0);

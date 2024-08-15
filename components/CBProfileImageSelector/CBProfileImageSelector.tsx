@@ -21,10 +21,10 @@ export const CBProfileImageSelector = (): JSX.Element => {
   const { showSnackbar } = useSnackbar();
 
   const [profilePicture, setProfilePicture] = useState<string>(
-    user?.customData.profilePicture || "",
+    user.customData.profilePicture,
   );
 
-  const userPoints = user?.customData.points || 0;
+  const userPoints = user.customData.points;
   const currentLevel =
     levels.find(
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
@@ -35,7 +35,7 @@ export const CBProfileImageSelector = (): JSX.Element => {
   };
 
   const handleSaveButtonClickProfilePic = () => {
-    if (user?.user) {
+    if (user.user) {
       changeProfilePicture(user.user.uid, profilePicture)
         .then(() => {
           showSnackbar(
@@ -78,7 +78,7 @@ export const CBProfileImageSelector = (): JSX.Element => {
 
         <Button
           onClick={handleSaveButtonClickProfilePic}
-          disabled={user?.customData.profilePicture === profilePicture}
+          disabled={user.customData.profilePicture === profilePicture}
         >
           Speichern
         </Button>

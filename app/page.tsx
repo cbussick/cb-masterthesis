@@ -12,7 +12,7 @@ export default function Home() {
   const user = useUser();
 
   let dashboard;
-  const userRole = user?.customData.role;
+  const userRole = user.customData.role;
 
   if (userRole === CBUserRole.Student) {
     dashboard = <CBDashboardStudent />;

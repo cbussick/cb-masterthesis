@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/firebase-client/useUser";
+import { useUncertainUser } from "@/firebase-client/useUncertainUser";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
 import { useRouteData } from "@/helpers/useRouteData";
 import { themeSpacingFactor } from "@/theme/theme";
@@ -23,7 +23,7 @@ const sidebarWidthClosed = 100;
 
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const routeData = useRouteData();
-  const user = useUser();
+  const user = useUncertainUser();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const {

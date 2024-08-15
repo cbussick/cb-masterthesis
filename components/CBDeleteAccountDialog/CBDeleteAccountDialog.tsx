@@ -38,7 +38,7 @@ export const CBDeleteAccountDialog = ({
   const handleConfirmDeleteion = () => {
     reset();
 
-    if (user?.user && user.user.email) {
+    if (user.user && user.user.email) {
       const credential = EmailAuthProvider.credential(
         user.user.email,
         password,

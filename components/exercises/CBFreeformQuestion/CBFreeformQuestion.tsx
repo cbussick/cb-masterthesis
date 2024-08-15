@@ -2,7 +2,6 @@
 
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
-import { useUser } from "@/firebase-client/useUser";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
@@ -17,7 +16,6 @@ export const CBFreeformQuestion = ({
   onCompleteExercise,
   onMistake,
 }: CBFreeformQuestionProps): JSX.Element => {
-  const user = useUser();
   const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const {
     setExercises,
@@ -45,7 +43,7 @@ export const CBFreeformQuestion = ({
         setCurrentExerciseFinished(true);
         const isCorrect = response.evaluation;
 
-        if (isCorrect && user) {
+        if (isCorrect) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });
 
           setExercises((previousExercises) => {
@@ -96,7 +94,6 @@ export const CBFreeformQuestion = ({
     setCurrentExerciseFinished,
     setExercises,
     showSnackbar,
-    user,
   ]);
 
   useEffect(() => {

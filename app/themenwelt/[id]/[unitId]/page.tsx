@@ -70,7 +70,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   }
 
   useEffect(() => {
-    if (user?.user) {
+    if (user.user) {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         const userCompletedExercises =
           progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
@@ -87,12 +87,12 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   }, [params.unitId, topicId, unit, user]);
 
   useEffect(() => {
-    if (user?.user) {
+    if (user.user) {
       getUserTopicWorldProgress(user.user.uid).then((progress) => {
         setTopicWorldProgress(progress);
       });
     }
-  }, [user?.user]);
+  }, [user.user]);
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
@@ -100,7 +100,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     allExercisesCompleted: boolean;
     difficulty: CBExerciseDifficulty;
   }) => {
-    if (user?.user) {
+    if (user.user) {
       if (parameters.allExercisesCompleted && parameters.difficulty) {
         if (parameters.difficulty === CBExerciseDifficulty.Hard) {
           if (exercises) {
@@ -166,7 +166,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
                 exerciseId: string;
                 isCorrect: boolean;
               }) => {
-                if (user?.user) {
+                if (user.user) {
                   markExerciseAsCompleted(
                     user.user.uid,
                     topicId,

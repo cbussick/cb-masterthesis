@@ -23,7 +23,7 @@ export const CBExamSimulator = ({
   exams,
 }: CBExamSimulatorProps): JSX.Element => {
   const user = useUser();
-  const completedExamAmount = user?.customData.completedExams || 0;
+  const completedExamAmount = user.customData.completedExams;
   const [examState, setExamState] = useState<CBExamSimulatorState>(
     CBExamSimulatorState.NotStarted,
   );
@@ -95,7 +95,7 @@ export const CBExamSimulator = ({
 
   const onSequenceComplete = useCallback(() => {
     setExamState(CBExamSimulatorState.Finished);
-    if (user?.user) {
+    if (user.user) {
       addCompletedExamsToUser(user.user.uid, 1);
 
       const correctExercisesAmount = exercises.filter(

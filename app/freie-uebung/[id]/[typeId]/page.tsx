@@ -80,7 +80,7 @@ export default function FreePracticeSequencePage({
 
   const topic = getEnumValueByStringValue(CBTopic, params.id);
 
-  if (!topic || !user) {
+  if (!topic) {
     notFound();
   }
 
@@ -104,7 +104,7 @@ export default function FreePracticeSequencePage({
         setFirstRender(false);
 
         if (exerciseType === CBExerciseType.AIQuiz && user.user) {
-          getOpenAIQuizExercise(user.user?.uid, topic).then((response) => {
+          getOpenAIQuizExercise(user.user.uid, topic).then((response) => {
             const exerciseWithMetaData: CBExerciseWithMetaData = {
               ...response,
               isCompleted: false,
@@ -166,11 +166,11 @@ export default function FreePracticeSequencePage({
   const onMistake = useCallback(
     (exercise: CBMistakeExercise) => {
       const isNotAlreadyInMistakes =
-        user?.customData.mistakeExercises.find(
+        user.customData.mistakeExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
-      if (user?.user && isNotAlreadyInMistakes) {
+      if (user.user && isNotAlreadyInMistakes) {
         const mistakeExercisesToAdd = [exercise];
         addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
@@ -180,7 +180,7 @@ export default function FreePracticeSequencePage({
 
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
-      if (user?.user) {
+      if (user.user) {
         const { uid } = user.user;
 
         const solvedExercisesToAdd = 1;
@@ -208,7 +208,7 @@ export default function FreePracticeSequencePage({
       allExercisesCompleted: boolean;
       difficulty: CBExerciseDifficulty;
     }) => {
-      if (user?.user) {
+      if (user.user) {
         if (parameters.allExercisesCompleted && parameters.difficulty) {
           addPointsToUser(
             user.user.uid,
