@@ -5,5 +5,12 @@ import { useUncertainUser } from "./useUncertainUser";
 // But this should be the case for anywhere below the `CBMainLayout` component.
 export const useUser = () => {
   const user = useUncertainUser();
-  return user!;
+
+  if (!user) {
+    throw new Error(
+      "User is null. Only use this hook when user is guaranteed to be not null.",
+    );
+  }
+
+  return user;
 };
