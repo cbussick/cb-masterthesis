@@ -63,9 +63,7 @@ export const CBExerciseSequenceBottomBar = ({
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
-
   const currentExerciseType = currentExercise?.type;
-
   const allExercisesCompleted = exercises.every(
     (exercise) => exercise.isCompleted,
   );
