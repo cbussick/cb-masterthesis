@@ -60,7 +60,6 @@ export const CBExerciseSequenceBottomBar = ({
   const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
     CBAPIRequestState.Idle,
   );
-
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
@@ -85,7 +84,7 @@ export const CBExerciseSequenceBottomBar = ({
         }
       }
 
-      if (exercises.every((exercise) => exercise.isCompleted)) {
+      if (allExercisesCompleted) {
         startConfetti();
       }
     }
