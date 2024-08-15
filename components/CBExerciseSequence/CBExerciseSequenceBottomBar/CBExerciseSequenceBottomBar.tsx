@@ -63,7 +63,7 @@ export const CBExerciseSequenceBottomBar = ({
 
   const onClickNext = () => {
     if (currentExerciseIndex === uncompletedExercises.length - 1) {
-      // The last exercise was completed. The whole sequence is completed.
+      // The last exercise was finished. The whole sequence is completed.
       if (onSequenceComplete) {
         if (sequenceType === CBExerciseSequenceType.ExamSimulator) {
           onSequenceComplete();
