@@ -1,6 +1,6 @@
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
-import { CBDiNAsHint } from "./CBDiNAsHint";
 import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
+import { CBDiNAsHint } from "./schemas/CBDiNAsHint";
 
 export const getOpenAIDiNAsHintForQuestion = async (
   question: string,

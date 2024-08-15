@@ -11,7 +11,10 @@ import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 export const getInformationForExercise = (
   exercise?: CBExercise,
 ): { title: string } | null => {
-  if (exercise?.type === CBExerciseType.Quiz) {
+  if (
+    exercise?.type === CBExerciseType.Quiz ||
+    exercise?.type === CBExerciseType.AIQuiz
+  ) {
     const castExercise = exercise as CBQuizExercise;
     return {
       title: castExercise.question,

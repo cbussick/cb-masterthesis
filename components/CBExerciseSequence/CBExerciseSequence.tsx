@@ -83,7 +83,10 @@ export const CBExerciseSequence = ({
         ref={componentRef}
       />
     );
-  } else if (currentExercise?.type === CBExerciseType.Quiz) {
+  } else if (
+    currentExercise?.type === CBExerciseType.Quiz ||
+    currentExercise?.type === CBExerciseType.AIQuiz
+  ) {
     const castExercise = currentExercise as unknown as CBQuizExercise;
 
     componentToRender = (

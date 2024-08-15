@@ -11,6 +11,7 @@ export interface CBQuizExercise extends CBExerciseWithTypeAndTopic {
   answers: CBAnswer[];
   correctAnswer: string;
   hint: string;
+  type: CBExerciseType.Quiz;
 }
 
 export const quizExercises: CBQuizExercise[] = [

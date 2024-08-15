@@ -22,6 +22,7 @@ import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUs
 import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
+import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
 import { retryMistakesPathSegment } from "@/helpers/routes";
 import { notFound } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -39,6 +40,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
+  [CBExerciseType.AIQuiz]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -47,6 +49,28 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
+  [CBExerciseType.AIQuiz]: 1,
+};
+
+const getRandomExercises = (
+  amountOfExercises: number,
+  exercises: CBExerciseWithMetaData[],
+): CBExerciseWithMetaData[] => {
+  const randomExercises: CBExerciseWithMetaData[] = [];
+  const usedIndexes: number[] = [];
+  let i = 0;
+  while (i < amountOfExercises) {
+    const randomIndex = Math.floor(Math.random() * exercises.length);
+    if (!usedIndexes.includes(randomIndex)) {
+      const randomExercise = exercises[randomIndex];
+
+      usedIndexes.push(randomIndex);
+      randomExercises.push(randomExercise);
+      i += 1;
+    }
+  }
+
+  return randomExercises;
 };
 
 export default function FreePracticeSequencePage({
@@ -54,26 +78,25 @@ export default function FreePracticeSequencePage({
 }: FreePracticeSequenceParams) {
   const user = useUser();
 
+  const topic = getEnumValueByStringValue(CBTopic, params.id);
+
+  if (!topic || !user) {
+    notFound();
+  }
+
   const [originalExercises, setOriginalExercises] = useState<
     CBExerciseWithMetaData[]
   >([]);
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
-
-  const topic = getEnumValueByStringValue(CBTopic, params.id);
-
-  if (!topic) {
-    notFound();
-  }
+  const [, setCompletionTime] = useState<CBTime>({
+    sec: 0,
+    min: 0,
+  });
 
   const exerciseType =
     params.typeId === retryMistakesPathSegment
       ? null
       : (params.typeId as CBExerciseType);
-
-  const [, setCompletionTime] = useState<CBTime>({
-    sec: 0,
-    min: 0,
-  });
 
   useEffect(() => {
     let exercises: CBExerciseWithMetaData[] = [];
@@ -82,37 +105,43 @@ export default function FreePracticeSequencePage({
       if (isFirstRender) {
         setFirstRender(false);
 
-        exercises = exercisesMap[exerciseType]
-          .filter((e) => e.topic === topic)
-          .map((ex) => ({ ...ex, isCompleted: false }));
+        if (exerciseType === CBExerciseType.AIQuiz && user.user) {
+          getOpenAIQuizExercise(user.user?.uid, topic).then((response) => {
+            const exerciseWithMetaData: CBExerciseWithMetaData = {
+              ...response,
+              isCompleted: false,
+            };
 
-        const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
+            setOriginalExercises([exerciseWithMetaData]);
+          });
+        } else {
+          exercises = exercisesMap[exerciseType]
+            .filter((e) => e.topic === topic)
+            .map((ex) => ({ ...ex, isCompleted: false }));
 
-        const amountOfExercises =
-          exercises.length < desiredAmountOfExercises
-            ? exercises.length
-            : desiredAmountOfExercises;
-        const randomExercises: CBExerciseWithMetaData[] = [];
-        const usedIndexes: number[] = [];
-        let i = 0;
-        while (i < amountOfExercises) {
-          const randomIndex = Math.floor(Math.random() * exercises.length);
-          if (!usedIndexes.includes(randomIndex)) {
-            const randomExercise = exercises[randomIndex];
+          const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
 
-            usedIndexes.push(randomIndex);
-            randomExercises.push(randomExercise);
-            i += 1;
-          }
+          const amountOfExercises =
+            exercises.length < desiredAmountOfExercises
+              ? exercises.length
+              : desiredAmountOfExercises;
+
+          const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
+            amountOfExercises,
+            exercises,
+          );
+
+          setOriginalExercises(randomExercises);
         }
-
-        setOriginalExercises(randomExercises);
       }
     } else if (isFirstRender) {
+      // The user is retrying mistakes
+
       setFirstRender(false);
 
-      user?.customData.mistakeExercises.forEach((e) => {
-        if (e.topic === topic) {
+      user.customData.mistakeExercises
+        .filter((e) => e.topic === topic)
+        .forEach((e) => {
           const exercise = exercisesMap[e.type].find((ex) => ex.id === e.id);
 
           if (exercise) {
@@ -122,27 +151,18 @@ export default function FreePracticeSequencePage({
             };
             exercises.push(exerciseWithMetaData);
           }
-        }
-      });
+        });
 
       const amountOfExercises = exercises.length < 5 ? exercises.length : 5;
-      const randomExercises: CBExerciseWithMetaData[] = [];
-      const usedIndexes: number[] = [];
-      let i = 0;
-      while (i < amountOfExercises) {
-        const randomIndex = Math.floor(Math.random() * exercises.length);
-        if (!usedIndexes.includes(randomIndex)) {
-          const randomExercise = exercises[randomIndex];
 
-          usedIndexes.push(randomIndex);
-          randomExercises.push(randomExercise);
-          i += 1;
-        }
-      }
+      const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
+        amountOfExercises,
+        exercises,
+      );
 
       setOriginalExercises(randomExercises);
     }
-  }, [exerciseType, isFirstRender, topic, user?.customData.mistakeExercises]);
+  }, [exerciseType, isFirstRender, topic, user]);
 
   const onMistake = useCallback(
     (exercise: CBMistakeExercise) => {

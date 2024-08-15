@@ -24,4 +24,5 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.MatchingGame]: { name: "Zuordnungsspiel" },
   [CBExerciseType.Swiper]: { name: "Zellen-Swiper" },
   [CBExerciseType.FreeformQuestion]: { name: "Freitext-Frage" },
+  [CBExerciseType.AIQuiz]: { name: "KI-Quiz" },
 };
