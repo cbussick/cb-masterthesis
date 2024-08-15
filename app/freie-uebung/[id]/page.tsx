@@ -49,7 +49,7 @@ export default function FreePracticeSubpage({
             previousLinks={[
               { label: "Freie Übung", href: CBRoute.FreieUebung },
             ]}
-            currentLabel={topicData.name || "Thema"}
+            currentLabel={topicData.name}
           />
         }
       />

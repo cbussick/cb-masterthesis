@@ -64,7 +64,7 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         title={
           <CBBreadcrumbs
             previousLinks={[{ label: "Themenwelt", href: CBRoute.Themenwelt }]}
-            currentLabel={topicData?.topicData.name || "Thema"}
+            currentLabel={topicData.topicData.name}
           />
         }
         isOnTransparentBackground
