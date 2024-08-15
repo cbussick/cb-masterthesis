@@ -70,29 +70,25 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   }
 
   useEffect(() => {
-    if (user.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        const userCompletedExercises =
-          progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
-          [];
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      const userCompletedExercises =
+        progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
+        [];
 
-        setExercises(
-          unit.exercises.map((exercise) => ({
-            ...exercise,
-            isCompleted: userCompletedExercises.includes(exercise.id),
-          })),
-        );
-      });
-    }
-  }, [params.unitId, topicId, unit, user]);
+      setExercises(
+        unit.exercises.map((exercise) => ({
+          ...exercise,
+          isCompleted: userCompletedExercises.includes(exercise.id),
+        })),
+      );
+    });
+  }, [params.unitId, topicId, unit.exercises, user.user.uid]);
 
   useEffect(() => {
-    if (user.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
@@ -100,38 +96,36 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     allExercisesCompleted: boolean;
     difficulty: CBExerciseDifficulty;
   }) => {
-    if (user.user) {
-      if (parameters.allExercisesCompleted && parameters.difficulty) {
-        if (parameters.difficulty === CBExerciseDifficulty.Hard) {
-          if (exercises) {
-            const unlockedGlossaryEntryIds: string[] = [];
-            const topic = exercises.at(0)?.topic;
+    if (parameters.allExercisesCompleted && parameters.difficulty) {
+      if (parameters.difficulty === CBExerciseDifficulty.Hard) {
+        if (exercises) {
+          const unlockedGlossaryEntryIds: string[] = [];
+          const topic = exercises.at(0)?.topic;
 
-            if (topic === CBTopic.Zelle) {
-              glossaryEntries.forEach((entry) => {
-                if (entry.topic === CBTopic.MitoseMeiose) {
-                  unlockedGlossaryEntryIds.push(entry.id);
-                }
-              });
-            } else if (topic === CBTopic.MitoseMeiose) {
-              glossaryEntries.forEach((entry) => {
-                if (entry.topic === CBTopic.AufbauDNA) {
-                  unlockedGlossaryEntryIds.push(entry.id);
-                }
-              });
-            }
+          if (topic === CBTopic.Zelle) {
+            glossaryEntries.forEach((entry) => {
+              if (entry.topic === CBTopic.MitoseMeiose) {
+                unlockedGlossaryEntryIds.push(entry.id);
+              }
+            });
+          } else if (topic === CBTopic.MitoseMeiose) {
+            glossaryEntries.forEach((entry) => {
+              if (entry.topic === CBTopic.AufbauDNA) {
+                unlockedGlossaryEntryIds.push(entry.id);
+              }
+            });
+          }
 
-            if (unlockGlossaryEntries.length > 0) {
-              unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
-            }
+          if (unlockGlossaryEntries.length > 0) {
+            unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
           }
         }
-
-        addPointsToUser(
-          user.user.uid,
-          pointsToAddForSequenceCompletion[parameters.difficulty],
-        );
       }
+
+      addPointsToUser(
+        user.user.uid,
+        pointsToAddForSequenceCompletion[parameters.difficulty],
+      );
     }
   };
   const hasAccess =
@@ -166,14 +160,12 @@ export default function ExercisePage({ params }: ExercisePageParams) {
                 exerciseId: string;
                 isCorrect: boolean;
               }) => {
-                if (user.user) {
-                  markExerciseAsCompleted(
-                    user.user.uid,
-                    topicId,
-                    params.unitId,
-                    parameters.exerciseId,
-                  );
-                }
+                markExerciseAsCompleted(
+                  user.user.uid,
+                  topicId,
+                  params.unitId,
+                  parameters.exerciseId,
+                );
               }}
               onSequenceComplete={onSequenceComplete}
               setCompletionTime={setCompletionTime}

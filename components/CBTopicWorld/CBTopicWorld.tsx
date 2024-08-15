@@ -20,12 +20,10 @@ export const CBTopicWorld = (): JSX.Element => {
     useState<TopicWorldProgress>();
 
   useEffect(() => {
-    if (user.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const topicsAsArray = Object.values(topicWorldTopics);
 

@@ -48,12 +48,10 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
   }
 
   useEffect(() => {
-    if (user.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const hasAccess =
     topicWorldProgress && isTopicUnlocked(topicId, topicWorldProgress);

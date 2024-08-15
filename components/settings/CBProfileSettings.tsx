@@ -67,39 +67,35 @@ export const CBProfileSettings = (): JSX.Element => {
   };
 
   const handleSaveButtonClickUsername = () => {
-    if (user.user) {
-      changeUsername(user.user.uid, username)
-        .then(() => {
-          showSnackbar(
-            "Benutzername geändert",
-            "Du hast deinen Benutzernamen erfolgreich geändert.",
-            "success",
-          );
-        })
-        .catch((error: FirebaseError) => {
-          const errorMessage = getAuthError(error.code) || error.message;
+    changeUsername(user.user.uid, username)
+      .then(() => {
+        showSnackbar(
+          "Benutzername geändert",
+          "Du hast deinen Benutzernamen erfolgreich geändert.",
+          "success",
+        );
+      })
+      .catch((error: FirebaseError) => {
+        const errorMessage = getAuthError(error.code) || error.message;
 
-          showSnackbar(
-            "Benutzername konnte nicht geändert werden",
-            errorMessage,
-            "error",
-          );
-        });
-    }
+        showSnackbar(
+          "Benutzername konnte nicht geändert werden",
+          errorMessage,
+          "error",
+        );
+      });
     handleEditUsernameClose();
   };
 
   const handleSaveButtonClickPassword = () => {
-    if (user.user && user.user.email) {
+    if (user.user.email) {
       const credential = EmailAuthProvider.credential(
         user.user.email,
         oldPassword,
       );
       reauthenticateUser(user.user, credential)
         .then(() => {
-          if (user.user) {
-            changePassword(user.user, newPassword, showSnackbar);
-          }
+          changePassword(user.user, newPassword, showSnackbar);
         })
         .catch((error: FirebaseError) => {
           const errorMessage = getAuthError(error.code) || error.message;
@@ -145,7 +141,7 @@ export const CBProfileSettings = (): JSX.Element => {
               value={user.customData.lastName}
             />
 
-            <CBEditTextField label="E-Mail" value={user.user?.email || ""} />
+            <CBEditTextField label="E-Mail" value={user.user.email || ""} />
 
             <Button
               variant="text"

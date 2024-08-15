@@ -23,12 +23,10 @@ export default function Achievements() {
     useState<TopicWorldProgress>();
 
   useEffect(() => {
-    if (user.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const isTopicCompleted = (topic: CBTopic) => {
     const topicsAsArray = Object.values(topicWorldTopics);

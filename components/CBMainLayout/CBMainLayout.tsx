@@ -1,5 +1,6 @@
 "use client";
 
+import { isUserFullyLoaded } from "@/firebase-client/isUserFullyLoaded";
 import { useUncertainUser } from "@/firebase-client/useUncertainUser";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
 import { useRouteData } from "@/helpers/useRouteData";
@@ -39,7 +40,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   }
 
   // Show loading while user and custom data is not loaded
-  if (!user?.isUserLoaded || (user.user && user.customData.firstName === "")) {
+  if (!isUserFullyLoaded(user)) {
     return <CBLoadingView />;
   }
 

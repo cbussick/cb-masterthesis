@@ -103,7 +103,7 @@ export default function FreePracticeSequencePage({
       if (isFirstRender) {
         setFirstRender(false);
 
-        if (exerciseType === CBExerciseType.AIQuiz && user.user) {
+        if (exerciseType === CBExerciseType.AIQuiz) {
           getOpenAIQuizExercise(user.user.uid, topic).then((response) => {
             const exerciseWithMetaData: CBExerciseWithMetaData = {
               ...response,
@@ -170,7 +170,7 @@ export default function FreePracticeSequencePage({
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
-      if (user.user && isNotAlreadyInMistakes) {
+      if (isNotAlreadyInMistakes) {
         const mistakeExercisesToAdd = [exercise];
         addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
@@ -180,27 +180,25 @@ export default function FreePracticeSequencePage({
 
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
-      if (user.user) {
-        const { uid } = user.user;
+      const { uid } = user.user;
 
-        const solvedExercisesToAdd = 1;
-        addSolvedExerciseToUser(uid, solvedExercisesToAdd);
-        const pointsToAdd = 1;
-        addPointsToUser(uid, pointsToAdd);
+      const solvedExercisesToAdd = 1;
+      addSolvedExerciseToUser(uid, solvedExercisesToAdd);
+      const pointsToAdd = 1;
+      addPointsToUser(uid, pointsToAdd);
 
-        // If the exercise type is not set, the user is retrying mistakes
-        if (!exerciseType) {
-          const exercise = user.customData.mistakeExercises.find(
-            (e) => e.id === parameters.exerciseId,
-          );
+      // If the exercise type is not set, the user is retrying mistakes
+      if (!exerciseType) {
+        const exercise = user.customData.mistakeExercises.find(
+          (e) => e.id === parameters.exerciseId,
+        );
 
-          if (exercise) {
-            removeExercisesFromMistakes(uid, [exercise]);
-          }
+        if (exercise) {
+          removeExercisesFromMistakes(uid, [exercise]);
         }
       }
     },
-    [exerciseType, user],
+    [exerciseType, user.customData.mistakeExercises, user.user],
   );
 
   const onSequenceComplete = useCallback(
@@ -208,13 +206,11 @@ export default function FreePracticeSequencePage({
       allExercisesCompleted: boolean;
       difficulty: CBExerciseDifficulty;
     }) => {
-      if (user.user) {
-        if (parameters.allExercisesCompleted && parameters.difficulty) {
-          addPointsToUser(
-            user.user.uid,
-            pointsToAddForSequenceCompletion[parameters.difficulty],
-          );
-        }
+      if (parameters.allExercisesCompleted && parameters.difficulty) {
+        addPointsToUser(
+          user.user.uid,
+          pointsToAddForSequenceCompletion[parameters.difficulty],
+        );
       }
     },
     [user],

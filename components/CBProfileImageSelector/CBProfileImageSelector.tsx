@@ -35,25 +35,23 @@ export const CBProfileImageSelector = (): JSX.Element => {
   };
 
   const handleSaveButtonClickProfilePic = () => {
-    if (user.user) {
-      changeProfilePicture(user.user.uid, profilePicture)
-        .then(() => {
-          showSnackbar(
-            "Profilbild geändert",
-            "Du hast dein Profilbild erfolgreich geändert.",
-            "success",
-          );
-        })
-        .catch((error: FirebaseError) => {
-          const errorMessage = getAuthError(error.code) || error.message;
+    changeProfilePicture(user.user.uid, profilePicture)
+      .then(() => {
+        showSnackbar(
+          "Profilbild geändert",
+          "Du hast dein Profilbild erfolgreich geändert.",
+          "success",
+        );
+      })
+      .catch((error: FirebaseError) => {
+        const errorMessage = getAuthError(error.code) || error.message;
 
-          showSnackbar(
-            "Profilbild konnte nicht geändert werden",
-            errorMessage,
-            "error",
-          );
-        });
-    }
+        showSnackbar(
+          "Profilbild konnte nicht geändert werden",
+          errorMessage,
+          "error",
+        );
+      });
   };
 
   return (
