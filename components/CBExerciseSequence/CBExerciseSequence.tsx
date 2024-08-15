@@ -93,7 +93,6 @@ export const CBExerciseSequence = ({
             // Keys are necessary to re-render the component when the exercise changes
             key={castExercise.id}
             exercise={castExercise}
-            sequenceType={type}
             componentRef={componentRef}
           />
         ),
@@ -107,7 +106,6 @@ export const CBExerciseSequence = ({
           <CBMatchingGame
             key={castExercise.id}
             exercise={castExercise}
-            sequenceType={type}
             ref={componentRef}
           />
         ),

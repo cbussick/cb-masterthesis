@@ -127,10 +127,10 @@ const commonParentToChildEdgeProps: Partial<Edge> = {
 };
 
 export const CBFamilyTree = forwardRef(
-  ({ exercise, sequenceType }: CBFamilyTreeProps, ref): JSX.Element => {
+  ({ exercise }: CBFamilyTreeProps, ref): JSX.Element => {
     const theme = useTheme();
     const animationControls = useAnimationControls();
-    const { isCurrentExerciseFinished } = useCBExerciseSequence();
+    const { isCurrentExerciseFinished, type } = useCBExerciseSequence();
     const currentBreakpoint = useCurrentMuiBreakpoint();
     const { showSnackbar } = useCBExerciseSequenceSnackbar();
     const {
@@ -475,7 +475,7 @@ export const CBFamilyTree = forwardRef(
     ) => {
       showErrors(mistakes, isInheritanceCorrect);
 
-      if (sequenceType !== CBExerciseSequenceType.ExamSimulator) {
+      if (type !== CBExerciseSequenceType.ExamSimulator) {
         showSnackbar(
           "Fehler vorhanden",
           "Leider sind noch Fehler vorhanden. 😕 Überprüfe die rot umrandeten Textfelder.",
@@ -509,7 +509,7 @@ export const CBFamilyTree = forwardRef(
 
       return {
         isCorrect: false,
-        isFinished: sequenceType === CBExerciseSequenceType.ExamSimulator,
+        isFinished: type === CBExerciseSequenceType.ExamSimulator,
       };
     };
 
@@ -651,7 +651,7 @@ export const CBFamilyTree = forwardRef(
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: (t) =>
                         // eslint-disable-next-line no-nested-ternary
-                        sequenceType === CBExerciseSequenceType.ExamSimulator &&
+                        type === CBExerciseSequenceType.ExamSimulator &&
                         isCurrentExerciseFinished
                           ? isInheritanceMistake
                             ? `${t.palette.error.main} !important`

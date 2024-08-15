@@ -15,10 +15,10 @@ import { CBMatchingGameOption } from "./CBMatchingGameOption";
 import { CBMatchingGameSelect } from "./CBMatchingGameSelect/CBMatchingGameSelect";
 
 export const CBMatchingGame = forwardRef(
-  ({ exercise, sequenceType }: CBMatchingGameProps, ref): JSX.Element => {
+  ({ exercise }: CBMatchingGameProps, ref): JSX.Element => {
     const { image, highlightedComponents, correctSelection } = exercise;
 
-    const { isCurrentExerciseFinished } = useCBExerciseSequence();
+    const { isCurrentExerciseFinished, type } = useCBExerciseSequence();
     const { showSnackbar } = useCBExerciseSequenceSnackbar();
 
     const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([
@@ -57,7 +57,7 @@ export const CBMatchingGame = forwardRef(
     const onConfirm: ButtonProps["onClick"] = (): CBConfirmation => {
       const isFinished =
         selectedOptions.filter((o) => o === null).length === 0 ||
-        sequenceType === CBExerciseSequenceType.ExamSimulator;
+        type === CBExerciseSequenceType.ExamSimulator;
 
       const isCorrect =
         isFinished &&

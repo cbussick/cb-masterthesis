@@ -1,5 +1,4 @@
 import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
-import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
 
 export enum CBNodeType {
   FamilyTreeNode = "familyTreeNode",
@@ -8,5 +7,4 @@ export enum CBNodeType {
 
 export interface CBFamilyTreeProps {
   exercise: CBFamilyTreeExercise;
-  sequenceType: CBExerciseSequenceType;
 }

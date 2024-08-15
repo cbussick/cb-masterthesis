@@ -5,17 +5,12 @@ import { CBFamilyTreeWithProvidersProps } from "./CBFamilyTreeWithProvidersInter
 
 export const CBFamilyTreeWithProviders = ({
   exercise,
-  sequenceType,
   componentRef,
 }: CBFamilyTreeWithProvidersProps): JSX.Element => {
   return (
     <FamilyTreeProvider>
       <ReactFlowProvider>
-        <CBFamilyTree
-          exercise={exercise}
-          sequenceType={sequenceType}
-          ref={componentRef}
-        />
+        <CBFamilyTree exercise={exercise} ref={componentRef} />
       </ReactFlowProvider>
     </FamilyTreeProvider>
   );
