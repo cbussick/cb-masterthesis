@@ -122,7 +122,7 @@ export const CBExerciseSequence = ({
     );
   }
 
-  const sessionIsFinished =
+  const isSequenceFinished =
     currentExerciseIndex > uncompletedExercises.length - 1;
 
   return (
@@ -134,7 +134,7 @@ export const CBExerciseSequence = ({
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
           type={type}
-          sessionIsFinished={sessionIsFinished}
+          sessionIsFinished={isSequenceFinished}
           setCompletionTime={setCompletionTime}
           ref={timerRef}
         />
@@ -151,7 +151,7 @@ export const CBExerciseSequence = ({
               overflow: "auto",
             }}
           >
-            {sessionIsFinished ? (
+            {isSequenceFinished ? (
               <CBExerciseSequenceEndScreen
                 difficulty={difficulty}
                 type={type}
@@ -162,18 +162,20 @@ export const CBExerciseSequence = ({
             )}
           </Stack>
 
-          <CBExerciseSequenceBottomBar
-            sequenceType={type}
-            uncompletedExercises={uncompletedExercises}
-            onMistake={onMistake}
-            onCompleteExercise={onCompleteExercise}
-            onSequenceComplete={onSequenceComplete}
-            difficulty={difficulty}
-            onCompleteHref={onCompleteHref}
-            onCancel={onCancel}
-            componentRef={componentRef}
-            timerRef={timerRef}
-          />
+          {!isSequenceFinished && (
+            <CBExerciseSequenceBottomBar
+              sequenceType={type}
+              uncompletedExercises={uncompletedExercises}
+              onMistake={onMistake}
+              onCompleteExercise={onCompleteExercise}
+              onSequenceComplete={onSequenceComplete}
+              difficulty={difficulty}
+              onCompleteHref={onCompleteHref}
+              onCancel={onCancel}
+              componentRef={componentRef}
+              timerRef={timerRef}
+            />
+          )}
         </Stack>
       </Stack>
 

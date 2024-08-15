@@ -46,7 +46,6 @@ export const CBExerciseSequenceBottomBar = ({
   const user = useUser();
   const { startConfetti } = useConfetti();
   const { showSnackbar, setOpen } = useCBExerciseSequenceSnackbar();
-
   const {
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
@@ -61,10 +60,6 @@ export const CBExerciseSequenceBottomBar = ({
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
-
-  if (!currentExercise) {
-    return null;
-  }
 
   const currentExerciseType = currentExercise?.type;
 
