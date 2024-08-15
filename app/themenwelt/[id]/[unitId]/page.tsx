@@ -157,7 +157,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
               onCompleteExercise={(parameters: {
                 exerciseId: string;
                 isCorrect: boolean;
-              }): void => {
+              }) => {
                 if (user?.user) {
                   markExerciseAsCompleted(
                     user.user.uid,
