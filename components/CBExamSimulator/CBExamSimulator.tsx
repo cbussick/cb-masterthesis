@@ -116,7 +116,7 @@ export const CBExamSimulator = ({
   const examSimulatorSequenceComponent = useMemo(
     () => (
       <CBExamSimulatorSequence
-        originalExercises={originalExercises}
+        exercises={originalExercises}
         setExercises={setExercises}
         onSequenceComplete={onSequenceComplete}
         setCompletionTime={setCompletionTime}

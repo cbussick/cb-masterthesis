@@ -84,9 +84,7 @@ export default function FreePracticeSequencePage({
     notFound();
   }
 
-  const [originalExercises, setOriginalExercises] = useState<
-    CBExerciseWithMetaData[]
-  >([]);
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
@@ -99,7 +97,7 @@ export default function FreePracticeSequencePage({
       : (params.typeId as CBExerciseType);
 
   useEffect(() => {
-    let exercises: CBExerciseWithMetaData[] = [];
+    let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
 
     if (exerciseType) {
       if (isFirstRender) {
@@ -112,26 +110,26 @@ export default function FreePracticeSequencePage({
               isCompleted: false,
             };
 
-            setOriginalExercises([exerciseWithMetaData]);
+            setExercises([exerciseWithMetaData]);
           });
         } else {
-          exercises = exercisesMap[exerciseType]
+          exercisesWithMetaData = exercisesMap[exerciseType]
             .filter((e) => e.topic === topic)
             .map((ex) => ({ ...ex, isCompleted: false }));
 
           const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
 
           const amountOfExercises =
-            exercises.length < desiredAmountOfExercises
-              ? exercises.length
+            exercisesWithMetaData.length < desiredAmountOfExercises
+              ? exercisesWithMetaData.length
               : desiredAmountOfExercises;
 
           const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
             amountOfExercises,
-            exercises,
+            exercisesWithMetaData,
           );
 
-          setOriginalExercises(randomExercises);
+          setExercises(randomExercises);
         }
       }
     } else if (isFirstRender) {
@@ -149,18 +147,19 @@ export default function FreePracticeSequencePage({
               ...exercise,
               isCompleted: false,
             };
-            exercises.push(exerciseWithMetaData);
+            exercisesWithMetaData.push(exerciseWithMetaData);
           }
         });
 
-      const amountOfExercises = exercises.length < 5 ? exercises.length : 5;
+      const amountOfExercises =
+        exercisesWithMetaData.length < 5 ? exercisesWithMetaData.length : 5;
 
       const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
         amountOfExercises,
-        exercises,
+        exercisesWithMetaData,
       );
 
-      setOriginalExercises(randomExercises);
+      setExercises(randomExercises);
     }
   }, [exerciseType, isFirstRender, topic, user]);
 
@@ -182,10 +181,12 @@ export default function FreePracticeSequencePage({
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
       if (user?.user) {
+        const { uid } = user.user;
+
         const solvedExercisesToAdd = 1;
-        addSolvedExerciseToUser(user.user.uid, solvedExercisesToAdd);
+        addSolvedExerciseToUser(uid, solvedExercisesToAdd);
         const pointsToAdd = 1;
-        addPointsToUser(user.user.uid, pointsToAdd);
+        addPointsToUser(uid, pointsToAdd);
 
         // If the exercise type is not set, the user is retrying mistakes
         if (!exerciseType) {
@@ -194,7 +195,7 @@ export default function FreePracticeSequencePage({
           );
 
           if (exercise) {
-            removeExercisesFromMistakes(user.user.uid, [exercise]);
+            removeExercisesFromMistakes(uid, [exercise]);
           }
         }
       }
@@ -221,7 +222,7 @@ export default function FreePracticeSequencePage({
 
   return (
     <CBFreePracticeExerciseSequence
-      exercises={originalExercises}
+      exercises={exercises}
       topic={topic}
       exerciseType={exerciseType}
       onMistake={onMistake}

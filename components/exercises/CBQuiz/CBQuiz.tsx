@@ -39,7 +39,6 @@ export const CBQuiz = ({
 
       if (isCorrect && user) {
         onCompleteExercise({ exerciseId: exercise.id, isCorrect });
-
         setExercises((previousExercises) => {
           const newExercises = previousExercises.map((ex) => {
             if (ex.id === exercise.id) {

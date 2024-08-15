@@ -21,6 +21,7 @@ import { markExerciseAsCompleted } from "@/firebase-client/markExerciseAsComplet
 import { unlockGlossaryEntries } from "@/firebase-client/unlockGlossaryEntries";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
+import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { CBRoute } from "@/helpers/routes";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
@@ -37,9 +38,7 @@ interface ExercisePageParams {
 export default function ExercisePage({ params }: ExercisePageParams) {
   const user = useUser();
 
-  const [exercises, setExercises] = useState<
-    CBExerciseWithMetaData[] | undefined
-  >(undefined);
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
@@ -47,13 +46,22 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
-  const topicId = params.id as CBTopic;
+  const topicId = getEnumValueByStringValue(CBTopic, params.id);
+
+  if (!topicId) {
+    notFound();
+  }
+
   const topicData = getEnumRecordObjectValueByStringKey(
     topicWorldTopics,
     topicId,
   );
 
-  const unit = topicData?.units.find(
+  if (!topicData) {
+    notFound();
+  }
+
+  const unit = topicData.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
@@ -138,11 +146,11 @@ export default function ExercisePage({ params }: ExercisePageParams) {
               previousLinks={[
                 { label: "Themenwelt", href: CBRoute.Themenwelt },
                 {
-                  label: topicData?.topicData.name || "Thema",
+                  label: topicData.topicData.name,
                   href: onCompleteHref,
                 },
               ]}
-              currentLabel={unit.name || "Einheit"}
+              currentLabel={unit.name}
             />
           }
         />

@@ -42,7 +42,7 @@ export const CBFreePracticeExerciseSequence = ({
               previousLinks={[
                 { label: "Freie Übung", href: CBRoute.FreieUebung },
                 {
-                  label: topicData.name || "Thema",
+                  label: topicData.name,
                   href: onCompleteHref,
                 },
               ]}
