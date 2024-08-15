@@ -51,7 +51,7 @@ export const CBFreePracticeExerciseSequence = ({
           subTitle={<Typography variant="h2">{subtitle}</Typography>}
         />
 
-        <CBExerciseSequenceProvider>
+        <CBExerciseSequenceProvider type={CBExerciseSequenceType.FreePractice}>
           <CBExerciseSequenceWrapper
             type={
               exerciseType

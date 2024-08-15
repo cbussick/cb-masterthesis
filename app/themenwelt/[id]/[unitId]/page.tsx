@@ -149,7 +149,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
         {/* eslint-disable-next-line no-nested-ternary */}
         {hasAccess ? (
-          <CBExerciseSequenceProvider>
+          <CBExerciseSequenceProvider type={CBExerciseSequenceType.TopicWorld}>
             <CBExerciseSequenceWrapper
               type={CBExerciseSequenceType.TopicWorld}
               exercises={exercises}

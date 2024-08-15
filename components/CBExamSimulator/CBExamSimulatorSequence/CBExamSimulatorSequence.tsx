@@ -13,7 +13,7 @@ export const CBExamSimulatorSequence = ({
   onCancel,
 }: CBExamSimulatorSequenceProps): JSX.Element => {
   return (
-    <CBExerciseSequenceProvider>
+    <CBExerciseSequenceProvider type={CBExerciseSequenceType.ExamSimulator}>
       <CBExerciseSequenceWrapper
         type={CBExerciseSequenceType.ExamSimulator}
         exercises={originalExercises}
