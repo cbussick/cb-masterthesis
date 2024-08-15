@@ -515,7 +515,7 @@ export const CBFamilyTree = forwardRef(
       } else {
         if (isFinished) {
           setCurrentExerciseFinished(true);
-          
+
           if (onMistake) {
             onMistake({
               id: exercise.id,
