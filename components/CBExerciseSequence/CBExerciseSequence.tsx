@@ -1,12 +1,15 @@
 "use client";
 
+import {
+  CBExercise,
+  CBExerciseWithMetaData,
+} from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
 import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise";
 import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExercise } from "@/data/exercises/CBSwiperExercise";
-import { getInformationForExercise } from "@/helpers/getInformationForExercise";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Stack } from "@mui/material";
 import { useRef } from "react";
@@ -43,12 +46,16 @@ export const CBExerciseSequence = ({
     return null;
   }
 
-  const uncompletedExercises = originalExercises.filter(
-    (exercise) => !exercise.isCompleted,
-  );
-
-  const completedExercises = originalExercises.filter(
-    (exercise) => exercise.isCompleted,
+  const [completedExercises, uncompletedExercises] = originalExercises.reduce(
+    (acc, exercise) => {
+      if (exercise.isCompleted) {
+        acc[0].push(exercise);
+      } else {
+        acc[1].push(exercise);
+      }
+      return acc;
+    },
+    [[], []] as [CBExerciseWithMetaData[], CBExerciseWithMetaData[]],
   );
 
   const currentExercise =
@@ -56,80 +63,111 @@ export const CBExerciseSequence = ({
       ? uncompletedExercises[currentExerciseIndex]
       : undefined;
 
-  const exerciseInformationToRender =
-    getInformationForExercise(currentExercise);
-
-  let componentToRender: JSX.Element | null = null;
-  if (currentExercise?.type === CBExerciseType.FamilyTree) {
-    const castExercise = currentExercise as CBFamilyTreeExercise;
-
-    componentToRender = (
-      <CBFamilyTreeWithProviders
-        // Keys are necessary to re-render the component when the exercise changes
-        key={castExercise.id}
-        exercise={castExercise}
-        sequenceType={type}
-        componentRef={componentRef}
-      />
-    );
-  } else if (currentExercise?.type === CBExerciseType.MatchingGame) {
-    const castExercise = currentExercise as CBMatchingGameExercise;
-
-    componentToRender = (
-      <CBMatchingGame
-        key={castExercise.id}
-        exercise={castExercise}
-        sequenceType={type}
-        ref={componentRef}
-      />
-    );
-  } else if (
-    currentExercise?.type === CBExerciseType.Quiz ||
-    currentExercise?.type === CBExerciseType.AIQuiz
-  ) {
-    const castExercise = currentExercise as unknown as CBQuizExercise;
-
-    componentToRender = (
-      <CBQuiz
-        key={castExercise.id}
-        exercise={castExercise}
-        onMistake={onMistake}
-        onCompleteExercise={onCompleteExercise}
-      />
-    );
-  } else if (currentExercise?.type === CBExerciseType.Swiper) {
-    const castExercise = currentExercise as CBSwiperExercise;
-
-    componentToRender = (
-      <CBSwiper
-        key={castExercise.id}
-        exercise={castExercise}
-        onMistake={onMistake}
-        onCompleteExercise={onCompleteExercise}
-        difficulty={difficulty}
-      />
-    );
-  } else if (currentExercise?.type === CBExerciseType.FreeformQuestion) {
-    const castExercise = currentExercise as CBFreeformQuestionExercise;
-
-    componentToRender = (
-      <CBFreeformQuestion
-        key={castExercise.id}
-        exercise={castExercise}
-        onCompleteExercise={onCompleteExercise}
-        onMistake={onMistake}
-      />
-    );
-  }
-
   const isSequenceFinished =
     currentExerciseIndex > uncompletedExercises.length - 1;
+
+  const componentInformationMap: Record<
+    CBExerciseType,
+    (exercise: CBExercise) => { title: string; component: JSX.Element }
+  > = {
+    [CBExerciseType.Quiz]: (exercise) => {
+      const castExercise = exercise as CBQuizExercise;
+      return {
+        title: castExercise.question,
+        component: (
+          <CBQuiz
+            key={castExercise.id}
+            exercise={castExercise}
+            onMistake={onMistake}
+            onCompleteExercise={onCompleteExercise}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.FamilyTree]: (exercise) => {
+      const castExercise = exercise as CBFamilyTreeExercise;
+      return {
+        title: castExercise.description,
+        component: (
+          <CBFamilyTreeWithProviders
+            // Keys are necessary to re-render the component when the exercise changes
+            key={castExercise.id}
+            exercise={castExercise}
+            sequenceType={type}
+            componentRef={componentRef}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.MatchingGame]: (exercise) => {
+      const castExercise = exercise as CBMatchingGameExercise;
+      return {
+        title: castExercise.title,
+        component: (
+          <CBMatchingGame
+            key={castExercise.id}
+            exercise={castExercise}
+            sequenceType={type}
+            ref={componentRef}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.Swiper]: (exercise) => {
+      const castExercise = exercise as CBSwiperExercise;
+
+      return {
+        title: "Ordne die Zellorganellen den richtigen Zelltypen zu.",
+        component: (
+          <CBSwiper
+            key={castExercise.id}
+            exercise={castExercise}
+            onMistake={onMistake}
+            onCompleteExercise={onCompleteExercise}
+            difficulty={difficulty}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.FreeformQuestion]: (exercise) => {
+      const castExercise = exercise as CBFreeformQuestionExercise;
+      return {
+        title: castExercise.question,
+        component: (
+          <CBFreeformQuestion
+            key={castExercise.id}
+            exercise={castExercise}
+            onCompleteExercise={onCompleteExercise}
+            onMistake={onMistake}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.AIQuiz]: (exercise) => {
+      const castExercise = exercise as CBQuizExercise;
+      return {
+        title: castExercise.question,
+        component: (
+          <CBQuiz
+            key={castExercise.id}
+            exercise={castExercise}
+            onMistake={onMistake}
+            onCompleteExercise={onCompleteExercise}
+          />
+        ),
+      };
+    },
+  };
+
+  const componentInformation =
+    currentExercise?.type &&
+    componentInformationMap[currentExercise?.type](currentExercise);
 
   return (
     <>
       <Stack spacing={3} sx={{ minHeight: 0, flexGrow: 1 }}>
         <CBExerciseSequenceTopBar
-          title={exerciseInformationToRender?.title || ""}
+          title={componentInformation?.title || ""}
           currentExerciseIndex={currentExerciseIndex}
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
@@ -158,7 +196,7 @@ export const CBExerciseSequence = ({
                 onCompleteHref={onCompleteHref}
               />
             ) : (
-              componentToRender
+              componentInformation?.component
             )}
           </Stack>
 
