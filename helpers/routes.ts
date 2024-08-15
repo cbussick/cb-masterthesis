@@ -49,20 +49,21 @@ export const routeMap: Record<CBRoute, CBRouteData> = {
   [CBRoute.Glossar]: {
     route: CBRoute.Glossar,
     title: "Glossar",
-    subtitle: "Hier kannst du alle wichtigen Begriffe der Genetik nachschlagen",
+    subtitle:
+      "Hier kannst du alle wichtigen Begriffe der Genetik nachschlagen.",
     forRoles: [CBUserRole.Student],
   },
   [CBRoute.Achievements]: {
     route: CBRoute.Achievements,
     title: "Achievements",
     subtitle:
-      "Entdecke eine Vielfalt von Achievements, von grundlegenden Meilensteinen bis hin zu anspruchsvollen Herausforderungen. ",
+      "Entdecke eine Vielfalt von Achievements, von grundlegenden Meilensteinen bis hin zu anspruchsvollen Herausforderungen.",
     forRoles: [CBUserRole.Student],
   },
   [CBRoute.Einstellungen]: {
     route: CBRoute.Einstellungen,
     title: "Einstellungen",
-    subtitle: "Hier siehst du deine Einstellungen der App",
+    subtitle: "Hier siehst du deine Einstellungen der App.",
     forRoles: [CBUserRole.Student, CBUserRole.Teacher, CBUserRole.Admin],
   },
 };
