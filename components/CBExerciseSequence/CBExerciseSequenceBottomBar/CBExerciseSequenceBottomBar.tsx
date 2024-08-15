@@ -57,9 +57,8 @@ export const CBExerciseSequenceBottomBar = ({
     setExercises,
   } = useCBExerciseSequence();
 
-  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
-    CBAPIRequestState.Idle,
-  );
+  const [hintAPIRequestState, setHintAPIRequestState] =
+    useState<CBAPIRequestState>(CBAPIRequestState.Idle);
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
@@ -171,14 +170,14 @@ export const CBExerciseSequenceBottomBar = ({
 
   const onClickHint = () => {
     if ("question" in currentExercise) {
-      setAPIRequestState(CBAPIRequestState.Fetching);
+      setHintAPIRequestState(CBAPIRequestState.Fetching);
       getOpenAIDiNAsHintForQuestion(currentExercise.question)
         .then((response) => {
-          setAPIRequestState(CBAPIRequestState.Success);
+          setHintAPIRequestState(CBAPIRequestState.Success);
           setHint(response.hint);
         })
         .catch((error) => {
-          setAPIRequestState(CBAPIRequestState.Error);
+          setHintAPIRequestState(CBAPIRequestState.Error);
           showSnackbar(
             "Problem beim Erfragen eines Tipps",
             error.message,
@@ -210,10 +209,10 @@ export const CBExerciseSequenceBottomBar = ({
           <CBDinaHint
             onClick={onClickHint}
             hint={hint}
-            isLoading={apiRequestState === CBAPIRequestState.Fetching}
+            isLoading={hintAPIRequestState === CBAPIRequestState.Fetching}
             disabled={
-              apiRequestState === CBAPIRequestState.Fetching ||
-              apiRequestState === CBAPIRequestState.Error ||
+              hintAPIRequestState === CBAPIRequestState.Fetching ||
+              hintAPIRequestState === CBAPIRequestState.Error ||
               isCurrentExerciseFinished
             }
           />
