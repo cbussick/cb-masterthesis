@@ -2,8 +2,9 @@
 
 import { exercisesData } from "@/data/exercises/CBExercise";
 import { topics } from "@/data/topics";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { CBRoute } from "@/helpers/routes";
-import { Stack, Typography } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
 import { CBBreadcrumbs } from "../CBBreadcrumbs/CBBreadcrumbs";
 import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
 import { CBExerciseSequenceProvider } from "../CBExerciseSequence/CBExerciseSequenceProvider";
@@ -20,6 +21,7 @@ export const CBFreePracticeExerciseSequence = ({
   onCompleteExercise,
   onSequenceComplete,
   setCompletionTime,
+  apiRequestState,
 }: CBFreePracticeExerciseSequenceProps): JSX.Element => {
   const topicData = topics[topic];
   const subtitle = exerciseType
@@ -51,21 +53,27 @@ export const CBFreePracticeExerciseSequence = ({
           subTitle={<Typography variant="h2">{subtitle}</Typography>}
         />
 
-        <CBExerciseSequenceProvider type={CBExerciseSequenceType.FreePractice}>
-          <CBExerciseSequenceWrapper
-            type={
-              exerciseType
-                ? CBExerciseSequenceType.FreePractice
-                : CBExerciseSequenceType.RetryMistakes
-            }
-            exercises={exercises}
-            onMistake={onMistake}
-            onCompleteHref={onCompleteHref}
-            onCompleteExercise={onCompleteExercise}
-            onSequenceComplete={onSequenceComplete}
-            setCompletionTime={setCompletionTime}
-          />
-        </CBExerciseSequenceProvider>
+        {apiRequestState === CBAPIRequestState.Fetching ? (
+          <CircularProgress />
+        ) : (
+          <CBExerciseSequenceProvider
+            type={CBExerciseSequenceType.FreePractice}
+          >
+            <CBExerciseSequenceWrapper
+              type={
+                exerciseType
+                  ? CBExerciseSequenceType.FreePractice
+                  : CBExerciseSequenceType.RetryMistakes
+              }
+              exercises={exercises}
+              onMistake={onMistake}
+              onCompleteHref={onCompleteHref}
+              onCompleteExercise={onCompleteExercise}
+              onSequenceComplete={onSequenceComplete}
+              setCompletionTime={setCompletionTime}
+            />
+          </CBExerciseSequenceProvider>
+        )}
       </Stack>
     </CBContentWrapper>
   );

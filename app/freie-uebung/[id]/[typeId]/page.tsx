@@ -21,9 +21,11 @@ import { addPointsToUser } from "@/firebase-client/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUser";
 import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
 import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
 import { retryMistakesPathSegment } from "@/helpers/routes";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { notFound } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -83,8 +85,12 @@ export default function FreePracticeSequencePage({
   }
 
   const user = useUser();
+  const { showSnackbar } = useCBExerciseSequenceSnackbar();
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
@@ -122,14 +128,27 @@ export default function FreePracticeSequencePage({
 
       setExercises(randomExercises);
     } else if (exerciseType === CBExerciseType.AIQuiz) {
-      getOpenAIQuizExercise(user.user.uid, topic).then((response) => {
-        const exerciseWithMetaData: CBExerciseWithMetaData = {
-          ...response,
-          isCompleted: false,
-        };
+      // TODO: Always fetches twice because of strict mode. Just leave it like this?
+      console.log("here");
+      setAPIRequestState(CBAPIRequestState.Fetching);
+      getOpenAIQuizExercise(user.user.uid, topic)
+        .then((response) => {
+          const exerciseWithMetaData: CBExerciseWithMetaData = {
+            ...response,
+            isCompleted: false,
+          };
 
-        setExercises([exerciseWithMetaData]);
-      });
+          setExercises([exerciseWithMetaData]);
+          setAPIRequestState(CBAPIRequestState.Success);
+        })
+        .catch((error) => {
+          setAPIRequestState(CBAPIRequestState.Error);
+          showSnackbar(
+            "Problem beim Generieren der Aufgabe",
+            error.message,
+            "error",
+          );
+        });
     } else if (exerciseType) {
       exercisesWithMetaData = exercisesMap[exerciseType]
         .filter((e) => e.topic === topic)
@@ -153,7 +172,7 @@ export default function FreePracticeSequencePage({
     // a new selection of random exercises, while the user is still inside the sequence.
     // This would cause glitches for the user.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseType, isRetryingMistakes, topic]);
+  }, [exerciseType, isRetryingMistakes, showSnackbar, topic]);
 
   const onMistake = useCallback(
     (exercise: CBMistakeExercise) => {
@@ -216,9 +235,11 @@ export default function FreePracticeSequencePage({
         onCompleteExercise={onCompleteExercise}
         onSequenceComplete={onSequenceComplete}
         setCompletionTime={setCompletionTime}
+        apiRequestState={apiRequestState}
       />
     ),
     [
+      apiRequestState,
       exerciseType,
       exercises,
       onCompleteExercise,
