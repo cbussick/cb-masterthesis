@@ -25,7 +25,7 @@ import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
 import { retryMistakesPathSegment } from "@/helpers/routes";
 import { notFound } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 interface FreePracticeSequenceParams {
   params: {
@@ -85,58 +85,19 @@ export default function FreePracticeSequencePage({
   const user = useUser();
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
-  const [isFirstRender, setFirstRender] = useState<boolean>(true);
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
   });
 
-  const exerciseType =
-    params.typeId === retryMistakesPathSegment
-      ? null
-      : (params.typeId as CBExerciseType);
+  const isRetryingMistakes = params.typeId === retryMistakesPathSegment;
+
+  const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
   useEffect(() => {
     let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
 
-    if (exerciseType) {
-      if (isFirstRender) {
-        setFirstRender(false);
-
-        if (exerciseType === CBExerciseType.AIQuiz) {
-          getOpenAIQuizExercise(user.user.uid, topic).then((response) => {
-            const exerciseWithMetaData: CBExerciseWithMetaData = {
-              ...response,
-              isCompleted: false,
-            };
-
-            setExercises([exerciseWithMetaData]);
-          });
-        } else {
-          exercisesWithMetaData = exercisesMap[exerciseType]
-            .filter((e) => e.topic === topic)
-            .map((ex) => ({ ...ex, isCompleted: false }));
-
-          const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
-
-          const amountOfExercises =
-            exercisesWithMetaData.length < desiredAmountOfExercises
-              ? exercisesWithMetaData.length
-              : desiredAmountOfExercises;
-
-          const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
-            amountOfExercises,
-            exercisesWithMetaData,
-          );
-
-          setExercises(randomExercises);
-        }
-      }
-    } else if (isFirstRender) {
-      // The user is retrying mistakes
-
-      setFirstRender(false);
-
+    if (isRetryingMistakes) {
       user.customData.mistakeExercises
         .filter((e) => e.topic === topic)
         .forEach((e) => {
@@ -160,8 +121,39 @@ export default function FreePracticeSequencePage({
       );
 
       setExercises(randomExercises);
+    } else if (exerciseType === CBExerciseType.AIQuiz) {
+      getOpenAIQuizExercise(user.user.uid, topic).then((response) => {
+        const exerciseWithMetaData: CBExerciseWithMetaData = {
+          ...response,
+          isCompleted: false,
+        };
+
+        setExercises([exerciseWithMetaData]);
+      });
+    } else if (exerciseType) {
+      exercisesWithMetaData = exercisesMap[exerciseType]
+        .filter((e) => e.topic === topic)
+        .map((ex) => ({ ...ex, isCompleted: false }));
+
+      const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
+
+      const amountOfExercises =
+        exercisesWithMetaData.length < desiredAmountOfExercises
+          ? exercisesWithMetaData.length
+          : desiredAmountOfExercises;
+
+      const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
+        amountOfExercises,
+        exercisesWithMetaData,
+      );
+
+      setExercises(randomExercises);
     }
-  }, [exerciseType, isFirstRender, topic, user]);
+    // Don't add anything from `user` to dependencies, because it would trigger
+    // a new selection of random exercises, while the user is still inside the sequence.
+    // This would cause glitches for the user.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exerciseType, isRetryingMistakes, topic]);
 
   const onMistake = useCallback(
     (exercise: CBMistakeExercise) => {
@@ -175,20 +167,18 @@ export default function FreePracticeSequencePage({
         addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
     },
-    [user],
+    [user.customData.mistakeExercises, user.user.uid],
   );
 
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
       const { uid } = user.user;
 
-      const solvedExercisesToAdd = 1;
-      addSolvedExerciseToUser(uid, solvedExercisesToAdd);
-      const pointsToAdd = 1;
-      addPointsToUser(uid, pointsToAdd);
+      addSolvedExerciseToUser(uid, 1);
+      addPointsToUser(uid, 1);
 
       // If the exercise type is not set, the user is retrying mistakes
-      if (!exerciseType) {
+      if (isRetryingMistakes) {
         const exercise = user.customData.mistakeExercises.find(
           (e) => e.id === parameters.exerciseId,
         );
@@ -198,7 +188,7 @@ export default function FreePracticeSequencePage({
         }
       }
     },
-    [exerciseType, user.customData.mistakeExercises, user.user],
+    [isRetryingMistakes, user.customData.mistakeExercises, user.user],
   );
 
   const onSequenceComplete = useCallback(
@@ -213,18 +203,28 @@ export default function FreePracticeSequencePage({
         );
       }
     },
-    [user],
+    [user.user.uid],
   );
 
-  return (
-    <CBFreePracticeExerciseSequence
-      exercises={exercises}
-      topic={topic}
-      exerciseType={exerciseType}
-      onMistake={onMistake}
-      onCompleteExercise={onCompleteExercise}
-      onSequenceComplete={onSequenceComplete}
-      setCompletionTime={setCompletionTime}
-    />
+  return useMemo(
+    () => (
+      <CBFreePracticeExerciseSequence
+        exercises={exercises}
+        topic={topic}
+        exerciseType={exerciseType || null}
+        onMistake={onMistake}
+        onCompleteExercise={onCompleteExercise}
+        onSequenceComplete={onSequenceComplete}
+        setCompletionTime={setCompletionTime}
+      />
+    ),
+    [
+      exerciseType,
+      exercises,
+      onCompleteExercise,
+      onMistake,
+      onSequenceComplete,
+      topic,
+    ],
   );
 }
