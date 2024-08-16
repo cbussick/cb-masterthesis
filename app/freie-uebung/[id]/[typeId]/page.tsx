@@ -76,13 +76,13 @@ const getRandomExercises = (
 export default function FreePracticeSequencePage({
   params,
 }: FreePracticeSequenceParams) {
-  const user = useUser();
-
   const topic = getEnumValueByStringValue(CBTopic, params.id);
 
   if (!topic) {
     notFound();
   }
+
+  const user = useUser();
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
