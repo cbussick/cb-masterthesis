@@ -57,14 +57,13 @@ export const CBFreePracticeExerciseSequence = ({
           <CircularProgress />
         ) : (
           <CBExerciseSequenceProvider
-            type={CBExerciseSequenceType.FreePractice}
+            type={
+              exerciseType
+                ? CBExerciseSequenceType.FreePractice
+                : CBExerciseSequenceType.RetryMistakes
+            }
           >
             <CBExerciseSequenceWrapper
-              type={
-                exerciseType
-                  ? CBExerciseSequenceType.FreePractice
-                  : CBExerciseSequenceType.RetryMistakes
-              }
               exercises={exercises}
               onMistake={onMistake}
               onCompleteHref={onCompleteHref}

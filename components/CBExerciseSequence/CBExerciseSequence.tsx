@@ -22,7 +22,6 @@ import { CBExerciseSequenceProps } from "./CBExerciseSequenceInterfaces";
 import { CBExerciseSequenceTopBar } from "./CBExerciseSequenceTopBar/CBExerciseSequenceTopBar";
 
 export const CBExerciseSequence = ({
-  type,
   originalExercises,
   currentExerciseIndex,
   onMistake,
@@ -173,7 +172,6 @@ export const CBExerciseSequence = ({
           currentExerciseIndex={currentExerciseIndex}
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
-          type={type}
           isSequenceFinished={isSequenceFinished}
           setCompletionTime={setCompletionTime}
           ref={timerRef}
@@ -194,7 +192,6 @@ export const CBExerciseSequence = ({
             {isSequenceFinished ? (
               <CBExerciseSequenceEndScreen
                 difficulty={difficulty}
-                type={type}
                 onCompleteHref={onCompleteHref}
               />
             ) : (
@@ -204,7 +201,6 @@ export const CBExerciseSequence = ({
 
           {!isSequenceFinished && (
             <CBExerciseSequenceBottomBar
-              sequenceType={type}
               uncompletedExercises={uncompletedExercises}
               onMistake={onMistake}
               onCompleteExercise={onCompleteExercise}

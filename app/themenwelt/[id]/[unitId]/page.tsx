@@ -153,7 +153,6 @@ export default function ExercisePage({ params }: ExercisePageParams) {
         {hasAccess ? (
           <CBExerciseSequenceProvider type={CBExerciseSequenceType.TopicWorld}>
             <CBExerciseSequenceWrapper
-              type={CBExerciseSequenceType.TopicWorld}
               exercises={exercises}
               onCompleteHref={onCompleteHref}
               onCompleteExercise={(parameters: {

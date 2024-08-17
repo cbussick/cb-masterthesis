@@ -11,7 +11,6 @@ export enum CBExerciseSequenceType {
 }
 
 export interface CBExerciseSequenceWrapperProps {
-  type: CBExerciseSequenceType;
   exercises: CBExerciseWithMetaData[] | undefined;
   onMistake?: (exercise: CBExerciseWithMetaData) => void;
   onCompleteHref?: string;

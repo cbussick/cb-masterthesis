@@ -15,7 +15,6 @@ export const CBExamSimulatorSequence = ({
   return (
     <CBExerciseSequenceProvider type={CBExerciseSequenceType.ExamSimulator}>
       <CBExerciseSequenceWrapper
-        type={CBExerciseSequenceType.ExamSimulator}
         exercises={exercises}
         onCompleteExercise={(params: {
           exerciseId: string;

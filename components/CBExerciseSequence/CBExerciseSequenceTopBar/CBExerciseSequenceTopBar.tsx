@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 import { CBExerciseTimer } from "../../CBExerciseTimer/CBExerciseTimer";
 import { CBProgressBar } from "../../CBProgressBar/CBProgressBar";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
+import { useCBExerciseSequence } from "../useCBExerciseSequenceProvider";
 import { CBExerciseSequenceTopBarProps } from "./CBExerciseSequenceTopBarInterfaces";
 
 export const CBExerciseSequenceTopBar = forwardRef(
@@ -14,12 +15,13 @@ export const CBExerciseSequenceTopBar = forwardRef(
       currentExerciseIndex,
       completedExercisesAmount,
       totalExercisesAmount,
-      type,
       isSequenceFinished,
       setCompletionTime,
     }: CBExerciseSequenceTopBarProps,
     ref,
   ): JSX.Element => {
+    const { type } = useCBExerciseSequence();
+
     const currentExerciseNumber = currentExerciseIndex + 1;
     const showProgressBar = !isSequenceFinished;
 

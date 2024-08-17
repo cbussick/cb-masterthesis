@@ -31,10 +31,9 @@ const difficultyMap: Record<
 
 export const CBExerciseSequenceEndScreen = ({
   difficulty,
-  type,
   onCompleteHref,
 }: CBExerciseSequenceEndScreenProps): JSX.Element => {
-  const { exercises } = useCBExerciseSequence();
+  const { exercises, type } = useCBExerciseSequence();
 
   useEffect(() => {
     playResultsSound();

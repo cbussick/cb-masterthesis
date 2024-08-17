@@ -6,7 +6,6 @@ import { CBExerciseSequenceWrapperProps } from "./CBExerciseSequenceWrapperInter
 import { useCBExerciseSequence } from "./useCBExerciseSequenceProvider";
 
 export const CBExerciseSequenceWrapper = ({
-  type,
   exercises: originalExercises,
   onMistake,
   onCompleteHref,
@@ -27,7 +26,6 @@ export const CBExerciseSequenceWrapper = ({
       originalExercises ? (
         <CBExerciseSequenceSnackbarProvider>
           <CBExerciseSequence
-            type={type}
             originalExercises={originalExercises}
             currentExerciseIndex={currentExerciseIndex}
             onMistake={onMistake}
@@ -52,7 +50,6 @@ export const CBExerciseSequenceWrapper = ({
       onSequenceComplete,
       originalExercises,
       setCompletionTime,
-      type,
     ],
   );
 };
