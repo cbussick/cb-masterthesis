@@ -1,6 +1,5 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { Dispatch, SetStateAction } from "react";
 import { CBTime } from "../CBExerciseTimer/CBExerciseTimerInterfaces";
 
@@ -14,7 +13,7 @@ export enum CBExerciseSequenceType {
 export interface CBExerciseSequenceWrapperProps {
   type: CBExerciseSequenceType;
   exercises: CBExerciseWithMetaData[] | undefined;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
   onCompleteHref?: string;
   onCompleteExercise: (params: any) => void;
   onSequenceComplete?: (params: any) => void;

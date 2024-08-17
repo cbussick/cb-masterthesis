@@ -1,8 +1,8 @@
-import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
 
 export interface CBMatchingGameProps {
-  exercise: CBMatchingGameExercise;
+  exercise: CBMatchingGameExerciseWithMetaData;
   onCompleteExercise: (params: any) => void;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
 }

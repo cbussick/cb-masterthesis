@@ -1,10 +1,10 @@
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
-import { CBSwiperExercise } from "@/data/exercises/CBSwiperExercise";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
 
 export interface CBSwiperProps {
-  exercise: CBSwiperExercise;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  exercise: CBSwiperExerciseWithMetaData;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
   onCompleteExercise: (params: any) => void;
   difficulty?: CBExerciseDifficulty;
 }

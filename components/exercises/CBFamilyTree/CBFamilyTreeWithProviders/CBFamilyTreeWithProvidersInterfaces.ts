@@ -1,10 +1,10 @@
-import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { CBFamilyTreeExerciseWithMetaData } from "@/data/exercises/CBFamilyTreeExercise";
 import { MutableRefObject } from "react";
 
 export interface CBFamilyTreeWithProvidersProps {
-  exercise: CBFamilyTreeExercise;
+  exercise: CBFamilyTreeExerciseWithMetaData;
   onCompleteExercise: (params: any) => void;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
   componentRef: MutableRefObject<undefined>;
 }

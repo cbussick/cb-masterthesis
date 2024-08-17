@@ -42,6 +42,10 @@ export interface CBFamilyTreeExercise extends CBExerciseWithTypeAndTopic {
   description: string;
 }
 
+export type CBFamilyTreeExerciseWithMetaData = CBFamilyTreeExercise & {
+  isCompleted: boolean;
+};
+
 export const familyTreeExercises: CBFamilyTreeExercise[] = [
   {
     id: "family-tree-1",

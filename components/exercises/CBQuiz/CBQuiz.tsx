@@ -54,21 +54,14 @@ export const CBQuiz = ({
         playCorrectSound();
       } else {
         if (onMistake) {
-          onMistake({
-            id: exercise.id,
-            topic: exercise.topic,
-            type: exercise.type,
-          });
+          onMistake(exercise);
         }
 
         playIncorrectSound();
       }
     },
     [
-      exercise.correctAnswer,
-      exercise.id,
-      exercise.topic,
-      exercise.type,
+      exercise,
       onCompleteExercise,
       onMistake,
       setCurrentExerciseFinished,

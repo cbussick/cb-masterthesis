@@ -1,15 +1,12 @@
 "use client";
 
-import {
-  CBExercise,
-  CBExerciseWithMetaData,
-} from "@/data/exercises/CBExercise";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
-import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
-import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise";
-import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
-import { CBSwiperExercise } from "@/data/exercises/CBSwiperExercise";
+import { CBFamilyTreeExerciseWithMetaData } from "@/data/exercises/CBFamilyTreeExercise";
+import { CBFreeformQuestionExerciseWithMetaData } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
+import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
+import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Stack } from "@mui/material";
 import { useRef } from "react";
@@ -68,10 +65,13 @@ export const CBExerciseSequence = ({
 
   const componentInformationMap: Record<
     CBExerciseType,
-    (exercise: CBExercise) => { title: string; component: JSX.Element }
+    (exercise: CBExerciseWithMetaData) => {
+      title: string;
+      component: JSX.Element;
+    }
   > = {
     [CBExerciseType.Quiz]: (exercise) => {
-      const castExercise = exercise as CBQuizExercise;
+      const castExercise = exercise as CBQuizExerciseWithMetaData;
       return {
         title: castExercise.question,
         component: (
@@ -85,7 +85,7 @@ export const CBExerciseSequence = ({
       };
     },
     [CBExerciseType.FamilyTree]: (exercise) => {
-      const castExercise = exercise as CBFamilyTreeExercise;
+      const castExercise = exercise as CBFamilyTreeExerciseWithMetaData;
       return {
         title: castExercise.description,
         component: (
@@ -101,7 +101,7 @@ export const CBExerciseSequence = ({
       };
     },
     [CBExerciseType.MatchingGame]: (exercise) => {
-      const castExercise = exercise as CBMatchingGameExercise;
+      const castExercise = exercise as CBMatchingGameExerciseWithMetaData;
       return {
         title: castExercise.title,
         component: (
@@ -116,7 +116,7 @@ export const CBExerciseSequence = ({
       };
     },
     [CBExerciseType.Swiper]: (exercise) => {
-      const castExercise = exercise as CBSwiperExercise;
+      const castExercise = exercise as CBSwiperExerciseWithMetaData;
 
       return {
         title: "Ordne die Zellorganellen den richtigen Zelltypen zu.",
@@ -132,7 +132,7 @@ export const CBExerciseSequence = ({
       };
     },
     [CBExerciseType.FreeformQuestion]: (exercise) => {
-      const castExercise = exercise as CBFreeformQuestionExercise;
+      const castExercise = exercise as CBFreeformQuestionExerciseWithMetaData;
       return {
         title: castExercise.question,
         component: (
@@ -146,7 +146,7 @@ export const CBExerciseSequence = ({
       };
     },
     [CBExerciseType.AIQuiz]: (exercise) => {
-      const castExercise = exercise as CBQuizExercise;
+      const castExercise = exercise as CBQuizExerciseWithMetaData;
       return {
         title: castExercise.question,
         component: (

@@ -8,6 +8,9 @@ export interface CBFreeformQuestionExercise extends CBExerciseWithTypeAndTopic {
   hint: string;
 }
 
+export type CBFreeformQuestionExerciseWithMetaData =
+  CBFreeformQuestionExercise & { isCompleted: boolean };
+
 export const freeformQuestionExercises: CBFreeformQuestionExercise[] = [
   {
     id: "freeform-1",

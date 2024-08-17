@@ -14,6 +14,10 @@ export interface CBQuizExercise extends CBExerciseWithTypeAndTopic {
   type: CBExerciseType.Quiz;
 }
 
+export type CBQuizExerciseWithMetaData = CBQuizExercise & {
+  isCompleted: boolean;
+};
+
 export const quizExercises: CBQuizExercise[] = [
   {
     id: "zelle-grundlagen-2",

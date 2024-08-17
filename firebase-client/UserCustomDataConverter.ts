@@ -1,3 +1,4 @@
+import { CBExercise } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBTopic } from "@/data/topics";
 import {
@@ -27,7 +28,7 @@ export interface CBUserCustomData {
   role: CBUserRole;
   unlockedGlossaryEntryIDs: string[];
   profilePicture: string;
-  mistakeExercises: CBMistakeExercise[];
+  mistakeExercises: (CBMistakeExercise | CBExercise)[];
   trackedTime: CBTrackedTime[];
 }
 
