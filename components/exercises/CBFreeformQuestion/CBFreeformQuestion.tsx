@@ -63,11 +63,7 @@ export const CBFreeformQuestion = ({
           playCorrectSound();
         } else {
           if (onMistake) {
-            onMistake({
-              id: exercise.id,
-              topic: exercise.topic,
-              type: exercise.type,
-            });
+            onMistake(exercise);
           }
 
           playIncorrectSound();
@@ -85,10 +81,7 @@ export const CBFreeformQuestion = ({
       });
   }, [
     answer,
-    exercise.id,
-    exercise.question,
-    exercise.topic,
-    exercise.type,
+    exercise,
     onCompleteExercise,
     onMistake,
     setCurrentExerciseFinished,

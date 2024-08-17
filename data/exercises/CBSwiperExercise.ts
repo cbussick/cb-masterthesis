@@ -30,6 +30,10 @@ export interface CBSwiperExercise extends CBExerciseWithTypeAndTopic {
   hint: string;
 }
 
+export type CBSwiperExerciseWithMetaData = CBSwiperExercise & {
+  isCompleted: boolean;
+};
+
 export const swiperExercises: CBSwiperExercise[] = [
   {
     id: "swiper-1",

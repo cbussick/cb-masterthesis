@@ -15,11 +15,11 @@ import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { CBTopic } from "@/data/topics";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { addExercisesToMistakes } from "@/firebase-client/addExercisesToMistakes";
 import { addPointsToUser } from "@/firebase-client/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUser";
 import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
+import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
@@ -107,7 +107,12 @@ export default function FreePracticeSequencePage({
       user.customData.mistakeExercises
         .filter((e) => e.topic === topic)
         .forEach((e) => {
-          const exercise = exercisesMap[e.type].find((ex) => ex.id === e.id);
+          let exercise: CBExercise | undefined;
+          if (e.type === CBExerciseType.AIQuiz) {
+            exercise = e as CBExercise;
+          } else {
+            exercise = exercisesMap[e.type].find((ex) => ex.id === e.id);
+          }
 
           if (exercise) {
             const exerciseWithMetaData: CBExerciseWithMetaData = {
@@ -129,7 +134,6 @@ export default function FreePracticeSequencePage({
       setExercises(randomExercises);
     } else if (exerciseType === CBExerciseType.AIQuiz) {
       // TODO: Always fetches twice because of strict mode. Just leave it like this?
-      console.log("here");
       setAPIRequestState(CBAPIRequestState.Fetching);
       getOpenAIQuizExercise(user.user.uid, topic)
         .then((response) => {
@@ -175,14 +179,24 @@ export default function FreePracticeSequencePage({
   }, [exerciseType, isRetryingMistakes, showSnackbar, topic]);
 
   const onMistake = useCallback(
-    (exercise: CBMistakeExercise) => {
+    (exercise: CBExerciseWithMetaData) => {
       const isNotAlreadyInMistakes =
         user.customData.mistakeExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
       if (isNotAlreadyInMistakes) {
-        const mistakeExercisesToAdd = [exercise];
+        const mistakeExercisesToAdd: (CBExercise | CBMistakeExercise)[] = [];
+        if (exercise.type === CBExerciseType.AIQuiz) {
+          const { isCompleted, ...exerciseWithoutMetadata } = exercise;
+          mistakeExercisesToAdd.push(exerciseWithoutMetadata);
+        } else {
+          mistakeExercisesToAdd.push({
+            id: exercise.id,
+            topic: exercise.topic,
+            type: exercise.type,
+          });
+        }
         addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
     },

@@ -1,5 +1,5 @@
-import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { CBFamilyTreeExerciseWithMetaData } from "@/data/exercises/CBFamilyTreeExercise";
 
 export enum CBNodeType {
   FamilyTreeNode = "familyTreeNode",
@@ -7,7 +7,7 @@ export enum CBNodeType {
 }
 
 export interface CBFamilyTreeProps {
-  exercise: CBFamilyTreeExercise;
+  exercise: CBFamilyTreeExerciseWithMetaData;
   onCompleteExercise: (params: any) => void;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
 }

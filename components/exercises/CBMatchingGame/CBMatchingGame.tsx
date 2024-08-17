@@ -101,11 +101,7 @@ export const CBMatchingGame = forwardRef(
           playCorrectSound();
         } else {
           if (onMistake) {
-            onMistake({
-              id: exercise.id,
-              topic: exercise.topic,
-              type: exercise.type,
-            });
+            onMistake(exercise);
           }
 
           playIncorrectSound();

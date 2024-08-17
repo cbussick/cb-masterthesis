@@ -1,13 +1,12 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { MutableRefObject } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 
 export interface CBExerciseSequenceBottomBarProps {
   sequenceType: CBExerciseSequenceType;
   uncompletedExercises: CBExerciseWithMetaData[];
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
   onCompleteExercise: (params: any) => void;
   onSequenceComplete?: (params?: any) => void;
   difficulty?: CBExerciseDifficulty;

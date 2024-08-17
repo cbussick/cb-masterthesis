@@ -1,8 +1,8 @@
-import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
 
 export interface CBQuizProps {
-  exercise: CBQuizExercise;
-  onMistake?: (exercise: CBMistakeExercise) => void;
+  exercise: CBQuizExerciseWithMetaData;
+  onMistake?: (exercise: CBExerciseWithMetaData) => void;
   onCompleteExercise: (params: any) => void;
 }

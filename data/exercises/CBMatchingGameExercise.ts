@@ -18,6 +18,10 @@ export interface CBMatchingGameExercise extends CBExerciseWithTypeAndTopic {
   hint: string;
 }
 
+export type CBMatchingGameExerciseWithMetaData = CBMatchingGameExercise & {
+  isCompleted: boolean;
+};
+
 export const matchingGameExercises: CBMatchingGameExercise[] = [
   {
     id: "matching-game-1",

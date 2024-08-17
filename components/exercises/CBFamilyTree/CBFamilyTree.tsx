@@ -517,11 +517,7 @@ export const CBFamilyTree = forwardRef(
           setCurrentExerciseFinished(true);
 
           if (onMistake) {
-            onMistake({
-              id: exercise.id,
-              topic: exercise.topic,
-              type: exercise.type,
-            });
+            onMistake(exercise);
           }
         } else {
           showSnackbar(
