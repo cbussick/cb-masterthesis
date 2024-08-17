@@ -1,9 +1,10 @@
 import { CBFamilyTreeExercise } from "@/data/exercises/CBFamilyTreeExercise";
+import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { MutableRefObject } from "react";
-import { CBExerciseSequenceType } from "../../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
 
 export interface CBFamilyTreeWithProvidersProps {
   exercise: CBFamilyTreeExercise;
-  sequenceType: CBExerciseSequenceType;
+  onCompleteExercise: (params: any) => void;
+  onMistake?: (exercise: CBMistakeExercise) => void;
   componentRef: MutableRefObject<undefined>;
 }

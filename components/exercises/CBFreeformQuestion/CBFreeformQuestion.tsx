@@ -2,11 +2,11 @@
 
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
-import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
-import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Alert, Container, Stack, TextField, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
@@ -16,8 +16,7 @@ export const CBFreeformQuestion = ({
   onCompleteExercise,
   onMistake,
 }: CBFreeformQuestionProps): JSX.Element => {
-  const user = useUser();
-  const { showSnackbar } = useExerciseSequenceSnackbar();
+  const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const {
     setExercises,
     isCurrentExerciseFinished,
@@ -25,23 +24,26 @@ export const CBFreeformQuestion = ({
   } = useCBExerciseSequence();
 
   const [answer, setAnswer] = useState<string>("");
-  const [isFetchingResponse, setFetchingResponse] = useState<boolean>(false);
-  const [isError, setError] = useState<boolean>(false);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
   const [isTextAreaFocused, setTextAreaFocused] = useState<boolean>(false);
 
-  const disabled = isFetchingResponse || isCurrentExerciseFinished || isError;
+  const disabled =
+    apiRequestState === CBAPIRequestState.Fetching ||
+    apiRequestState === CBAPIRequestState.Error ||
+    isCurrentExerciseFinished;
 
   const onConfirm = useCallback(() => {
-    setFetchingResponse(true);
-
+    setAPIRequestState(CBAPIRequestState.Fetching);
     getOpenAIAnswerEvaluation(exercise.question, answer)
       .then((response) => {
-        setFetchingResponse(false);
+        setAPIRequestState(CBAPIRequestState.Success);
 
         setCurrentExerciseFinished(true);
         const isCorrect = response.evaluation;
 
-        if (isCorrect && user) {
+        if (isCorrect) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });
 
           setExercises((previousExercises) => {
@@ -78,8 +80,7 @@ export const CBFreeformQuestion = ({
         );
       })
       .catch((error) => {
-        setFetchingResponse(false);
-        setError(true);
+        setAPIRequestState(CBAPIRequestState.Error);
         showSnackbar("Problem bei der Auswertung", error.message, "error");
       });
   }, [
@@ -93,7 +94,6 @@ export const CBFreeformQuestion = ({
     setCurrentExerciseFinished,
     setExercises,
     showSnackbar,
-    user,
   ]);
 
   useEffect(() => {
@@ -152,7 +152,7 @@ export const CBFreeformQuestion = ({
 
           <CBLoadingButton
             onClick={onConfirm}
-            isLoading={isFetchingResponse}
+            isLoading={apiRequestState === CBAPIRequestState.Fetching}
             disabled={disabled}
             sx={{ width: 150 }}
           >

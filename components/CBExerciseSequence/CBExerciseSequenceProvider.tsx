@@ -13,17 +13,17 @@ import { CBExerciseSequenceType } from "./CBExerciseSequenceWrapperInterfaces";
 
 interface CBExerciseSequenceProviderProps {
   children: ReactNode;
+  type: CBExerciseSequenceType;
 }
 
 interface CBExerciseSequenceDataType {
   type: CBExerciseSequenceType;
-  setType: Dispatch<SetStateAction<CBExerciseSequenceType>>;
   exercises: CBExerciseWithMetaData[];
   setExercises: Dispatch<SetStateAction<CBExerciseWithMetaData[]>>;
   currentExerciseIndex: number;
   setCurrentExerciseIndex: Dispatch<SetStateAction<number>>;
   /**
-   * Whether the current exercise is finished. Not necessarily correctly.
+   * Whether the current exercise is finished. Can be correctly or incorrectly finished.
    */
   isCurrentExerciseFinished: boolean;
   setCurrentExerciseFinished: Dispatch<SetStateAction<boolean>>;
@@ -31,7 +31,6 @@ interface CBExerciseSequenceDataType {
 
 const defaultExerciseSequence: CBExerciseSequenceDataType = {
   type: CBExerciseSequenceType.FreePractice,
-  setType: () => {},
   exercises: [],
   setExercises: () => {},
   currentExerciseIndex: 0,
@@ -45,10 +44,8 @@ export const CBExerciseSequenceContext =
 
 export const CBExerciseSequenceProvider = ({
   children,
+  type,
 }: CBExerciseSequenceProviderProps) => {
-  const [type, setType] = useState<CBExerciseSequenceType>(
-    defaultExerciseSequence.type,
-  );
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(
     defaultExerciseSequence.currentExerciseIndex,
@@ -61,7 +58,6 @@ export const CBExerciseSequenceProvider = ({
       <CBExerciseSequenceContext.Provider
         value={{
           type,
-          setType,
           exercises,
           setExercises,
           currentExerciseIndex,

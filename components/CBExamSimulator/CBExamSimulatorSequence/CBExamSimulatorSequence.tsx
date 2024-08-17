@@ -6,17 +6,17 @@ import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSeque
 import { CBExamSimulatorSequenceProps } from "./CBExamSimulatorSequenceInterfaces";
 
 export const CBExamSimulatorSequence = ({
-  originalExercises,
+  exercises,
   setExercises,
   onSequenceComplete,
   setCompletionTime,
   onCancel,
 }: CBExamSimulatorSequenceProps): JSX.Element => {
   return (
-    <CBExerciseSequenceProvider>
+    <CBExerciseSequenceProvider type={CBExerciseSequenceType.ExamSimulator}>
       <CBExerciseSequenceWrapper
         type={CBExerciseSequenceType.ExamSimulator}
-        exercises={originalExercises}
+        exercises={exercises}
         onCompleteExercise={(params: {
           exerciseId: string;
           isCorrect: boolean;

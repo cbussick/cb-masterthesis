@@ -1,4 +1,4 @@
-import { CBDiNAsHintSchema } from "@/helpers/openai/schemas/CBDiNAsHint";
+import { CBFreeformQuestionEvaluationSchema } from "@/helpers/openai/schemas/CBFreeformQuestionEvaluation";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { zodResponseFormat } from "openai/helpers/zod.mjs";
@@ -6,18 +6,17 @@ import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// TODO: Eigentlich passt diese Beispiel-Antwort doch gar nicht mehr, weil sie nicht im JSON Format ist?
+// TODO: Eigentlich passt diese Beispiel-Antwort doch gar nicht mehr, weil sie nicht im JSON Format ist? Und das "Ja;;" und "Nein;;" ist wegen Structured Outputs nicht mehr richtig oder?
 //
 // Show the AI assistant what the conversation should look like
 const examples: ChatCompletionMessageParam[] = [
   {
     role: "user",
-    content: `Gib mir einen Tipp für die Frage "In welcher Zellorganelle findet die Mitose statt?".`,
+    content: `Ist die Antwort "Im Zellkern" eine korrekte Antwort auf die Frage "In welcher Zellorganelle findet die Mitose statt?" Beginne deine Antwort mit "Ja;;" oder "Nein;;". Gib danach nur den Grund an.`,
   },
   {
     role: "assistant",
-    content:
-      "Die Mitose ist ein entscheidender Schritt im Zellzyklus, der die Zellteilung ermöglicht. Überlege, in welchem Organell dieser Prozess stattfinden könnte, indem du dir überlegst, welche Strukturen und Umgebungen für eine präzise Zellteilung notwendig sind.",
+    content: "Ja;; Die Mitose findet im Zellkern statt.",
   },
 ];
 
@@ -38,7 +37,10 @@ export async function POST(req: Request) {
       },
     ],
     model: "gpt-4o-mini",
-    response_format: zodResponseFormat(CBDiNAsHintSchema, "dinas-hint"),
+    response_format: zodResponseFormat(
+      CBFreeformQuestionEvaluationSchema,
+      "freeform-question-evaluation",
+    ),
   });
 
   const response = completion.choices;

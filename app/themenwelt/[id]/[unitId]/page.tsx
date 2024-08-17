@@ -21,6 +21,7 @@ import { markExerciseAsCompleted } from "@/firebase-client/markExerciseAsComplet
 import { unlockGlossaryEntries } from "@/firebase-client/unlockGlossaryEntries";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
+import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { CBRoute } from "@/helpers/routes";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
@@ -37,9 +38,7 @@ interface ExercisePageParams {
 export default function ExercisePage({ params }: ExercisePageParams) {
   const user = useUser();
 
-  const [exercises, setExercises] = useState<
-    CBExerciseWithMetaData[] | undefined
-  >(undefined);
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
@@ -47,13 +46,22 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
-  const topicId = params.id as CBTopic;
+  const topicId = getEnumValueByStringValue(CBTopic, params.id);
+
+  if (!topicId) {
+    notFound();
+  }
+
   const topicData = getEnumRecordObjectValueByStringKey(
     topicWorldTopics,
     topicId,
   );
 
-  const unit = topicData?.units.find(
+  if (!topicData) {
+    notFound();
+  }
+
+  const unit = topicData.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
 
@@ -62,29 +70,25 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   }
 
   useEffect(() => {
-    if (user?.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        const userCompletedExercises =
-          progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
-          [];
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      const userCompletedExercises =
+        progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
+        [];
 
-        setExercises(
-          unit.exercises.map((exercise) => ({
-            ...exercise,
-            isCompleted: userCompletedExercises.includes(exercise.id),
-          })),
-        );
-      });
-    }
-  }, [params.unitId, topicId, unit, user]);
+      setExercises(
+        unit.exercises.map((exercise) => ({
+          ...exercise,
+          isCompleted: userCompletedExercises.includes(exercise.id),
+        })),
+      );
+    });
+  }, [params.unitId, topicId, unit.exercises, user.user.uid]);
 
   useEffect(() => {
-    if (user?.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user?.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
@@ -92,38 +96,36 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     allExercisesCompleted: boolean;
     difficulty: CBExerciseDifficulty;
   }) => {
-    if (user?.user) {
-      if (parameters.allExercisesCompleted && parameters.difficulty) {
-        if (parameters.difficulty === CBExerciseDifficulty.Hard) {
-          if (exercises) {
-            const unlockedGlossaryEntryIds: string[] = [];
-            const topic = exercises.at(0)?.topic;
+    if (parameters.allExercisesCompleted && parameters.difficulty) {
+      if (parameters.difficulty === CBExerciseDifficulty.Hard) {
+        if (exercises) {
+          const unlockedGlossaryEntryIds: string[] = [];
+          const topic = exercises.at(0)?.topic;
 
-            if (topic === CBTopic.Zelle) {
-              glossaryEntries.forEach((entry) => {
-                if (entry.topic === CBTopic.MitoseMeiose) {
-                  unlockedGlossaryEntryIds.push(entry.id);
-                }
-              });
-            } else if (topic === CBTopic.MitoseMeiose) {
-              glossaryEntries.forEach((entry) => {
-                if (entry.topic === CBTopic.AufbauDNA) {
-                  unlockedGlossaryEntryIds.push(entry.id);
-                }
-              });
-            }
+          if (topic === CBTopic.Zelle) {
+            glossaryEntries.forEach((entry) => {
+              if (entry.topic === CBTopic.MitoseMeiose) {
+                unlockedGlossaryEntryIds.push(entry.id);
+              }
+            });
+          } else if (topic === CBTopic.MitoseMeiose) {
+            glossaryEntries.forEach((entry) => {
+              if (entry.topic === CBTopic.AufbauDNA) {
+                unlockedGlossaryEntryIds.push(entry.id);
+              }
+            });
+          }
 
-            if (unlockGlossaryEntries.length > 0) {
-              unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
-            }
+          if (unlockGlossaryEntries.length > 0) {
+            unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
           }
         }
-
-        addPointsToUser(
-          user.user.uid,
-          pointsToAddForSequenceCompletion[parameters.difficulty],
-        );
       }
+
+      addPointsToUser(
+        user.user.uid,
+        pointsToAddForSequenceCompletion[parameters.difficulty],
+      );
     }
   };
   const hasAccess =
@@ -138,18 +140,18 @@ export default function ExercisePage({ params }: ExercisePageParams) {
               previousLinks={[
                 { label: "Themenwelt", href: CBRoute.Themenwelt },
                 {
-                  label: topicData?.topicData.name || "Thema",
+                  label: topicData.topicData.name,
                   href: onCompleteHref,
                 },
               ]}
-              currentLabel={unit.name || "Einheit"}
+              currentLabel={unit.name}
             />
           }
         />
 
         {/* eslint-disable-next-line no-nested-ternary */}
         {hasAccess ? (
-          <CBExerciseSequenceProvider>
+          <CBExerciseSequenceProvider type={CBExerciseSequenceType.TopicWorld}>
             <CBExerciseSequenceWrapper
               type={CBExerciseSequenceType.TopicWorld}
               exercises={exercises}
@@ -157,15 +159,13 @@ export default function ExercisePage({ params }: ExercisePageParams) {
               onCompleteExercise={(parameters: {
                 exerciseId: string;
                 isCorrect: boolean;
-              }): void => {
-                if (user?.user) {
-                  markExerciseAsCompleted(
-                    user.user.uid,
-                    topicId,
-                    params.unitId,
-                    parameters.exerciseId,
-                  );
-                }
+              }) => {
+                markExerciseAsCompleted(
+                  user.user.uid,
+                  topicId,
+                  params.unitId,
+                  parameters.exerciseId,
+                );
               }}
               onSequenceComplete={onSequenceComplete}
               setCompletionTime={setCompletionTime}

@@ -23,7 +23,7 @@ export const CBExamSimulator = ({
   exams,
 }: CBExamSimulatorProps): JSX.Element => {
   const user = useUser();
-  const completedExamAmount = user?.customData.completedExams || 0;
+  const completedExamAmount = user.customData.completedExams;
   const [examState, setExamState] = useState<CBExamSimulatorState>(
     CBExamSimulatorState.NotStarted,
   );
@@ -95,18 +95,14 @@ export const CBExamSimulator = ({
 
   const onSequenceComplete = useCallback(() => {
     setExamState(CBExamSimulatorState.Finished);
-    if (user?.user) {
-      addCompletedExamsToUser(user.user.uid, 1);
+    addCompletedExamsToUser(user.user.uid, 1);
 
-      const correctExercisesAmount = exercises.filter(
-        (e) => e.isCorrect,
-      ).length;
-      if (correctExercisesAmount >= exercises.length / 2) {
-        const pointsToAdd = correctExercisesAmount + pointsForSuccessfulExam;
-        addPointsToUser(user.user.uid, pointsToAdd);
-      }
+    const correctExercisesAmount = exercises.filter((e) => e.isCorrect).length;
+    if (correctExercisesAmount >= exercises.length / 2) {
+      const pointsToAdd = correctExercisesAmount + pointsForSuccessfulExam;
+      addPointsToUser(user.user.uid, pointsToAdd);
     }
-  }, [exercises, user]);
+  }, [exercises, user.user.uid]);
 
   const onCancel = useCallback(() => {
     setExamState(CBExamSimulatorState.NotStarted);
@@ -116,7 +112,7 @@ export const CBExamSimulator = ({
   const examSimulatorSequenceComponent = useMemo(
     () => (
       <CBExamSimulatorSequence
-        originalExercises={originalExercises}
+        exercises={originalExercises}
         setExercises={setExercises}
         onSequenceComplete={onSequenceComplete}
         setCompletionTime={setCompletionTime}

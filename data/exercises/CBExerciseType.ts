@@ -4,4 +4,5 @@ export enum CBExerciseType {
   MatchingGame = "zuordnungsspiel",
   Swiper = "swiper",
   FreeformQuestion = "freiform-frage",
+  AIQuiz = "ki-quiz",
 }

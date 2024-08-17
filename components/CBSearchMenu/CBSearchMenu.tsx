@@ -21,7 +21,7 @@ export const CBSearchMenu = ({
     ? Object.entries(routeMap).filter(
         ([, value]) =>
           value.title?.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          value.forRoles.includes(user?.customData.role),
+          value.forRoles.includes(user.customData.role),
       )
     : [];
 

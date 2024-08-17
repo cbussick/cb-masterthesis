@@ -17,13 +17,9 @@ interface CBExerciseSequenceSnackbarProviderProps {
 export interface CBExerciseSequenceSnackbarData {
   isOpen: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  toggleOpen: VoidFunction;
   title: CBSnackbarProps["title"];
-  setTitle: (title: string) => void;
   message: CBSnackbarProps["message"];
-  setMessage: (message: string) => void;
   severity: CBSnackbarProps["severity"];
-  setSeverity: (severity: CBSnackbarProps["severity"]) => void;
   showSnackbar: (
     title: string,
     message: string,
@@ -34,13 +30,9 @@ export interface CBExerciseSequenceSnackbarData {
 const defaultSnackbar: CBExerciseSequenceSnackbarData = {
   isOpen: false,
   setOpen: () => {},
-  toggleOpen: () => {},
   title: "",
-  setTitle: () => {},
   message: "",
-  setMessage: () => {},
   severity: undefined,
-  setSeverity: () => {},
   showSnackbar: () => {},
 };
 
@@ -51,10 +43,11 @@ export const CBExerciseSequenceSnackbarProvider = ({
   children,
 }: CBExerciseSequenceSnackbarProviderProps) => {
   const [isOpen, setOpen] = useState<boolean>(defaultSnackbar.isOpen);
-  const [title, setTitle] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [severity, setSeverity] =
-    useState<CBExerciseSequenceSnackbarData["severity"]>();
+  const [title, setTitle] = useState<ReactNode>(defaultSnackbar.title);
+  const [message, setMessage] = useState<ReactNode>(defaultSnackbar.message);
+  const [severity, setSeverity] = useState<
+    CBExerciseSequenceSnackbarData["severity"]
+  >(defaultSnackbar.severity);
 
   const showSnackbar = (
     snackbarTitle: string,
@@ -73,13 +66,9 @@ export const CBExerciseSequenceSnackbarProvider = ({
         value={{
           isOpen,
           setOpen,
-          toggleOpen: () => setOpen((open) => !open),
           title,
-          setTitle,
           message,
-          setMessage,
           severity,
-          setSeverity,
           showSnackbar,
         }}
       >

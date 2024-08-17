@@ -49,7 +49,7 @@ export default function FreePracticeSubpage({
             previousLinks={[
               { label: "Freie Übung", href: CBRoute.FreieUebung },
             ]}
-            currentLabel={topicData.name || "Thema"}
+            currentLabel={topicData.name}
           />
         }
       />
@@ -108,17 +108,24 @@ export default function FreePracticeSubpage({
           </Grid>
         )}
 
-        {user &&
-          user.customData.mistakeExercises.find((e) => e.topic === topic) !==
-            undefined && (
-            <Grid {...commonGridItemProps}>
-              <CBInfoCard
-                text="Fehler wiederholen"
-                image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
-                href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
-              />
-            </Grid>
-          )}
+        <Grid {...commonGridItemProps}>
+          <CBInfoCard
+            text={exercisesData[CBExerciseType.AIQuiz].name}
+            image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
+            href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
+          />
+        </Grid>
+
+        {user.customData.mistakeExercises.find((e) => e.topic === topic) !==
+          undefined && (
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text="Fehler wiederholen"
+              image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
+              href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
+            />
+          </Grid>
+        )}
       </Grid>
     </CBContentWrapper>
   );

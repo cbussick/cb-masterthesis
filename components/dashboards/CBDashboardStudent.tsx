@@ -2,30 +2,22 @@
 
 import { levels } from "@/data/gamification";
 import { useUser } from "@/firebase-client/useUser";
-import { CBRoute } from "@/helpers/routes";
 import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
 import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";
-import { Divider, Stack } from "@mui/material";
-import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
+import { Stack } from "@mui/material";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";
 import { CBGraphCard } from "../CBGraphCard/CBGraphCard";
-import { CBInfoCard } from "../CBInfoCard/CBInfoCard";
 import { CBProgressCard } from "../CBProgressCard/CBProgressCard";
 import { CBTrackedTimeGraph } from "../CBTrackedTimeGraph/CBTrackedTimeGraph";
 import { CBUserActionsBar } from "../CBUserActionsBar/CBUserActionsBar";
 import { CBWelcomeBanner } from "../CBWelcomeBanner/CBWelcomeBanner";
 
-const commonGridItemProps: Grid2Props = {
-  xs: 6,
-  lg: 4,
-};
-
 export const CBDashboardStudent = (): JSX.Element => {
   const user = useUser();
 
-  const userPoints = user?.customData.points || 0;
+  const userPoints = user.customData.points;
 
-  const lastWeekTimes = getLastWeekTimes(user?.customData.trackedTime || []);
+  const lastWeekTimes = getLastWeekTimes(user.customData.trackedTime);
   const totalTime = lastWeekTimes.reduce((acc, t) => {
     return acc + t.time;
   }, 0);
@@ -96,37 +88,6 @@ export const CBDashboardStudent = (): JSX.Element => {
 
           <CBDateCalendar />
         </Stack>
-
-        <Divider sx={{ mt: 3, mb: 5 }} />
-
-        <Grid container spacing={3} disableEqualOverflow>
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
-              image={{ src: "/lab-equipment.jpg", alt: "Laborausstattung" }}
-              text="Themenwelt"
-              href={CBRoute.Themenwelt}
-            />
-          </Grid>
-
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
-              image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
-              text="Tierische und pflanzliche Zellen"
-              href={`${CBRoute.FreieUebung}/zelle`}
-            />
-          </Grid>
-
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
-              image={{
-                src: "/pruefungssimulator.jpg",
-                alt: "Prüfungssimulator",
-              }}
-              text="Prüfungssimulator"
-              href={CBRoute.Pruefungssimulator}
-            />
-          </Grid>
-        </Grid>
       </Stack>
     </Stack>
   );

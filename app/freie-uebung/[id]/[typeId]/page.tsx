@@ -21,10 +21,13 @@ import { addPointsToUser } from "@/firebase-client/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUser";
 import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
 import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
+import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
 import { retryMistakesPathSegment } from "@/helpers/routes";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { notFound } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 interface FreePracticeSequenceParams {
   params: {
@@ -39,6 +42,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
+  [CBExerciseType.AIQuiz]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -47,72 +51,62 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
+  [CBExerciseType.AIQuiz]: 1,
+};
+
+const getRandomExercises = (
+  amountOfExercises: number,
+  exercises: CBExerciseWithMetaData[],
+): CBExerciseWithMetaData[] => {
+  const randomExercises: CBExerciseWithMetaData[] = [];
+  const usedIndexes: number[] = [];
+  let i = 0;
+  while (i < amountOfExercises) {
+    const randomIndex = Math.floor(Math.random() * exercises.length);
+    if (!usedIndexes.includes(randomIndex)) {
+      const randomExercise = exercises[randomIndex];
+
+      usedIndexes.push(randomIndex);
+      randomExercises.push(randomExercise);
+      i += 1;
+    }
+  }
+
+  return randomExercises;
 };
 
 export default function FreePracticeSequencePage({
   params,
 }: FreePracticeSequenceParams) {
-  const user = useUser();
-
-  const [originalExercises, setOriginalExercises] = useState<
-    CBExerciseWithMetaData[]
-  >([]);
-  const [isFirstRender, setFirstRender] = useState<boolean>(true);
-
   const topic = getEnumValueByStringValue(CBTopic, params.id);
 
   if (!topic) {
     notFound();
   }
 
-  const exerciseType =
-    params.typeId === retryMistakesPathSegment
-      ? null
-      : (params.typeId as CBExerciseType);
+  const user = useUser();
+  const { showSnackbar } = useCBExerciseSequenceSnackbar();
 
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
   const [, setCompletionTime] = useState<CBTime>({
     sec: 0,
     min: 0,
   });
 
+  const isRetryingMistakes = params.typeId === retryMistakesPathSegment;
+
+  const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
+
   useEffect(() => {
-    let exercises: CBExerciseWithMetaData[] = [];
+    let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
 
-    if (exerciseType) {
-      if (isFirstRender) {
-        setFirstRender(false);
-
-        exercises = exercisesMap[exerciseType]
-          .filter((e) => e.topic === topic)
-          .map((ex) => ({ ...ex, isCompleted: false }));
-
-        const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
-
-        const amountOfExercises =
-          exercises.length < desiredAmountOfExercises
-            ? exercises.length
-            : desiredAmountOfExercises;
-        const randomExercises: CBExerciseWithMetaData[] = [];
-        const usedIndexes: number[] = [];
-        let i = 0;
-        while (i < amountOfExercises) {
-          const randomIndex = Math.floor(Math.random() * exercises.length);
-          if (!usedIndexes.includes(randomIndex)) {
-            const randomExercise = exercises[randomIndex];
-
-            usedIndexes.push(randomIndex);
-            randomExercises.push(randomExercise);
-            i += 1;
-          }
-        }
-
-        setOriginalExercises(randomExercises);
-      }
-    } else if (isFirstRender) {
-      setFirstRender(false);
-
-      user?.customData.mistakeExercises.forEach((e) => {
-        if (e.topic === topic) {
+    if (isRetryingMistakes) {
+      user.customData.mistakeExercises
+        .filter((e) => e.topic === topic)
+        .forEach((e) => {
           const exercise = exercisesMap[e.type].find((ex) => ex.id === e.id);
 
           if (exercise) {
@@ -120,66 +114,100 @@ export default function FreePracticeSequencePage({
               ...exercise,
               isCompleted: false,
             };
-            exercises.push(exerciseWithMetaData);
+            exercisesWithMetaData.push(exerciseWithMetaData);
           }
-        }
-      });
+        });
 
-      const amountOfExercises = exercises.length < 5 ? exercises.length : 5;
-      const randomExercises: CBExerciseWithMetaData[] = [];
-      const usedIndexes: number[] = [];
-      let i = 0;
-      while (i < amountOfExercises) {
-        const randomIndex = Math.floor(Math.random() * exercises.length);
-        if (!usedIndexes.includes(randomIndex)) {
-          const randomExercise = exercises[randomIndex];
+      const amountOfExercises =
+        exercisesWithMetaData.length < 5 ? exercisesWithMetaData.length : 5;
 
-          usedIndexes.push(randomIndex);
-          randomExercises.push(randomExercise);
-          i += 1;
-        }
-      }
+      const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
+        amountOfExercises,
+        exercisesWithMetaData,
+      );
 
-      setOriginalExercises(randomExercises);
+      setExercises(randomExercises);
+    } else if (exerciseType === CBExerciseType.AIQuiz) {
+      // TODO: Always fetches twice because of strict mode. Just leave it like this?
+      console.log("here");
+      setAPIRequestState(CBAPIRequestState.Fetching);
+      getOpenAIQuizExercise(user.user.uid, topic)
+        .then((response) => {
+          const exerciseWithMetaData: CBExerciseWithMetaData = {
+            ...response,
+            isCompleted: false,
+          };
+
+          setExercises([exerciseWithMetaData]);
+          setAPIRequestState(CBAPIRequestState.Success);
+        })
+        .catch((error) => {
+          setAPIRequestState(CBAPIRequestState.Error);
+          showSnackbar(
+            "Problem beim Generieren der Aufgabe",
+            error.message,
+            "error",
+          );
+        });
+    } else if (exerciseType) {
+      exercisesWithMetaData = exercisesMap[exerciseType]
+        .filter((e) => e.topic === topic)
+        .map((ex) => ({ ...ex, isCompleted: false }));
+
+      const desiredAmountOfExercises = exerciseAmountMap[exerciseType];
+
+      const amountOfExercises =
+        exercisesWithMetaData.length < desiredAmountOfExercises
+          ? exercisesWithMetaData.length
+          : desiredAmountOfExercises;
+
+      const randomExercises: CBExerciseWithMetaData[] = getRandomExercises(
+        amountOfExercises,
+        exercisesWithMetaData,
+      );
+
+      setExercises(randomExercises);
     }
-  }, [exerciseType, isFirstRender, topic, user?.customData.mistakeExercises]);
+    // Don't add anything from `user` to dependencies, because it would trigger
+    // a new selection of random exercises, while the user is still inside the sequence.
+    // This would cause glitches for the user.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exerciseType, isRetryingMistakes, showSnackbar, topic]);
 
   const onMistake = useCallback(
     (exercise: CBMistakeExercise) => {
       const isNotAlreadyInMistakes =
-        user?.customData.mistakeExercises.find(
+        user.customData.mistakeExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
-      if (user?.user && isNotAlreadyInMistakes) {
+      if (isNotAlreadyInMistakes) {
         const mistakeExercisesToAdd = [exercise];
         addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
       }
     },
-    [user],
+    [user.customData.mistakeExercises, user.user.uid],
   );
 
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
-      if (user?.user) {
-        const solvedExercisesToAdd = 1;
-        addSolvedExerciseToUser(user.user.uid, solvedExercisesToAdd);
-        const pointsToAdd = 1;
-        addPointsToUser(user.user.uid, pointsToAdd);
+      const { uid } = user.user;
 
-        // If the exercise type is not set, the user is retrying mistakes
-        if (!exerciseType) {
-          const exercise = user.customData.mistakeExercises.find(
-            (e) => e.id === parameters.exerciseId,
-          );
+      addSolvedExerciseToUser(uid, 1);
+      addPointsToUser(uid, 1);
 
-          if (exercise) {
-            removeExercisesFromMistakes(user.user.uid, [exercise]);
-          }
+      // If the exercise type is not set, the user is retrying mistakes
+      if (isRetryingMistakes) {
+        const exercise = user.customData.mistakeExercises.find(
+          (e) => e.id === parameters.exerciseId,
+        );
+
+        if (exercise) {
+          removeExercisesFromMistakes(uid, [exercise]);
         }
       }
     },
-    [exerciseType, user],
+    [isRetryingMistakes, user.customData.mistakeExercises, user.user],
   );
 
   const onSequenceComplete = useCallback(
@@ -187,27 +215,37 @@ export default function FreePracticeSequencePage({
       allExercisesCompleted: boolean;
       difficulty: CBExerciseDifficulty;
     }) => {
-      if (user?.user) {
-        if (parameters.allExercisesCompleted && parameters.difficulty) {
-          addPointsToUser(
-            user.user.uid,
-            pointsToAddForSequenceCompletion[parameters.difficulty],
-          );
-        }
+      if (parameters.allExercisesCompleted && parameters.difficulty) {
+        addPointsToUser(
+          user.user.uid,
+          pointsToAddForSequenceCompletion[parameters.difficulty],
+        );
       }
     },
-    [user],
+    [user.user.uid],
   );
 
-  return (
-    <CBFreePracticeExerciseSequence
-      exercises={originalExercises}
-      topic={topic}
-      exerciseType={exerciseType}
-      onMistake={onMistake}
-      onCompleteExercise={onCompleteExercise}
-      onSequenceComplete={onSequenceComplete}
-      setCompletionTime={setCompletionTime}
-    />
+  return useMemo(
+    () => (
+      <CBFreePracticeExerciseSequence
+        exercises={exercises}
+        topic={topic}
+        exerciseType={exerciseType || null}
+        onMistake={onMistake}
+        onCompleteExercise={onCompleteExercise}
+        onSequenceComplete={onSequenceComplete}
+        setCompletionTime={setCompletionTime}
+        apiRequestState={apiRequestState}
+      />
+    ),
+    [
+      apiRequestState,
+      exerciseType,
+      exercises,
+      onCompleteExercise,
+      onMistake,
+      onSequenceComplete,
+      topic,
+    ],
   );
 }

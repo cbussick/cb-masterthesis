@@ -18,7 +18,6 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
-  CircularProgress,
   Collapse,
   Divider,
   List,
@@ -45,9 +44,6 @@ const commonListProps: ListProps = {
   disablePadding: true,
 };
 
-/**
- * The sidebar on the left side of the app.
- */
 export const CBSidebar = ({
   sidebarWidthOpen,
   sidebarWidthClosed,
@@ -161,29 +157,25 @@ export const CBSidebar = ({
 
             <Divider sx={{ mx: 4, width: "100%" }} />
 
-            {user ? (
-              <List {...commonListProps}>
-                {menuItems.reduce<JSX.Element[]>((acc, item) => {
-                  if (
-                    item.forRoles.includes(user?.customData.role) &&
-                    item.href !== CBRoute.Einstellungen
-                  ) {
-                    acc.push(
-                      <CBSidebarItem
-                        key={item.label}
-                        listItemButtonProps={{ href: item.href }}
-                        icon={item.icon}
-                        label={item.label}
-                        isExpansionTransitionRunning={isTransitionRunning}
-                      />,
-                    );
-                  }
-                  return acc;
-                }, [])}
-              </List>
-            ) : (
-              <CircularProgress />
-            )}
+            <List {...commonListProps}>
+              {menuItems.reduce<JSX.Element[]>((acc, item) => {
+                if (
+                  item.forRoles.includes(user.customData.role) &&
+                  item.href !== CBRoute.Einstellungen
+                ) {
+                  acc.push(
+                    <CBSidebarItem
+                      key={item.label}
+                      listItemButtonProps={{ href: item.href }}
+                      icon={item.icon}
+                      label={item.label}
+                      isExpansionTransitionRunning={isTransitionRunning}
+                    />,
+                  );
+                }
+                return acc;
+              }, [])}
+            </List>
           </Stack>
 
           <List {...commonListProps}>

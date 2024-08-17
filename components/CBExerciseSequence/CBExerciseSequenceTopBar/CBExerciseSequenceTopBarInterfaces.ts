@@ -8,6 +8,6 @@ export interface CBExerciseSequenceTopBarProps {
   completedExercisesAmount: number;
   totalExercisesAmount: number;
   type: CBExerciseSequenceType;
-  sessionIsFinished: boolean;
+  isSequenceFinished: boolean;
   setCompletionTime?: Dispatch<SetStateAction<CBTime>>;
 }

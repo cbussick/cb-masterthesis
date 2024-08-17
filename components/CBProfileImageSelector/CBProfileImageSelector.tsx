@@ -21,10 +21,10 @@ export const CBProfileImageSelector = (): JSX.Element => {
   const { showSnackbar } = useSnackbar();
 
   const [profilePicture, setProfilePicture] = useState<string>(
-    user?.customData.profilePicture || "",
+    user.customData.profilePicture,
   );
 
-  const userPoints = user?.customData.points || 0;
+  const userPoints = user.customData.points;
   const currentLevel =
     levels.find(
       (l) => l.pointsToNextLevel && l.pointsToNextLevel > userPoints,
@@ -35,25 +35,23 @@ export const CBProfileImageSelector = (): JSX.Element => {
   };
 
   const handleSaveButtonClickProfilePic = () => {
-    if (user?.user) {
-      changeProfilePicture(user.user.uid, profilePicture)
-        .then(() => {
-          showSnackbar(
-            "Profilbild geändert",
-            "Du hast dein Profilbild erfolgreich geändert.",
-            "success",
-          );
-        })
-        .catch((error: FirebaseError) => {
-          const errorMessage = getAuthError(error.code) || error.message;
+    changeProfilePicture(user.user.uid, profilePicture)
+      .then(() => {
+        showSnackbar(
+          "Profilbild geändert",
+          "Du hast dein Profilbild erfolgreich geändert.",
+          "success",
+        );
+      })
+      .catch((error: FirebaseError) => {
+        const errorMessage = getAuthError(error.code) || error.message;
 
-          showSnackbar(
-            "Profilbild konnte nicht geändert werden",
-            errorMessage,
-            "error",
-          );
-        });
-    }
+        showSnackbar(
+          "Profilbild konnte nicht geändert werden",
+          errorMessage,
+          "error",
+        );
+      });
   };
 
   return (
@@ -78,7 +76,7 @@ export const CBProfileImageSelector = (): JSX.Element => {
 
         <Button
           onClick={handleSaveButtonClickProfilePic}
-          disabled={user?.customData.profilePicture === profilePicture}
+          disabled={user.customData.profilePicture === profilePicture}
         >
           Speichern
         </Button>

@@ -38,7 +38,7 @@ export const CBDeleteAccountDialog = ({
   const handleConfirmDeleteion = () => {
     reset();
 
-    if (user?.user && user.user.email) {
+    if (user.user.email) {
       const credential = EmailAuthProvider.credential(
         user.user.email,
         password,
@@ -46,27 +46,25 @@ export const CBDeleteAccountDialog = ({
 
       reauthenticateUser(user.user, credential)
         .then(() => {
-          if (user.user) {
-            deleteUser(user.user)
-              .then(() => {
-                router.push("/");
+          deleteUser(user.user)
+            .then(() => {
+              router.push("/");
 
-                showSnackbar(
-                  "Account gelöscht",
-                  "Dein Account wurde erfolgreich gelöscht. Wir hoffen, dass du uns bald wieder besuchst. Bis zum nächsten Mal!",
-                  "success",
-                );
-              })
-              .catch((error: FirebaseError) => {
-                const errorMessage = getAuthError(error.code) || error.message;
+              showSnackbar(
+                "Account gelöscht",
+                "Dein Account wurde erfolgreich gelöscht. Wir hoffen, dass du uns bald wieder besuchst. Bis zum nächsten Mal!",
+                "success",
+              );
+            })
+            .catch((error: FirebaseError) => {
+              const errorMessage = getAuthError(error.code) || error.message;
 
-                showSnackbar(
-                  "Account konnte nicht gelöscht werden",
-                  errorMessage,
-                  "error",
-                );
-              });
-          }
+              showSnackbar(
+                "Account konnte nicht gelöscht werden",
+                errorMessage,
+                "error",
+              );
+            });
         })
         .catch((error: FirebaseError) => {
           const errorMessage = getAuthError(error.code) || error.message;

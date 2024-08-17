@@ -1,5 +1,3 @@
-// Todo: Ich glaube alle Y-Werte Minus 30 wenn ich es so lasse?
-
 import {
   CBMatchingGameHighlightComponent,
   CBMatchingGameHighlightComponentSide,

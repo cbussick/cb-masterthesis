@@ -4,7 +4,7 @@ import { CBTime } from "../../CBExerciseTimer/CBExerciseTimerInterfaces";
 import { CBExerciseWithCorrectness } from "../CBExamSimulatorInterfaces";
 
 export interface CBExamSimulatorSequenceProps {
-  originalExercises: CBExerciseWithMetaData[];
+  exercises: CBExerciseWithMetaData[];
   setExercises: Dispatch<SetStateAction<CBExerciseWithCorrectness[]>>;
   onSequenceComplete: VoidFunction;
   setCompletionTime: Dispatch<SetStateAction<CBTime>>;

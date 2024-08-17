@@ -12,7 +12,12 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-interface CBUserData {
+export interface CBUserWithCustomData {
+  user: User;
+  customData: CBUserCustomData;
+}
+
+export interface CBUserData {
   user: User | null;
   isUserLoaded: boolean;
   customData: CBUserCustomData;
@@ -36,7 +41,7 @@ const defaultUserData: CBUserData = {
   },
 };
 
-export const UserContext = createContext<CBUserData | null>(null);
+export const UserContext = createContext<CBUserData>(defaultUserData);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(defaultUserData.user);

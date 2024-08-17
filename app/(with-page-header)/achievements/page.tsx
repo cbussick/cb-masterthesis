@@ -14,21 +14,19 @@ import { useEffect, useState } from "react";
 export default function Achievements() {
   const user = useUser();
 
-  const solvedExercisesCount = user?.customData.solvedExercises || 0;
-  const completedExamCount = user?.customData.completedExams || 0;
+  const solvedExercisesCount = user.customData.solvedExercises;
+  const completedExamCount = user.customData.completedExams;
   const unlockedGlossaryEntries =
-    user?.customData.unlockedGlossaryEntryIDs.length || 0;
+    user.customData.unlockedGlossaryEntryIDs.length;
 
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
   useEffect(() => {
-    if (user?.user) {
-      getUserTopicWorldProgress(user.user.uid).then((progress) => {
-        setTopicWorldProgress(progress);
-      });
-    }
-  }, [user?.user]);
+    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+      setTopicWorldProgress(progress);
+    });
+  }, [user.user.uid]);
 
   const isTopicCompleted = (topic: CBTopic) => {
     const topicsAsArray = Object.values(topicWorldTopics);

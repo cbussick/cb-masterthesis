@@ -1,5 +1,6 @@
 "use client";
 
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAITextToSpeech } from "@/helpers/openai/getOpenAITextToSpeech";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { MicRounded } from "@mui/icons-material";
@@ -20,7 +21,9 @@ export const CBDinaHint = ({
   const { showSnackbar } = useSnackbar();
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [isFetchingSpeech, setFetchingSpeech] = useState<boolean>(false);
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Idle,
+  );
   const [audio, setAudio] = useState<HTMLAudioElement>();
 
   // Necessary, because the the callback for the promise to fetch the speech will always
@@ -86,15 +89,15 @@ export const CBDinaHint = ({
             <Stack direction="row" spacing={1}>
               <CBLoadingButton
                 variant="outlined"
-                isLoading={isFetchingSpeech}
+                isLoading={apiRequestState === CBAPIRequestState.Fetching}
                 onClick={() => {
                   if (audio) {
                     audio.play();
                   } else {
-                    setFetchingSpeech(true);
+                    setAPIRequestState(CBAPIRequestState.Fetching);
                     getOpenAITextToSpeech(hint)
                       .then((res) => {
-                        setFetchingSpeech(false);
+                        setAPIRequestState(CBAPIRequestState.Success);
 
                         const speech = new Audio(res);
                         setAudio(speech);
@@ -104,7 +107,7 @@ export const CBDinaHint = ({
                         }
                       })
                       .catch((err) => {
-                        setFetchingSpeech(false);
+                        setAPIRequestState(CBAPIRequestState.Error);
                         showSnackbar("Fehler beim Vorlesen", err, "error");
                       });
                   }

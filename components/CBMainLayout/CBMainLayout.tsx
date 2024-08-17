@@ -1,6 +1,7 @@
 "use client";
 
-import { useUser } from "@/firebase-client/useUser";
+import { isUserFullyLoaded } from "@/firebase-client/isUserFullyLoaded";
+import { useUncertainUser } from "@/firebase-client/useUncertainUser";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
 import { useRouteData } from "@/helpers/useRouteData";
 import { themeSpacingFactor } from "@/theme/theme";
@@ -23,7 +24,7 @@ const sidebarWidthClosed = 100;
 
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const routeData = useRouteData();
-  const user = useUser();
+  const user = useUncertainUser();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const {
@@ -39,7 +40,7 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   }
 
   // Show loading while user and custom data is not loaded
-  if (!user?.isUserLoaded || (user.user && user.customData.firstName === "")) {
+  if (!isUserFullyLoaded(user)) {
     return <CBLoadingView />;
   }
 

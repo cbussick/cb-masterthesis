@@ -3,10 +3,10 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { useUser } from "@/firebase-client/useUser";
+import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { useConfetti } from "@/ui/useConfetti";
-import { useExerciseSequenceSnackbar } from "@/ui/useExerciseSequenceSnackbar";
 import {
   CheckRounded,
   ChevronRightRounded,
@@ -16,7 +16,6 @@ import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../useCBExerciseSequenceProvider";
-import { CBConfirmation } from "./CBConfirmation";
 import { CBExerciseSequenceBottomBarProps } from "./CBExerciseSequenceBottomBarInterfaces";
 
 const exerciseTypesWithConfirmButton = [
@@ -34,47 +33,37 @@ const cancelButtonLabelMap: Record<CBExerciseSequenceType, string> = {
 export const CBExerciseSequenceBottomBar = ({
   sequenceType,
   uncompletedExercises,
-  onMistake,
-  onCompleteExercise,
   onSequenceComplete,
   difficulty,
   onCompleteHref,
   onCancel,
   componentRef,
   timerRef,
-}: CBExerciseSequenceBottomBarProps): JSX.Element | null => {
-  const user = useUser();
+}: CBExerciseSequenceBottomBarProps): JSX.Element => {
   const { startConfetti } = useConfetti();
-  const { showSnackbar, setOpen } = useExerciseSequenceSnackbar();
-
+  const { showSnackbar, setOpen: setSnackbarOpen } =
+    useCBExerciseSequenceSnackbar();
   const {
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
     currentExerciseIndex,
     setCurrentExerciseIndex,
     exercises,
-    setExercises,
   } = useCBExerciseSequence();
 
-  const [isFetchingHint, setFetchingHint] = useState<boolean>(false);
-  const [isErrorFetchingHint, setErrorFetchingHint] = useState<boolean>(false);
+  const [hintAPIRequestState, setHintAPIRequestState] =
+    useState<CBAPIRequestState>(CBAPIRequestState.Idle);
   const [hint, setHint] = useState<string>("");
 
   const currentExercise = uncompletedExercises[currentExerciseIndex];
-
-  if (!currentExercise) {
-    return null;
-  }
-
   const currentExerciseType = currentExercise?.type;
-
   const allExercisesCompleted = exercises.every(
     (exercise) => exercise.isCompleted,
   );
 
-  const moveToNextExercise = () => {
+  const onClickNext = () => {
     if (currentExerciseIndex === uncompletedExercises.length - 1) {
-      // The last exercise was completed. The whole sequence is completed.
+      // The last exercise was finished. The whole sequence is completed.
       if (onSequenceComplete) {
         if (sequenceType === CBExerciseSequenceType.ExamSimulator) {
           onSequenceComplete();
@@ -86,77 +75,33 @@ export const CBExerciseSequenceBottomBar = ({
         }
       }
 
-      if (exercises.every((exercise) => exercise.isCompleted)) {
+      if (allExercisesCompleted) {
         startConfetti();
       }
     }
 
     setCurrentExerciseIndex((prev) => prev + 1);
-  };
-
-  const onClickNext = () => {
-    moveToNextExercise();
     setCurrentExerciseFinished(false);
     setHint("");
-    setOpen(false);
+    setSnackbarOpen(false);
   };
 
-  const onClickConfirm = () => {
-    /**
-     * Not ideal, but works for now.
-     * Make sure to have the following code inside each child exercise component which is
-     * evaluated by pushing the "Auswerten"-button:
-     * ```
-     * useImperativeHandle(ref, () => ({
-     *     onConfirm,
-     * }));
-     * ```
-     *
-     * And use an appropriate `onConfirm` function. See `CBFamilyTree` for example.
-     */
-    // @ts-ignore
+  /**
+   * Not ideal, but works for now.
+   * Make sure to have the following code inside each exercise component which is
+   * evaluated by pushing the "Auswerten"-button:
+   *
+   * ```
+   * useImperativeHandle(ref, () => ({
+   *     onConfirm,
+   * }));
+   * ```
+   *
+   * And use an appropriate `onConfirm` function inside each exercise component.
+   */
+  const onConfirm = () => {
     if (componentRef.current?.onConfirm) {
-      const exerciseConfirmationData =
-        componentRef.current.onConfirm() as CBConfirmation;
-
-      if (exerciseTypesWithConfirmButton.includes(currentExerciseType)) {
-        setCurrentExerciseFinished(exerciseConfirmationData.isFinished);
-
-        if (exerciseConfirmationData.isFinished) {
-          if (!exerciseConfirmationData.isCorrect && onMistake) {
-            onMistake({
-              id: currentExercise.id,
-              topic: currentExercise.topic,
-              type: currentExercise.type,
-            });
-          }
-
-          if (
-            exerciseConfirmationData.isCorrect &&
-            user &&
-            currentExerciseIndex !== undefined
-          ) {
-            onCompleteExercise({
-              exerciseId: uncompletedExercises[currentExerciseIndex].id,
-              isCorrect: exerciseConfirmationData.isCorrect,
-            });
-
-            setExercises((previousExercises) => {
-              const newExercises = previousExercises.map((ex) => {
-                if (ex.id === currentExercise?.id) {
-                  return {
-                    ...ex,
-                    isCompleted: true,
-                  };
-                }
-                return ex;
-              });
-
-              return newExercises;
-            });
-          }
-        }
-      }
+      componentRef.current.onConfirm();
     }
   };
 
@@ -166,7 +111,7 @@ export const CBExerciseSequenceBottomBar = ({
         onCancel
           ? () => {
               onCancel();
-              setOpen(false);
+              setSnackbarOpen(false);
             }
           : undefined
       }
@@ -179,15 +124,14 @@ export const CBExerciseSequenceBottomBar = ({
 
   const onClickHint = () => {
     if ("question" in currentExercise) {
-      setFetchingHint(true);
+      setHintAPIRequestState(CBAPIRequestState.Fetching);
       getOpenAIDiNAsHintForQuestion(currentExercise.question)
         .then((response) => {
-          setFetchingHint(false);
+          setHintAPIRequestState(CBAPIRequestState.Success);
           setHint(response.hint);
         })
         .catch((error) => {
-          setFetchingHint(false);
-          setErrorFetchingHint(true);
+          setHintAPIRequestState(CBAPIRequestState.Error);
           showSnackbar(
             "Problem beim Erfragen eines Tipps",
             error.message,
@@ -219,16 +163,18 @@ export const CBExerciseSequenceBottomBar = ({
           <CBDinaHint
             onClick={onClickHint}
             hint={hint}
-            isLoading={isFetchingHint}
+            isLoading={hintAPIRequestState === CBAPIRequestState.Fetching}
             disabled={
-              isFetchingHint || isErrorFetchingHint || isCurrentExerciseFinished
+              hintAPIRequestState === CBAPIRequestState.Fetching ||
+              hintAPIRequestState === CBAPIRequestState.Error ||
+              isCurrentExerciseFinished
             }
           />
         )}
 
         {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
           <Button
-            onClick={onClickConfirm}
+            onClick={onConfirm}
             disabled={isCurrentExerciseFinished}
             endIcon={<CheckRounded />}
           >

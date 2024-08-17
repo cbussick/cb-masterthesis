@@ -16,24 +16,11 @@ export const CBExerciseSequenceWrapper = ({
   difficulty,
   onCancel,
 }: CBExerciseSequenceWrapperProps): JSX.Element => {
-  const {
-    currentExerciseIndex,
-    setCurrentExerciseIndex,
-    setExercises,
-    setType,
-  } = useCBExerciseSequence();
-
-  useEffect(() => {
-    setCurrentExerciseIndex(0);
-  }, [setCurrentExerciseIndex]);
+  const { currentExerciseIndex, setExercises } = useCBExerciseSequence();
 
   useEffect(() => {
     setExercises(originalExercises || []);
   }, [originalExercises, setExercises]);
-
-  useEffect(() => {
-    setType(type);
-  }, [setType, type]);
 
   return useMemo(
     () =>
@@ -56,16 +43,16 @@ export const CBExerciseSequenceWrapper = ({
         <CircularProgress />
       ),
     [
-      originalExercises,
-      type,
       currentExerciseIndex,
-      onMistake,
-      onCompleteHref,
-      onCompleteExercise,
-      onSequenceComplete,
-      setCompletionTime,
       difficulty,
       onCancel,
+      onCompleteExercise,
+      onCompleteHref,
+      onMistake,
+      onSequenceComplete,
+      originalExercises,
+      setCompletionTime,
+      type,
     ],
   );
 };

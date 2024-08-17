@@ -1,7 +1,8 @@
 import { CBMatchingGameExercise } from "@/data/exercises/CBMatchingGameExercise";
-import { CBExerciseSequenceType } from "../../CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
+import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 
 export interface CBMatchingGameProps {
   exercise: CBMatchingGameExercise;
-  sequenceType: CBExerciseSequenceType;
+  onCompleteExercise: (params: any) => void;
+  onMistake?: (exercise: CBMistakeExercise) => void;
 }
