@@ -49,10 +49,6 @@ export const CBExerciseSequenceEndScreen = ({
     100
   ).toFixed(2);
 
-  const shortenedPercentage = correctExercisesPercentage.endsWith(".00")
-    ? correctExercisesPercentage.slice(0, -3)
-    : correctExercisesPercentage;
-
   const buttonsMap: Record<CBExerciseSequenceType, JSX.Element | null> = {
     [CBExerciseSequenceType.TopicWorld]: onCompleteHref ? (
       <CBUnstyledNextLink href={onCompleteHref}>
@@ -81,7 +77,7 @@ export const CBExerciseSequenceEndScreen = ({
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             textAlign: "center",
           }}
@@ -98,13 +94,17 @@ export const CBExerciseSequenceEndScreen = ({
           }}
         >
           <Stack spacing={2}>
-            {difficulty !== undefined && (
+            {difficulty && (
               <CBExerciseSequenceEndCard {...difficultyMap[difficulty]} />
             )}
 
             <CBExerciseSequenceEndCard
               image={{ src: "/star.png", alt: "Stern" }}
-              text={`${shortenedPercentage}% richtig beantwortet`}
+              text={`${
+                correctExercisesPercentage.endsWith(".00")
+                  ? correctExercisesPercentage.slice(0, -3)
+                  : correctExercisesPercentage.replace(".", ",")
+              }% richtig beantwortet`}
             />
           </Stack>
 
