@@ -92,7 +92,10 @@ export const CBTrackedTimeGraph = ({
       }
       colors={[theme.palette.primary.main]}
       // Leave `left: ...` here. Prevents the Y-Axis labels from being cut off.
-      margin={{ top: 42, left: 68 }}
+      // The rest of the margin is specifiedto be as close to the edges of the container as possible
+      // and not have any unnecessary space.
+      margin={{ top: 7, right: 2, bottom: 25, left: 54 }}
+      grid={{ horizontal: true }}
       sx={{
         ".MuiChartsAxis-label": {
           transform: "translateX(-10px) !important",

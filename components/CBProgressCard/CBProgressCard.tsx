@@ -3,6 +3,8 @@ import { CBImage } from "../CBImage/CBImage";
 import { CBProgressBar } from "../CBProgressBar/CBProgressBar";
 import { CBProgressCardProps } from "./CBProgressCardInterfaces";
 
+const contentPadding = 4;
+
 export const CBProgressCard = ({
   title,
   subTitle,
@@ -18,11 +20,10 @@ export const CBProgressCard = ({
     >
       <Stack
         direction="row"
-        spacing={4}
+        spacing={contentPadding}
         sx={{
           alignItems: "center",
           height: "100%",
-          pr: 4,
         }}
       >
         <CBImage
@@ -40,6 +41,8 @@ export const CBProgressCard = ({
         <Stack
           sx={{
             flexGrow: 1,
+            py: contentPadding,
+            pr: contentPadding,
           }}
         >
           <Stack spacing={0.7}>

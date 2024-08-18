@@ -2,8 +2,6 @@
 
 import { CBClassEvent, events } from "@/data/events";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
-import { useIsServerSide } from "@/helpers/useIsServerSide";
-import { CircularProgress } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import { useState } from "react";
@@ -20,7 +18,7 @@ const getEventsInCurrentMonth = (date: Dayjs) => {
 };
 
 export const CBDateCalendar = (): JSX.Element => {
-  const currentDate = dayjsLocalized();
+  const [currentDate, setCurrentDate] = useState<Dayjs>(dayjsLocalized());
   const [calendarEvents, setCalendarEvents] = useState<CBClassEvent[]>(
     getEventsInCurrentMonth(currentDate),
   );
@@ -31,15 +29,11 @@ export const CBDateCalendar = (): JSX.Element => {
     setCalendarEvents(eventsInCurrentMonth);
   };
 
-  const isServerSide = useIsServerSide();
-  if (isServerSide) {
-    return <CircularProgress />;
-  }
-
   return (
     <DateCalendar
       readOnly
-      defaultValue={currentDate}
+      value={currentDate}
+      onChange={(value) => setCurrentDate(value)}
       onMonthChange={handleMonthChange}
       // Leave this here. For whatever reason, it changes the day of the week format from e.g. "M" to "Mo".
       dayOfWeekFormatter={(date) => {
@@ -57,7 +51,7 @@ export const CBDateCalendar = (): JSX.Element => {
       sx={{
         overflow: "visible",
         "& .MuiPickersCalendarHeader-root": {
-          pl: 2,
+          pl: 1.5,
           mt: 0,
         },
         "& .MuiPickersCalendarHeader-labelContainer": {

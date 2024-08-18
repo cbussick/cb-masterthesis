@@ -4,9 +4,8 @@ import { levels } from "@/data/gamification";
 import { useUser } from "@/firebase-client/useUser";
 import { calculateHoursAndMinutes } from "@/helpers/time-tracking/calculateHoursAndMinutes";
 import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";
-import { CBGraphCard } from "../CBGraphCard/CBGraphCard";
 import { CBProgressCard } from "../CBProgressCard/CBProgressCard";
 import { CBTrackedTimeGraph } from "../CBTrackedTimeGraph/CBTrackedTimeGraph";
 import { CBUserActionsBar } from "../CBUserActionsBar/CBUserActionsBar";
@@ -18,11 +17,11 @@ export const CBDashboardStudent = (): JSX.Element => {
   const { points } = customData;
 
   const lastWeekTimes = getLastWeekTimes(customData.trackedTime);
-  const totalTime = lastWeekTimes.reduce((acc, t) => {
+  const totalTimeLastWeek = lastWeekTimes.reduce((acc, t) => {
     return acc + t.time;
   }, 0);
 
-  const formattedTime = calculateHoursAndMinutes(totalTime);
+  const formattedTime = calculateHoursAndMinutes(totalTimeLastWeek);
 
   const currentLevel =
     levels.find((l) => l.pointsToNextLevel && l.pointsToNextLevel > points) ||
@@ -33,7 +32,7 @@ export const CBDashboardStudent = (): JSX.Element => {
   const maxLevelReached = !currentLevel.pointsToNextLevel;
 
   return (
-    <Stack spacing={3} sx={{ overflowY: "hidden" }}>
+    <Stack spacing={3} sx={{ overflowY: "hidden", flex: 1 }}>
       <Stack
         direction="row"
         spacing={1}
@@ -48,7 +47,7 @@ export const CBDashboardStudent = (): JSX.Element => {
       </Stack>
 
       {/* `p` is necessary to not have the card shadows cut off */}
-      <Stack sx={{ overflowY: "auto", p: 0.5 }}>
+      <Stack spacing={3} sx={{ overflowY: "auto", p: 0.5, flex: 1 }}>
         <Stack
           direction="row"
           spacing={5}
@@ -56,7 +55,7 @@ export const CBDashboardStudent = (): JSX.Element => {
             justifyContent: "space-between",
           }}
         >
-          <Stack spacing={2}>
+          <Stack sx={{ flex: 1 }}>
             <CBProgressCard
               image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
               title={userLvlTitleText}
@@ -72,20 +71,16 @@ export const CBDashboardStudent = (): JSX.Element => {
               progressValue={points}
               maxValue={pointsToNextLvl}
             />
-
-            <CBGraphCard
-              image={{ src: "/flask.jpg", alt: "Erlenmeyerkolben" }}
-              title={`${formattedTime.h}h ${formattedTime.min}min`}
-              subTitle={`Du hast diese Woche bislang ${formattedTime.h} ${
-                formattedTime.h === 1 ? "Stunde" : "Stunden"
-              } und ${formattedTime.min} ${
-                formattedTime.min === 1 ? "Minute" : "Minuten"
-              } gelernt`}
-              graph={<CBTrackedTimeGraph lastWeekTimes={lastWeekTimes} />}
-            />
           </Stack>
 
           <CBDateCalendar />
+        </Stack>
+
+        <Stack spacing={1} sx={{ flex: 1 }}>
+          <Typography>{`Du hast in dieser Woche insgesamt ${formattedTime.h === 0 ? `${formattedTime.min} Minuten lang gelernt` : `${formattedTime.h} Stunden und ${formattedTime.min} Minuten lang gelernt`}:`}</Typography>
+
+          {/* Necessary to not render the graph while on the server, because then the calendar is not yet */}
+          <CBTrackedTimeGraph lastWeekTimes={lastWeekTimes} />
         </Stack>
       </Stack>
     </Stack>
