@@ -11,6 +11,34 @@ import { useUser } from "@/firebase-client/useUser";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 
+const isTopicCompleted = (
+  topic: CBTopic,
+  topicWorldProgress: TopicWorldProgress,
+) => {
+  const topicsAsArray = Object.values(topicWorldTopics);
+  const topicData = topicsAsArray.find(
+    (t) => t.topicData.name === topics[topic].name,
+  );
+
+  const userTopicProgress = topicWorldProgress.topics[topic];
+
+  const userUnits =
+    userTopicProgress && Object.entries(userTopicProgress?.units);
+
+  const topicIsCompleted = topicData?.units.every((unit) => {
+    const userUnitProgress = userUnits?.find((userUnit) => {
+      return userUnit[0] === unit.id;
+    });
+    return unit.exercises.every((exercise) => {
+      return (
+        userUnitProgress &&
+        userUnitProgress[1].completedExercises.includes(exercise.id)
+      );
+    });
+  });
+  return topicIsCompleted;
+};
+
 const makeAchievementData = (
   achievement: CBAchievement,
 ): Omit<CBAchievementCardProps, "progressValue"> => {
@@ -38,44 +66,31 @@ export default function Achievements() {
     });
   }, [user.uid]);
 
-  const isTopicCompleted = (topic: CBTopic) => {
-    const topicsAsArray = Object.values(topicWorldTopics);
-    const topicData = topicsAsArray.find(
-      (t) => t.topicData.name === topics[topic].name,
-    );
-
-    const userTopicProgress = topicWorldProgress?.topics[topic];
-
-    const userUnits =
-      userTopicProgress && Object.entries(userTopicProgress?.units);
-
-    const topicIsCompleted = topicData?.units.every((unit) => {
-      const userUnitProgress = userUnits?.find((userUnit) => {
-        return userUnit[0] === unit.id;
-      });
-      return unit.exercises.every((exercise) => {
-        return (
-          userUnitProgress &&
-          userUnitProgress[1].completedExercises.includes(exercise.id)
-        );
-      });
-    });
-    return topicIsCompleted;
-  };
-
   const achievementCardsData: CBAchievementCardProps[] = [
     // Themenwelt
     {
       ...makeAchievementData(achievements[0]),
-      progressValue: isTopicCompleted(CBTopic.Zelle) ? 1 : 0,
+      progressValue:
+        topicWorldProgress &&
+        isTopicCompleted(CBTopic.Zelle, topicWorldProgress)
+          ? 1
+          : 0,
     },
     {
       ...makeAchievementData(achievements[1]),
-      progressValue: isTopicCompleted(CBTopic.MitoseMeiose) ? 1 : 0,
+      progressValue:
+        topicWorldProgress &&
+        isTopicCompleted(CBTopic.MitoseMeiose, topicWorldProgress)
+          ? 1
+          : 0,
     },
     {
       ...makeAchievementData(achievements[2]),
-      progressValue: isTopicCompleted(CBTopic.AufbauDNA) ? 1 : 0,
+      progressValue:
+        topicWorldProgress &&
+        isTopicCompleted(CBTopic.AufbauDNA, topicWorldProgress)
+          ? 1
+          : 0,
     },
     // Freie Übungen
     {
