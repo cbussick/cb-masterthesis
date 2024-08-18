@@ -23,21 +23,20 @@ const makeAchievementData = (
 };
 
 export default function Achievements() {
-  const user = useUser();
+  const { customData, user } = useUser();
 
-  const solvedExercisesCount = user.customData.solvedExercises;
-  const completedExamCount = user.customData.completedExams;
-  const unlockedGlossaryEntries =
-    user.customData.unlockedGlossaryEntryIDs.length;
+  const solvedExercisesCount = customData.solvedExercises;
+  const completedExamCount = customData.completedExams;
+  const unlockedGlossaryEntries = customData.unlockedGlossaryEntryIDs.length;
 
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
   useEffect(() => {
-    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+    getUserTopicWorldProgress(user.uid).then((progress) => {
       setTopicWorldProgress(progress);
     });
-  }, [user.user.uid]);
+  }, [user.uid]);
 
   const isTopicCompleted = (topic: CBTopic) => {
     const topicsAsArray = Object.values(topicWorldTopics);
