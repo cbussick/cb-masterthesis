@@ -33,11 +33,9 @@ const cancelButtonLabelMap: Record<CBExerciseSequenceType, string> = {
 export const CBExerciseSequenceBottomBar = ({
   uncompletedExercises,
   onSequenceComplete,
-  difficulty,
   onCompleteHref,
   onCancel,
   componentRef,
-  timerRef,
 }: CBExerciseSequenceBottomBarProps): JSX.Element => {
   const { startConfetti } = useConfetti();
   const { showSnackbar, setOpen: setSnackbarOpen } =
@@ -68,10 +66,7 @@ export const CBExerciseSequenceBottomBar = ({
         if (type === CBExerciseSequenceType.ExamSimulator) {
           onSequenceComplete();
         } else {
-          onSequenceComplete({ allExercisesCompleted, difficulty });
-        }
-        if (timerRef.current?.onSequenceComplete) {
-          timerRef.current.onSequenceComplete();
+          onSequenceComplete({ allExercisesCompleted });
         }
       }
 

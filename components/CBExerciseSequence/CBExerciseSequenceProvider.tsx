@@ -1,6 +1,8 @@
 "use client";
 
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
+import { Dayjs } from "dayjs";
 import {
   Dispatch,
   ReactNode,
@@ -14,6 +16,7 @@ import { CBExerciseSequenceType } from "./CBExerciseSequenceWrapperInterfaces";
 interface CBExerciseSequenceProviderProps {
   children: ReactNode;
   type: CBExerciseSequenceType;
+  beginTime: Dayjs;
 }
 
 interface CBExerciseSequenceDataType {
@@ -27,6 +30,7 @@ interface CBExerciseSequenceDataType {
    */
   isCurrentExerciseFinished: boolean;
   setCurrentExerciseFinished: Dispatch<SetStateAction<boolean>>;
+  beginTime: Dayjs;
 }
 
 const defaultExerciseSequence: CBExerciseSequenceDataType = {
@@ -37,6 +41,7 @@ const defaultExerciseSequence: CBExerciseSequenceDataType = {
   setCurrentExerciseIndex: () => {},
   isCurrentExerciseFinished: false,
   setCurrentExerciseFinished: () => {},
+  beginTime: dayjsLocalized(),
 };
 
 export const CBExerciseSequenceContext =
@@ -45,6 +50,7 @@ export const CBExerciseSequenceContext =
 export const CBExerciseSequenceProvider = ({
   children,
   type,
+  beginTime,
 }: CBExerciseSequenceProviderProps) => {
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(
@@ -64,12 +70,14 @@ export const CBExerciseSequenceProvider = ({
           setCurrentExerciseIndex,
           isCurrentExerciseFinished,
           setCurrentExerciseFinished,
+          beginTime,
         }}
       >
         {children}
       </CBExerciseSequenceContext.Provider>
     ),
     [
+      beginTime,
       children,
       currentExerciseIndex,
       exercises,

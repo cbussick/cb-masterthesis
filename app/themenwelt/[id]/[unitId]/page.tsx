@@ -5,7 +5,6 @@ import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper
 import { CBExerciseSequenceProvider } from "@/components/CBExerciseSequence/CBExerciseSequenceProvider";
 import { CBExerciseSequenceWrapper } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapper";
 import { CBExerciseSequenceType } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
-import { CBTime } from "@/components/CBExerciseTimer/CBExerciseTimerInterfaces";
 import { glossaryEntries } from "@/components/CBGlossary/CBGlossaryEntries";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
@@ -16,6 +15,7 @@ import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { addPointsToUser } from "@/firebase-client/addPointsToUser";
+import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
 import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { markExerciseAsCompleted } from "@/firebase-client/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase-client/unlockGlossaryEntries";
@@ -23,10 +23,11 @@ import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { CBRoute } from "@/helpers/routes";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
 import { Stack } from "@mui/material";
 import { notFound } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface ExercisePageParams {
   params: {
@@ -37,14 +38,6 @@ interface ExercisePageParams {
 
 export default function ExercisePage({ params }: ExercisePageParams) {
   const user = useUser();
-
-  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
-  const [, setCompletionTime] = useState<CBTime>({
-    sec: 0,
-    min: 0,
-  });
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
 
   const topicId = getEnumValueByStringValue(CBTopic, params.id);
 
@@ -61,6 +54,10 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     notFound();
   }
 
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
+  const [topicWorldProgress, setTopicWorldProgress] =
+    useState<TopicWorldProgress>();
+
   const unit = topicData.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
@@ -68,6 +65,8 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   if (!unit) {
     notFound();
   }
+
+  const { difficulty } = unit;
 
   useEffect(() => {
     getUserTopicWorldProgress(user.user.uid).then((progress) => {
@@ -92,12 +91,13 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
+  const beginTime = useMemo(() => dayjsLocalized(), []);
+
   const onSequenceComplete = (parameters: {
     allExercisesCompleted: boolean;
-    difficulty: CBExerciseDifficulty;
   }) => {
-    if (parameters.allExercisesCompleted && parameters.difficulty) {
-      if (parameters.difficulty === CBExerciseDifficulty.Hard) {
+    if (parameters.allExercisesCompleted) {
+      if (difficulty === CBExerciseDifficulty.Hard) {
         if (exercises) {
           const unlockedGlossaryEntryIds: string[] = [];
           const topic = exercises.at(0)?.topic;
@@ -124,10 +124,14 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
       addPointsToUser(
         user.user.uid,
-        pointsToAddForSequenceCompletion[parameters.difficulty],
+        pointsToAddForSequenceCompletion[difficulty],
       );
     }
+
+    const endTime = dayjsLocalized();
+    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
   };
+
   const hasAccess =
     topicWorldProgress && isUnitUnlocked(topicId, unit, topicWorldProgress);
 
@@ -151,7 +155,10 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
         {/* eslint-disable-next-line no-nested-ternary */}
         {hasAccess ? (
-          <CBExerciseSequenceProvider type={CBExerciseSequenceType.TopicWorld}>
+          <CBExerciseSequenceProvider
+            type={CBExerciseSequenceType.TopicWorld}
+            beginTime={beginTime}
+          >
             <CBExerciseSequenceWrapper
               exercises={exercises}
               onCompleteHref={onCompleteHref}
@@ -167,8 +174,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
                 );
               }}
               onSequenceComplete={onSequenceComplete}
-              setCompletionTime={setCompletionTime}
-              difficulty={unit.difficulty}
+              difficulty={difficulty}
             />
           </CBExerciseSequenceProvider>
         ) : hasAccess === undefined ? null : (

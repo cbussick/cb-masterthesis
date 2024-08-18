@@ -1,23 +1,21 @@
 "use client";
 
-import { CBTime } from "@/components/CBExerciseTimer/CBExerciseTimerInterfaces";
 import { CBFreePracticeExerciseSequence } from "@/components/CBFreePracticeExerciseSequence/CBFreePracticeExerciseSequence";
 import {
   CBExercise,
   CBExerciseWithMetaData,
 } from "@/data/exercises/CBExercise";
-import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
 import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
-import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { CBTopic } from "@/data/topics";
 import { addExercisesToMistakes } from "@/firebase-client/addExercisesToMistakes";
 import { addPointsToUser } from "@/firebase-client/addPointsToUser";
 import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUser";
+import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
 import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
 import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
@@ -25,6 +23,7 @@ import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
 import { retryMistakesPathSegment } from "@/helpers/routes";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { notFound } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -91,10 +90,6 @@ export default function FreePracticeSequencePage({
   const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
     CBAPIRequestState.Idle,
   );
-  const [, setCompletionTime] = useState<CBTime>({
-    sec: 0,
-    min: 0,
-  });
 
   const isRetryingMistakes = params.typeId === retryMistakesPathSegment;
 
@@ -224,20 +219,12 @@ export default function FreePracticeSequencePage({
     [isRetryingMistakes, user.customData.mistakeExercises, user.user],
   );
 
-  const onSequenceComplete = useCallback(
-    (parameters: {
-      allExercisesCompleted: boolean;
-      difficulty: CBExerciseDifficulty;
-    }) => {
-      if (parameters.allExercisesCompleted && parameters.difficulty) {
-        addPointsToUser(
-          user.user.uid,
-          pointsToAddForSequenceCompletion[parameters.difficulty],
-        );
-      }
-    },
-    [user.user.uid],
-  );
+  const beginTime = useMemo(() => dayjsLocalized(), []);
+
+  const onSequenceComplete = useCallback(() => {
+    const endTime = dayjsLocalized();
+    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
+  }, [beginTime, user.user.uid]);
 
   return useMemo(
     () => (
@@ -248,12 +235,13 @@ export default function FreePracticeSequencePage({
         onMistake={onMistake}
         onCompleteExercise={onCompleteExercise}
         onSequenceComplete={onSequenceComplete}
-        setCompletionTime={setCompletionTime}
         apiRequestState={apiRequestState}
+        beginTime={beginTime}
       />
     ),
     [
       apiRequestState,
+      beginTime,
       exerciseType,
       exercises,
       onCompleteExercise,

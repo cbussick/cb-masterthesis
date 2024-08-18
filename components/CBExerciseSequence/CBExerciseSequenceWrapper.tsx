@@ -11,7 +11,6 @@ export const CBExerciseSequenceWrapper = ({
   onCompleteHref,
   onCompleteExercise,
   onSequenceComplete,
-  setCompletionTime,
   difficulty,
   onCancel,
 }: CBExerciseSequenceWrapperProps): JSX.Element => {
@@ -32,7 +31,6 @@ export const CBExerciseSequenceWrapper = ({
             onCompleteHref={onCompleteHref}
             onCompleteExercise={onCompleteExercise}
             onSequenceComplete={onSequenceComplete}
-            setCompletionTime={setCompletionTime}
             difficulty={difficulty}
             onCancel={onCancel}
           />
@@ -49,7 +47,6 @@ export const CBExerciseSequenceWrapper = ({
       onMistake,
       onSequenceComplete,
       originalExercises,
-      setCompletionTime,
     ],
   );
 };

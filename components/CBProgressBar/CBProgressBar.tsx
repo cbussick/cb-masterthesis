@@ -14,7 +14,6 @@ export const CBProgressBar = ({
   maxValue,
   height,
   width,
-  rounded,
   format,
 }: CBProgressBarProps): JSX.Element => {
   const value = Math.round((currentValue / maxValue) * 100);
@@ -33,7 +32,7 @@ export const CBProgressBar = ({
         sx={{
           width: width === undefined ? 300 : width,
           height: heightMap[height === undefined ? "large" : height],
-          borderRadius: rounded === undefined || rounded ? 5 : undefined,
+          borderRadius: 5,
         }}
       />
 

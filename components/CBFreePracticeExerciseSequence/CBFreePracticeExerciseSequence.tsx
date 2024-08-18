@@ -20,8 +20,8 @@ export const CBFreePracticeExerciseSequence = ({
   onMistake,
   onCompleteExercise,
   onSequenceComplete,
-  setCompletionTime,
   apiRequestState,
+  beginTime,
 }: CBFreePracticeExerciseSequenceProps): JSX.Element => {
   const topicData = topics[topic];
   const subtitle = exerciseType
@@ -62,6 +62,7 @@ export const CBFreePracticeExerciseSequence = ({
                 ? CBExerciseSequenceType.FreePractice
                 : CBExerciseSequenceType.RetryMistakes
             }
+            beginTime={beginTime}
           >
             <CBExerciseSequenceWrapper
               exercises={exercises}
@@ -69,7 +70,6 @@ export const CBFreePracticeExerciseSequence = ({
               onCompleteHref={onCompleteHref}
               onCompleteExercise={onCompleteExercise}
               onSequenceComplete={onSequenceComplete}
-              setCompletionTime={setCompletionTime}
             />
           </CBExerciseSequenceProvider>
         )}

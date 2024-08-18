@@ -1,97 +1,51 @@
 "use client";
 
-import { CBTrackedTime } from "@/firebase-client/UserCustomDataConverter";
-import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
-import { useUser } from "@/firebase-client/useUser";
+import { getFormattedTimeInMinutesAndSeconds } from "@/helpers/time-tracking/getFormattedTimeInMinutesAndSeconds";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Stack, Typography } from "@mui/material";
-import dayjs from "dayjs";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { CBExerciseTimerProps, CBTime } from "./CBExerciseTimerInterfaces";
+import { useEffect, useState } from "react";
 
-export const CBExerciseTimer = forwardRef(
-  (
-    { setCompletionTime, isVisible }: CBExerciseTimerProps,
-    ref,
-  ): JSX.Element | null => {
-    const user = useUser();
+export const CBExerciseTimer = (): JSX.Element | null => {
+  const [passedSeconds, setPassedSeconds] = useState<number>(0);
 
-    const [time, setTime] = useState<CBTime>({
-      sec: 0,
-      min: 0,
-    });
+  const passedMinutes = Math.floor(passedSeconds / 60);
+  const isTimerExpired = passedMinutes >= 5;
 
-    const isTimerExpired = time.min >= 5;
+  const updateTimer = () => {
+    setPassedSeconds((prev) => prev + 1);
+  };
 
-    const updateTimer = () => {
-      setTime((prev) => {
-        const newTime = { ...prev };
-        if (newTime.sec < 59) newTime.sec += 1;
-        else {
-          newTime.min += 1;
-          newTime.sec = 0;
-        }
-        if (newTime.min === 60) {
-          newTime.min = 0;
-        }
+  useEffect(() => {
+    const id = setInterval(updateTimer, 1000);
 
-        return newTime;
-      });
+    return () => {
+      clearInterval(id);
     };
+  }, []);
 
-    useEffect(() => {
-      const id = setInterval(updateTimer, 1000);
-
-      return () => {
-        clearInterval(id);
-      };
-    }, []);
-
-    const onSequenceComplete = () => {
-      setCompletionTime(time);
-      const today = dayjs();
-      const formattedDate = today.format("YYYY-MM-DD");
-
-      const trackedTime: CBTrackedTime = {
-        date: formattedDate,
-        time: time.sec + time.min * 60,
-      };
-
-      addTrackedTimeToUser(user.user.uid, trackedTime);
-    };
-
-    useImperativeHandle(ref, () => ({
-      onSequenceComplete,
-    }));
-
-    return isVisible ? (
-      <Stack
-        direction="row"
-        spacing={1}
+  return (
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <TimerIcon
         sx={{
-          justifyContent: "center",
-          alignItems: "center",
+          color: (t) =>
+            isTimerExpired ? t.palette.error.main : t.palette.grey[600],
+        }}
+      />
+
+      <Typography
+        sx={{
+          color: isTimerExpired ? (t) => t.palette.error.main : undefined,
         }}
       >
-        <TimerIcon
-          sx={{
-            color: (t) =>
-              isTimerExpired ? t.palette.error.main : t.palette.grey[600],
-          }}
-        />
-
-        <Typography
-          sx={{
-            color: isTimerExpired ? (t) => t.palette.error.main : undefined,
-          }}
-        >
-          {`${time.min < 10 ? 0 : ""}${time.min}:${time.sec < 10 ? 0 : ""}${
-            time.sec
-          } / 20:00`}
-        </Typography>
-      </Stack>
-    ) : null;
-  },
-);
-
-CBExerciseTimer.displayName = "CBExerciseTimer";
+        {`${getFormattedTimeInMinutesAndSeconds(passedSeconds)} / 20:00`}
+      </Typography>
+    </Stack>
+  );
+};

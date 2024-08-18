@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
   CBTrackedTime,
@@ -7,8 +8,17 @@ import { firestore } from "./firebase";
 
 export const addTrackedTimeToUser = async (
   uid: string,
-  trackedTime: CBTrackedTime,
+  beginTime: Dayjs,
+  endTime: Dayjs,
 ) => {
+  const formattedDate = endTime.format("YYYY-MM-DD");
+  const durationInSeconds = endTime.diff(beginTime, "second");
+
+  const trackedTime: CBTrackedTime = {
+    date: formattedDate,
+    time: durationInSeconds,
+  };
+
   try {
     const documentReference = doc(firestore, `users/${uid}`).withConverter(
       userCustomDataConverter,

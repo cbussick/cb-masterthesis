@@ -1,10 +1,10 @@
 "use client";
 
-import { getFormattedTimeFromSeconds } from "@/helpers/time-tracking/getFormattedTime";
+import { calculateHoursAndMinutes } from "@/helpers/time-tracking/calculateHoursAndMinutes";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { getWeekdayIndex } from "@/helpers/time-tracking/getWeekdayIndex";
 import { useTheme } from "@mui/material";
 import { LineChart, LineChartProps } from "@mui/x-charts";
-import dayjs from "dayjs";
 import { CBTrackedTimeGraphProps } from "./CBTrackedTimeGraphInterfaces";
 
 const xAxisId = "x";
@@ -15,14 +15,13 @@ export const CBTrackedTimeGraph = ({
 }: CBTrackedTimeGraphProps): JSX.Element => {
   const theme = useTheme();
 
-  const today = dayjs();
+  const today = dayjsLocalized();
   const todayIndex = getWeekdayIndex(today);
 
   const lastWeekData = [0, 0, 0, 0, 0, 0, 0].map((t, index) => {
     const existingTime = lastWeekTimes.find((time) => {
-      const date = new Date(time.date);
-      const dateAsDayJs = dayjs(date);
-      const weekDayIndex = getWeekdayIndex(dateAsDayJs);
+      const date = dayjsLocalized(new Date(time.date));
+      const weekDayIndex = getWeekdayIndex(date);
       return weekDayIndex === index;
     });
 
@@ -51,7 +50,7 @@ export const CBTrackedTimeGraph = ({
       curve: "linear",
       valueFormatter: (v) => {
         if (v) {
-          const formatted = getFormattedTimeFromSeconds(v * 60);
+          const formatted = calculateHoursAndMinutes(v * 60);
           const totalMinutes = formatted.h * 60 + formatted.min;
 
           return `${totalMinutes} ${totalMinutes === 1 ? "Minute" : "Minuten"}`;

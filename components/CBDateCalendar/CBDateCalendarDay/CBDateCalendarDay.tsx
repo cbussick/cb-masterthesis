@@ -1,9 +1,9 @@
 "use client";
 
 import { CBClassEvent } from "@/data/events";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { Theme, Typography, useTheme } from "@mui/material";
 import { PickersDay } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
 import { MouseEvent, useState } from "react";
 import { CBDateCalendarDayInformation } from "../CBDateCalendarDayInformation/CBDateCalendarDayInformation";
 import { CBDateCalendarDayProps } from "./CBDateCalendarDayInterfaces";
@@ -43,7 +43,7 @@ export const CBDateCalendarDay = ({
 
   const selectedColor = theme.palette.primary.main;
 
-  const isInPast = day.isBefore(dayjs());
+  const isInPast = day.isBefore(dayjsLocalized());
 
   const highlightedDayEvents: CBClassEvent[] = events.filter(
     (event) => event.date.date() === day.date(),

@@ -28,7 +28,6 @@ export const CBExerciseSequence = ({
   onCompleteHref,
   onCompleteExercise,
   onSequenceComplete,
-  setCompletionTime,
   difficulty,
   onCancel,
 }: CBExerciseSequenceProps): JSX.Element | null => {
@@ -36,7 +35,6 @@ export const CBExerciseSequence = ({
     useCBExerciseSequenceSnackbar();
 
   const componentRef = useRef();
-  const timerRef = useRef();
 
   if (originalExercises.length === 0) {
     return null;
@@ -173,8 +171,6 @@ export const CBExerciseSequence = ({
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
           isSequenceFinished={isSequenceFinished}
-          setCompletionTime={setCompletionTime}
-          ref={timerRef}
         />
 
         <Stack
@@ -205,11 +201,9 @@ export const CBExerciseSequence = ({
               onMistake={onMistake}
               onCompleteExercise={onCompleteExercise}
               onSequenceComplete={onSequenceComplete}
-              difficulty={difficulty}
               onCompleteHref={onCompleteHref}
               onCancel={onCancel}
               componentRef={componentRef}
-              timerRef={timerRef}
             />
           )}
         </Stack>

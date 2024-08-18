@@ -3,10 +3,11 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { addCompletedExamsToUser } from "@/firebase-client/addCompletedExamsToUser";
 import { addPointsToUser } from "@/firebase-client/addPointsToUser";
+import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
 import { useUser } from "@/firebase-client/useUser";
 import { CBRoute, routeMap } from "@/helpers/routes";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { CBTime } from "../CBExerciseTimer/CBExerciseTimerInterfaces";
 import { CBPageHeader } from "../CBPageHeader/CBPageHeader";
 import { CBExamSimulatorEndScreen } from "./CBExamSimulatorEndScreen/CBExamSimulatorEndScreen";
 import { CBExamSimulatorHome } from "./CBExamSimulatorHome/CBExamSimulatorHome";
@@ -36,11 +37,6 @@ export const CBExamSimulator = ({
   const [exercises, setExercises] = useState<CBExerciseWithCorrectness[]>([]);
 
   const [isFirstRender, setFirstRender] = useState<boolean>(true);
-
-  const [completionTime, setCompletionTime] = useState<CBTime>({
-    sec: 0,
-    min: 0,
-  });
 
   const resetExercises = useCallback(
     (failedExercises: CBExerciseWithCorrectness[]) => {
@@ -93,16 +89,20 @@ export const CBExamSimulator = ({
     }
   }, [exercises, isFirstRender, resetExercises]);
 
+  const beginTime = useMemo(() => dayjsLocalized(), []);
+
   const onSequenceComplete = useCallback(() => {
     setExamState(CBExamSimulatorState.Finished);
     addCompletedExamsToUser(user.user.uid, 1);
+    const endTime = dayjsLocalized();
+    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
 
     const correctExercisesAmount = exercises.filter((e) => e.isCorrect).length;
     if (correctExercisesAmount >= exercises.length / 2) {
       const pointsToAdd = correctExercisesAmount + pointsForSuccessfulExam;
       addPointsToUser(user.user.uid, pointsToAdd);
     }
-  }, [exercises, user.user.uid]);
+  }, [beginTime, exercises, user.user.uid]);
 
   const onCancel = useCallback(() => {
     setExamState(CBExamSimulatorState.NotStarted);
@@ -115,20 +115,18 @@ export const CBExamSimulator = ({
         exercises={originalExercises}
         setExercises={setExercises}
         onSequenceComplete={onSequenceComplete}
-        setCompletionTime={setCompletionTime}
         onCancel={onCancel}
+        beginTime={beginTime}
       />
     ),
-    [originalExercises, onSequenceComplete, onCancel],
+    [originalExercises, onSequenceComplete, onCancel, beginTime],
   );
 
   let content: JSX.Element | null = null;
 
   if (examState === CBExamSimulatorState.NotStarted) {
-    let amountFinishedExercisesText = `${completedExamAmount}`;
-    if (completedExamAmount === 0) {
-      amountFinishedExercisesText = "Keine";
-    }
+    const amountFinishedExercisesText =
+      completedExamAmount === 0 ? "Keine" : `${completedExamAmount}`;
 
     content = (
       <CBExamSimulatorHome
@@ -158,10 +156,13 @@ export const CBExamSimulator = ({
   };
 
   if (examState === CBExamSimulatorState.Finished) {
+    const endTime = dayjsLocalized();
+    const passedSeconds = endTime.diff(beginTime, "second");
+
     content = (
       <CBExamSimulatorEndScreen
         exercises={exercises}
-        completionTime={completionTime}
+        passedSeconds={passedSeconds}
         onRetry={onRetry}
         onStartNewExam={onStartNewExam}
       />

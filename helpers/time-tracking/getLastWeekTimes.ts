@@ -1,18 +1,16 @@
 import { CBTrackedTime } from "@/firebase-client/UserCustomDataConverter";
-import dayjs from "dayjs";
-import { getWeekdayIndex } from "./getWeekdayIndex";
+import { dayjsLocalized } from "./dayjsLocalized";
 
 export const getLastWeekTimes = (
   userTimes: CBTrackedTime[],
 ): CBTrackedTime[] => {
-  const today = dayjs();
-  const todayIndex = getWeekdayIndex(today);
+  const today = dayjsLocalized();
 
   return userTimes.filter((t) => {
     const date = new Date(t.date);
     const dateDifference = today.diff(date, "day");
 
-    if (dateDifference <= todayIndex) {
+    if (dateDifference < 7) {
       return true;
     }
     return false;
