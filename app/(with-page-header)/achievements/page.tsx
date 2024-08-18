@@ -2,7 +2,7 @@
 
 import { CBAchievementCard } from "@/components/CBAchievementCard/CBAchievementCard";
 import { CBAchievementCardProps } from "@/components/CBAchievementCard/CBAchievementCardInterfaces";
-import { achievements } from "@/data/achievements";
+import { achievements, CBAchievement } from "@/data/achievements";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic, topics } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
@@ -10,6 +10,17 @@ import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldPr
 import { useUser } from "@/firebase-client/useUser";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
+
+const makeAchievementData = (
+  achievement: CBAchievement,
+): Omit<CBAchievementCardProps, "progressValue"> => {
+  return {
+    title: achievement.name,
+    subTitle: achievement.description,
+    image: { src: achievement.img.src, alt: achievement.img.alt },
+    progressGoal: achievement.progressGoal,
+  };
+};
 
 export default function Achievements() {
   const user = useUser();
@@ -56,83 +67,50 @@ export default function Achievements() {
   const achievementCardsData: CBAchievementCardProps[] = [
     // Themenwelt
     {
-      title: achievements[0].name,
-      subTitle: achievements[0].description,
-      image: { src: achievements[0].img.src, alt: achievements[0].img.alt },
-      progressGoal: achievements[0].progressGoal,
+      ...makeAchievementData(achievements[0]),
       progressValue: isTopicCompleted(CBTopic.Zelle) ? 1 : 0,
     },
     {
-      title: achievements[1].name,
-      subTitle: achievements[1].description,
-      image: { src: achievements[1].img.src, alt: achievements[1].img.alt },
-      progressGoal: achievements[1].progressGoal,
+      ...makeAchievementData(achievements[1]),
       progressValue: isTopicCompleted(CBTopic.MitoseMeiose) ? 1 : 0,
     },
     {
-      title: achievements[2].name,
-      subTitle: achievements[2].description,
-      image: { src: achievements[2].img.src, alt: achievements[2].img.alt },
-      progressGoal: achievements[2].progressGoal,
+      ...makeAchievementData(achievements[2]),
       progressValue: isTopicCompleted(CBTopic.AufbauDNA) ? 1 : 0,
     },
     // Freie Übungen
     {
-      title: achievements[3].name,
-      subTitle: achievements[3].description,
-      image: { src: achievements[3].img.src, alt: achievements[3].img.alt },
-      progressGoal: achievements[3].progressGoal,
+      ...makeAchievementData(achievements[3]),
       progressValue: solvedExercisesCount,
     },
     {
-      title: achievements[4].name,
-      subTitle: achievements[4].description,
-      image: { src: achievements[4].img.src, alt: achievements[4].img.alt },
-      progressGoal: achievements[4].progressGoal,
+      ...makeAchievementData(achievements[4]),
       progressValue: solvedExercisesCount,
     },
     {
-      title: achievements[5].name,
-      subTitle: achievements[5].description,
-      image: { src: achievements[5].img.src, alt: achievements[5].img.alt },
-      progressGoal: achievements[5].progressGoal,
+      ...makeAchievementData(achievements[5]),
       progressValue: solvedExercisesCount,
     },
     {
-      title: achievements[6].name,
-      subTitle: achievements[6].description,
-      image: { src: achievements[6].img.src, alt: achievements[6].img.alt },
-      progressGoal: achievements[6].progressGoal,
+      ...makeAchievementData(achievements[6]),
       progressValue: solvedExercisesCount,
     },
     // Prüfungssimulator
     {
-      title: achievements[7].name,
-      subTitle: achievements[7].description,
-      image: { src: achievements[7].img.src, alt: achievements[7].img.alt },
-      progressGoal: achievements[7].progressGoal,
+      ...makeAchievementData(achievements[7]),
       progressValue: completedExamCount,
     },
     {
-      title: achievements[8].name,
-      subTitle: achievements[8].description,
-      image: { src: achievements[8].img.src, alt: achievements[8].img.alt },
-      progressGoal: achievements[8].progressGoal,
+      ...makeAchievementData(achievements[8]),
       progressValue: completedExamCount,
     },
     {
-      title: achievements[9].name,
-      subTitle: achievements[9].description,
-      image: { src: achievements[9].img.src, alt: achievements[9].img.alt },
-      progressGoal: achievements[9].progressGoal,
+      ...makeAchievementData(achievements[9]),
       progressValue: completedExamCount,
     },
     // Glossar
     {
-      title: achievements[10].name,
-      subTitle: achievements[10].description,
-      image: { src: achievements[10].img.src, alt: achievements[10].img.alt },
-      progressGoal: achievements[10].progressGoal,
+      ...makeAchievementData(achievements[10]),
       progressValue: unlockedGlossaryEntries,
     },
   ];
