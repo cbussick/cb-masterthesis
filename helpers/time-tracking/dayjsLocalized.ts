@@ -1,8 +1,7 @@
 import dayjs from "dayjs";
+import de from "dayjs/locale/de";
 import duration from "dayjs/plugin/duration";
 import isoWeek from "dayjs/plugin/isoWeek";
-
-import de from "dayjs/locale/de";
 
 const dayjsLocalized = dayjs;
 dayjs.extend(duration);
