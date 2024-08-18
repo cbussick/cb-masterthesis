@@ -1,7 +1,7 @@
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
-import dayjs from "dayjs";
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
+import { dayjsLocalized } from "../time-tracking/dayjsLocalized";
 import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
 
 export const getOpenAIQuizExercise = async (
@@ -20,7 +20,7 @@ export const getOpenAIQuizExercise = async (
   });
 
   const evaluationWithStaticData: CBQuizExercise = {
-    id: `${userId}_${dayjs().unix()}`,
+    id: `${userId}_${dayjsLocalized().unix()}`,
     topic,
     type: CBExerciseType.AIQuiz,
     ...evaluation,

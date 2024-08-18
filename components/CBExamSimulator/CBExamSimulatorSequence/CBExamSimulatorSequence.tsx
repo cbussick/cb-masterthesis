@@ -9,13 +9,15 @@ export const CBExamSimulatorSequence = ({
   exercises,
   setExercises,
   onSequenceComplete,
-  setCompletionTime,
   onCancel,
+  beginTime,
 }: CBExamSimulatorSequenceProps): JSX.Element => {
   return (
-    <CBExerciseSequenceProvider type={CBExerciseSequenceType.ExamSimulator}>
+    <CBExerciseSequenceProvider
+      type={CBExerciseSequenceType.ExamSimulator}
+      beginTime={beginTime}
+    >
       <CBExerciseSequenceWrapper
-        type={CBExerciseSequenceType.ExamSimulator}
         exercises={exercises}
         onCompleteExercise={(params: {
           exerciseId: string;
@@ -36,7 +38,6 @@ export const CBExamSimulatorSequence = ({
           });
         }}
         onSequenceComplete={onSequenceComplete}
-        setCompletionTime={setCompletionTime}
         onCancel={onCancel}
       />
     </CBExerciseSequenceProvider>

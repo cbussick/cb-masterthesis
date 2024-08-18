@@ -22,14 +22,12 @@ import { CBExerciseSequenceProps } from "./CBExerciseSequenceInterfaces";
 import { CBExerciseSequenceTopBar } from "./CBExerciseSequenceTopBar/CBExerciseSequenceTopBar";
 
 export const CBExerciseSequence = ({
-  type,
   originalExercises,
   currentExerciseIndex,
   onMistake,
   onCompleteHref,
   onCompleteExercise,
   onSequenceComplete,
-  setCompletionTime,
   difficulty,
   onCancel,
 }: CBExerciseSequenceProps): JSX.Element | null => {
@@ -37,7 +35,6 @@ export const CBExerciseSequence = ({
     useCBExerciseSequenceSnackbar();
 
   const componentRef = useRef();
-  const timerRef = useRef();
 
   if (originalExercises.length === 0) {
     return null;
@@ -173,10 +170,7 @@ export const CBExerciseSequence = ({
           currentExerciseIndex={currentExerciseIndex}
           completedExercisesAmount={completedExercises.length}
           totalExercisesAmount={originalExercises.length}
-          type={type}
           isSequenceFinished={isSequenceFinished}
-          setCompletionTime={setCompletionTime}
-          ref={timerRef}
         />
 
         <Stack
@@ -194,7 +188,6 @@ export const CBExerciseSequence = ({
             {isSequenceFinished ? (
               <CBExerciseSequenceEndScreen
                 difficulty={difficulty}
-                type={type}
                 onCompleteHref={onCompleteHref}
               />
             ) : (
@@ -204,16 +197,13 @@ export const CBExerciseSequence = ({
 
           {!isSequenceFinished && (
             <CBExerciseSequenceBottomBar
-              sequenceType={type}
               uncompletedExercises={uncompletedExercises}
               onMistake={onMistake}
               onCompleteExercise={onCompleteExercise}
               onSequenceComplete={onSequenceComplete}
-              difficulty={difficulty}
               onCompleteHref={onCompleteHref}
               onCancel={onCancel}
               componentRef={componentRef}
-              timerRef={timerRef}
             />
           )}
         </Stack>

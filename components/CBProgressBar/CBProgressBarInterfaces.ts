@@ -9,6 +9,5 @@ export interface CBProgressBarProps {
   width?: number | string;
   height?: CBProgressBarHeight;
   color?: LinearProgressProps["color"];
-  rounded?: boolean;
   format?: CBProgressBarFormat;
 }

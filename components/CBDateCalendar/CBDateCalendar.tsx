@@ -1,11 +1,11 @@
 "use client";
 
 import { CBClassEvent, events } from "@/data/events";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { useIsServerSide } from "@/helpers/useIsServerSide";
 import { CircularProgress } from "@mui/material";
 import { DateCalendar } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
-import "dayjs/locale/de";
+import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { CBDateCalendarDay } from "./CBDateCalendarDay/CBDateCalendarDay";
 
@@ -20,7 +20,7 @@ const getEventsInCurrentMonth = (date: Dayjs) => {
 };
 
 export const CBDateCalendar = (): JSX.Element => {
-  const currentDate = dayjs();
+  const currentDate = dayjsLocalized();
   const [calendarEvents, setCalendarEvents] = useState<CBClassEvent[]>(
     getEventsInCurrentMonth(currentDate),
   );

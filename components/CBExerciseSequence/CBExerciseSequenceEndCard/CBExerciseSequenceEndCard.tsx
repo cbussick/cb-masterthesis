@@ -9,8 +9,9 @@ export const CBExerciseSequenceEndCard = ({
   return (
     <Card
       sx={{
-        height: 100,
+        height: 120,
         display: "flex",
+        width: "100%",
       }}
     >
       <Stack

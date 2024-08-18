@@ -2,6 +2,7 @@
 
 import { CBRoute } from "@/helpers/routes";
 import { playResultsSound } from "@/helpers/sounds/playResultsSound";
+import { getFormattedTimeInMinutesAndSeconds } from "@/helpers/time-tracking/getFormattedTimeInMinutesAndSeconds";
 import { DashboardRounded, RefreshRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -14,13 +15,15 @@ import { CBExamSimulatorEndScreenProps } from "./CBExamSimulatorEndScreenInterfa
 
 export const CBExamSimulatorEndScreen = ({
   exercises,
-  completionTime,
+  passedSeconds,
   onRetry,
   onStartNewExam,
 }: CBExamSimulatorEndScreenProps): JSX.Element => {
   const falseExercises: CBExerciseWithCorrectness[] = exercises.filter(
     (e) => !e.isCorrect,
   );
+
+  const passedMinutes = Math.floor(passedSeconds / 60);
 
   const correctExerciseAmount = exercises.filter((e) => e.isCorrect).length;
 
@@ -30,7 +33,7 @@ export const CBExamSimulatorEndScreen = ({
       : "Prüfung nicht bestanden";
 
   const completionTimeTitle =
-    completionTime.min >= 20
+    passedMinutes >= 20
       ? "Ausbaufähiges Zeitmanagement"
       : "Hervorragendes Zeitmanagement";
 
@@ -58,9 +61,7 @@ export const CBExamSimulatorEndScreen = ({
         <CBExamSimulatorTopCard
           image={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
           title={completionTimeTitle}
-          subTitle={`${completionTime.min < 10 ? 0 : ""}${completionTime.min}:${
-            completionTime.sec < 10 ? 0 : ""
-          }${completionTime.sec} Minuten`}
+          subTitle={getFormattedTimeInMinutesAndSeconds(passedSeconds)}
         />
       </Stack>
 
@@ -68,20 +69,20 @@ export const CBExamSimulatorEndScreen = ({
 
       <Typography
         sx={{
-          p: 1,
+          py: 1,
         }}
       >
         Im Folgenden findest du eine Übersicht über alle abgeschlossenen
         Aufgaben in der Prüfungssimulation:
       </Typography>
 
-      {/* Negative `mx` is necessary to align the grid with the other elements */}
       <Grid
         container
         rowSpacing={1}
         columnSpacing={2}
         sx={{
-          mx: "-12px !important",
+          // Negative `mx` is necessary to align the grid with the other elements
+          mx: "-8px !important",
         }}
       >
         {exercises.map((exercise, index) => (

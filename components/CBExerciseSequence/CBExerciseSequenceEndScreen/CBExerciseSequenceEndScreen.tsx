@@ -3,8 +3,10 @@
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { playResultsSound } from "@/helpers/sounds/playResultsSound";
+import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
+import { getFormattedTimeInMinutesAndSeconds } from "@/helpers/time-tracking/getFormattedTimeInMinutesAndSeconds";
 import { Button, Container, Stack, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { CBExerciseSequenceEndCard } from "../CBExerciseSequenceEndCard/CBExerciseSequenceEndCard";
 import { CBExerciseSequenceEndCardProps } from "../CBExerciseSequenceEndCard/CBExerciseSequenceEndCardInterfaces";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
@@ -31,10 +33,9 @@ const difficultyMap: Record<
 
 export const CBExerciseSequenceEndScreen = ({
   difficulty,
-  type,
   onCompleteHref,
 }: CBExerciseSequenceEndScreenProps): JSX.Element => {
-  const { exercises } = useCBExerciseSequence();
+  const { exercises, type, beginTime } = useCBExerciseSequence();
 
   useEffect(() => {
     playResultsSound();
@@ -49,10 +50,6 @@ export const CBExerciseSequenceEndScreen = ({
       exercises.length) *
     100
   ).toFixed(2);
-
-  const shortenedPercentage = correctExercisesPercentage.endsWith(".00")
-    ? correctExercisesPercentage.slice(0, -3)
-    : correctExercisesPercentage;
 
   const buttonsMap: Record<CBExerciseSequenceType, JSX.Element | null> = {
     [CBExerciseSequenceType.TopicWorld]: onCompleteHref ? (
@@ -73,6 +70,11 @@ export const CBExerciseSequenceEndScreen = ({
     ) : null,
   };
 
+  const passedSeconds = useMemo(
+    () => dayjsLocalized().diff(beginTime, "second"),
+    [beginTime],
+  );
+
   return (
     <Container maxWidth="md">
       <Stack
@@ -82,7 +84,7 @@ export const CBExerciseSequenceEndScreen = ({
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             textAlign: "center",
           }}
@@ -96,16 +98,26 @@ export const CBExerciseSequenceEndScreen = ({
           spacing={3}
           sx={{
             alignItems: "center",
+            width: "100%",
           }}
         >
-          <Stack spacing={2}>
-            {difficulty !== undefined && (
+          <Stack spacing={2} sx={{ width: "100%" }}>
+            {difficulty && (
               <CBExerciseSequenceEndCard {...difficultyMap[difficulty]} />
             )}
 
             <CBExerciseSequenceEndCard
               image={{ src: "/star.png", alt: "Stern" }}
-              text={`${shortenedPercentage}% richtig beantwortet`}
+              text={`${
+                correctExercisesPercentage.endsWith(".00")
+                  ? correctExercisesPercentage.slice(0, -3)
+                  : correctExercisesPercentage.replace(".", ",")
+              }% der Aufgaben richtig beantwortet`}
+            />
+
+            <CBExerciseSequenceEndCard
+              image={{ src: "/exam-simulator/timer.png", alt: "Stern" }}
+              text={`${getFormattedTimeInMinutesAndSeconds(passedSeconds)} gelernt`}
             />
           </Stack>
 
