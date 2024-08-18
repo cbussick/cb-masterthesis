@@ -17,18 +17,18 @@ export interface CBTopicData {
 export const topics: Record<CBTopic, CBTopicData> = {
   [CBTopic.Zelle]: {
     name: "Tierische und pflanzliche Zelle",
-    icon: { src: "/topic-world/zelle-bildicon.png", alt: "Zelle" },
+    icon: { src: "/topic-world/zelle-transparent.png", alt: "Zelle" },
   },
   [CBTopic.MitoseMeiose]: {
     name: "Mitose und Meiose",
     icon: {
-      src: "/topic-world/mitose-meiose-bildicon.png",
+      src: "/topic-world/mitose-meiose-transparent.png",
       alt: "Mitose und Meiose",
     },
   },
   [CBTopic.AufbauDNA]: {
     name: "Aufbau der DNA",
-    icon: { src: "/topic-world/dna-bildicon.png", alt: "DNA" },
+    icon: { src: "/topic-world/dna-transparent.png", alt: "DNA" },
   },
   [CBTopic.DNAReplikation]: {
     name: "DNA-Replikation",

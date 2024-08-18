@@ -72,7 +72,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Pflanzliche-Zelle-3.png",
+      src: "/cell-organelles/pflanzliche-zelle-2.png",
       alt: "Zellorganellen: Endoplasmatisches Retikulum, Peroxisome, Mitochondrium, Vakuole",
     },
     options: [
@@ -116,7 +116,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Pflanzliche-Zelle-3.png",
+      src: "/cell-organelles/pflanzliche-zelle-2.png",
       alt: "Zellorganellen: Mitochrondrium, Lysosomen, Zellkern, Golgi-Apparat",
     },
     options: [
@@ -160,7 +160,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Tierische-Zelle-2.png",
+      src: "/cell-organelles/tierische-zelle-2.png",
       alt: "Zellorganellen: Zellkern, Centriolen, Lysosomen, Golgi-Apparat",
     },
     options: [
@@ -204,7 +204,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Tierische-Zelle-2.png",
+      src: "/cell-organelles/tierische-zelle-2.png",
       alt: "Zellorganellen: Mitochondrium, Endoplasmatisches Retikulum, Mikrotubuli, Peroxisome",
     },
     options: [
@@ -248,7 +248,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Tierische-Zelle.png",
+      src: "/cell-organelles/tierische-zelle.png",
       alt: "Zellorganellen: Golgi-Apparat, Centriolen, Lysosomen, Mikrotubuli",
     },
     options: [
@@ -292,7 +292,7 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
     type: CBExerciseType.MatchingGame,
     topic: CBTopic.Zelle,
     image: {
-      src: "/cell-organelles/Tierische-Zelle.png",
+      src: "/cell-organelles/tierische-zelle.png",
       alt: "Zellorganellen: Zellkern, Endoplasmatische Retikulum, Lysosomen, Mitochondrium",
     },
     options: [

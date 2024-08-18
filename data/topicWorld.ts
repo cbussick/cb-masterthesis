@@ -35,7 +35,7 @@ export const zelleUnits: CBTopicWorldUnit[] = [
       .filter((exercise) => exercise.topic === CBTopic.Zelle)
       .slice(0, 10),
     icon: {
-      src: "/topic-world/grundlagen.png",
+      src: "/topic-world/small-plant.png",
       alt: "Grundlagen, pflanze klein",
     },
   },
@@ -45,7 +45,7 @@ export const zelleUnits: CBTopicWorldUnit[] = [
     difficulty: CBExerciseDifficulty.Medium,
     exercises: swiperExercises.slice(0, 12),
     icon: {
-      src: "/topic-world/weiterfuehrendes.png",
+      src: "/topic-world/medium-plant.png",
       alt: "Weiterführendes, Pflanze mittel groß",
     },
   },
@@ -56,7 +56,7 @@ export const zelleUnits: CBTopicWorldUnit[] = [
     exercises: quizExercises
       .filter((exercise) => exercise.topic === CBTopic.Zelle)
       .slice(11, 22),
-    icon: { src: "/topic-world/expertise.png", alt: "Expertise, Pflanze groß" },
+    icon: { src: "/topic-world/big-plant.png", alt: "Expertise, Pflanze groß" },
   },
 ];
 export const mitoseUnits: CBTopicWorldUnit[] = [
@@ -68,7 +68,7 @@ export const mitoseUnits: CBTopicWorldUnit[] = [
       .filter((exercise) => exercise.topic === CBTopic.MitoseMeiose)
       .slice(0, 3),
     icon: {
-      src: "/topic-world/grundlagen.png",
+      src: "/topic-world/small-plant.png",
       alt: "Grundlagen, pflanze klein",
     },
   },
@@ -80,7 +80,7 @@ export const mitoseUnits: CBTopicWorldUnit[] = [
       .filter((exercise) => exercise.topic === CBTopic.MitoseMeiose)
       .slice(4, 7),
     icon: {
-      src: "/topic-world/weiterfuehrendes.png",
+      src: "/topic-world/medium-plant.png",
       alt: "Weiterführendes, Pflanze mittel groß",
     },
   },
@@ -91,7 +91,7 @@ export const mitoseUnits: CBTopicWorldUnit[] = [
     exercises: quizExercises
       .filter((exercise) => exercise.topic === CBTopic.MitoseMeiose)
       .slice(8, 10),
-    icon: { src: "/topic-world/expertise.png", alt: "Expertise, Pflanze groß" },
+    icon: { src: "/topic-world/big-plant.png", alt: "Expertise, Pflanze groß" },
   },
 ];
 
@@ -104,7 +104,7 @@ export const aufbauDNAUnits: CBTopicWorldUnit[] = [
       .filter((exercise) => exercise.topic === CBTopic.AufbauDNA)
       .slice(0, 8),
     icon: {
-      src: "/topic-world/grundlagen.png",
+      src: "/topic-world/small-plant.png",
       alt: "Grundlagen, Pflanze klein",
     },
   },
@@ -116,7 +116,7 @@ export const aufbauDNAUnits: CBTopicWorldUnit[] = [
       .filter((exercise) => exercise.topic === CBTopic.AufbauDNA)
       .slice(9, 17),
     icon: {
-      src: "/topic-world/weiterfuehrendes.png",
+      src: "/topic-world/medium-plant.png",
       alt: "Weiterführendes, Pflanze mittel groß",
     },
   },
@@ -127,7 +127,7 @@ export const aufbauDNAUnits: CBTopicWorldUnit[] = [
     exercises: quizExercises
       .filter((exercise) => exercise.topic === CBTopic.AufbauDNA)
       .slice(18, 24),
-    icon: { src: "/topic-world/expertise.png", alt: "Expertise, Pflanze groß" },
+    icon: { src: "/topic-world/big-plant.png", alt: "Expertise, Pflanze groß" },
   },
 ];
 export const dnaReplikationUnits: CBTopicWorldUnit[] = [];
