@@ -9,6 +9,7 @@ import { CBTrackedTimeGraphProps } from "./CBTrackedTimeGraphInterfaces";
 
 const xAxisId = "x";
 const yAxisId = "y";
+const tickSize = 11;
 
 export const CBTrackedTimeGraph = ({
   thisWeekTimes,
@@ -91,11 +92,11 @@ export const CBTrackedTimeGraph = ({
       ]}
       leftAxis={{
         axisId: yAxisId,
-        tickSize: 11,
+        tickSize,
       }}
       bottomAxis={{
         axisId: xAxisId,
-        tickSize: 11,
+        tickSize,
       }}
       series={
         hasNoTrackedTime
