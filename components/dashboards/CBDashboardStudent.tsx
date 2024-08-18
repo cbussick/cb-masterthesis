@@ -2,10 +2,11 @@
 
 import { levels } from "@/data/gamification";
 import { useUser } from "@/firebase-client/useUser";
-import { calculateHoursAndMinutes } from "@/helpers/time-tracking/calculateHoursAndMinutes";
-import { getLastWeekTimes } from "@/helpers/time-tracking/getLastWeekTimes";
+import { calculateHoursAndMinutesAndSeconds } from "@/helpers/time-tracking/calculateHoursAndMinutesAndSeconds";
+import { getThisWeekTimes } from "@/helpers/time-tracking/getThisWeekTimes";
 import { Stack, Typography } from "@mui/material";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";
+import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBProgressCard } from "../CBProgressCard/CBProgressCard";
 import { CBTrackedTimeGraph } from "../CBTrackedTimeGraph/CBTrackedTimeGraph";
 import { CBUserActionsBar } from "../CBUserActionsBar/CBUserActionsBar";
@@ -16,12 +17,13 @@ export const CBDashboardStudent = (): JSX.Element => {
 
   const { points } = customData;
 
-  const lastWeekTimes = getLastWeekTimes(customData.trackedTime);
-  const totalTimeLastWeek = lastWeekTimes.reduce((acc, t) => {
+  const thisWeekTimes = getThisWeekTimes(customData.trackedTime);
+  const totalTimeThisWeek = thisWeekTimes.reduce((acc, t) => {
     return acc + t.time;
   }, 0);
 
-  const formattedTime = calculateHoursAndMinutes(totalTimeLastWeek);
+  const { hours, minutes, seconds } =
+    calculateHoursAndMinutesAndSeconds(totalTimeThisWeek);
 
   const currentLevel =
     levels.find((l) => l.pointsToNextLevel && l.pointsToNextLevel > points) ||
@@ -30,6 +32,15 @@ export const CBDashboardStudent = (): JSX.Element => {
   const userLvlTitleText = `Level ${currentLevel.level}: ${currentLevel.description}`;
   const pointsToNextLvl = currentLevel.pointsToNextLevel || points;
   const maxLevelReached = !currentLevel.pointsToNextLevel;
+
+  const hoursStringPart =
+    hours === 0 ? "" : `${hours} ${hours === 1 ? "Stunde" : "Stunden"}`;
+  const minutesStringPart =
+    minutes === 0 && hours === 0
+      ? ""
+      : `${minutes} ${minutes === 1 ? "Minute" : "Minuten"}`;
+  const secondsStringPart =
+    seconds === 0 ? "" : `${seconds} ${seconds === 1 ? "Sekunde" : "Sekunden"}`;
 
   return (
     <Stack spacing={3} sx={{ overflowY: "hidden", flex: 1 }}>
@@ -77,10 +88,21 @@ export const CBDashboardStudent = (): JSX.Element => {
         </Stack>
 
         <Stack spacing={1} sx={{ flex: 1 }}>
-          <Typography>{`Du hast in dieser Woche insgesamt ${formattedTime.h === 0 ? `${formattedTime.min} Minuten lang gelernt` : `${formattedTime.h} Stunden und ${formattedTime.min} Minuten lang gelernt`}:`}</Typography>
+          {hours === 0 && minutes === 0 && seconds === 0 ? (
+            <Stack direction="row" spacing={1}>
+              <Typography>
+                Du hast in dieser Woche noch nicht gelernt. Viel Erfolg!
+              </Typography>
 
-          {/* Necessary to not render the graph while on the server, because then the calendar is not yet */}
-          <CBTrackedTimeGraph lastWeekTimes={lastWeekTimes} />
+              <CBEmoji emoji="💪" />
+            </Stack>
+          ) : (
+            <Typography>
+              {`Du hast in dieser Woche insgesamt ${hoursStringPart} ${minutesStringPart} ${secondsStringPart} lang gelernt:`}
+            </Typography>
+          )}
+
+          <CBTrackedTimeGraph thisWeekTimes={thisWeekTimes} />
         </Stack>
       </Stack>
     </Stack>

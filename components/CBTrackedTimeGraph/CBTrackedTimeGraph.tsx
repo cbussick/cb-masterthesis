@@ -1,6 +1,6 @@
 "use client";
 
-import { calculateHoursAndMinutes } from "@/helpers/time-tracking/calculateHoursAndMinutes";
+import { calculateMinutesAndSeconds } from "@/helpers/time-tracking/calculateMinutesAndSeconds";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { getWeekdayIndex } from "@/helpers/time-tracking/getWeekdayIndex";
 import { useTheme } from "@mui/material";
@@ -11,33 +11,35 @@ const xAxisId = "x";
 const yAxisId = "y";
 
 export const CBTrackedTimeGraph = ({
-  lastWeekTimes,
+  thisWeekTimes,
 }: CBTrackedTimeGraphProps): JSX.Element => {
   const theme = useTheme();
 
   const today = dayjsLocalized();
   const todayIndex = getWeekdayIndex(today);
 
-  const lastWeekData = [0, 0, 0, 0, 0, 0, 0].map((t, index) => {
-    const existingTime = lastWeekTimes.find((time) => {
+  const thisWeekData = [0, 0, 0, 0, 0, 0, 0].map((t, index) => {
+    const existingTime = thisWeekTimes.find((time) => {
       const date = dayjsLocalized(new Date(time.date));
       const weekDayIndex = getWeekdayIndex(date);
       return weekDayIndex === index;
     });
 
+    // If day is in the future, do not show any data point
     if (index > todayIndex) {
       return null;
     }
     if (existingTime) {
+      // Transform time to minutes
       return existingTime.time >= 60 ? existingTime.time / 60 : 0;
     }
     return 0;
   });
 
-  const hasNoTrackedTime = lastWeekData.every((t) => t === null || t === 0);
+  const hasNoTrackedTime = thisWeekData.every((t) => t === null || t === 0);
 
   // Necessary, so that the graph does not have the line in the middle when there is no tracked time.
-  // Instead, this will show the line at the bottom of the graph.
+  // Instead this will show the line at the bottom of the graph.
   const noTrackedTimeTickZeroFixData: LineChartProps["series"] = [
     // Can be ignored, because this allows hiding the tooltip for points in this series.
     // @ts-ignore
@@ -46,16 +48,26 @@ export const CBTrackedTimeGraph = ({
 
   const data: LineChartProps["series"] = [
     {
-      data: lastWeekData,
+      data: thisWeekData,
       curve: "linear",
       valueFormatter: (v) => {
         if (v) {
-          const formatted = calculateHoursAndMinutes(v * 60);
-          const totalMinutes = formatted.h * 60 + formatted.min;
+          const totalSeconds = v * 60;
+          const { minutes, seconds } = calculateMinutesAndSeconds(totalSeconds);
 
-          return `${totalMinutes} ${totalMinutes === 1 ? "Minute" : "Minuten"}`;
+          const minutesStringPart =
+            minutes === 0
+              ? ""
+              : `${minutes} ${minutes === 1 ? "Minute" : "Minuten"}`;
+
+          const secondsStringPart =
+            seconds === 0
+              ? ""
+              : `${seconds} ${seconds === 1 ? "Sekunde" : "Sekunden"}`;
+
+          return `${minutesStringPart} ${secondsStringPart}`;
         }
-        return "0 Minuten";
+        return "Keine Zeit erfasst";
       },
     },
   ];
