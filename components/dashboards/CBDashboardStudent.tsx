@@ -167,7 +167,7 @@ export const CBDashboardStudent = (): JSX.Element => {
             </Typography>
           )}
 
-          <Card sx={{ flex: 1, p: 4 }}>
+          <Card sx={{ flex: 1, p: 4, minHeight: 180 }}>
             <CBTrackedTimeGraph thisWeekTimes={thisWeekTimes} />
           </Card>
         </Stack>
