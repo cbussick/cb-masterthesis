@@ -6,5 +6,6 @@ export interface CBProgressCircleProps {
   progress: number;
   href: string;
   unlocked: boolean;
+  comingSoon?: boolean;
   icon: CBImgWithAlt;
 }

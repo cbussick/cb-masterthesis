@@ -3,6 +3,7 @@
 import { useCurrentMuiBreakpoint } from "@/helpers/useCurrentMuiBreakpoint";
 import { LockRounded } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Breakpoint,
   ButtonBase,
@@ -41,6 +42,7 @@ export const CBProgressCircle = ({
   progress,
   href,
   unlocked,
+  comingSoon,
   icon,
 }: CBProgressCircleProps): JSX.Element => {
   const theme = useTheme();
@@ -170,6 +172,15 @@ export const CBProgressCircle = ({
               >
                 {label}
               </Typography>
+
+              {comingSoon && (
+                <Alert
+                  severity="info"
+                  sx={{ alignItems: "center", width: "100%" }}
+                >
+                  <Typography>Coming soon!</Typography>
+                </Alert>
+              )}
             </Stack>
           </ButtonBase>
         </Link>

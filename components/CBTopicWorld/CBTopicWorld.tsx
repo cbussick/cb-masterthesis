@@ -1,7 +1,7 @@
 "use client";
 
 import { topicWorldTopics } from "@/data/topicWorld";
-import { CBTopic } from "@/data/topics";
+import { CBTopic, comingSoonTopics } from "@/data/topics";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordKeyByValue } from "@/helpers/getEnumRecordKeyByValue";
 import { CBRoute } from "@/helpers/routes";
@@ -54,7 +54,10 @@ export const CBTopicWorld = (): JSX.Element => {
               notFound();
             }
 
-            const unlocked = isTopicUnlocked(topicId, topicWorldProgress);
+            const comingSoon = comingSoonTopics.includes(topicId);
+
+            const unlocked =
+              !comingSoon && isTopicUnlocked(topicId, topicWorldProgress);
 
             let completedUnits = 0;
 
@@ -88,6 +91,7 @@ export const CBTopicWorld = (): JSX.Element => {
                   progress={Number.isNaN(progress) ? 0 : progress}
                   href={`${CBRoute.Themenwelt}/${topicId}`}
                   unlocked={unlocked || false}
+                  comingSoon={comingSoon}
                 />
               </Fragment>
             );

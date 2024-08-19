@@ -32,14 +32,20 @@ export const topics: Record<CBTopic, CBTopicData> = {
   },
   [CBTopic.DNAReplikation]: {
     name: "DNA-Replikation",
-    icon: { src: "emoji-svgs/2753.svg", alt: "DNA-Replikation" },
+    icon: { src: "", alt: "" },
   },
   [CBTopic.Proteinbiosynthese]: {
     name: "Proteinbiosynthese",
-    icon: { src: "emoji-svgs/2753.svg", alt: "Proteinbiosynthese" },
+    icon: { src: "", alt: "" },
   },
   [CBTopic.Mutation]: {
     name: "(Gen-)Mutationen",
-    icon: { src: "emoji-svgs/2753.svg", alt: "(Gen-)Mutationen" },
+    icon: { src: "", alt: "" },
   },
 };
+
+export const comingSoonTopics: CBTopic[] = [
+  CBTopic.DNAReplikation,
+  CBTopic.Proteinbiosynthese,
+  CBTopic.Mutation,
+];
