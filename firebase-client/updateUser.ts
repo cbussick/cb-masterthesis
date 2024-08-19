@@ -11,6 +11,6 @@ export const updateUser = async (
 
     updateDoc(documentReference, data);
   } catch (error) {
-    //
+    // Handle error
   }
 };
