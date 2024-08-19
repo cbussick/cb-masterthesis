@@ -1,6 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
-import { userCustomDataConverter } from "./UserCustomDataConverter";
-import { firestore } from "./firebase";
+import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
+import { setDoc } from "firebase/firestore";
 import { CBUserRole } from "./userRole";
 
 export const initializeCustomUserFields = async (
@@ -13,9 +12,7 @@ export const initializeCustomUserFields = async (
   profilePicture: string,
 ) => {
   try {
-    const documentReference = doc(firestore, `users/${uid}`).withConverter(
-      userCustomDataConverter,
-    );
+    const documentReference = getUserCustomDataDocumentReference(uid);
 
     setDoc(documentReference, {
       firstName,

@@ -13,10 +13,10 @@ import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { addPointsToUser } from "@/firebase-client/addPointsToUser";
-import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
+import { CBUserCustomData } from "@/firebase-client/UserCustomDataConverter";
+import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";
 import { markExerciseAsCompleted } from "@/firebase-client/markExerciseAsCompleted";
-import { unlockGlossaryEntries } from "@/firebase-client/unlockGlossaryEntries";
+import { updateUser } from "@/firebase-client/updateUser";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
@@ -35,7 +35,7 @@ interface ExercisePageParams {
 }
 
 export default function ExercisePage({ params }: ExercisePageParams) {
-  const user = useUser();
+  const { user, topicWorldProgress, customData } = useUser();
 
   const topicId = getEnumValueByStringValue(CBTopic, params.id);
 
@@ -66,7 +66,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
   useEffect(() => {
     const userCompletedExercises =
-      user.topicWorldProgress.topics[topicId]?.units[params.unitId]
+      topicWorldProgress.topics[topicId]?.units[params.unitId]
         ?.completedExercises || [];
 
     const exercisesWithMetaData: CBExerciseWithMetaData[] = unit.exercises.map(
@@ -90,6 +90,8 @@ export default function ExercisePage({ params }: ExercisePageParams) {
   const onSequenceComplete = (parameters: {
     allExercisesCompleted: boolean;
   }) => {
+    const userNewData: Partial<CBUserCustomData> = {};
+
     if (parameters.allExercisesCompleted) {
       if (difficulty === CBExerciseDifficulty.Hard) {
         if (exercises) {
@@ -110,23 +112,33 @@ export default function ExercisePage({ params }: ExercisePageParams) {
             });
           }
 
-          if (unlockGlossaryEntries.length > 0) {
-            unlockGlossaryEntries(user.user.uid, unlockedGlossaryEntryIds);
-          }
+          const dedupedUnlockedGlossaryEntryIds =
+            unlockedGlossaryEntryIds.filter(
+              (entry) => !customData.unlockedGlossaryEntryIDs.includes(entry),
+            );
+
+          userNewData.unlockedGlossaryEntryIDs = [
+            ...customData.unlockedGlossaryEntryIDs,
+            ...dedupedUnlockedGlossaryEntryIds,
+          ];
         }
       }
 
-      addPointsToUser(
-        user.user.uid,
-        pointsToAddForSequenceCompletion[difficulty],
-      );
+      userNewData.points =
+        customData.points + pointsToAddForSequenceCompletion[difficulty];
     }
 
     const endTime = dayjsLocalized();
-    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
+
+    userNewData.trackedTime = makeUpdatedTrackedTime(
+      beginTime,
+      endTime,
+      customData,
+    );
+    updateUser(user.uid, userNewData);
   };
 
-  const hasAccess = isUnitUnlocked(topicId, unit, user.topicWorldProgress);
+  const hasAccess = isUnitUnlocked(topicId, unit, topicWorldProgress);
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
@@ -160,7 +172,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
                 isCorrect: boolean;
               }) => {
                 markExerciseAsCompleted(
-                  user.user.uid,
+                  user.uid,
                   topicId,
                   params.unitId,
                   parameters.exerciseId,
