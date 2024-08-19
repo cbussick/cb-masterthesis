@@ -32,7 +32,7 @@ const rows = [
 
 export const CBDashboardAdmin = (): JSX.Element => {
   return (
-    <Stack spacing={3}>
+    <Stack spacing={2}>
       <Stack
         direction="row"
         spacing={1}

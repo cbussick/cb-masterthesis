@@ -1,5 +1,6 @@
 "use client";
 
+import { CBRoute } from "@/helpers/routes";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
@@ -31,7 +32,7 @@ export const CBNoAccessView = (): JSX.Element => {
             Menüpunkte in der Sidebar links.
           </Typography>
 
-          <Button href="/">Zum Dashboard</Button>
+          <Button href={CBRoute.Home}>Zum Dashboard</Button>
         </Stack>
       </Stack>
     </CBContentWrapper>

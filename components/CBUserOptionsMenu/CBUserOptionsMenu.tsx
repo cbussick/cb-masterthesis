@@ -1,6 +1,7 @@
 "use client";
 
 import { handleSignOut } from "@/helpers/handleSignOut";
+import { CBRoute } from "@/helpers/routes";
 import { useSnackbar } from "@/ui/useSnackbar";
 import { Logout, Settings } from "@mui/icons-material";
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
@@ -35,7 +36,7 @@ export const CBUserOptionsMenu = ({
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <CBUnstyledNextLink href="/einstellungen">
+      <CBUnstyledNextLink href={CBRoute.Einstellungen}>
         <MenuItem onClick={onClose}>
           <ListItemIcon>
             <Settings fontSize="small" />

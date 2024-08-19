@@ -1,4 +1,5 @@
 import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
+import { CBProgressBarProps } from "../CBProgressBar/CBProgressBarInterfaces";
 
 export interface CBProgressCardProps {
   image: CBImgWithAlt;
@@ -6,4 +7,5 @@ export interface CBProgressCardProps {
   subTitle: string;
   progressValue: number;
   maxValue: number;
+  format?: CBProgressBarProps["format"];
 }

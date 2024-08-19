@@ -1,6 +1,8 @@
-import { Card, Stack, Typography } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { CBImage } from "../CBImage/CBImage";
 import { CBGraphCardProps } from "./CBGraphCardInterfaces";
+
+const contentPadding = 4;
 
 export const CBGraphCard = ({
   image,
@@ -17,9 +19,10 @@ export const CBGraphCard = ({
     >
       <Stack
         direction="row"
-        spacing={4}
+        spacing={contentPadding}
         sx={{
           alignItems: "center",
+          flex: 1,
         }}
       >
         <CBImage
@@ -40,9 +43,11 @@ export const CBGraphCard = ({
 
         <Stack
           direction="row"
+          spacing={4}
           sx={{
             height: "100%",
             alignItems: "center",
+            flex: 1,
           }}
         >
           <Stack spacing={0.7}>
@@ -51,7 +56,16 @@ export const CBGraphCard = ({
             <Typography variant="body2">{subTitle}</Typography>
           </Stack>
 
-          {graph}
+          <Box
+            sx={{
+              height: "100%",
+              flex: 1,
+              py: contentPadding,
+              pr: contentPadding,
+            }}
+          >
+            {graph}
+          </Box>
         </Stack>
       </Stack>
     </Card>

@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 
 import { alphabet } from "@/helpers/alphabet";
+import { CBRoute } from "@/helpers/routes";
 import { LockRounded } from "@mui/icons-material";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { useState } from "react";
@@ -179,7 +180,7 @@ export const CBGlossaryEntriesList = ({
                                   {`Schalte Level ${entry.unlockLevel} in der `}
 
                                   <CBLink
-                                    href="/themenwelt"
+                                    href={CBRoute.Themenwelt}
                                     style={{
                                       fontWeight: "medium",
                                     }}
