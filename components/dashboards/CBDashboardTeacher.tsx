@@ -18,7 +18,7 @@ const commonGridItemProps: Grid2Props = {
 };
 export const CBDashboardTeacher = (): JSX.Element => {
   return (
-    <Stack spacing={3}>
+    <Stack spacing={2}>
       <CBPageHeader
         title="Dashboard"
         subTitle="Erhalte einen Überblick über deine Klassen, bearbeite das Glossar und

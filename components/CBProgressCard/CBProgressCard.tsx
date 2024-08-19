@@ -11,6 +11,7 @@ export const CBProgressCard = ({
   image,
   progressValue,
   maxValue,
+  format,
 }: CBProgressCardProps): JSX.Element => {
   return (
     <Card
@@ -56,7 +57,7 @@ export const CBProgressCard = ({
             maxValue={maxValue}
             height="small"
             width="100%"
-            format="percent"
+            format={format}
           />
         </Stack>
       </Stack>
