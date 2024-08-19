@@ -1,31 +1,50 @@
 "use client";
 
 import { topicWorldTopics } from "@/data/topicWorld";
+import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordKeyByValue } from "@/helpers/getEnumRecordKeyByValue";
 import { CBRoute } from "@/helpers/routes";
+import { isTopicCompleted } from "@/helpers/topic-world/isTopicCompleted";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
-import { Box, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack } from "@mui/material";
 import { notFound } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { CBProgressCircle } from "../CBProgressCircle/CBProgressCircle";
 import { CBProgressCircleConnector } from "../CBProgressCircleConnector/CBProgressCircleConnector";
 
 export const CBTopicWorld = (): JSX.Element => {
-  const user = useUser();
+  const {
+    user: { uid },
+  } = useUser();
 
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
   useEffect(() => {
-    getUserTopicWorldProgress(user.user.uid).then((progress) => {
+    getUserTopicWorldProgress(uid).then((progress) => {
       setTopicWorldProgress(progress);
     });
-  }, [user.user.uid]);
+  }, [uid]);
 
   const topicsAsArray = Object.values(topicWorldTopics);
+
+  let currentTopic = CBTopic.Zelle;
+  if (topicWorldProgress) {
+    if (isTopicCompleted(CBTopic.Zelle, topicWorldProgress)) {
+      currentTopic = CBTopic.MitoseMeiose;
+    }
+    if (isTopicCompleted(CBTopic.MitoseMeiose, topicWorldProgress)) {
+      currentTopic = CBTopic.AufbauDNA;
+    }
+  }
+
+  useEffect(() => {
+    const element = document.getElementById(currentTopic);
+    element?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [currentTopic]);
 
   return (
     <Box
@@ -52,20 +71,20 @@ export const CBTopicWorld = (): JSX.Element => {
 
             let completedUnits = 0;
 
-            topic?.units.forEach((unit) => {
+            topic.units.forEach((unit) => {
               const completedExercises =
-                topicWorldProgress?.topics[topicId]?.units[unit.id]
+                topicWorldProgress.topics[topicId]?.units[unit.id]
                   ?.completedExercises?.length;
 
               if (
                 completedExercises &&
-                completedExercises === unit?.exercises.length
+                completedExercises === unit.exercises.length
               ) {
                 completedUnits += 1;
               }
             });
 
-            const progress = topic?.units
+            const progress = topic.units
               ? (100 * completedUnits) / topic.units.length
               : 0;
 
@@ -76,6 +95,7 @@ export const CBTopicWorld = (): JSX.Element => {
                 )}
 
                 <CBProgressCircle
+                  id={topicId}
                   label={topic.topicData.name}
                   icon={topic.topicData.icon}
                   progress={Number.isNaN(progress) ? 0 : progress}
@@ -86,7 +106,9 @@ export const CBTopicWorld = (): JSX.Element => {
             );
           })}
         </Stack>
-      ) : null}
+      ) : (
+        <CircularProgress />
+      )}
     </Box>
   );
 };

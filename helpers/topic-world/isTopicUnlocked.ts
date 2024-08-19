@@ -2,6 +2,7 @@ import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { getEnumRecordKeyByValue } from "../getEnumRecordKeyByValue";
+import { isTopicCompleted } from "./isTopicCompleted";
 
 export const isTopicUnlocked = (
   topic: CBTopic,
@@ -22,19 +23,7 @@ export const isTopicUnlocked = (
       : getEnumRecordKeyByValue(topicWorldTopics, previousTopicGeneralData);
 
   const isPreviousTopicCompleted =
-    previousTopicId &&
-    previousTopicGeneralData?.units?.length > 0 &&
-    previousTopicGeneralData.units.every((unit) => {
-      const userUnitProgress =
-        topicWorldProgress.topics[previousTopicId]?.units[unit.id];
-
-      return (
-        unit.exercises.length > 0 &&
-        unit.exercises.every((exercise) => {
-          return userUnitProgress?.completedExercises.includes(exercise.id);
-        })
-      );
-    });
+    previousTopicId && isTopicCompleted(previousTopicId, topicWorldProgress);
 
   const isUnlocked = index === 0 || isPreviousTopicCompleted;
 
