@@ -13,7 +13,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
 import { CBSidebar } from "../CBSidebar/CBSidebar";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
-import { CBLoadingView } from "../views/CBLoadingView";
+import { CBLoadingView } from "../views/CBLoadingAppView";
 import { CBMobileView } from "../views/CBMobileView";
 import { CBNoAccessView } from "../views/CBNoAccessView";
 import { CBNotSignedInView } from "../views/CBNotSignedInView";
