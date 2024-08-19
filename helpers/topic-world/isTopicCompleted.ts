@@ -1,10 +1,10 @@
 import { CBTopic } from "@/data/topics";
 import { topicWorldTopics } from "@/data/topicWorld";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { CBTopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 
 export const isTopicCompleted = (
   topic: CBTopic,
-  topicWorldProgress: TopicWorldProgress,
+  topicWorldProgress: CBTopicWorldProgress,
 ) => {
   const userTopicProgress = topicWorldProgress.topics[topic];
 

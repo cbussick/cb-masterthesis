@@ -3,7 +3,7 @@ import {
   PartialWithFieldValue,
 } from "firebase/firestore";
 
-export interface TopicWorldProgress {
+export interface CBTopicWorldProgress {
   topics: {
     [topicId: string]: {
       units: {
@@ -16,17 +16,17 @@ export interface TopicWorldProgress {
 }
 
 export const topicWorldProgressConverter: FirestoreDataConverter<
-  TopicWorldProgress,
-  PartialWithFieldValue<TopicWorldProgress>
+  CBTopicWorldProgress,
+  PartialWithFieldValue<CBTopicWorldProgress>
 > = {
   toFirestore(
-    topicWorldProgress: PartialWithFieldValue<TopicWorldProgress>,
-  ): PartialWithFieldValue<TopicWorldProgress> {
+    topicWorldProgress: PartialWithFieldValue<CBTopicWorldProgress>,
+  ): PartialWithFieldValue<CBTopicWorldProgress> {
     return {
       topics: topicWorldProgress.topics,
     };
   },
-  fromFirestore(snapshot, options): TopicWorldProgress {
+  fromFirestore(snapshot, options): CBTopicWorldProgress {
     const data = snapshot.data(options);
     return { topics: data.topics };
   },

@@ -13,10 +13,8 @@ import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { addPointsToUser } from "@/firebase-client/addPointsToUser";
 import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
-import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { markExerciseAsCompleted } from "@/firebase-client/markExerciseAsCompleted";
 import { unlockGlossaryEntries } from "@/firebase-client/unlockGlossaryEntries";
 import { useUser } from "@/firebase-client/useUser";
@@ -54,10 +52,6 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     notFound();
   }
 
-  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
-
   const unit = topicData.units.find(
     (currentUnit) => currentUnit.id === params.unitId,
   );
@@ -68,26 +62,26 @@ export default function ExercisePage({ params }: ExercisePageParams) {
 
   const { difficulty } = unit;
 
-  useEffect(() => {
-    getUserTopicWorldProgress(user.user.uid).then((progress) => {
-      const userCompletedExercises =
-        progress?.topics[topicId]?.units[params.unitId]?.completedExercises ||
-        [];
-
-      setExercises(
-        unit.exercises.map((exercise) => ({
-          ...exercise,
-          isCompleted: userCompletedExercises.includes(exercise.id),
-        })),
-      );
-    });
-  }, [params.unitId, topicId, unit.exercises, user.user.uid]);
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
 
   useEffect(() => {
-    getUserTopicWorldProgress(user.user.uid).then((progress) => {
-      setTopicWorldProgress(progress);
-    });
-  }, [user.user.uid]);
+    const userCompletedExercises =
+      user.topicWorldProgress.topics[topicId]?.units[params.unitId]
+        ?.completedExercises || [];
+
+    const exercisesWithMetaData: CBExerciseWithMetaData[] = unit.exercises.map(
+      (exercise) => ({
+        ...exercise,
+        isCompleted: userCompletedExercises.includes(exercise.id),
+      }),
+    );
+
+    setExercises(exercisesWithMetaData);
+    // Don't add anything from `user` to dependencies, because it would trigger
+    // a new selection of random exercises, while the user is still inside the sequence.
+    // This would cause glitches for the user.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.unitId, topicId, unit.exercises]);
 
   const onCompleteHref = `${CBRoute.Themenwelt}/${topicId}`;
 
@@ -132,8 +126,7 @@ export default function ExercisePage({ params }: ExercisePageParams) {
     addTrackedTimeToUser(user.user.uid, beginTime, endTime);
   };
 
-  const hasAccess =
-    topicWorldProgress && isUnitUnlocked(topicId, unit, topicWorldProgress);
+  const hasAccess = isUnitUnlocked(topicId, unit, user.topicWorldProgress);
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>

@@ -1,12 +1,12 @@
 import { CBTopicWorldUnit, topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { CBTopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { isUnitCompleted } from "./isUnitCompleted";
 
 export const isUnitUnlocked = (
   topic: CBTopic,
   unit: CBTopicWorldUnit,
-  topicWorldProgress: TopicWorldProgress,
+  topicWorldProgress: CBTopicWorldProgress,
 ) => {
   const topicData = topicWorldTopics[topic];
 

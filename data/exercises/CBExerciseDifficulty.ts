@@ -1,5 +1,5 @@
 export enum CBExerciseDifficulty {
-  Easy,
-  Medium,
-  Hard,
+  Easy = "easy",
+  Medium = "medium",
+  Hard = "hard",
 }
