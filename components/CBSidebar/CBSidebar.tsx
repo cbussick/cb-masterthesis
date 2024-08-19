@@ -122,7 +122,7 @@ export const CBSidebar = ({
               }}
             >
               <Link
-                href="/"
+                href={CBRoute.Home}
                 style={{
                   width: "100%",
                 }}

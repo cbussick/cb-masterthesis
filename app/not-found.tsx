@@ -3,6 +3,7 @@
 import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper";
 import { CBEmoji } from "@/components/CBEmoji/CBEmoji";
 import { CBLogo } from "@/components/CBLogo/CBLogo";
+import { CBRoute } from "@/helpers/routes";
 import { Button, Container, Stack, Typography } from "@mui/material";
 
 export default function NotFound() {
@@ -31,7 +32,7 @@ export default function NotFound() {
             Menüpunkte in der Sidebar links.
           </Typography>
 
-          <Button href="/">Zum Dashboard</Button>
+          <Button href={CBRoute.Home}>Zum Dashboard</Button>
         </Stack>
       </Stack>
     </CBContentWrapper>
