@@ -9,7 +9,7 @@ export const CBExerciseSequenceEndCard = ({
   return (
     <Card
       sx={{
-        height: 120,
+        height: 100,
         display: "flex",
         width: "100%",
       }}
@@ -37,7 +37,7 @@ export const CBExerciseSequenceEndCard = ({
         />
 
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             display: "flex",
             alignItems: "center",
