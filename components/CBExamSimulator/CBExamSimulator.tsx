@@ -1,9 +1,9 @@
 "use client";
 
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
-import { addCompletedExamsToUser } from "@/firebase-client/addCompletedExamsToUser";
-import { addPointsToUser } from "@/firebase-client/addPointsToUser";
-import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
+import { CBUserCustomData } from "@/firebase-client/UserCustomDataConverter";
+import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";
+import { updateUser } from "@/firebase-client/updateUser";
 import { useUser } from "@/firebase-client/useUser";
 import { CBRoute, routeMap } from "@/helpers/routes";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
@@ -23,8 +23,8 @@ const pointsForSuccessfulExam = 5;
 export const CBExamSimulator = ({
   exams,
 }: CBExamSimulatorProps): JSX.Element => {
-  const user = useUser();
-  const completedExamAmount = user.customData.completedExams;
+  const { user, customData } = useUser();
+  const completedExamAmount = customData.completedExams;
   const [examState, setExamState] = useState<CBExamSimulatorState>(
     CBExamSimulatorState.NotStarted,
   );
@@ -93,16 +93,26 @@ export const CBExamSimulator = ({
 
   const onSequenceComplete = useCallback(() => {
     setExamState(CBExamSimulatorState.Finished);
-    addCompletedExamsToUser(user.user.uid, 1);
+    const userNewData: Partial<CBUserCustomData> = {};
+
+    userNewData.completedExams = customData.completedExams + 1;
+
     const endTime = dayjsLocalized();
-    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
+
+    userNewData.trackedTime = makeUpdatedTrackedTime(
+      beginTime,
+      endTime,
+      customData,
+    );
 
     const correctExercisesAmount = exercises.filter((e) => e.isCorrect).length;
     if (correctExercisesAmount >= exercises.length / 2) {
       const pointsToAdd = correctExercisesAmount + pointsForSuccessfulExam;
-      addPointsToUser(user.user.uid, pointsToAdd);
+      userNewData.points = customData.points + pointsToAdd;
     }
-  }, [beginTime, exercises, user.user.uid]);
+
+    updateUser(user.uid, userNewData);
+  }, [beginTime, customData, exercises, user.uid]);
 
   const onCancel = useCallback(() => {
     setExamState(CBExamSimulatorState.NotStarted);

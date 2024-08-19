@@ -12,12 +12,12 @@ import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
 import { CBTopic } from "@/data/topics";
-import { addExercisesToMistakes } from "@/firebase-client/addExercisesToMistakes";
-import { addPointsToUser } from "@/firebase-client/addPointsToUser";
-import { addSolvedExerciseToUser } from "@/firebase-client/addSolvedExerciseToUser";
-import { addTrackedTimeToUser } from "@/firebase-client/addTrackedTimeToUser";
-import { removeExercisesFromMistakes } from "@/firebase-client/removeExercisesFromMistakes";
-import { CBMistakeExercise } from "@/firebase-client/UserCustomDataConverter";
+import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";
+import { updateUser } from "@/firebase-client/updateUser";
+import {
+  CBMistakeExercise,
+  CBUserCustomData,
+} from "@/firebase-client/UserCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
@@ -192,7 +192,13 @@ export default function FreePracticeSequencePage({
             type: exercise.type,
           });
         }
-        addExercisesToMistakes(user.uid, mistakeExercisesToAdd);
+
+        const newUserData: Partial<CBUserCustomData> = {};
+        newUserData.mistakeExercises = customData.mistakeExercises.concat(
+          mistakeExercisesToAdd,
+        );
+
+        updateUser(user.uid, newUserData);
       }
     },
     [customData.mistakeExercises, user.uid],
@@ -202,9 +208,10 @@ export default function FreePracticeSequencePage({
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
       const { uid } = user;
 
-      // Todo: Combine these and only make one request
-      addSolvedExerciseToUser(uid, 1);
-      addPointsToUser(uid, 1);
+      const newUserData: Partial<CBUserCustomData> = {
+        solvedExercises: customData.solvedExercises + 1,
+        points: customData.points + 1,
+      };
 
       // If the exercise type is not set, the user is retrying mistakes
       if (isRetryingMistakes) {
@@ -213,20 +220,38 @@ export default function FreePracticeSequencePage({
         );
 
         if (exercise) {
-          // Todo: See above, maybe you can combine this with the other requests as well?
-          removeExercisesFromMistakes(uid, [exercise]);
+          newUserData.mistakeExercises = customData.mistakeExercises.filter(
+            (e) =>
+              exercises.find((ex) => ex.id === e.id && ex.topic === e.topic) ===
+              undefined,
+          );
         }
       }
+      updateUser(uid, newUserData);
     },
-    [isRetryingMistakes, customData.mistakeExercises, user],
+    [
+      user,
+      isRetryingMistakes,
+      customData.solvedExercises,
+      customData.points,
+      customData.mistakeExercises,
+      exercises,
+    ],
   );
 
   const beginTime = useMemo(() => dayjsLocalized(), []);
 
   const onSequenceComplete = useCallback(() => {
     const endTime = dayjsLocalized();
-    addTrackedTimeToUser(user.uid, beginTime, endTime);
-  }, [beginTime, user.uid]);
+
+    const userNewData: Partial<CBUserCustomData> = {};
+    userNewData.trackedTime = makeUpdatedTrackedTime(
+      beginTime,
+      endTime,
+      customData,
+    );
+    updateUser(user.uid, userNewData);
+  }, [beginTime, customData, user.uid]);
 
   return useMemo(
     () => (
