@@ -18,6 +18,15 @@ export const CBProgressBar = ({
 }: CBProgressBarProps): JSX.Element => {
   const value = Math.round((currentValue / maxValue) * 100);
 
+  const progressFormat =
+    format === undefined || format === "fraction" ? "fraction" : "percent";
+
+  const maxValueDigitAmount =
+    progressFormat === "fraction" ? maxValue.toString().length : null;
+
+  const currentValueFractionString =
+    maxValueDigitAmount && `${currentValue}`.padStart(maxValueDigitAmount, "0");
+
   return (
     <Stack
       direction="row"
@@ -41,8 +50,8 @@ export const CBProgressBar = ({
           whiteSpace: "nowrap",
         }}
       >
-        {format === undefined || format === "fraction"
-          ? `${currentValue}/${maxValue}`
+        {progressFormat === "fraction"
+          ? `${currentValueFractionString}/${maxValue}`
           : `${value} %`}
       </Typography>
     </Stack>

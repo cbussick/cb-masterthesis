@@ -2,7 +2,13 @@
 
 import { CBClassEvent, events } from "@/data/events";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
-import { DateCalendar } from "@mui/x-date-pickers";
+import {
+  DateCalendar,
+  dateCalendarClasses,
+  dayCalendarClasses,
+  pickersCalendarHeaderClasses,
+  pickersDayClasses,
+} from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { CBDateCalendarDay } from "./CBDateCalendarDay/CBDateCalendarDay";
@@ -35,9 +41,8 @@ export const CBDateCalendar = (): JSX.Element => {
       value={currentDate}
       onChange={(value) => setCurrentDate(value)}
       onMonthChange={handleMonthChange}
-      // Leave this here. For whatever reason, it changes the day of the week format from e.g. "M" to "Mo".
       dayOfWeekFormatter={(date) => {
-        return date;
+        return date.format("dd");
       }}
       disablePast
       views={["day"]}
@@ -49,24 +54,39 @@ export const CBDateCalendar = (): JSX.Element => {
         day: { events: calendarEvents },
       }}
       sx={{
-        overflow: "visible",
-        "& .MuiPickersCalendarHeader-root": {
+        height: "100%",
+        maxHeight: "100%",
+        [`& .${pickersCalendarHeaderClasses.root}`]: {
           pl: 1.5,
           mt: 0,
         },
-        "& .MuiPickersCalendarHeader-labelContainer": {
+        [`& .${pickersCalendarHeaderClasses.labelContainer}`]: {
           pointerEvents: "none",
         },
-        "& .MuiPickersCalendarHeader-label": {
+        [`& .${pickersCalendarHeaderClasses.label}`]: {
           fontSize: (t) => t.typography.h3.fontSize,
         },
-        "& .MuiDayCalendar-weekDayLabel": {
+        [`& .${dateCalendarClasses.viewTransitionContainer}`]: {
+          flex: 1,
+          "& > *": {
+            height: "100%",
+          },
+        },
+        [`& .${dayCalendarClasses.root}`]: {
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        },
+        [`& .${dayCalendarClasses.slideTransition}`]: {
+          flex: 1,
+        },
+        [`& .${dayCalendarClasses.weekDayLabel}`]: {
           fontSize: (t) => t.typography.body2.fontSize,
           fontWeight: (t) => t.typography.fontWeightMedium,
           color: (t) => t.palette.text.primary,
           m: spacing,
         },
-        "& .MuiPickersDay-root": {
+        [`& .${pickersDayClasses.root}`]: {
           m: spacing,
         },
       }}
