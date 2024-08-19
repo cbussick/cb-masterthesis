@@ -1,5 +1,6 @@
 "use client";
 
+import { CBEmoji } from "@/components/CBEmoji/CBEmoji";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { playResultsSound } from "@/helpers/sounds/playResultsSound";
@@ -30,6 +31,8 @@ const difficultyMap: Record<
     text: "Schwierigkeit Schwer",
   },
 };
+
+const typographyVariant = "h3";
 
 export const CBExerciseSequenceEndScreen = ({
   difficulty,
@@ -83,16 +86,24 @@ export const CBExerciseSequenceEndScreen = ({
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
-          }}
-        >
-          {allExercisesCompleted
-            ? "Großartig, alles richtig!"
-            : "Sehr gut, nur noch ein paar Fragen, die du wiederholen musst!"}
-        </Typography>
+        {allExercisesCompleted ? (
+          <Stack direction="row" spacing={1}>
+            <Typography variant={typographyVariant}>
+              Großartig, alles richtig!
+            </Typography>
+
+            <CBEmoji emoji="🎉" typographyVariant={typographyVariant} />
+          </Stack>
+        ) : (
+          <Typography
+            variant={typographyVariant}
+            sx={{
+              textAlign: "center",
+            }}
+          >
+            Nur noch ein paar Fragen, die du wiederholen musst!
+          </Typography>
+        )}
 
         <Stack
           spacing={3}
