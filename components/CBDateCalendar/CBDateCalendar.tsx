@@ -4,6 +4,7 @@ import { CBClassEvent, events } from "@/data/events";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import {
   DateCalendar,
+  dateCalendarClasses,
   dayCalendarClasses,
   pickersCalendarHeaderClasses,
   pickersDayClasses,
@@ -53,7 +54,8 @@ export const CBDateCalendar = (): JSX.Element => {
         day: { events: calendarEvents },
       }}
       sx={{
-        overflow: "visible",
+        height: "100%",
+        maxHeight: "100%",
         [`& .${pickersCalendarHeaderClasses.root}`]: {
           pl: 1.5,
           mt: 0,
@@ -63,6 +65,20 @@ export const CBDateCalendar = (): JSX.Element => {
         },
         [`& .${pickersCalendarHeaderClasses.label}`]: {
           fontSize: (t) => t.typography.h3.fontSize,
+        },
+        [`& .${dateCalendarClasses.viewTransitionContainer}`]: {
+          flex: 1,
+          "& > *": {
+            height: "100%",
+          },
+        },
+        [`& .${dayCalendarClasses.root}`]: {
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        },
+        [`& .${dayCalendarClasses.slideTransition}`]: {
+          flex: 1,
         },
         [`& .${dayCalendarClasses.weekDayLabel}`]: {
           fontSize: (t) => t.typography.body2.fontSize,
