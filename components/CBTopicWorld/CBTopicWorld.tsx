@@ -2,8 +2,6 @@
 
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
-import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordKeyByValue } from "@/helpers/getEnumRecordKeyByValue";
 import { CBRoute } from "@/helpers/routes";
@@ -11,23 +9,12 @@ import { isTopicCompleted } from "@/helpers/topic-world/isTopicCompleted";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
 import { Box, CircularProgress, Stack } from "@mui/material";
 import { notFound } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { CBProgressCircle } from "../CBProgressCircle/CBProgressCircle";
 import { CBProgressCircleConnector } from "../CBProgressCircleConnector/CBProgressCircleConnector";
 
 export const CBTopicWorld = (): JSX.Element => {
-  const {
-    user: { uid },
-  } = useUser();
-
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
-
-  useEffect(() => {
-    getUserTopicWorldProgress(uid).then((progress) => {
-      setTopicWorldProgress(progress);
-    });
-  }, [uid]);
+  const { topicWorldProgress } = useUser();
 
   const topicsAsArray = Object.values(topicWorldTopics);
 

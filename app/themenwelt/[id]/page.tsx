@@ -9,8 +9,6 @@ import { CBProgressCircleConnector } from "@/components/CBProgressCircleConnecto
 import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
-import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
@@ -24,7 +22,7 @@ import {
 } from "@/helpers/topic-world/topicWorldStyles";
 import { Box, Stack } from "@mui/material";
 import { notFound } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 
 interface TopicUnitPageParams {
   params: {
@@ -33,10 +31,7 @@ interface TopicUnitPageParams {
 }
 
 export default function TopicUnit({ params }: TopicUnitPageParams) {
-  const user = useUser();
-
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
+  const { topicWorldProgress } = useUser();
 
   const topicId = getEnumValueByStringValue(CBTopic, params.id);
 
@@ -52,12 +47,6 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
   if (!topicData) {
     notFound();
   }
-
-  useEffect(() => {
-    getUserTopicWorldProgress(user.user.uid).then((progress) => {
-      setTopicWorldProgress(progress);
-    });
-  }, [user.user.uid]);
 
   let currentUnit = topicData.units[0].id;
   if (topicWorldProgress) {

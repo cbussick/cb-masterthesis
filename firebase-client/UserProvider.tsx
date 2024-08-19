@@ -1,9 +1,11 @@
 "use client";
 
+import { getTopicWorldDocumentReference } from "@/helpers/getTopicWorldDocumentReference";
 import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
 import { NextOrObserver, User, onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
+import { CBTopicWorldProgress } from "./TopicWorldProgressConverter";
 import { CBUserCustomData } from "./UserCustomDataConverter";
 import { auth } from "./firebase";
 import { CBUserRole } from "./userRole";
@@ -12,15 +14,17 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-export interface CBUserWithCustomData {
+export interface CBUser {
   user: User;
   customData: CBUserCustomData;
+  topicWorldProgress: CBTopicWorldProgress;
 }
 
 export interface CBUserData {
   user: User | null;
   isUserLoaded: boolean;
   customData: CBUserCustomData;
+  topicWorldProgress: CBTopicWorldProgress;
 }
 
 const defaultUserData: CBUserData = {
@@ -39,6 +43,9 @@ const defaultUserData: CBUserData = {
     mistakeExercises: [],
     trackedTime: [],
   },
+  topicWorldProgress: {
+    topics: {},
+  },
 };
 
 export const UserContext = createContext<CBUserData>(defaultUserData);
@@ -51,6 +58,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [customData, setCustomData] = useState<CBUserCustomData>(
     defaultUserData.customData,
   );
+
+  const [topicWorldProgress, setTopicWorldProgress] =
+    useState<CBTopicWorldProgress>(defaultUserData.topicWorldProgress);
 
   const handleAuthStateChanged: NextOrObserver<User> = async (
     currentUser: User | null,
@@ -68,6 +78,17 @@ export const UserProvider = ({ children }: UserProviderProps) => {
           setCustomData(data);
         }
       });
+
+      const topicWorldProgressReference = getTopicWorldDocumentReference(
+        currentUser.uid,
+      );
+
+      onSnapshot(topicWorldProgressReference, (snapshot) => {
+        const data = snapshot.data();
+        if (data) {
+          setTopicWorldProgress(data);
+        }
+      });
     } else {
       // User is signed out
       setUser(null);
@@ -81,8 +102,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   const value = useMemo(() => {
-    return { user, isUserLoaded, customData };
-  }, [customData, isUserLoaded, user]);
+    return { user, isUserLoaded, customData, topicWorldProgress };
+  }, [customData, isUserLoaded, topicWorldProgress, user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

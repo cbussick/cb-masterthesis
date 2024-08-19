@@ -1,10 +1,7 @@
 import { CBAchievementCardProps } from "@/components/CBAchievementCard/CBAchievementCardInterfaces";
 import { achievements, CBAchievement } from "@/data/achievements";
 import { CBTopic } from "@/data/topics";
-import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { useUser } from "@/firebase-client/useUser";
-import { useEffect, useState } from "react";
 import { isTopicCompleted } from "./topic-world/isTopicCompleted";
 
 const makeAchievementData = (
@@ -19,46 +16,31 @@ const makeAchievementData = (
 };
 
 export const useAchievementsProgress = () => {
-  const { customData, user } = useUser();
+  const { customData, topicWorldProgress } = useUser();
 
   const solvedExercisesCount = customData.solvedExercises;
   const completedExamCount = customData.completedExams;
   const unlockedGlossaryEntries = customData.unlockedGlossaryEntryIDs.length;
 
-  const [topicWorldProgress, setTopicWorldProgress] =
-    useState<TopicWorldProgress>();
-
-  useEffect(() => {
-    getUserTopicWorldProgress(user.uid).then((progress) => {
-      setTopicWorldProgress(progress);
-    });
-  }, [user.uid]);
-
   const achievementCardsData: CBAchievementCardProps[] = [
     // Themenwelt
     {
       ...makeAchievementData(achievements[0]),
-      progressValue:
-        topicWorldProgress &&
-        isTopicCompleted(CBTopic.Zelle, topicWorldProgress)
-          ? 1
-          : 0,
+      progressValue: isTopicCompleted(CBTopic.Zelle, topicWorldProgress)
+        ? 1
+        : 0,
     },
     {
       ...makeAchievementData(achievements[1]),
-      progressValue:
-        topicWorldProgress &&
-        isTopicCompleted(CBTopic.MitoseMeiose, topicWorldProgress)
-          ? 1
-          : 0,
+      progressValue: isTopicCompleted(CBTopic.MitoseMeiose, topicWorldProgress)
+        ? 1
+        : 0,
     },
     {
       ...makeAchievementData(achievements[2]),
-      progressValue:
-        topicWorldProgress &&
-        isTopicCompleted(CBTopic.AufbauDNA, topicWorldProgress)
-          ? 1
-          : 0,
+      progressValue: isTopicCompleted(CBTopic.AufbauDNA, topicWorldProgress)
+        ? 1
+        : 0,
     },
     // Freie Übungen
     {

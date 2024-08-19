@@ -1,12 +1,12 @@
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { CBTopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
 import { getEnumRecordKeyByValue } from "../getEnumRecordKeyByValue";
 import { isTopicCompleted } from "./isTopicCompleted";
 
 export const isTopicUnlocked = (
   topic: CBTopic,
-  topicWorldProgress: TopicWorldProgress,
+  topicWorldProgress: CBTopicWorldProgress,
 ) => {
   const topicsAsArray = Object.values(topicWorldTopics);
   const topicData = topicWorldTopics[topic];

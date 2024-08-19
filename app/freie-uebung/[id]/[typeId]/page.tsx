@@ -83,7 +83,7 @@ export default function FreePracticeSequencePage({
     notFound();
   }
 
-  const user = useUser();
+  const { user, customData } = useUser();
   const { showSnackbar } = useCBExerciseSequenceSnackbar();
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
@@ -99,7 +99,7 @@ export default function FreePracticeSequencePage({
     let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
 
     if (isRetryingMistakes) {
-      user.customData.mistakeExercises
+      customData.mistakeExercises
         .filter((e) => e.topic === topic)
         .forEach((e) => {
           let exercise: CBExercise | undefined;
@@ -130,7 +130,7 @@ export default function FreePracticeSequencePage({
     } else if (exerciseType === CBExerciseType.AIQuiz) {
       // TODO: Always fetches twice because of strict mode. Just leave it like this?
       setAPIRequestState(CBAPIRequestState.Fetching);
-      getOpenAIQuizExercise(user.user.uid, topic)
+      getOpenAIQuizExercise(user.uid, topic)
         .then((response) => {
           const exerciseWithMetaData: CBExerciseWithMetaData = {
             ...response,
@@ -176,7 +176,7 @@ export default function FreePracticeSequencePage({
   const onMistake = useCallback(
     (exercise: CBExerciseWithMetaData) => {
       const isNotAlreadyInMistakes =
-        user.customData.mistakeExercises.find(
+        customData.mistakeExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
@@ -192,39 +192,41 @@ export default function FreePracticeSequencePage({
             type: exercise.type,
           });
         }
-        addExercisesToMistakes(user.user.uid, mistakeExercisesToAdd);
+        addExercisesToMistakes(user.uid, mistakeExercisesToAdd);
       }
     },
-    [user.customData.mistakeExercises, user.user.uid],
+    [customData.mistakeExercises, user.uid],
   );
 
   const onCompleteExercise = useCallback(
     (parameters: { exerciseId: string; isCorrect: boolean }) => {
-      const { uid } = user.user;
+      const { uid } = user;
 
+      // Todo: Combine these and only make one request
       addSolvedExerciseToUser(uid, 1);
       addPointsToUser(uid, 1);
 
       // If the exercise type is not set, the user is retrying mistakes
       if (isRetryingMistakes) {
-        const exercise = user.customData.mistakeExercises.find(
+        const exercise = customData.mistakeExercises.find(
           (e) => e.id === parameters.exerciseId,
         );
 
         if (exercise) {
+          // Todo: See above, maybe you can combine this with the other requests as well?
           removeExercisesFromMistakes(uid, [exercise]);
         }
       }
     },
-    [isRetryingMistakes, user.customData.mistakeExercises, user.user],
+    [isRetryingMistakes, customData.mistakeExercises, user],
   );
 
   const beginTime = useMemo(() => dayjsLocalized(), []);
 
   const onSequenceComplete = useCallback(() => {
     const endTime = dayjsLocalized();
-    addTrackedTimeToUser(user.user.uid, beginTime, endTime);
-  }, [beginTime, user.user.uid]);
+    addTrackedTimeToUser(user.uid, beginTime, endTime);
+  }, [beginTime, user.uid]);
 
   return useMemo(
     () => (
