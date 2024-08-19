@@ -1,6 +1,7 @@
 import { CBTopicWorldUnit, topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
 import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { isUnitCompleted } from "./isUnitCompleted";
 
 export const isUnitUnlocked = (
   topic: CBTopic,
@@ -20,14 +21,9 @@ export const isUnitUnlocked = (
     (u) => u.id === previousUnitId,
   );
 
-  const previousUnitCompletedExercises =
-    previousUnitId &&
-    topicWorldProgress?.topics[topic]?.units[previousUnitId]?.completedExercises
-      ?.length;
-
   const isPreviousUnitCompleted =
-    previousUnitCompletedExercises ===
-    generalPreviousUnitData?.exercises.length;
+    generalPreviousUnitData &&
+    isUnitCompleted(topic, generalPreviousUnitData, topicWorldProgress);
 
   const isUnlocked = index === 0 || isPreviousUnitCompleted;
 

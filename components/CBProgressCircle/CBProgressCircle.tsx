@@ -36,6 +36,7 @@ const iconSizeMap: Record<Breakpoint, number> = {
 };
 
 export const CBProgressCircle = ({
+  id,
   label,
   progress,
   href,
@@ -52,6 +53,7 @@ export const CBProgressCircle = ({
 
   return (
     <Box
+      id={id}
       component={motion.div}
       initial={{ scale: 0.5, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

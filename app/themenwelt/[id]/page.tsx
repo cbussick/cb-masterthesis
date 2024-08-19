@@ -13,6 +13,7 @@ import { TopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverte
 import { getUserTopicWorldProgress } from "@/firebase-client/getUserTopicWorldProgress";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
+import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { CBRoute } from "@/helpers/routes";
 import { isTopicUnlocked } from "@/helpers/topic-world/isTopicUnlocked";
 import { isUnitUnlocked } from "@/helpers/topic-world/isUnitUnlocked";
@@ -37,7 +38,12 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<TopicWorldProgress>();
 
-  const topicId = params.id as CBTopic;
+  const topicId = getEnumValueByStringValue(CBTopic, params.id);
+
+  if (!topicId) {
+    notFound();
+  }
+
   const topicData = getEnumRecordObjectValueByStringKey(
     topicWorldTopics,
     topicId,
@@ -52,6 +58,19 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
       setTopicWorldProgress(progress);
     });
   }, [user.user.uid]);
+
+  let currentUnit = topicData.units[0].id;
+  if (topicWorldProgress) {
+    topicData.units.forEach((unit) => {
+      const isUnlocked = isUnitUnlocked(topicId, unit, topicWorldProgress);
+      currentUnit = isUnlocked ? unit.id : currentUnit;
+    });
+  }
+
+  useEffect(() => {
+    const element = document.getElementById(currentUnit);
+    element?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [currentUnit]);
 
   const hasAccess =
     topicWorldProgress && isTopicUnlocked(topicId, topicWorldProgress);
@@ -108,6 +127,7 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
                     )}
 
                     <CBProgressCircle
+                      id={unit.id}
                       label={unit.name}
                       progress={progress}
                       href={`${CBRoute.Themenwelt}/${topicId}/${unit.id}`}
@@ -124,21 +144,23 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
         <CBNoAccessTopicWorldView />
       )}
 
-      <CBImage
-        image={{
-          src: "/logo/dina.svg",
-          alt: "DiNA",
-        }}
-        boxProps={{
-          sx: {
-            position: "absolute",
-            right: 50,
-            bottom: 10,
-            width: 200,
-            height: 300,
-          },
-        }}
-      />
+      {hasAccess ? (
+        <CBImage
+          image={{
+            src: "/logo/dina.svg",
+            alt: "DiNA",
+          }}
+          boxProps={{
+            sx: {
+              position: "absolute",
+              right: 50,
+              bottom: 10,
+              width: 200,
+              height: 300,
+            },
+          }}
+        />
+      ) : null}
     </CBContentWrapper>
   );
 }

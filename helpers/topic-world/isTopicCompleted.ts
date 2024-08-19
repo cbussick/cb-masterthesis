@@ -6,11 +6,11 @@ export const isTopicCompleted = (
   topic: CBTopic,
   topicWorldProgress: TopicWorldProgress,
 ) => {
-  const topicData = topicWorldTopics[topic];
-
   const userTopicProgress = topicWorldProgress.topics[topic];
 
   if (userTopicProgress) {
+    const topicData = topicWorldTopics[topic];
+
     const userUnits = Object.entries(userTopicProgress.units);
 
     const isCompleted = topicData?.units.every((unit) => {
