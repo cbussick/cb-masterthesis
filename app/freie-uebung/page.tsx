@@ -54,7 +54,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
+            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
             text="DNA-Replikation"
             disabled
           />
@@ -62,7 +62,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
+            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
             text="Proteinbiosynthese"
             disabled
           />
@@ -70,7 +70,7 @@ export default function FreePractice() {
 
         <Grid {...commonGridItemProps}>
           <CBInfoCard
-            image={{ src: "/coming-soon/coming-soon.jpg", alt: "Coming soon" }}
+            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
             text="(Gen-) Mutationen"
             disabled
           />

@@ -40,7 +40,7 @@ export const CBExamSimulatorHome = ({
       >
         <CBImage
           image={{
-            src: "/exam-simulator-bg.png",
+            src: "/exam-simulator/exam-simulator-bg.png",
             alt: "Ein Labor",
           }}
           boxProps={{
