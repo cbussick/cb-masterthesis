@@ -4,8 +4,9 @@ import { exercisesData } from "@/data/exercises/CBExercise";
 import { topics } from "@/data/topics";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { CBRoute } from "@/helpers/routes";
-import { CircularProgress, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { CBBreadcrumbs } from "../CBBreadcrumbs/CBBreadcrumbs";
+import { CBContentLoadingIndicator } from "../CBContentLoadingIndicator";
 import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
 import { CBExerciseSequenceProvider } from "../CBExerciseSequence/CBExerciseSequenceProvider";
 import { CBExerciseSequenceWrapper } from "../CBExerciseSequence/CBExerciseSequenceWrapper";
@@ -54,7 +55,7 @@ export const CBFreePracticeExerciseSequence = ({
         />
 
         {apiRequestState === CBAPIRequestState.Fetching ? (
-          <CircularProgress />
+          <CBContentLoadingIndicator />
         ) : (
           <CBExerciseSequenceProvider
             type={
