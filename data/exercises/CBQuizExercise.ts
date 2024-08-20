@@ -24,10 +24,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist das Endoplasmatische Retikulum (ER) aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -47,7 +43,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Das Endoplasmatische Retikulum (ER) besteht aus einem komplexen Netzwerk von Membranen.",
+    hint: "Das Endoplasmatische Retikulum (ER) besteht aus einem komplexen Netzwerk von Membranen.",
   },
   {
     id: "zelle-grundlagen-3",
@@ -65,17 +61,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Produktion von ATP (Adenosintriphosphat)" },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Das Endoplasmatische Retikulum (ER) spielt eine wichtige Rolle bei der Synthese, Modifikation und dem Transport von Proteinen und Lipiden.",
+    hint: "Das Endoplasmatische Retikulum (ER) spielt eine wichtige Rolle bei der Synthese, Modifikation und dem Transport von Proteinen und Lipiden.",
   },
   {
     id: "zelle-grundlagen-4",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist das Mitochondrium aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -92,7 +84,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Das Mitochondrium ist eine Organell mit einer doppelten Membranstruktur.",
+    hint: "Das Mitochondrium ist ein Organell mit einer doppelten Membranstruktur.",
   },
   {
     id: "zelle-grundlagen-5",
@@ -119,17 +111,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die Funktion des Mitochondriums ist eng mit der Energieproduktion in der Zelle verbunden. Betrachte den Prozess der Zellatmung, bei dem Mitochondrien eine zentrale Rolle spielen.",
+    hint: "Die Funktion des Mitochondriums ist eng mit der Energieproduktion in der Zelle verbunden. Betrachte den Prozess der Zellatmung, bei dem Mitochondrien eine zentrale Rolle spielen.",
   },
   {
     id: "zelle-grundlagen-6",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie sind Plasmodesmen aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -149,7 +137,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Plasmodesmen sind strukturelle Verbindungen zwischen pflanzlichen Zellen, die den Austausch von Molekülen ermöglichen",
+    hint: "Plasmodesmen sind strukturelle Verbindungen zwischen pflanzlichen Zellen, die den Austausch von Molekülen ermöglichen",
   },
   {
     id: "zelle-grundlagen-7",
@@ -157,8 +145,8 @@ export const quizExercises: CBQuizExercise[] = [
     topic: CBTopic.Zelle,
     question: "Was ist die Funktion von Plasmodesmen?",
     image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
+      src: "/cell-organelles/plasmodesmen.png",
+      alt: "Plasmodesmen",
     },
     answers: [
       { id: "A", text: "Speicherung von Wasser in Pflanzenzellen" },
@@ -170,17 +158,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Regulation des Zellzyklus in Pflanzenzellen" },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Plasmodesmen sind strukturelle Verbindungen zwischen pflanzlichen Zellen, die den Austausch von Molekülen ermöglichen ",
+    hint: "Plasmodesmen sind strukturelle Verbindungen zwischen pflanzlichen Zellen, die den Austausch von Molekülen ermöglichen ",
   },
   {
     id: "zelle-grundlagen-8",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist die Zellmembran aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -200,7 +184,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Die Zellmembran ist eine dünne, flexible Hülle, die die Zelle umgibt und ihre Bestandteile einschließt.",
+    hint: "Die Zellmembran ist eine dünne, flexible Hülle, die die Zelle umgibt und ihre Bestandteile einschließt.",
   },
   {
     id: "zelle-grundlagen-9",
@@ -218,17 +202,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Produktion von Enzymen für den Zellstoffwechsel" },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die Zellmembran hat verschiedene lebenswichtige Funktionen für die Zelle. Denke daran, dass sie als semipermeable Barriere fungiert, die den Transport von Molekülen in und aus der Zelle reguliert. ",
+    hint: "Die Zellmembran hat verschiedene lebenswichtige Funktionen für die Zelle. Denke daran, dass sie als semipermeable Barriere fungiert, die den Transport von Molekülen in und aus der Zelle reguliert. ",
   },
   {
     id: "zelle-grundlagen-10",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist das Zellplasma aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -245,17 +225,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Ist eine Ansammlung von Vesikeln und Bläschen" },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Das Zellplasma, auch als Zytoplasma bezeichnet, ist eine gelartige Substanz, die den Zellraum zwischen der Zellmembran und dem Zellkern ausfüllt. ",
+    hint: "Das Zellplasma, auch als Zytoplasma bezeichnet, ist eine gelartige Substanz, die den Zellraum zwischen der Zellmembran und dem Zellkern ausfüllt. ",
   },
   {
     id: "zelle-grundlagen-11",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Was ist die Funktion des Zellplasmas?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       { id: "A", text: "Energieerzeugung" },
       {
@@ -266,17 +242,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Speicherort für genetische Informationen" },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Das Zellplasma (Zytoplasma) erfüllt mehrere wichtige Funktionen in der Zelle. Denke daran, dass es der Ort ist, an dem die meisten zellulären Aktivitäten stattfinden. ",
+    hint: "Das Zellplasma (Zytoplasma) erfüllt mehrere wichtige Funktionen in der Zelle. Denke daran, dass es der Ort ist, an dem die meisten zellulären Aktivitäten stattfinden. ",
   },
   {
     id: "zelle-grundlagen-12",
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist der Zellkern aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -322,10 +294,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist das Ribosom aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -336,7 +304,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus Ribonukleinsäure (RNA) und Proteinen" },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Ribosomen sind zelluläre Strukturen, die eine Schlüsselrolle bei der Proteinsynthese spielen.",
+    hint: "Ribosomen sind zelluläre Strukturen, die eine Schlüsselrolle bei der Proteinsynthese spielen.",
   },
   {
     id: "zelle-grundlagen-15",
@@ -358,10 +326,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist der Golgi-Apparat aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       { id: "A", text: "Aus Membranstapeln als Teil des Membransystems" },
       {
@@ -372,7 +336,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus Cytoskelett und Vesikeln" },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Überlege, dass der Golgi-Apparat aus flachen membranösen Säcken besteht, die als Cisternen bekannt sind. Diese Cisternen sind in Stapeln angeordnet. ",
+    hint: "Überlege, dass der Golgi-Apparat aus flachen membranösen Säcken besteht, die als Cisternen bekannt sind. Diese Cisternen sind in Stapeln angeordnet. ",
   },
   {
     id: "zelle-grundlagen-17",
@@ -394,10 +358,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist ein Chloroplast aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       { id: "A", text: "Aus einer komplexen Molekülstruktur" },
       {
@@ -414,7 +374,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Der Chloroplast hat eine spezifische Doppelmembranstruktur, wobei die innere Membran in Form von Thylakoiden gestapelt ist, um Fotosynthese-Reaktionen zu ermöglichen.",
+    hint: "Der Chloroplast hat eine spezifische Doppelmembranstruktur, wobei die innere Membran in Form von Thylakoiden gestapelt ist, um Fotosynthese-Reaktionen zu ermöglichen.",
   },
   {
     id: "zelle-grundlagen-19",
@@ -436,10 +396,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist die Zellwand aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       { id: "A", text: "Aus einer einfachen Lipidschicht" },
       { id: "B", text: "Aus einer doppelten Membranschicht" },
@@ -447,7 +403,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus Cellulose" },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Die Zellwand besteht aus spezifischen strukturellen Komponenten, die ihr Festigkeit verleihen. Denke darüber nach, wie diese Komponenten miteinander verbunden sind und welchen Zweck sie innerhalb der Zelle erfüllen.",
+    hint: "Die Zellwand besteht aus spezifischen strukturellen Komponenten, die ihr Festigkeit verleihen. Denke darüber nach, wie diese Komponenten miteinander verbunden sind und welchen Zweck sie innerhalb der Zelle erfüllen.",
   },
   {
     id: "zelle-grundlagen-21",
@@ -455,8 +411,8 @@ export const quizExercises: CBQuizExercise[] = [
     topic: CBTopic.Zelle,
     question: "Was ist die Funktion einer Zellwand?",
     image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
+      src: "/cell-organelles/zellwand.png",
+      alt: "Zellwand",
     },
     answers: [
       { id: "A", text: "Schutz, Stabilität und Struktur" },
@@ -472,10 +428,6 @@ export const quizExercises: CBQuizExercise[] = [
     type: CBExerciseType.Quiz,
     topic: CBTopic.Zelle,
     question: "Wie ist die Vakuole aufgebaut?",
-    image: {
-      src: "/cell-organelles/pflanzliche-zelle.png",
-      alt: "Pflanzliche Zelle",
-    },
     answers: [
       {
         id: "A",
@@ -489,7 +441,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus einem flüssigkeitsgefüllten Raum im Zellplasma" },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Die Vakuole ist eine zelluläre Struktur mit einer spezifischen Membran und einem flüssigen Inhalt. Überlege, welche Funktionen die Vakuole in der Zelle erfüllt und wie ihre Struktur dazu beiträgt. Denke auch an mögliche spezialisierte Regionen innerhalb der Vakuole.",
+    hint: "Die Vakuole ist eine zelluläre Struktur mit einer spezifischen Membran und einem flüssigen Inhalt. Überlege, welche Funktionen die Vakuole in der Zelle erfüllt und wie ihre Struktur dazu beiträgt. Denke auch an mögliche spezialisierte Regionen innerhalb der Vakuole.",
   },
   {
     id: "zelle-grundlagen-23",
@@ -507,7 +459,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Ort der Fotosynthese" },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die Funktion der Vakuole ist vielfältig und umfasst Aufgaben wie die Speicherung von Wasser, Nährstoffen und Abfallprodukten. Denke darüber nach, wie die Vakuole zur Aufrechterhaltung des Zellinnendrucks, zur Speicherung von chemischen Verbindungen und zur Entgiftung beiträgt. Betrachte auch die Rolle der Vakuole in der Zellstabilität und im Wachstumsprozess.",
+    hint: "Die Funktion der Vakuole ist vielfältig und umfasst Aufgaben wie die Speicherung von Wasser, Nährstoffen und Abfallprodukten. Denke darüber nach, wie die Vakuole zur Aufrechterhaltung des Zellinnendrucks, zur Speicherung von chemischen Verbindungen und zur Entgiftung beiträgt. Betrachte auch die Rolle der Vakuole in der Zellstabilität und im Wachstumsprozess.",
   },
   {
     id: "mitose-meiose-1",
@@ -542,17 +494,13 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Produktion von Energie in der Zelle" },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die Mitose ist ein zellulärer Prozess, bei dem eine Mutterzelle in zwei identische Tochterzellen aufgeteilt wird. Denke darüber nach, welche Rolle die Mitose bei der Zellregeneration, Reparatur und dem Wachstum spielt.",
+    hint: "Die Mitose ist ein zellulärer Prozess, bei dem eine Mutterzelle in zwei identische Tochterzellen aufgeteilt wird. Denke darüber nach, welche Rolle die Mitose bei der Zellregeneration, Reparatur und dem Wachstum spielt.",
   },
   {
     id: "mitose-meiose-4",
     type: CBExerciseType.Quiz,
     topic: CBTopic.MitoseMeiose,
     question: "Was läuft in der Prophase ab?",
-    image: {
-      src: "/cell-division/mitosis/mitose.png",
-      alt: "Mitosephasen: Interphase, Prophase, Metaphase, Anaphase, Telophase",
-    },
     answers: [
       {
         id: "A",
@@ -569,17 +517,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: In der Prophase der Zellteilung (Mitose oder Meiose) kondensieren die Chromosomen, der Kernkörper (Nukleolus) verschwindet, und die Kernhülle beginnt sich aufzulösen. Die Spindelfasern beginnen sich zu bilden, und die Zelle bereitet sich auf die nachfolgenden Schritte der Teilung vor.",
+    hint: "In der Prophase der Zellteilung (Mitose oder Meiose) kondensieren die Chromosomen, der Kernkörper (Nukleolus) verschwindet, und die Kernhülle beginnt sich aufzulösen. Die Spindelfasern beginnen sich zu bilden, und die Zelle bereitet sich auf die nachfolgenden Schritte der Teilung vor.",
   },
   {
     id: "mitose-meiose-5",
     type: CBExerciseType.Quiz,
     topic: CBTopic.MitoseMeiose,
     question: "Was läuft in der Metaphase ab?",
-    image: {
-      src: "/cell-division/mitosis/mitose.png",
-      alt: "Mitosephasen: Interphase, Prophase, Metaphase, Anaphase, Telophase",
-    },
     answers: [
       {
         id: "A",
@@ -596,17 +540,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: In der Metaphase der Zellteilung (Mitose oder Meiose) ordnen sich die kondensierten Chromosomen in der Mitte der Zelle an, auch als Äquator oder Metaphasenplatte bekannt. Die Spindelfasern befestigen sich an den Zentromeren der Chromosomen, wodurch eine symmetrische Anordnung entsteht.",
+    hint: "In der Metaphase der Zellteilung (Mitose oder Meiose) ordnen sich die kondensierten Chromosomen in der Mitte der Zelle an, auch als Äquator oder Metaphasenplatte bekannt. Die Spindelfasern befestigen sich an den Zentromeren der Chromosomen, wodurch eine symmetrische Anordnung entsteht.",
   },
   {
     id: "mitose-meiose-6",
     type: CBExerciseType.Quiz,
     topic: CBTopic.MitoseMeiose,
     question: "Was läuft in der Anaphase ab?",
-    image: {
-      src: "/cell-division/mitosis/mitose.png",
-      alt: "Mitosephasen: Interphase, Prophase, Metaphase, Anaphase, Telophase",
-    },
     answers: [
       { id: "A", text: "Die Chromosomen bewegen sich zur Mitte der Zelle" },
       { id: "B", text: "Die Zellmembran teilt sich" },
@@ -620,17 +560,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: In der Anaphase der Zellteilung (Mitose oder Meiose) werden die Chromatiden der Chromosomen voneinander getrennt und zu den gegenüberliegenden Polen der Zelle gezogen. Dies geschieht durch die Kontraktion der Spindelfasern, was die Verteilung der genetischen Informationen auf die Tochterzellen ermöglicht.",
+    hint: "In der Anaphase der Zellteilung (Mitose oder Meiose) werden die Chromatiden der Chromosomen voneinander getrennt und zu den gegenüberliegenden Polen der Zelle gezogen. Dies geschieht durch die Kontraktion der Spindelfasern, was die Verteilung der genetischen Informationen auf die Tochterzellen ermöglicht.",
   },
   {
     id: "mitose-meiose-7",
     type: CBExerciseType.Quiz,
     topic: CBTopic.MitoseMeiose,
     question: "Was läuft in der Telophase ab?",
-    image: {
-      src: "/cell-division/mitosis/mitose.png",
-      alt: "Mitosephasen: Interphase, Prophase, Metaphase, Anaphase, Telophase",
-    },
     answers: [
       { id: "A", text: "Die Chromosomen bewegen sich zur Mitte der Zelle" },
       { id: "B", text: "Die Zellmembran teilt sich" },
@@ -644,17 +580,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: In der Telophase der Zellteilung (Mitose oder Meiose) erfolgt die Entfaltung der Chromosomen zu ihrer ursprünglichen, entkondensierten Form. Die Kernhülle bildet sich wieder aus, und es entstehen zwei separate Zellkerne. Der Nukleolus erscheint erneut, und die Zelle bereitet sich darauf vor, sich physikalisch zu teilen.",
+    hint: "In der Telophase der Zellteilung (Mitose oder Meiose) erfolgt die Entfaltung der Chromosomen zu ihrer ursprünglichen, entkondensierten Form. Die Kernhülle bildet sich wieder aus, und es entstehen zwei separate Zellkerne. Der Nukleolus erscheint erneut, und die Zelle bereitet sich darauf vor, sich physikalisch zu teilen.",
   },
   {
     id: "mitose-meiose-8",
     type: CBExerciseType.Quiz,
     topic: CBTopic.MitoseMeiose,
     question: "Was läuft in der Interphase ab?",
-    image: {
-      src: "/cell-division/mitosis/mitose.png",
-      alt: "Mitosephasen: Interphase, Prophase, Metaphase, Anaphase, Telophase",
-    },
     answers: [
       { id: "A", text: "Die Zelle teilt sich in zwei Tochterzellen" },
       {
@@ -668,7 +600,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Chromosomen werden getrennt" },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Die Interphase ist keine Phase der Zellteilung selbst, sondern eine Phase zwischen den Teilungen. In dieser Phase wächst die Zelle, ihre Organellen vervielfachen sich, und die DNA repliziert sich. Es gibt drei Hauptstadien in der Interphase: G1-Phase (Wachstumsphase), S-Phase (Synthesephase, in der die DNA repliziert wird), und G2-Phase (Vorbereitung auf die Zellteilung).",
+    hint: "Die Interphase ist keine Phase der Zellteilung selbst, sondern eine Phase zwischen den Teilungen. In dieser Phase wächst die Zelle, ihre Organellen vervielfachen sich, und die DNA repliziert sich. Es gibt drei Hauptstadien in der Interphase: G1-Phase (Wachstumsphase), S-Phase (Synthesephase, in der die DNA repliziert wird), und G2-Phase (Vorbereitung auf die Zellteilung).",
   },
   {
     id: "mitose-meiose-9",
@@ -692,7 +624,7 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Zellteilung zur Bildung von Tochterzellen" },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die Meiose ist ein zellulärer Prozess, der zur Bildung von Geschlechtszellen führt (Spermien und Eizellen). Ihre Hauptaufgabe besteht darin, die Anzahl der Chromosomensätze zu halbieren, um genetische Vielfalt bei der sexuellen Fortpflanzung zu ermöglichen. Die Meiose besteht aus zwei aufeinanderfolgenden Teilungen (Meiose I und Meiose II).",
+    hint: "Die Meiose ist ein zellulärer Prozess, der zur Bildung von Geschlechtszellen führt (Spermien und Eizellen). Ihre Hauptaufgabe besteht darin, die Anzahl der Chromosomensätze zu halbieren, um genetische Vielfalt bei der sexuellen Fortpflanzung zu ermöglichen. Die Meiose besteht aus zwei aufeinanderfolgenden Teilungen (Meiose I und Meiose II).",
   },
   {
     id: "mitose-meiose-10",
@@ -722,7 +654,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Das Ergebnis der Mitose ist die Bildung von zwei genetisch identischen Tochterzellen, die denselben Chromosomensatz wie die Mutterzelle haben. Dieser Prozess ist wichtig für das Wachstum, die Reparatur von Gewebe und die Aufrechterhaltung des Zellbestands.",
+    hint: "Das Ergebnis der Mitose ist die Bildung von zwei genetisch identischen Tochterzellen, die denselben Chromosomensatz wie die Mutterzelle haben. Dieser Prozess ist wichtig für das Wachstum, die Reparatur von Gewebe und die Aufrechterhaltung des Zellbestands.",
   },
   {
     id: "mitose-meiose-11",
@@ -752,7 +684,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Sowohl bei Männern als auch bei Frauen führt die Meiose zur Bildung von Geschlechtszellen (Spermien bei Männern, Eizellen bei Frauen). Ein wichtiges Merkmal ist, dass die Meiose die Chromosomenzahl halbiert, was für die genetische Vielfalt bei der sexuellen Fortpflanzung entscheidend ist. Beachte jedoch, dass die Meiose bei Männern während der Spermatogenese kontinuierlich stattfindet, während bei Frauen die Meiose Teil der Eizellreifung ist und erst nach der Befruchtung abgeschlossen wird.",
+    hint: "Sowohl bei Männern als auch bei Frauen führt die Meiose zur Bildung von Geschlechtszellen (Spermien bei Männern, Eizellen bei Frauen). Ein wichtiges Merkmal ist, dass die Meiose die Chromosomenzahl halbiert, was für die genetische Vielfalt bei der sexuellen Fortpflanzung entscheidend ist. Beachte jedoch, dass die Meiose bei Männern während der Spermatogenese kontinuierlich stattfindet, während bei Frauen die Meiose Teil der Eizellreifung ist und erst nach der Befruchtung abgeschlossen wird.",
   },
   {
     id: "aufbau-der-dna-1",
@@ -779,7 +711,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Die DNA ist eine Molekülstruktur, die genetische Informationen in Zellen trägt und die Baupläne für die Entwicklung, Funktion und Reproduktion von Organismen enthält.",
+    hint: "Die DNA ist eine Molekülstruktur, die genetische Informationen in Zellen trägt und die Baupläne für die Entwicklung, Funktion und Reproduktion von Organismen enthält.",
   },
   {
     id: "aufbau-der-dna-2",
@@ -807,7 +739,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Die Forscher, die die Struktur der DNA erstmals beschrieben, erhielten den Nobelpreis für Medizin im Jahr 1962. Ihr Beitrag revolutionierte das Verständnis der Genetik und der Vererbung von Merkmalen. Denke darüber nach, wer zu diesem Zeitpunkt anerkannt wurde.",
+    hint: "Die Forscher, die die Struktur der DNA erstmals beschrieben, erhielten den Nobelpreis für Medizin im Jahr 1962. Ihr Beitrag revolutionierte das Verständnis der Genetik und der Vererbung von Merkmalen. Denke darüber nach, wer zu diesem Zeitpunkt anerkannt wurde.",
   },
   {
     id: "aufbau-der-dna-3",
@@ -834,7 +766,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Diese Bindungen bilden sich zwischen den komplementären Basen Adenin (A) und Thymin (T), sowie zwischen Guanin (G) und Cytosin (C).",
+    hint: "Diese Bindungen bilden sich zwischen den komplementären Basen Adenin (A) und Thymin (T), sowie zwischen Guanin (G) und Cytosin (C).",
   },
   {
     id: "aufbau-der-dna-4",
@@ -861,7 +793,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Die DNA im Zellkern ist hochgradig organisiert und liegt in Form von Chromosomen vor. Diese Chromosomen bestehen aus langen DNA-Molekülen, die sich um Proteine wickeln. Denke darüber nach, wie diese Organisation die Speicherung und den Zugang zu genetischen Informationen erleichtert.",
+    hint: "Die DNA im Zellkern ist hochgradig organisiert und liegt in Form von Chromosomen vor. Diese Chromosomen bestehen aus langen DNA-Molekülen, die sich um Proteine wickeln. Denke darüber nach, wie diese Organisation die Speicherung und den Zugang zu genetischen Informationen erleichtert.",
   },
   {
     id: "aufbau-der-dna-5",
@@ -888,14 +820,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Die Basen in der DNA bilden spezifische Paare, wobei Adenin (A) sich mit einer bestimmten Base paart und Guanin (G) sich mit einer anderen paart. Denke darüber nach, welche Basen sich in der DNA immer gegenüberliegen und wie diese Paarung die Struktur beeinflusst.",
+    hint: "Die Basen in der DNA bilden spezifische Paare, wobei Adenin (A) sich mit einer bestimmten Base paart und Guanin (G) sich mit einer anderen paart. Denke darüber nach, welche Basen sich in der DNA immer gegenüberliegen und wie diese Paarung die Struktur beeinflusst.",
   },
   {
     id: "aufbau-der-dna-6",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was sind Nukleotide?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -915,14 +846,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Nukleotide sind Moleküle, die aus einem Phosphat, einem Zucker und einer Stickstoffbase bestehen. Denke darüber nach, wie diese Moleküle miteinander verknüpft sind und welche Funktion sie bei der Bildung der DNA haben.",
+    hint: "Nukleotide sind Moleküle, die aus einem Phosphat, einem Zucker und einer Stickstoffbase bestehen. Denke darüber nach, wie diese Moleküle miteinander verknüpft sind und welche Funktion sie bei der Bildung der DNA haben.",
   },
   {
     id: "aufbau-der-dna-7",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Wie setzt sich ein Nukleotid zusammen?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -942,14 +872,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Ein Nukleotid setzt sich aus drei Hauptkomponenten zusammen. Überlege, welche diese Komponenten sind und wie sie in der Struktur eines Nukleotids angeordnet sind.",
+    hint: "Ein Nukleotid setzt sich aus drei Hauptkomponenten zusammen. Überlege, welche diese Komponenten sind und wie sie in der Struktur eines Nukleotids angeordnet sind.",
   },
   {
     id: "aufbau-der-dna-8",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was versteht man unter einem Karyogramm?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -969,7 +898,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Ein Karyogramm bietet eine strukturierte Ansicht genetischer Information.",
+    hint: "Ein Karyogramm bietet eine strukturierte Ansicht genetischer Information.",
   },
   {
     id: "aufbau-der-dna-9",
@@ -977,7 +906,6 @@ export const quizExercises: CBQuizExercise[] = [
     topic: CBTopic.AufbauDNA,
     question:
       "Warum sind Keimzellen zur Gewinnung von Karyogrammen ungeeignet?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -997,14 +925,14 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Bei der Gewinnung von Karyogrammen sind Keimzellen ungeeignet. Überlege, warum dies so ist, indem du dir die spezifischen Merkmale von Keimzellen anschaust und wie sich diese von somatischen Zellen unterscheiden.",
+    hint: "Bei der Gewinnung von Karyogrammen sind Keimzellen ungeeignet. Überlege, warum dies so ist, indem du dir die spezifischen Merkmale von Keimzellen anschaust und wie sich diese von somatischen Zellen unterscheiden.",
   },
   {
     id: "aufbau-der-dna-10",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Wie viele Chromosomenpaare hat ein menschliches Embryo?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
+    image: { src: "/dna/chromosom.png", alt: "Chromosom" },
     answers: [
       {
         id: "A",
@@ -1024,14 +952,14 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Ein menschlicher Embryo hat eine bestimmte Anzahl von Chromosomenpaaren. Überlege, wie viele Chromosomen insgesamt vorhanden sind und wie sie paarweise angeordnet sind.",
+    hint: "Ein menschlicher Embryo hat eine bestimmte Anzahl von Chromosomenpaaren. Überlege, wie viele Chromosomen insgesamt vorhanden sind und wie sie paarweise angeordnet sind.",
   },
   {
     id: "aufbau-der-dna-11",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Wie heißen die Einzelstränge, aus denen ein Chromosom besteht?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
+    image: { src: "/dna/chromosom.png", alt: "Chromosom" },
     answers: [
       {
         id: "A",
@@ -1051,14 +979,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Chromosomen bestehen aus Einzelsträngen, die spezielle Namen haben. Denke darüber nach, wie diese Einzelstränge genannt werden und wie sie zusammenwirken, um die charakteristische Struktur eines Chromosoms zu bilden.",
+    hint: "Chromosomen bestehen aus Einzelsträngen, die spezielle Namen haben. Denke darüber nach, wie diese Einzelstränge genannt werden und wie sie zusammenwirken, um die charakteristische Struktur eines Chromosoms zu bilden.",
   },
   {
     id: "aufbau-der-dna-12",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was versteht man unter einem Phänotyp?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1078,14 +1005,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Der Phänotyp bezieht sich auf die sichtbaren Merkmale eines Organismus, die durch die Kombination von genetischer Information (Genotyp) und Umwelteinflüssen entstehen. Denke darüber nach, wie diese Faktoren miteinander interagieren.",
+    hint: "Der Phänotyp bezieht sich auf die sichtbaren Merkmale eines Organismus, die durch die Kombination von genetischer Information (Genotyp) und Umwelteinflüssen entstehen. Denke darüber nach, wie diese Faktoren miteinander interagieren.",
   },
   {
     id: "aufbau-der-dna-13",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was versteht man unter einem Genotyp?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1105,14 +1031,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Der Genotyp bezieht sich auf die genetische Information eines Organismus, die durch die Kombination seiner Allele für bestimmte Gene bestimmt wird. Überlege, wie der Genotyp die genetische Ausstattung und damit die möglichen Phänotypen beeinflusst.",
+    hint: "Der Genotyp bezieht sich auf die genetische Information eines Organismus, die durch die Kombination seiner Allele für bestimmte Gene bestimmt wird. Überlege, wie der Genotyp die genetische Ausstattung und damit die möglichen Phänotypen beeinflusst.",
   },
   {
     id: "aufbau-der-dna-14",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Warum teilen sich Körperzellen?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1132,14 +1057,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Körperzellen teilen sich aus verschiedenen Gründen. Überlege, welche Funktionen die Zellteilung im Organismus erfüllt, wie etwa Wachstum, Reparatur von Gewebe und die Aufrechterhaltung des Zellbestands.",
+    hint: "Körperzellen teilen sich aus verschiedenen Gründen. Überlege, welche Funktionen die Zellteilung im Organismus erfüllt, wie etwa Wachstum, Reparatur von Gewebe und die Aufrechterhaltung des Zellbestands.",
   },
   {
     id: "aufbau-der-dna-15",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was sind Gameten?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1159,7 +1083,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Denke darüber nach, welche Rolle Gameten im Fortpflanzungsprozess spielen und wie sie sich von anderen Zellen unterscheiden.",
+    hint: "Denke darüber nach, welche Rolle Gameten im Fortpflanzungsprozess spielen und wie sie sich von anderen Zellen unterscheiden.",
   },
   {
     id: "aufbau-der-dna-16",
@@ -1187,7 +1111,7 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Die Bildung haploider Keimzellen ist entscheidend für die sexuelle Fortpflanzung beim Menschen. Überlege, warum die Reduktion der Chromosomenzahl in den Keimzellen wichtig ist und welche Rolle dies im Fortpflanzungsprozess spielt.",
+    hint: "Die Bildung haploider Keimzellen ist entscheidend für die sexuelle Fortpflanzung beim Menschen. Überlege, warum die Reduktion der Chromosomenzahl in den Keimzellen wichtig ist und welche Rolle dies im Fortpflanzungsprozess spielt.",
   },
   {
     id: "aufbau-der-dna-17",
@@ -1215,14 +1139,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Die DNA im Zellkern erfüllt verschiedene Aufgaben. Überlege, welche Funktionen die DNA hat, sowohl in Bezug auf die Speicherung von Informationen als auch auf ihre Rolle bei der Steuerung von Zellaktivitäten.",
+    hint: "Die DNA im Zellkern erfüllt verschiedene Aufgaben. Überlege, welche Funktionen die DNA hat, sowohl in Bezug auf die Speicherung von Informationen als auch auf ihre Rolle bei der Steuerung von Zellaktivitäten.",
   },
   {
     id: "aufbau-der-dna-18",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist ein Gen?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1242,14 +1165,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Ein Gen ist eine spezifische Abschnitt der DNA, der die Anleitung für die Produktion eines Proteins oder einer funktionellen RNA enthält.",
+    hint: "Ein Gen ist eine spezifische Abschnitt der DNA, der die Anleitung für die Produktion eines Proteins oder einer funktionellen RNA enthält.",
   },
   {
     id: "aufbau-der-dna-19",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist eine Zygote?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1269,14 +1191,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    hint: "Tipp: Eine Zygote ist eine Zelle, die durch die Verschmelzung von zwei Gameten entsteht. Überlege, welche Rolle die Zygote im Entwicklungsprozess eines Organismus spielt und wie sie zur Bildung eines neuen Individuums beiträgt.",
+    hint: "Eine Zygote ist eine Zelle, die durch die Verschmelzung von zwei Gameten entsteht. Überlege, welche Rolle die Zygote im Entwicklungsprozess eines Organismus spielt und wie sie zur Bildung eines neuen Individuums beiträgt.",
   },
   {
     id: "aufbau-der-dna-20",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist ein Crossing Over und wann findet es statt?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1296,14 +1217,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Denke darüber nach, warum dieser Vorgang während eines bestimmten Stadiums der Zellteilung stattfindet und welche Auswirkungen er auf die genetische Vielfalt hat.",
+    hint: "Denke darüber nach, warum dieser Vorgang während eines bestimmten Stadiums der Zellteilung stattfindet und welche Auswirkungen er auf die genetische Vielfalt hat.",
   },
   {
     id: "aufbau-der-dna-21",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Wozu dient ein Crossing Over?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1323,14 +1243,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    hint: "Tipp: Überlege, wie der Austausch von DNA-Abschnitten zwischen homologen Chromosomen während der Meiose zu neuen Kombinationen von Genen führt und warum dies für die Evolution und Anpassung von Organismen wichtig ist.",
+    hint: "Überlege, wie der Austausch von DNA-Abschnitten zwischen homologen Chromosomen während der Meiose zu neuen Kombinationen von Genen führt und warum dies für die Evolution und Anpassung von Organismen wichtig ist.",
   },
   {
     id: "aufbau-der-dna-22",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist ein Non-Disjunction?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1350,14 +1269,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Denke darüber nach, in welchem Stadium der Zellteilung Non-Disjunction auftreten kann und welche Auswirkungen dies auf die Chromosomenzahl in den Tochterzellen hat.",
+    hint: "Denke darüber nach, in welchem Stadium der Zellteilung Non-Disjunction auftreten kann und welche Auswirkungen dies auf die Chromosomenzahl in den Tochterzellen hat.",
   },
   {
     id: "aufbau-der-dna-23",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist Monosomie?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1377,14 +1295,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Monosomie ist ein genetischer Zustand, bei dem eine Zelle nur ein Exemplar eines bestimmten Chromosoms statt der üblichen zwei Exemplare hat. Überlege, wie Monosomie entsteht und welche Konsequenzen sie für die genetische Ausstattung des Organismus hat.",
+    hint: "Monosomie ist ein genetischer Zustand, bei dem eine Zelle nur ein Exemplar eines bestimmten Chromosoms statt der üblichen zwei Exemplare hat. Überlege, wie Monosomie entsteht und welche Konsequenzen sie für die genetische Ausstattung des Organismus hat.",
   },
   {
     id: "aufbau-der-dna-24",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Was ist heterozygot?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1404,14 +1321,13 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    hint: "Tipp: Überlege, wie Heterozygotie in Bezug auf die genetische Vielfalt und Phänotypen wirkt.",
+    hint: "Überlege, wie Heterozygotie in Bezug auf die genetische Vielfalt und Phänotypen wirkt.",
   },
   {
     id: "aufbau-der-dna-25",
     type: CBExerciseType.Quiz,
     topic: CBTopic.AufbauDNA,
     question: "Wie viele Chromosomen hat eine Keimzelle?",
-    image: { src: "/dna/doppelhelix.png", alt: "DNA Doppelhelix" },
     answers: [
       {
         id: "A",
@@ -1431,6 +1347,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    hint: "Tipp: Eine Keimzelle ist haploid, was bedeutet, dass sie die Hälfte der Chromosomenzahl einer somatischen Zelle hat. Überlege, warum die Reduktion der Chromosomenzahl in Keimzellen wichtig ist und wie dies zur genetischen Vielfalt beiträgt.",
+    hint: "Eine Keimzelle ist haploid, was bedeutet, dass sie die Hälfte der Chromosomenzahl einer somatischen Zelle hat. Überlege, warum die Reduktion der Chromosomenzahl in Keimzellen wichtig ist und wie dies zur genetischen Vielfalt beiträgt.",
   },
 ];
