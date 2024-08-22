@@ -26,7 +26,6 @@ export const CBDialog = ({
         sx={{
           display: "flex",
           justifyContent: "center",
-          overflow: "visible",
           ...dialogContentProps?.sx,
         }}
       >
@@ -47,13 +46,14 @@ export const CBDialog = ({
         sx={{
           p: 2,
           pb: 3,
+          overflow: "hidden",
         }}
       >
         <IconButton sx={{ alignSelf: "flex-end" }} onClick={onClose}>
           <Close />
         </IconButton>
 
-        <Stack>
+        <Stack sx={{ overflow: "auto" }}>
           {title && (
             <DialogTitle variant="h2" display="flex" justifyContent="center">
               {title}
