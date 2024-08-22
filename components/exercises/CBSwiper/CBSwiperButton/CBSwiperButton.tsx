@@ -66,7 +66,11 @@ export const CBSwiperButton = ({
               <CBEmoji emoji={cellTypeData.icons[0]} fontSize={iconFontSize} />
             )}
 
-            <Typography>{cellTypeData.name}</Typography>
+            <Typography
+              sx={{ fontWeight: (t) => t.typography.fontWeightMedium }}
+            >
+              {cellTypeData.name}
+            </Typography>
           </Stack>
         </Box>
       </CBAnswerButton>
