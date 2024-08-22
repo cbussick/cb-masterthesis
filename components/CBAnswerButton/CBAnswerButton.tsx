@@ -46,8 +46,6 @@ export const CBAnswerButton = ({
   isCurrentExerciseFinished,
   disabled,
   clickedButton,
-  onMouseEnter,
-  onMouseLeave,
   sx,
 }: CBAnswerButtonProps): JSX.Element => {
   const wasClicked = clickedButton === id;
@@ -56,8 +54,6 @@ export const CBAnswerButton = ({
     <Button
       id={id}
       disabled={isCurrentExerciseFinished || disabled}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       sx={{
         width: "100%",
         minHeight: 75,

@@ -175,12 +175,16 @@ export const CBExerciseSequence = ({
 
         <Stack
           spacing={3}
-          sx={{ minHeight: 0, flex: "1 1 auto", justifyContent: "center" }}
+          sx={{
+            minHeight: 0,
+            flex: 1,
+            justifyContent: "center",
+          }}
         >
           <Stack
             sx={{
               minHeight: 0,
-              flex: "1 1 auto",
+              flex: 1,
               justifyContent: "center",
               overflow: "auto",
             }}

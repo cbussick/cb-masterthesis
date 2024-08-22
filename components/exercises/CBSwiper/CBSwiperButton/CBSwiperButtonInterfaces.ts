@@ -7,7 +7,4 @@ export interface CBSwiperButtonProps {
   onClick: ButtonProps["onClick"];
   isCurrentExerciseFinished: boolean;
   clickedButton: string;
-  onMouseEnter?: ButtonProps["onMouseEnter"];
-  onMouseLeave?: ButtonProps["onMouseLeave"];
-  sx?: ButtonProps["sx"];
 }
