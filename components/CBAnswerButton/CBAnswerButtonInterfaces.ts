@@ -8,7 +8,5 @@ export interface CBAnswerButtonProps {
   isCurrentExerciseFinished: boolean;
   disabled?: boolean;
   clickedButton: string;
-  onMouseEnter?: ButtonProps["onMouseEnter"];
-  onMouseLeave?: ButtonProps["onMouseLeave"];
   sx?: ButtonProps["sx"];
 }

@@ -1,23 +1,22 @@
 "use client";
 
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
-import { CBImage } from "@/components/CBImage/CBImage";
-import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { CBSwiperCellType } from "@/data/exercises/CBSwiperExercise";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
-import { ButtonProps, Card, Stack, Typography } from "@mui/material";
+import { ClientRect, DndContext, DndContextProps } from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
+import { ButtonProps, Stack } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
-import { DraggableProps, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { CBSwiperButton } from "./CBSwiperButton/CBSwiperButton";
 import { CBSwiperButtonProps } from "./CBSwiperButton/CBSwiperButtonInterfaces";
+import { CBSwiperCard } from "./CBSwiperCard/CBSwiperCard";
 import { CBSwiperProps } from "./CBSwiperInterfaces";
 
 const commonGridProps: Grid2Props = {
   xs: 4,
   display: "flex",
-  alignItems: "center",
 };
 
 export const CBSwiper = ({
@@ -33,8 +32,6 @@ export const CBSwiper = ({
   } = useCBExerciseSequence();
 
   const [clickedButton, setClickedButton] = useState<string>("");
-  const [dropTarget, setDropTarget] = useState<string>("");
-  const [isDragging, setDragging] = useState<boolean>(false);
 
   const constraintsRef = useRef<HTMLDivElement>(null);
 
@@ -78,137 +75,85 @@ export const CBSwiper = ({
     onConfirm(buttonAnswerId);
   };
 
-  const onDragEnd: DraggableProps["onDragEnd"] = () => {
-    setDragging(false);
-    if (dropTarget) {
-      onConfirm(dropTarget);
-    }
-  };
-
   const commonButtonProps: Pick<
     CBSwiperButtonProps,
-    "onClick" | "isCurrentExerciseFinished" | "clickedButton" | "onMouseLeave"
+    "onClick" | "isCurrentExerciseFinished" | "clickedButton"
   > = {
     onClick,
     isCurrentExerciseFinished,
     clickedButton,
-    onMouseLeave: () => setDropTarget(""),
+  };
+
+  const onDragEnd: DndContextProps["onDragEnd"] = (event) => {
+    const chosenCellType = event.over?.id;
+    if (chosenCellType) {
+      onConfirm(chosenCellType.toString());
+    }
   };
 
   return (
-    <Stack
-      sx={{
-        // `p={1}` is necessary to not have the boxshadow of the cards cut off
-        p: 1,
-        overflow: "hidden",
-        cursor: isDragging ? "grabbing" : "auto",
-      }}
+    <DndContext
+      onDragEnd={onDragEnd}
+      modifiers={[
+        (e) =>
+          restrictToParentElement({
+            ...e,
+            containerNodeRect:
+              constraintsRef?.current?.getBoundingClientRect() as ClientRect,
+          }),
+      ]}
     >
-      <Grid container ref={constraintsRef}>
-        <Grid {...commonGridProps}>
-          <CBSwiperButton
-            cellType={CBSwiperCellType.Plant}
-            isCorrect={exercise.belongsTo === CBSwiperCellType.Plant}
-            onMouseEnter={() => setDropTarget(CBSwiperCellType.Plant)}
-            {...commonButtonProps}
-          />
-        </Grid>
-
-        <Grid
-          {...commonGridProps}
-          sx={{
-            justifyContent: "center",
-          }}
-        >
-          <Card
-            sx={{
-              width: "80%",
-              height: "100%",
-              p: 2,
-              zIndex: 1,
-              pointerEvents: isDragging ? "none" : "auto",
-              // eslint-disable-next-line no-nested-ternary
-              cursor: isCurrentExerciseFinished
-                ? "auto"
-                : isDragging
-                  ? "grabbing"
-                  : "grab",
-            }}
-            component={motion.div}
-            drag={!isCurrentExerciseFinished}
-            dragSnapToOrigin
-            dragConstraints={constraintsRef}
-            // Can not be 0, otherwise the snapping to origin is not animated and the card jumps back instantly
-            dragElastic={{}}
-            onDragStart={() => setDragging(true)}
-            onDragEnd={onDragEnd}
-          >
-            <Stack
-              spacing={1}
-              sx={{
-                width: "100%",
-                height: "100%",
-                alignItems: "center",
-              }}
-            >
-              {difficulty === CBExerciseDifficulty.Medium ||
-                (difficulty === CBExerciseDifficulty.Easy && (
-                  <Typography variant="h3">{exercise.name}</Typography>
-                ))}
-
-              {exercise.image && (
-                <CBImage
-                  image={exercise.image}
-                  boxProps={{
-                    flexGrow: 1,
-                    sx: {
-                      height: undefined,
-                    },
-                  }}
-                  imageProps={{ draggable: false }}
-                />
-              )}
-            </Stack>
-          </Card>
-        </Grid>
-
-        <Grid
-          {...commonGridProps}
-          sx={{
-            justifyContent: "flex-end",
-          }}
-        >
-          <CBSwiperButton
-            cellType={CBSwiperCellType.Animal}
-            isCorrect={exercise.belongsTo === CBSwiperCellType.Animal}
-            onMouseEnter={() => setDropTarget(CBSwiperCellType.Animal)}
-            {...commonButtonProps}
-          />
-        </Grid>
-
-        <Grid
-          container
-          xs={12}
-          sx={{
-            justifyContent: "center",
-            mt: 3,
-          }}
-        >
-          <Grid
-            {...commonGridProps}
-            sx={{
-              justifyContent: "center",
-            }}
-          >
+      <Stack
+        sx={{
+          // `p={1}` is necessary to not have the boxshadow of the cards cut off
+          p: 1,
+          minHeight: "100%",
+        }}
+      >
+        <Grid container ref={constraintsRef} sx={{ flex: 1 }}>
+          <Grid {...commonGridProps}>
             <CBSwiperButton
-              cellType={CBSwiperCellType.Both}
-              isCorrect={exercise.belongsTo === CBSwiperCellType.Both}
-              onMouseEnter={() => setDropTarget(CBSwiperCellType.Both)}
+              cellType={CBSwiperCellType.Plant}
+              isCorrect={exercise.belongsTo === CBSwiperCellType.Plant}
               {...commonButtonProps}
             />
           </Grid>
+
+          <Grid {...commonGridProps} sx={{ justifyContent: "center" }}>
+            <CBSwiperCard
+              name={exercise.name}
+              image={exercise.image}
+              difficulty={difficulty}
+              isExerciseFinished={isCurrentExerciseFinished}
+            />
+          </Grid>
+
+          <Grid {...commonGridProps} sx={{ justifyContent: "flex-end" }}>
+            <CBSwiperButton
+              cellType={CBSwiperCellType.Animal}
+              isCorrect={exercise.belongsTo === CBSwiperCellType.Animal}
+              {...commonButtonProps}
+            />
+          </Grid>
+
+          <Grid
+            container
+            xs={12}
+            sx={{
+              justifyContent: "center",
+              mt: 3,
+            }}
+          >
+            <Grid {...commonGridProps} sx={{ justifyContent: "center" }}>
+              <CBSwiperButton
+                cellType={CBSwiperCellType.Both}
+                isCorrect={exercise.belongsTo === CBSwiperCellType.Both}
+                {...commonButtonProps}
+              />
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Stack>
+      </Stack>
+    </DndContext>
   );
 };

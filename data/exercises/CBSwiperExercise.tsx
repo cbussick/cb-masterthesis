@@ -6,6 +6,9 @@ import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
 const swiperHint =
   "Gucke dir die Zelle genau an und entscheide ob es sich um eine tierische oder pflanzliche Zelle handelt, oder vielleicht Beides?";
 
+const plantIcon = "🌱";
+const animalIcon = "🐾";
+
 export enum CBSwiperCellType {
   Plant = "plant",
   Animal = "animal",
@@ -14,12 +17,22 @@ export enum CBSwiperCellType {
 
 interface CBSwiperCellTypeData {
   name: string;
+  icons: string[];
 }
 
 export const swiperCellTypes: Record<CBSwiperCellType, CBSwiperCellTypeData> = {
-  [CBSwiperCellType.Plant]: { name: "Pflanzliche Zelle" },
-  [CBSwiperCellType.Animal]: { name: "Tierische Zelle" },
-  [CBSwiperCellType.Both]: { name: "Beides" },
+  [CBSwiperCellType.Plant]: {
+    name: "Pflanzliche Zelle",
+    icons: [plantIcon],
+  },
+  [CBSwiperCellType.Animal]: {
+    name: "Tierische Zelle",
+    icons: [animalIcon],
+  },
+  [CBSwiperCellType.Both]: {
+    name: "Beides",
+    icons: [plantIcon, animalIcon],
+  },
 };
 
 export interface CBSwiperExercise extends CBExerciseWithTypeAndTopic {
