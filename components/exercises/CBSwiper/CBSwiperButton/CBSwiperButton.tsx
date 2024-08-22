@@ -35,7 +35,6 @@ export const CBSwiperButton = ({
           height: "100%",
           p: 0,
           transition: "0.25s",
-          opacity: isOver ? "0.5" : undefined,
           boxShadow: (t) => (isOver ? t.shadows[4] : undefined),
         }}
       >
