@@ -8,6 +8,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { CBSwiperButtonProps } from "./CBSwiperButtonInterfaces";
 
 const iconFontSize = "40px";
+const borderRadius = 5;
 
 export const CBSwiperButton = ({
   cellType,
@@ -35,8 +36,8 @@ export const CBSwiperButton = ({
           height: "100%",
           p: 0,
           transition: "0.25s",
-          opacity: isOver ? "0.5" : undefined,
           boxShadow: (t) => (isOver ? t.shadows[4] : undefined),
+          borderRadius,
         }}
       >
         <Box
@@ -47,7 +48,7 @@ export const CBSwiperButton = ({
             justifyContent: "center",
             alignItems: "center",
             border: "4px dashed",
-            borderRadius: 5,
+            borderRadius,
             borderColor: (t) =>
               isOver ? t.palette.primary.main : "transparent",
             transition: "border-color 0.3s",
@@ -66,7 +67,11 @@ export const CBSwiperButton = ({
               <CBEmoji emoji={cellTypeData.icons[0]} fontSize={iconFontSize} />
             )}
 
-            <Typography>{cellTypeData.name}</Typography>
+            <Typography
+              sx={{ fontWeight: (t) => t.typography.fontWeightMedium }}
+            >
+              {cellTypeData.name}
+            </Typography>
           </Stack>
         </Box>
       </CBAnswerButton>

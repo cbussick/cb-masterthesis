@@ -141,7 +141,7 @@ export const CBSwiper = ({
             xs={12}
             sx={{
               justifyContent: "center",
-              mt: 3,
+              mt: 9,
             }}
           >
             <Grid {...commonGridProps} sx={{ justifyContent: "center" }}>

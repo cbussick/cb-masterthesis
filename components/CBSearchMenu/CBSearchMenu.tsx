@@ -27,12 +27,7 @@ export const CBSearchMenu = ({
 
   return (
     <CBDialog isOpen={isMenuOpen} onClose={onClose}>
-      <Stack
-        sx={{
-          width: "100%",
-          height: "100%",
-        }}
-      >
+      <Stack>
         <TextField
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -51,7 +46,7 @@ export const CBSearchMenu = ({
           }}
         />
 
-        <List sx={{ overflowY: "auto" }}>
+        <List sx={{ overflow: "auto" }}>
           {searchResults.map((s, index) => (
             <React.Fragment key={s[0]}>
               {index !== 0 && <Divider />}

@@ -25,6 +25,12 @@ export const CBSwiperCard = ({
         height: "100%",
         p: 2,
         zIndex: 1,
+        // eslint-disable-next-line no-nested-ternary
+        cursor: isDragging
+          ? "grabbing"
+          : isExerciseFinished
+            ? undefined
+            : "grab",
         transition: isDragging ? undefined : "transform 0.25s ease",
         transform: transform
           ? `translate3d(${transform.x}px, ${transform.y}px, 0)`

@@ -4,7 +4,7 @@ import { CBExerciseType } from "./CBExerciseType";
 import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
 
 const swiperHint =
-  "Gucke dir die Zelle genau an und entscheide ob es sich um eine tierische oder pflanzliche Zelle handelt, oder vielleicht Beides?";
+  "Guck dir das Zellorganell genau an und entscheide, ob es zu einer tierischen oder pflanzlichen Zelle gehört - oder vielleicht zu beiden.";
 
 const plantIcon = "🌱";
 const animalIcon = "🐾";
