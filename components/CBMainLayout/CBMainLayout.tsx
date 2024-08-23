@@ -10,6 +10,7 @@ import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, Stack, Theme, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
 import { CBSidebar } from "../CBSidebar/CBSidebar";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
@@ -21,6 +22,12 @@ import { CBMainLayoutProps } from "./CBMainLayoutInterfaces";
 
 const sidebarWidthOpen = 300;
 const sidebarWidthClosed = 100;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnWindowFocus: false },
+  },
+});
 
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const routeData = useRouteData();
@@ -51,52 +58,54 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const notFound = hasAccess === undefined;
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
-      <Stack
-        direction="row"
-        sx={{
-          height: "100vh",
-        }}
-      >
-        <Box
+    <QueryClientProvider client={queryClient}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
+        <Stack
+          direction="row"
           sx={{
-            position: "relative",
-            height: "100%",
+            height: "100vh",
           }}
         >
-          <CBSidebar
-            sidebarWidthOpen={sidebarWidthOpen}
-            sidebarWidthClosed={sidebarWidthClosed}
-            sidebarHorizontalSpacing={layoutHorizontalSpacing}
-          />
-        </Box>
+          <Box
+            sx={{
+              position: "relative",
+              height: "100%",
+            }}
+          >
+            <CBSidebar
+              sidebarWidthOpen={sidebarWidthOpen}
+              sidebarWidthClosed={sidebarWidthClosed}
+              sidebarHorizontalSpacing={layoutHorizontalSpacing}
+            />
+          </Box>
 
-        <CBConfettiProvider>
-          <CBConfettiWrapper>
-            <Box
-              sx={{
-                flex: "1 1 auto",
-                height: "100%",
-                ml:
-                  layoutHorizontalSpacing * 2 +
-                  sidebarWidthClosed / themeSpacingFactor,
-              }}
-            >
-              {hasAccess || notFound ? children : <CBNoAccessView />}
-            </Box>
-          </CBConfettiWrapper>
-        </CBConfettiProvider>
-      </Stack>
+          <CBConfettiProvider>
+            <CBConfettiWrapper>
+              <Box
+                sx={{
+                  flex: "1 1 auto",
+                  height: "100%",
+                  ml:
+                    layoutHorizontalSpacing * 2 +
+                    sidebarWidthClosed / themeSpacingFactor,
+                }}
+              >
+                {hasAccess || notFound ? children : <CBNoAccessView />}
+              </Box>
+            </CBConfettiWrapper>
+          </CBConfettiProvider>
+        </Stack>
 
-      <CBSnackbar
-        isOpen={isSnackbarOpen}
-        severity={severity}
-        onClose={() => {
-          setSnackbarOpen(false);
-        }}
-        title={title}
-        message={message}
-      />
-    </LocalizationProvider>
+        <CBSnackbar
+          isOpen={isSnackbarOpen}
+          severity={severity}
+          onClose={() => {
+            setSnackbarOpen(false);
+          }}
+          title={title}
+          message={message}
+        />
+      </LocalizationProvider>
+    </QueryClientProvider>
   );
 };

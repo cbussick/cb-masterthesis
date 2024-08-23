@@ -1,17 +1,17 @@
 const apiBaseUrl = "/api/";
 
 export enum CBAPIRoute {
-  EvaluateFreeformQuestion = "EvaluateFreeformQuestion",
-  DiNAsHint = "DiNAsHint",
-  Image = "Image",
-  TextToSpeech = "TextToSpeech",
-  GenerateQuizExercise = "GenerateQuizExercise",
+  EvaluateFreeformQuestion = "evaluate-freeform-question",
+  DiNAsHint = "dinas-hint",
+  Image = "image",
+  TextToSpeech = "text-to-speech",
+  GenerateQuizExercise = "generate-quiz-exercise",
 }
 
 export const apiRouteMap: Record<CBAPIRoute, string> = {
-  [CBAPIRoute.EvaluateFreeformQuestion]: `${apiBaseUrl}evaluate-freeform-question`,
-  [CBAPIRoute.DiNAsHint]: `${apiBaseUrl}dinas-hint`,
-  [CBAPIRoute.GenerateQuizExercise]: `${apiBaseUrl}generate-quiz-exercise`,
-  [CBAPIRoute.Image]: `${apiBaseUrl}image`,
-  [CBAPIRoute.TextToSpeech]: `${apiBaseUrl}text-to-speech`,
+  [CBAPIRoute.EvaluateFreeformQuestion]: `${apiBaseUrl}${CBAPIRoute.EvaluateFreeformQuestion}`,
+  [CBAPIRoute.DiNAsHint]: `${apiBaseUrl}${CBAPIRoute.DiNAsHint}`,
+  [CBAPIRoute.GenerateQuizExercise]: `${apiBaseUrl}${CBAPIRoute.GenerateQuizExercise}`,
+  [CBAPIRoute.Image]: `${apiBaseUrl}${CBAPIRoute.Image}`,
+  [CBAPIRoute.TextToSpeech]: `${apiBaseUrl}${CBAPIRoute.TextToSpeech}`,
 };

@@ -1,7 +1,7 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBTopic } from "@/data/topics";
-import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
+import { UseQueryResult } from "@tanstack/react-query";
 import { Dayjs } from "dayjs";
 
 export interface CBFreePracticeExerciseSequenceProps {
@@ -11,6 +11,7 @@ export interface CBFreePracticeExerciseSequenceProps {
   onMistake: (exercise: CBExerciseWithMetaData) => void;
   onCompleteExercise: (params: any) => void;
   onSequenceComplete: (params: any) => void;
-  apiRequestState?: CBAPIRequestState;
   beginTime: Dayjs;
+  requestStatus?: UseQueryResult["status"];
+  errorMessage?: string;
 }

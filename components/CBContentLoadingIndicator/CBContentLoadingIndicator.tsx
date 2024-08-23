@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { CBImage } from "./CBImage/CBImage";
+import { CBImage } from "../CBImage/CBImage";
 
 export const CBContentLoadingIndicator = (): JSX.Element => {
   return (
