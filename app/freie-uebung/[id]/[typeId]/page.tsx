@@ -19,12 +19,11 @@ import {
   CBUserCustomData,
 } from "@/firebase-client/UserCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
-import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
-import { getOpenAIQuizExercise } from "@/helpers/openai/getOpenAIGenerateQuizExercise";
+import { useGenerateAIQuizQuery } from "@/helpers/queries/useGenerateAIQuizQuery";
 import { retryMistakesPathSegment } from "@/helpers/routes";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
-import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
+import { useSnackbar } from "@/ui/useSnackbar";
 import { notFound } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -83,17 +82,18 @@ export default function FreePracticeSequencePage({
     notFound();
   }
 
-  const { user, customData } = useUser();
-  const { showSnackbar } = useCBExerciseSequenceSnackbar();
+  const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
-  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
-  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
-    CBAPIRequestState.Idle,
+  const { user, customData } = useUser();
+  const { showSnackbar } = useSnackbar();
+  const { data, status, error } = useGenerateAIQuizQuery(
+    topic,
+    exerciseType === CBExerciseType.AIQuiz,
   );
 
-  const isRetryingMistakes = params.typeId === retryMistakesPathSegment;
+  const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
 
-  const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
+  const isRetryingMistakes = params.typeId === retryMistakesPathSegment;
 
   useEffect(() => {
     let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
@@ -128,26 +128,14 @@ export default function FreePracticeSequencePage({
 
       setExercises(randomExercises);
     } else if (exerciseType === CBExerciseType.AIQuiz) {
-      // TODO: Always fetches twice because of strict mode. Just leave it like this?
-      setAPIRequestState(CBAPIRequestState.Fetching);
-      getOpenAIQuizExercise(user.uid, topic)
-        .then((response) => {
-          const exerciseWithMetaData: CBExerciseWithMetaData = {
-            ...response,
-            isCompleted: false,
-          };
+      if (data) {
+        const exerciseWithMetaData: CBExerciseWithMetaData = {
+          ...data,
+          isCompleted: false,
+        };
 
-          setExercises([exerciseWithMetaData]);
-          setAPIRequestState(CBAPIRequestState.Success);
-        })
-        .catch((error) => {
-          setAPIRequestState(CBAPIRequestState.Error);
-          showSnackbar(
-            "Problem beim Generieren der Aufgabe",
-            error.message,
-            "error",
-          );
-        });
+        setExercises([exerciseWithMetaData]);
+      }
     } else if (exerciseType) {
       exercisesWithMetaData = exercisesMap[exerciseType]
         .filter((e) => e.topic === topic)
@@ -171,7 +159,7 @@ export default function FreePracticeSequencePage({
     // a new selection of random exercises, while the user is still inside the sequence.
     // This would cause glitches for the user.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseType, isRetryingMistakes, showSnackbar, topic]);
+  }, [exerciseType, isRetryingMistakes, showSnackbar, topic, data]);
 
   const onMistake = useCallback(
     (exercise: CBExerciseWithMetaData) => {
@@ -262,18 +250,22 @@ export default function FreePracticeSequencePage({
         onMistake={onMistake}
         onCompleteExercise={onCompleteExercise}
         onSequenceComplete={onSequenceComplete}
-        apiRequestState={apiRequestState}
         beginTime={beginTime}
+        requestStatus={
+          exerciseType === CBExerciseType.AIQuiz ? status : undefined
+        }
+        errorMessage={error?.message}
       />
     ),
     [
-      apiRequestState,
       beginTime,
+      error?.message,
       exerciseType,
       exercises,
       onCompleteExercise,
       onMistake,
       onSequenceComplete,
+      status,
       topic,
     ],
   );

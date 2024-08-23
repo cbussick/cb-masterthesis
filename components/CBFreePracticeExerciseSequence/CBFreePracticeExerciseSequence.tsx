@@ -2,11 +2,12 @@
 
 import { exercisesData } from "@/data/exercises/CBExercise";
 import { topics } from "@/data/topics";
-import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { CBRoute } from "@/helpers/routes";
 import { Stack, Typography } from "@mui/material";
+import { UseQueryResult } from "@tanstack/react-query";
 import { CBBreadcrumbs } from "../CBBreadcrumbs/CBBreadcrumbs";
-import { CBContentLoadingIndicator } from "../CBContentLoadingIndicator";
+import { CBContentErrorMessage } from "../CBContentErrorMessage/CBContentErrorMessage";
+import { CBContentLoadingIndicator } from "../CBContentLoadingIndicator/CBContentLoadingIndicator";
 import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
 import { CBExerciseSequenceProvider } from "../CBExerciseSequence/CBExerciseSequenceProvider";
 import { CBExerciseSequenceWrapper } from "../CBExerciseSequence/CBExerciseSequenceWrapper";
@@ -21,8 +22,9 @@ export const CBFreePracticeExerciseSequence = ({
   onMistake,
   onCompleteExercise,
   onSequenceComplete,
-  apiRequestState,
   beginTime,
+  requestStatus,
+  errorMessage,
 }: CBFreePracticeExerciseSequenceProps): JSX.Element => {
   const topicData = topics[topic];
   const subtitle = exerciseType
@@ -30,6 +32,29 @@ export const CBFreePracticeExerciseSequence = ({
     : "Fehler Wiederholung";
 
   const onCompleteHref = `${CBRoute.FreieUebung}/${topic}`;
+
+  const contentMap: Record<UseQueryResult["status"], JSX.Element> = {
+    pending: <CBContentLoadingIndicator />,
+    success: (
+      <CBExerciseSequenceProvider
+        type={
+          exerciseType
+            ? CBExerciseSequenceType.FreePractice
+            : CBExerciseSequenceType.RetryMistakes
+        }
+        beginTime={beginTime}
+      >
+        <CBExerciseSequenceWrapper
+          exercises={exercises}
+          onMistake={onMistake}
+          onCompleteHref={onCompleteHref}
+          onCompleteExercise={onCompleteExercise}
+          onSequenceComplete={onSequenceComplete}
+        />
+      </CBExerciseSequenceProvider>
+    ),
+    error: <CBContentErrorMessage message={errorMessage || ""} />,
+  };
 
   return (
     <CBContentWrapper bgcolor={(t) => t.palette.background.default}>
@@ -54,26 +79,7 @@ export const CBFreePracticeExerciseSequence = ({
           subTitle={<Typography variant="h2">{subtitle}</Typography>}
         />
 
-        {apiRequestState === CBAPIRequestState.Fetching ? (
-          <CBContentLoadingIndicator />
-        ) : (
-          <CBExerciseSequenceProvider
-            type={
-              exerciseType
-                ? CBExerciseSequenceType.FreePractice
-                : CBExerciseSequenceType.RetryMistakes
-            }
-            beginTime={beginTime}
-          >
-            <CBExerciseSequenceWrapper
-              exercises={exercises}
-              onMistake={onMistake}
-              onCompleteHref={onCompleteHref}
-              onCompleteExercise={onCompleteExercise}
-              onSequenceComplete={onSequenceComplete}
-            />
-          </CBExerciseSequenceProvider>
-        )}
+        {requestStatus ? contentMap[requestStatus] : contentMap.success}
       </Stack>
     </CBContentWrapper>
   );
