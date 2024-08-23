@@ -1,16 +1,14 @@
-import { themeWithResponsiveFontSizes as theme } from "@/theme/theme";
-import { useMediaQuery } from "@mui/material";
-import { Breakpoint } from "@mui/system";
+import { Breakpoint, Theme, useMediaQuery } from "@mui/material";
 
 const defaultBreakpoint: Breakpoint = "xs";
 
 export const useCurrentMuiBreakpoint = (): Breakpoint => {
   const breakpoints: Record<Breakpoint, boolean> = {
-    xs: useMediaQuery(theme.breakpoints.only("xs")),
-    sm: useMediaQuery(theme.breakpoints.only("sm")),
-    md: useMediaQuery(theme.breakpoints.only("md")),
-    lg: useMediaQuery(theme.breakpoints.only("lg")),
-    xl: useMediaQuery(theme.breakpoints.only("xl")),
+    xs: useMediaQuery<Theme>((t) => t.breakpoints.only("xs")),
+    sm: useMediaQuery<Theme>((t) => t.breakpoints.only("sm")),
+    md: useMediaQuery<Theme>((t) => t.breakpoints.only("md")),
+    lg: useMediaQuery<Theme>((t) => t.breakpoints.only("lg")),
+    xl: useMediaQuery<Theme>((t) => t.breakpoints.only("xl")),
   };
 
   const breakPoint = Object.entries(breakpoints).find(
