@@ -7,7 +7,7 @@ import { useRouteData } from "@/helpers/useRouteData";
 import { themeSpacingFactor } from "@/theme/theme";
 import { CBConfettiProvider } from "@/ui/CBConfettiProvider";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Stack, Theme, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
@@ -25,8 +25,8 @@ const sidebarWidthClosed = 100;
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
   const routeData = useRouteData();
   const user = useUncertainUser();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery<Theme>((t) => t.breakpoints.down("sm"));
+
   const {
     isOpen: isSnackbarOpen,
     setOpen: setSnackbarOpen,
@@ -39,7 +39,6 @@ export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
     return <CBMobileView />;
   }
 
-  // Show loading while user and custom data is not loaded
   if (!isUserFullyLoaded(user)) {
     return <CBLoadingView />;
   }
