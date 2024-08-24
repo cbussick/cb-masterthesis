@@ -20,7 +20,7 @@ export const CBQuiz = ({
     setExercises,
   } = useCBExerciseSequence();
 
-  const [clickedButton, setClickedButton] = useState<string>("");
+  const [chosenAnswer, setChosenAnswer] = useState<string>("");
   const [randomizedAnswers, setRandomizedAnswers] = useState<CBAnswer[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const CBQuiz = ({
 
   const confirmAnswer = useCallback(
     (buttonAnswerId: string) => {
-      setClickedButton(buttonAnswerId);
+      setChosenAnswer(buttonAnswerId);
 
       setCurrentExerciseFinished(true);
 
@@ -137,7 +137,7 @@ export const CBQuiz = ({
                   isCorrect={exercise.correctAnswer === answer.id}
                   onClick={onConfirm}
                   isCurrentExerciseFinished={isCurrentExerciseFinished}
-                  clickedButton={clickedButton}
+                  clickedButton={chosenAnswer}
                   index={index}
                 />
               </Grid>
