@@ -53,6 +53,63 @@ export const CBProgressCircle = ({
     innerCircleSizeMap[currentBreakpoint] +
     (innerCircleSizeMap[currentBreakpoint] / 10) * 2.6;
 
+  const isClickable = unlocked && href;
+
+  const innerCircleComponent: JSX.Element = (
+    <ButtonBase
+      sx={{
+        width: innerCircleSizeMap[currentBreakpoint],
+        height: innerCircleSizeMap[currentBreakpoint],
+        borderRadius: "50%",
+        bgcolor: (t) => t.palette.background.default,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        p: 3,
+        boxShadow: (t) => t.shadows[8],
+      }}
+      TouchRippleProps={{
+        style: { color: theme.palette.primary.light },
+      }}
+      disabled={!isClickable}
+    >
+      <Stack
+        sx={{
+          alignItems: "center",
+          mt: -4,
+        }}
+        spacing={1}
+      >
+        {unlocked ? (
+          <CBImage image={icon} boxProps={{ sx: { width: 120, height: 95 } }} />
+        ) : (
+          <LockRounded
+            sx={{
+              color: (t) => t.palette.grey[700],
+              fontSize: iconSizeMap[currentBreakpoint],
+            }}
+          />
+        )}
+
+        <Typography
+          variant="h3"
+          sx={{
+            textAlign: "center",
+            fontWeight: (t) => t.typography.fontWeightBold,
+          }}
+        >
+          {label}
+        </Typography>
+
+        {comingSoon && (
+          <Alert severity="info" sx={{ alignItems: "center", width: "100%" }}>
+            <Typography>Coming soon!</Typography>
+          </Alert>
+        )}
+      </Stack>
+    </ButtonBase>
+  );
+
   return (
     <Box
       id={id}
@@ -60,7 +117,7 @@ export const CBProgressCircle = ({
       initial={{ scale: 0.5, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
-      whileHover={{ scale: unlocked ? 1.025 : undefined }}
+      whileHover={{ scale: isClickable ? 1.025 : undefined }}
       sx={{
         position: "relative",
         width: "fit-content",
@@ -124,66 +181,16 @@ export const CBProgressCircle = ({
           />
         )}
 
-        <Link href={href} style={{ textDecoration: "none", color: "inherit" }}>
-          <ButtonBase
-            sx={{
-              width: innerCircleSizeMap[currentBreakpoint],
-              height: innerCircleSizeMap[currentBreakpoint],
-              borderRadius: "50%",
-              bgcolor: (t) => t.palette.background.default,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 3,
-              boxShadow: (t) => t.shadows[8],
-            }}
-            TouchRippleProps={{
-              style: { color: theme.palette.primary.light },
-            }}
-            disabled={!unlocked}
+        {href ? (
+          <Link
+            href={href}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
-            <Stack
-              sx={{
-                alignItems: "center",
-                mt: -4,
-              }}
-              spacing={1}
-            >
-              {unlocked ? (
-                <CBImage
-                  image={icon}
-                  boxProps={{ sx: { width: 120, height: 95 } }}
-                />
-              ) : (
-                <LockRounded
-                  sx={{
-                    color: (t) => t.palette.grey[700],
-                    fontSize: iconSizeMap[currentBreakpoint],
-                  }}
-                />
-              )}
-
-              <Typography
-                variant="h3"
-                sx={{
-                  textAlign: "center",
-                  fontWeight: (t) => t.typography.fontWeightBold,
-                }}
-              >
-                {label}
-              </Typography>
-
-              {comingSoon && (
-                <Alert
-                  severity="info"
-                  sx={{ alignItems: "center", width: "100%" }}
-                >
-                  <Typography>Coming soon!</Typography>
-                </Alert>
-              )}
-            </Stack>
-          </ButtonBase>
-        </Link>
+            {innerCircleComponent}
+          </Link>
+        ) : (
+          innerCircleComponent
+        )}
       </Box>
     </Box>
   );
