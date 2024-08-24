@@ -10,8 +10,8 @@ export interface CBQuizExercise extends CBExerciseWithTypeAndTopic {
   image?: CBImgWithAlt;
   answers: CBAnswer[];
   correctAnswer: string;
-  hint: string;
-  type: CBExerciseType.Quiz;
+  hint?: string;
+  type: CBExerciseType.Quiz | CBExerciseType.AIQuiz;
 }
 
 export type CBQuizExerciseWithMetaData = CBQuizExercise & {

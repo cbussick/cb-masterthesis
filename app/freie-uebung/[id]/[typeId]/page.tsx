@@ -36,20 +36,20 @@ interface FreePracticeSequenceParams {
 
 const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.Quiz]: quizExercises,
+  [CBExerciseType.AIQuiz]: [],
   [CBExerciseType.FamilyTree]: familyTreeExercises,
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
-  [CBExerciseType.AIQuiz]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.Quiz]: 10,
+  [CBExerciseType.AIQuiz]: 10,
   [CBExerciseType.FamilyTree]: 2,
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
-  [CBExerciseType.AIQuiz]: 1,
 };
 
 const getRandomExercises = (
@@ -86,8 +86,13 @@ export default function FreePracticeSequencePage({
 
   const { user, customData } = useUser();
   const { showSnackbar } = useSnackbar();
-  const { data, status, error } = useGenerateAIQuizQuery(
+  const {
+    data: generatedAIQuizData,
+    status,
+    error,
+  } = useGenerateAIQuizQuery(
     topic,
+    exerciseAmountMap[CBExerciseType.AIQuiz],
     exerciseType === CBExerciseType.AIQuiz,
   );
 
@@ -128,13 +133,13 @@ export default function FreePracticeSequencePage({
 
       setExercises(randomExercises);
     } else if (exerciseType === CBExerciseType.AIQuiz) {
-      if (data) {
-        const exerciseWithMetaData: CBExerciseWithMetaData = {
-          ...data,
+      if (generatedAIQuizData) {
+        exercisesWithMetaData = generatedAIQuizData.map((quiz) => ({
+          ...quiz,
           isCompleted: false,
-        };
+        }));
 
-        setExercises([exerciseWithMetaData]);
+        setExercises(exercisesWithMetaData);
       }
     } else if (exerciseType) {
       exercisesWithMetaData = exercisesMap[exerciseType]
@@ -159,7 +164,13 @@ export default function FreePracticeSequencePage({
     // a new selection of random exercises, while the user is still inside the sequence.
     // This would cause glitches for the user.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseType, isRetryingMistakes, showSnackbar, topic, data]);
+  }, [
+    exerciseType,
+    isRetryingMistakes,
+    showSnackbar,
+    topic,
+    generatedAIQuizData,
+  ]);
 
   const onMistake = useCallback(
     (exercise: CBExerciseWithMetaData) => {

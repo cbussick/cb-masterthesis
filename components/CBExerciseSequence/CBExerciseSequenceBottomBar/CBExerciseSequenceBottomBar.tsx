@@ -3,8 +3,10 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
-import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
+import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
+import { CBAPIRoute } from "@/helpers/apiRoutes";
+import { useGenerateHintQuery } from "@/helpers/queries/useGenerateHintQuery";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { useConfetti } from "@/ui/useConfetti";
 import {
@@ -13,7 +15,8 @@ import {
   MeetingRoomRounded,
 } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
-import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { CBExerciseSequenceType } from "../CBExerciseSequenceWrapperInterfaces";
 import { useCBExerciseSequence } from "../useCBExerciseSequenceProvider";
 import { CBExerciseSequenceBottomBarProps } from "./CBExerciseSequenceBottomBarInterfaces";
@@ -38,8 +41,7 @@ export const CBExerciseSequenceBottomBar = ({
   componentRef,
 }: CBExerciseSequenceBottomBarProps): JSX.Element => {
   const { startConfetti } = useConfetti();
-  const { showSnackbar, setOpen: setSnackbarOpen } =
-    useCBExerciseSequenceSnackbar();
+  const { setOpen: setSnackbarOpen } = useCBExerciseSequenceSnackbar();
   const {
     isCurrentExerciseFinished,
     setCurrentExerciseFinished,
@@ -49,12 +51,33 @@ export const CBExerciseSequenceBottomBar = ({
     type,
   } = useCBExerciseSequence();
 
-  const [hintAPIRequestState, setHintAPIRequestState] =
-    useState<CBAPIRequestState>(CBAPIRequestState.Idle);
-  const [hint, setHint] = useState<string>("");
-
   const currentExercise = uncompletedExercises[currentExerciseIndex];
   const currentExerciseType = currentExercise?.type;
+
+  const shouldGenerateHint =
+    currentExerciseType === CBExerciseType.Quiz ||
+    currentExerciseType === CBExerciseType.AIQuiz ||
+    currentExerciseType === CBExerciseType.FreeformQuestion;
+
+  const {
+    data: generatedHintData,
+    fetchStatus,
+    error,
+    refetch,
+  } = useGenerateHintQuery(
+    (currentExercise as CBQuizExercise | CBFreeformQuestionExercise)?.question,
+  );
+
+  const queryClient = useQueryClient();
+
+  const [hint, setHint] = useState<string>(generatedHintData?.hint || "");
+
+  useEffect(() => {
+    if (generatedHintData) {
+      setHint(generatedHintData.hint);
+    }
+  }, [generatedHintData]);
+
   const allExercisesCompleted = exercises.every(
     (exercise) => exercise.isCompleted,
   );
@@ -79,6 +102,7 @@ export const CBExerciseSequenceBottomBar = ({
     setCurrentExerciseFinished(false);
     setHint("");
     setSnackbarOpen(false);
+    queryClient.resetQueries({ queryKey: [CBAPIRoute.DiNAsHint] });
   };
 
   /**
@@ -118,22 +142,9 @@ export const CBExerciseSequenceBottomBar = ({
   );
 
   const onClickHint = () => {
-    if ("question" in currentExercise) {
-      setHintAPIRequestState(CBAPIRequestState.Fetching);
-      getOpenAIDiNAsHintForQuestion(currentExercise.question)
-        .then((response) => {
-          setHintAPIRequestState(CBAPIRequestState.Success);
-          setHint(response.hint);
-        })
-        .catch((error) => {
-          setHintAPIRequestState(CBAPIRequestState.Error);
-          showSnackbar(
-            "Problem beim Erfragen eines Tipps",
-            error.message,
-            "error",
-          );
-        });
-    } else {
+    if (shouldGenerateHint) {
+      refetch();
+    } else if (currentExercise.hint) {
       setHint(currentExercise.hint);
     }
   };
@@ -158,10 +169,10 @@ export const CBExerciseSequenceBottomBar = ({
           <CBDinaHint
             onClick={onClickHint}
             hint={hint}
-            isLoading={hintAPIRequestState === CBAPIRequestState.Fetching}
+            isLoading={fetchStatus === "fetching"}
             disabled={
-              hintAPIRequestState === CBAPIRequestState.Fetching ||
-              hintAPIRequestState === CBAPIRequestState.Error ||
+              fetchStatus === "fetching" ||
+              error !== null ||
               isCurrentExerciseFinished
             }
           />
