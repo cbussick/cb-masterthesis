@@ -3,6 +3,7 @@
 import { isUserFullyLoaded } from "@/firebase-client/isUserFullyLoaded";
 import { useUncertainUser } from "@/firebase-client/useUncertainUser";
 import { layoutHorizontalSpacing } from "@/helpers/layoutSpacing";
+import { CBQueryOnError } from "@/helpers/queries/CBQueryOnError";
 import { useRouteData } from "@/helpers/useRouteData";
 import { themeSpacingFactor } from "@/theme/theme";
 import { CBConfettiProvider } from "@/ui/CBConfettiProvider";
@@ -10,7 +11,11 @@ import { useSnackbar } from "@/ui/useSnackbar";
 import { Box, Stack, Theme, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { CBConfettiWrapper } from "../CBConfettiWrapper/CBConfettiWrapper";
 import { CBSidebar } from "../CBSidebar/CBSidebar";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
@@ -27,6 +32,13 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: { refetchOnWindowFocus: false },
   },
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (query.meta?.onError) {
+        (query.meta.onError as CBQueryOnError)(error.message);
+      }
+    },
+  }),
 });
 
 export const CBMainLayout = ({ children }: CBMainLayoutProps): JSX.Element => {
