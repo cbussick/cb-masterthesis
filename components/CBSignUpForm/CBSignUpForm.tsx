@@ -78,7 +78,7 @@ export const CBSignUpForm = (): JSX.Element => {
   };
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} sx={{ mt: 1 }}>
       <form onSubmit={handleSubmit(handleSignUp)} noValidate>
         <Stack spacing={3}>
           <Stack spacing={2}>
