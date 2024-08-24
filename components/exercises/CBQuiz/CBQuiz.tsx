@@ -71,19 +71,21 @@ export const CBQuiz = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const { key } = event;
-      if (key === "A" || key === "a") {
-        const buttonId = randomizedAnswers[0].id;
-        confirmAnswer(buttonId);
-      } else if (key === "B" || key === "b") {
-        const buttonId = randomizedAnswers[1].id;
-        confirmAnswer(buttonId);
-      } else if (key === "C" || key === "c") {
-        const buttonId = randomizedAnswers[2].id;
-        confirmAnswer(buttonId);
-      } else if (key === "D" || key === "d") {
-        const buttonId = randomizedAnswers[3].id;
-        confirmAnswer(buttonId);
+      if (!isCurrentExerciseFinished) {
+        const { key } = event;
+        if (key === "A" || key === "a") {
+          const buttonId = randomizedAnswers[0].id;
+          confirmAnswer(buttonId);
+        } else if (key === "B" || key === "b") {
+          const buttonId = randomizedAnswers[1].id;
+          confirmAnswer(buttonId);
+        } else if (key === "C" || key === "c") {
+          const buttonId = randomizedAnswers[2].id;
+          confirmAnswer(buttonId);
+        } else if (key === "D" || key === "d") {
+          const buttonId = randomizedAnswers[3].id;
+          confirmAnswer(buttonId);
+        }
       }
     };
 
@@ -92,7 +94,7 @@ export const CBQuiz = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [confirmAnswer, randomizedAnswers]);
+  }, [confirmAnswer, isCurrentExerciseFinished, randomizedAnswers]);
 
   const onConfirm: ButtonProps["onClick"] = (e) => {
     const buttonAnswerId = e.currentTarget.id;
