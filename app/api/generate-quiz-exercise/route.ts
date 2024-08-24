@@ -1,4 +1,4 @@
-import { CBQuizExerciseSchema } from "@/helpers/openai/schemas/CBQuizExerciseSchema";
+import { CBGenerateAIQuizExerciseSchema } from "@/helpers/openai/schemas/CBGenerateAIQuizExerciseSchema";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { zodResponseFormat } from "openai/helpers/zod.mjs";
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     ],
     model: "gpt-4o-mini",
     response_format: zodResponseFormat(
-      CBQuizExerciseSchema,
+      CBGenerateAIQuizExerciseSchema,
       "generate-quiz-exercise",
     ),
   });

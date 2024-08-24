@@ -3,6 +3,8 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
+import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIDiNAsHintForQuestion } from "@/helpers/openai/getOpenAIDiNAsHintForQuestion";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -118,9 +120,17 @@ export const CBExerciseSequenceBottomBar = ({
   );
 
   const onClickHint = () => {
-    if ("question" in currentExercise) {
+    if (
+      currentExercise.type === CBExerciseType.Quiz ||
+      currentExercise.type === CBExerciseType.AIQuiz ||
+      currentExercise.type === CBExerciseType.FreeformQuestion
+    ) {
+      const castExercise = currentExercise as
+        | CBQuizExercise
+        | CBFreeformQuestionExercise;
+
       setHintAPIRequestState(CBAPIRequestState.Fetching);
-      getOpenAIDiNAsHintForQuestion(currentExercise.question)
+      getOpenAIDiNAsHintForQuestion(castExercise.question)
         .then((response) => {
           setHintAPIRequestState(CBAPIRequestState.Success);
           setHint(response.hint);
@@ -133,7 +143,7 @@ export const CBExerciseSequenceBottomBar = ({
             "error",
           );
         });
-    } else {
+    } else if (currentExercise.hint) {
       setHint(currentExercise.hint);
     }
   };

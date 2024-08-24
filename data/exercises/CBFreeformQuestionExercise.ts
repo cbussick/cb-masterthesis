@@ -5,7 +5,7 @@ import { quizExercises } from "./CBQuizExercise";
 export interface CBFreeformQuestionExercise extends CBExerciseWithTypeAndTopic {
   id: string;
   question: string;
-  hint: string;
+  hint?: string;
 }
 
 export type CBFreeformQuestionExerciseWithMetaData =
