@@ -134,7 +134,7 @@ export const CBMatchingGame = forwardRef(
           >
             {highlightedComponents.map((component, index) => (
               <Stack
-                key={component.id}
+                key={`${component.id}-${exercise.id}`}
                 direction={
                   component.side === CBMatchingGameHighlightComponentSide.Left
                     ? "row-reverse"

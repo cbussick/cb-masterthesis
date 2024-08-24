@@ -20,7 +20,7 @@ export const CBQuiz = ({
     setExercises,
   } = useCBExerciseSequence();
 
-  const [clickedButton, setClickedButton] = useState<string>("");
+  const [chosenAnswer, setChosenAnswer] = useState<string>("");
   const [randomizedAnswers, setRandomizedAnswers] = useState<CBAnswer[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const CBQuiz = ({
 
   const confirmAnswer = useCallback(
     (buttonAnswerId: string) => {
-      setClickedButton(buttonAnswerId);
+      setChosenAnswer(buttonAnswerId);
 
       setCurrentExerciseFinished(true);
 
@@ -71,19 +71,21 @@ export const CBQuiz = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const { key } = event;
-      if (key === "A" || key === "a") {
-        const buttonId = randomizedAnswers[0].id;
-        confirmAnswer(buttonId);
-      } else if (key === "B" || key === "b") {
-        const buttonId = randomizedAnswers[1].id;
-        confirmAnswer(buttonId);
-      } else if (key === "C" || key === "c") {
-        const buttonId = randomizedAnswers[2].id;
-        confirmAnswer(buttonId);
-      } else if (key === "D" || key === "d") {
-        const buttonId = randomizedAnswers[3].id;
-        confirmAnswer(buttonId);
+      if (!isCurrentExerciseFinished) {
+        const { key } = event;
+        if (key === "A" || key === "a") {
+          const buttonId = randomizedAnswers[0].id;
+          confirmAnswer(buttonId);
+        } else if (key === "B" || key === "b") {
+          const buttonId = randomizedAnswers[1].id;
+          confirmAnswer(buttonId);
+        } else if (key === "C" || key === "c") {
+          const buttonId = randomizedAnswers[2].id;
+          confirmAnswer(buttonId);
+        } else if (key === "D" || key === "d") {
+          const buttonId = randomizedAnswers[3].id;
+          confirmAnswer(buttonId);
+        }
       }
     };
 
@@ -92,7 +94,7 @@ export const CBQuiz = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [confirmAnswer, randomizedAnswers]);
+  }, [confirmAnswer, isCurrentExerciseFinished, randomizedAnswers]);
 
   const onConfirm: ButtonProps["onClick"] = (e) => {
     const buttonAnswerId = e.currentTarget.id;
@@ -129,13 +131,15 @@ export const CBQuiz = ({
             }}
           >
             {randomizedAnswers.map((answer, index) => (
-              <Grid xs={12} lg={6} key={answer.id}>
+              // Don't use the id of the answer as key alone, because it might cause visual glitches
+              // when the next question is loaded and the answers are shuffled.
+              <Grid xs={12} lg={6} key={`${answer.id}-${answer.text}`}>
                 <CBQuizAnswerButton
                   answer={answer}
                   isCorrect={exercise.correctAnswer === answer.id}
                   onClick={onConfirm}
                   isCurrentExerciseFinished={isCurrentExerciseFinished}
-                  clickedButton={clickedButton}
+                  clickedButton={chosenAnswer}
                   index={index}
                 />
               </Grid>

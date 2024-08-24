@@ -12,7 +12,7 @@ export const getOpenAIQuizExercise = async (
   topic: CBTopic,
   amount: number,
 ): Promise<CBQuizExercise[]> => {
-  const prompt = `Gib mir ${amount} Quiz-Aufgabe${amount > 1 ? "n" : ""} für das Thema "${topic}". Schreib die Frage in das Feld "question" und vier Antwortmöglichkeiten in das Feld "answers".`;
+  const prompt = `Gib mir ${amount} Quiz-Aufgabe${amount > 1 ? "n" : ""} für das Thema "${topic}". Schreib für jede Frage: Die Frage in das Feld "question" und vier Antwortmöglichkeiten in das Feld "answers". Nummeriere die Antwortmöglichkeiten von "A" bis "D" und schreib dies in das Feld "id" Antwortmöglichkeiten.`;
 
   const generatedQuizzes = (await makeOpenAITextGenerationAPIRequest(
     prompt,
