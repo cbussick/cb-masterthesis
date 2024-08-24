@@ -131,7 +131,9 @@ export const CBQuiz = ({
             }}
           >
             {randomizedAnswers.map((answer, index) => (
-              <Grid xs={12} lg={6} key={answer.id}>
+              // Don't use the id of the answer as key alone, because it might cause visual glitches
+              // when the next question is loaded and the answers are shuffled.
+              <Grid xs={12} lg={6} key={`${answer.id}-${answer.text}`}>
                 <CBQuizAnswerButton
                   answer={answer}
                   isCorrect={exercise.correctAnswer === answer.id}

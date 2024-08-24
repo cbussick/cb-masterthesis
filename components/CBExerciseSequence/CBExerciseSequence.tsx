@@ -81,6 +81,20 @@ export const CBExerciseSequence = ({
         ),
       };
     },
+    [CBExerciseType.AIQuiz]: (exercise) => {
+      const castExercise = exercise as CBQuizExerciseWithMetaData;
+      return {
+        title: castExercise.question,
+        component: (
+          <CBQuiz
+            key={castExercise.id}
+            exercise={castExercise}
+            onMistake={onMistake}
+            onCompleteExercise={onCompleteExercise}
+          />
+        ),
+      };
+    },
     [CBExerciseType.FamilyTree]: (exercise) => {
       const castExercise = exercise as CBFamilyTreeExerciseWithMetaData;
       return {
@@ -138,20 +152,6 @@ export const CBExerciseSequence = ({
             exercise={castExercise}
             onCompleteExercise={onCompleteExercise}
             onMistake={onMistake}
-          />
-        ),
-      };
-    },
-    [CBExerciseType.AIQuiz]: (exercise) => {
-      const castExercise = exercise as CBQuizExerciseWithMetaData;
-      return {
-        title: castExercise.question,
-        component: (
-          <CBQuiz
-            key={castExercise.id}
-            exercise={castExercise}
-            onMistake={onMistake}
-            onCompleteExercise={onCompleteExercise}
           />
         ),
       };
