@@ -20,15 +20,15 @@ const difficultyMap: Record<
 > = {
   [CBExerciseDifficulty.Easy]: {
     image: { src: "/difficulty-easy.png", alt: "Kleine Pflanze" },
-    text: "Schwierigkeit Leicht",
+    text: "Schwierigkeit: Leicht",
   },
   [CBExerciseDifficulty.Medium]: {
     image: { src: "/difficulty-medium.png", alt: "Mittelgroße Pflanze" },
-    text: "Schwierigkeit Mittel",
+    text: "Schwierigkeit: Mittel",
   },
   [CBExerciseDifficulty.Hard]: {
     image: { src: "/difficulty-hard.png", alt: "Große Pflanze" },
-    text: "Schwierigkeit Schwer",
+    text: "Schwierigkeit: Schwer",
   },
 };
 
