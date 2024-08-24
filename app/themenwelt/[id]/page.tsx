@@ -109,6 +109,8 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
                       generalUnitData.exercises.length
                     : 0;
 
+                const isUnitCompleted = progress === 100;
+
                 return (
                   <Fragment key={unit.id}>
                     {index !== 0 && (
@@ -119,7 +121,11 @@ export default function TopicUnit({ params }: TopicUnitPageParams) {
                       id={unit.id}
                       label={unit.name}
                       progress={progress}
-                      href={`${CBRoute.Themenwelt}/${topicId}/${unit.id}`}
+                      href={
+                        isUnitCompleted
+                          ? undefined
+                          : `${CBRoute.Themenwelt}/${topicId}/${unit.id}`
+                      }
                       unlocked={isUnlocked || false}
                       icon={unit.icon}
                     />
