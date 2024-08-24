@@ -82,7 +82,7 @@ export const CBSidebar = ({
         top: (t) => t.spacing(layoutVerticalSpacing),
         bottom: (t) => t.spacing(layoutVerticalSpacing),
         left: (t) => t.spacing(layoutHorizontalSpacing),
-        zIndex: 999,
+        zIndex: (t) => t.zIndex.drawer,
         bgcolor: (t) => t.palette.background.default,
         borderRadius: 5,
         boxShadow: (t) => t.shadows[8],

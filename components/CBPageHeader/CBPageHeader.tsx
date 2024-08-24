@@ -26,7 +26,6 @@ export const CBPageHeader = ({
         py: isOnTransparentBackground ? 4 : undefined,
         px: isOnTransparentBackground ? 6 : undefined,
         borderRadius: isOnTransparentBackground ? 5 : undefined,
-        zIndex: 9,
         mb: 4,
         ...sx,
       }}
