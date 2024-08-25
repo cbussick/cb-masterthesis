@@ -7,6 +7,7 @@ import { playResultsSound } from "@/helpers/sounds/playResultsSound";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
 import { getFormattedTimeInMinutesAndSeconds } from "@/helpers/time-tracking/getFormattedTimeInMinutesAndSeconds";
 import { Button, Container, Stack, Typography } from "@mui/material";
+import { motion, MotionProps } from "framer-motion";
 import { useEffect, useMemo } from "react";
 import { CBExerciseSequenceEndCard } from "../CBExerciseSequenceEndCard/CBExerciseSequenceEndCard";
 import { CBExerciseSequenceEndCardProps } from "../CBExerciseSequenceEndCard/CBExerciseSequenceEndCardInterfaces";
@@ -33,6 +34,28 @@ const difficultyMap: Record<
 };
 
 const typographyVariant = "h3";
+
+const animationEndCardContainerVariants: MotionProps["variants"] = {
+  show: {
+    transition: { staggerChildren: 0.25 },
+  },
+};
+
+const animationEndCardVariants: MotionProps["variants"] = {
+  initial: {
+    scale: 0,
+    opacity: 0,
+  },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 260, damping: 20 },
+  },
+};
+
+const commonEndCardMotionProps: MotionProps = {
+  variants: animationEndCardVariants,
+};
 
 export const CBExerciseSequenceEndScreen = ({
   difficulty,
@@ -112,24 +135,37 @@ export const CBExerciseSequenceEndScreen = ({
             width: "100%",
           }}
         >
-          <Stack spacing={2} sx={{ width: "100%" }}>
+          <Stack
+            component={motion.div}
+            variants={animationEndCardContainerVariants}
+            initial="initial"
+            animate="show"
+            spacing={2}
+            sx={{ width: "100%" }}
+          >
             {difficulty && (
-              <CBExerciseSequenceEndCard {...difficultyMap[difficulty]} />
+              <motion.div {...commonEndCardMotionProps}>
+                <CBExerciseSequenceEndCard {...difficultyMap[difficulty]} />
+              </motion.div>
             )}
 
-            <CBExerciseSequenceEndCard
-              image={{ src: "/star.png", alt: "Stern" }}
-              text={`${
-                correctExercisesPercentage.endsWith(".00")
-                  ? correctExercisesPercentage.slice(0, -3)
-                  : correctExercisesPercentage.replace(".", ",")
-              }% der Aufgaben richtig beantwortet`}
-            />
+            <motion.div {...commonEndCardMotionProps}>
+              <CBExerciseSequenceEndCard
+                image={{ src: "/star.png", alt: "Stern" }}
+                text={`${
+                  correctExercisesPercentage.endsWith(".00")
+                    ? correctExercisesPercentage.slice(0, -3)
+                    : correctExercisesPercentage.replace(".", ",")
+                }% der Aufgaben richtig beantwortet`}
+              />
+            </motion.div>
 
-            <CBExerciseSequenceEndCard
-              image={{ src: "/exam-simulator/timer.png", alt: "Stern" }}
-              text={`${getFormattedTimeInMinutesAndSeconds(passedSeconds)} gelernt`}
-            />
+            <motion.div {...commonEndCardMotionProps}>
+              <CBExerciseSequenceEndCard
+                image={{ src: "/exam-simulator/timer.png", alt: "Stern" }}
+                text={`${getFormattedTimeInMinutesAndSeconds(passedSeconds)} gelernt`}
+              />
+            </motion.div>
           </Stack>
 
           {buttonsMap[type]}
