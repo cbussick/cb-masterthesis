@@ -116,7 +116,7 @@ export default function FreePracticeSubpage({
           />
         </Grid>
 
-        {user.customData.mistakeExercises.find((e) => e.topic === topic) !==
+        {user.incorrectExercises.find((e) => e.topic === topic) !==
           undefined && (
           <Grid {...commonGridItemProps}>
             <CBInfoCard

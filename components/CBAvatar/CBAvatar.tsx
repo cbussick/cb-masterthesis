@@ -10,26 +10,31 @@ export const CBAvatar = ({
   imageProps,
   avatarProps,
 }: CBAvatarProps): JSX.Element => {
+  const hasImage = image.src !== "";
+
   return (
     <Avatar
       {...avatarProps}
+      src={hasImage ? undefined : ""}
       sx={{
         width: imageSize,
         height: imageSize,
-        bgcolor: (t) => t.palette.background.default,
+        bgcolor: hasImage ? (t) => t.palette.background.default : undefined,
         ...avatarProps?.sx,
       }}
     >
-      <CBImage
-        image={image}
-        boxProps={{
-          sx: {
-            height: "100%",
-          },
-        }}
-        imageElementProps={{ sizes: `${imageSize}px` }}
-        {...imageProps}
-      />
+      {image.src !== "" && (
+        <CBImage
+          image={image}
+          boxProps={{
+            sx: {
+              height: "100%",
+            },
+          }}
+          imageElementProps={{ sizes: `${imageSize}px` }}
+          {...imageProps}
+        />
+      )}
     </Avatar>
   );
 };

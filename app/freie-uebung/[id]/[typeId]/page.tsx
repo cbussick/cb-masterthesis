@@ -12,12 +12,12 @@ import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
 import { CBTopic } from "@/data/topics";
+import { addIncorrectExercise } from "@/firebase-client/addIncorrectExercise";
+import { CBIncorrectExercise } from "@/firebase-client/incorrectExercisesConverter";
 import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";
+import { removeIncorrectExercise } from "@/firebase-client/removeIncorrectExercise";
 import { updateUser } from "@/firebase-client/updateUser";
-import {
-  CBMistakeExercise,
-  CBUserCustomData,
-} from "@/firebase-client/UserCustomDataConverter";
+import { CBUserCustomData } from "@/firebase-client/userCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { useGenerateAIQuizQuery } from "@/helpers/queries/useGenerateAIQuizQuery";
@@ -84,7 +84,7 @@ export default function FreePracticeSequencePage({
 
   const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
-  const { user, customData } = useUser();
+  const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
   const {
     data: generatedAIQuizData,
@@ -104,7 +104,7 @@ export default function FreePracticeSequencePage({
     let exercisesWithMetaData: CBExerciseWithMetaData[] = [];
 
     if (isRetryingMistakes) {
-      customData.mistakeExercises
+      incorrectExercises
         .filter((e) => e.topic === topic)
         .forEach((e) => {
           let exercise: CBExercise | undefined;
@@ -174,33 +174,28 @@ export default function FreePracticeSequencePage({
 
   const onMistake = useCallback(
     (exercise: CBExerciseWithMetaData) => {
-      const isNotAlreadyInMistakes =
-        customData.mistakeExercises.find(
+      const isNotAlreadyInIncorrectExercises =
+        incorrectExercises.find(
           (e) => e.id === exercise.id && e.topic === exercise.topic,
         ) === undefined;
 
-      if (isNotAlreadyInMistakes) {
-        const mistakeExercisesToAdd: (CBExercise | CBMistakeExercise)[] = [];
+      if (isNotAlreadyInIncorrectExercises) {
+        let incorrectExerciseToAdd: CBIncorrectExercise;
         if (exercise.type === CBExerciseType.AIQuiz) {
           const { isCompleted, ...exerciseWithoutMetadata } = exercise;
-          mistakeExercisesToAdd.push(exerciseWithoutMetadata);
+          incorrectExerciseToAdd = exerciseWithoutMetadata;
         } else {
-          mistakeExercisesToAdd.push({
+          incorrectExerciseToAdd = {
             id: exercise.id,
             topic: exercise.topic,
             type: exercise.type,
-          });
+          };
         }
 
-        const newUserData: Partial<CBUserCustomData> = {};
-        newUserData.mistakeExercises = customData.mistakeExercises.concat(
-          mistakeExercisesToAdd,
-        );
-
-        updateUser(user.uid, newUserData);
+        addIncorrectExercise(user.uid, incorrectExerciseToAdd);
       }
     },
-    [customData.mistakeExercises, user.uid],
+    [incorrectExercises, user.uid],
   );
 
   const onCompleteExercise = useCallback(
@@ -214,27 +209,22 @@ export default function FreePracticeSequencePage({
 
       // If the exercise type is not set, the user is retrying mistakes
       if (isRetryingMistakes) {
-        const exercise = customData.mistakeExercises.find(
+        const exercise = incorrectExercises.find(
           (e) => e.id === parameters.exerciseId,
         );
 
         if (exercise) {
-          newUserData.mistakeExercises = customData.mistakeExercises.filter(
-            (e) =>
-              exercises.find((ex) => ex.id === e.id && ex.topic === e.topic) ===
-              undefined,
-          );
+          removeIncorrectExercise(uid, exercise?.id);
         }
       }
       updateUser(uid, newUserData);
     },
     [
-      user,
-      isRetryingMistakes,
-      customData.solvedExercises,
       customData.points,
-      customData.mistakeExercises,
-      exercises,
+      customData.solvedExercises,
+      incorrectExercises,
+      isRetryingMistakes,
+      user,
     ],
   );
 

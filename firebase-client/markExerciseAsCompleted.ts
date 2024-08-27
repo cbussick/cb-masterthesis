@@ -1,4 +1,4 @@
-import { getTopicWorldDocumentReference } from "@/helpers/getTopicWorldDocumentReference";
+import { getTopicWorldProgressDocumentReference } from "@/helpers/getTopicWorldProgressDocumentReference";
 import { arrayUnion, updateDoc } from "firebase/firestore";
 
 export const markExerciseAsCompleted = async (
@@ -8,7 +8,7 @@ export const markExerciseAsCompleted = async (
   exerciseId: string,
 ) => {
   try {
-    const documentReference = getTopicWorldDocumentReference(uid);
+    const documentReference = getTopicWorldProgressDocumentReference(uid);
 
     const topicPath = `topics.${topicId}.units.${unitId}.completedExercises`;
     await updateDoc(documentReference, {
