@@ -1,8 +1,9 @@
 "use client";
 
 import { useUser } from "@/firebase-client/useUser";
-import { Avatar, Box, Chip, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
+import { CBAvatar } from "../CBAvatar/CBAvatar";
 import { CBUserOptionsMenu } from "../CBUserOptionsMenu/CBUserOptionsMenu";
 
 const userChipId = "user-chip";
@@ -14,6 +15,7 @@ export const CBUserChip = (): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const isUserMenuOpen = Boolean(anchorEl);
+
   const handleUserChipClick = (event: MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -34,7 +36,11 @@ export const CBUserChip = (): JSX.Element => {
           },
         }}
         avatar={
-          <Avatar src={user.customData.profilePicture} alt="Profilbild" />
+          <CBAvatar
+            image={{ src: user.customData.profilePicture, alt: "Profilbild" }}
+            // This is the default height for the MUI `Avatar` inside a `Chip`
+            imageSize={24}
+          />
         }
         label={
           <Typography

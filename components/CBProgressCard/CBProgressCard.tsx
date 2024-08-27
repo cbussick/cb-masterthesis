@@ -5,10 +5,13 @@ import { CBProgressCardProps } from "./CBProgressCardInterfaces";
 
 const contentPadding = 4;
 
+const size = 150;
+
 export const CBProgressCard = ({
   title,
   subTitle,
   image,
+  imageElementProps: imageProps,
   progressValue,
   maxValue,
   format,
@@ -16,7 +19,7 @@ export const CBProgressCard = ({
   return (
     <Card
       sx={{
-        height: 150,
+        height: size,
       }}
     >
       <Stack
@@ -31,12 +34,16 @@ export const CBProgressCard = ({
           image={image}
           boxProps={{
             sx: {
-              width: 150,
+              width: size,
               height: "100%",
               flexShrink: 0,
             },
           }}
-          imageProps={{ style: { objectFit: "cover" } }}
+          imageElementProps={{
+            sizes: `${size}px`,
+            ...imageProps,
+            style: { objectFit: "cover", ...imageProps?.style },
+          }}
         />
 
         <Stack

@@ -1,19 +1,19 @@
 import { CBImage } from "@/components/CBImage/CBImage";
 import { Card, CardContent, Stack, Typography } from "@mui/material";
-import { CBExamSimulatorTopCardProps } from "./CBExamSimulatorTopCardInterfaces";
+import { CBExamSimulatorEndScreenTopCardProps } from "./CBExamSimulatorEndScreenTopCardInterfaces";
 
-export const CBExamSimulatorTopCard = ({
+export const CBExamSimulatorEndScreenTopCard = ({
   image,
   title,
   subTitle,
-}: CBExamSimulatorTopCardProps): JSX.Element => {
+}: CBExamSimulatorEndScreenTopCardProps): JSX.Element => {
   return (
     <Card sx={{ display: "flex", height: 100, width: "100%" }}>
       <Stack direction="row">
         <CBImage
           image={image}
           boxProps={{ sx: { width: 150, height: "100%" } }}
-          imageProps={{
+          imageElementProps={{
             style: {
               objectFit: "cover",
             },

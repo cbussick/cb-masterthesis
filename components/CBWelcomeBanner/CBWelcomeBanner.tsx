@@ -1,7 +1,14 @@
 import { useUser } from "@/firebase-client/useUser";
 import { CBUserRole } from "@/firebase-client/userRole";
-import { Avatar, Box, Stack, Typography } from "@mui/material";
-import { MouseEvent, useState } from "react";
+import {
+  Box,
+  ButtonBase,
+  ButtonBaseProps,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { CBAvatar } from "../CBAvatar/CBAvatar";
 import { CBEmoji } from "../CBEmoji/CBEmoji";
 import { CBUserOptionsMenu } from "../CBUserOptionsMenu/CBUserOptionsMenu";
 
@@ -18,21 +25,22 @@ export const CBWelcomeBanner = (): JSX.Element => {
   const handleUserMenuClose = () => {
     setAnchorEl(null);
   };
-  const handleAvatarClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleAvatarClick: ButtonBaseProps["onClick"] = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   return (
     <Box>
       <Stack direction="row" spacing={2}>
-        <Box>
-          <Avatar
-            src={user.customData.profilePicture}
-            alt="Profilbild"
-            onClick={handleAvatarClick}
-            sx={{ width: avatarSize, height: avatarSize, cursor: "pointer" }}
+        <ButtonBase
+          onClick={handleAvatarClick}
+          sx={{ borderRadius: "50%", height: "fit-content" }}
+        >
+          <CBAvatar
+            image={{ src: user.customData.profilePicture, alt: "Profilbild" }}
+            imageSize={avatarSize}
           />
-        </Box>
+        </ButtonBase>
 
         <Stack>
           <Stack direction="row" spacing={1}>

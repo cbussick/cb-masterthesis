@@ -33,7 +33,7 @@ export const CBSimpleInfoCard = ({
               height: "100%",
             },
           }}
-          imageProps={{
+          imageElementProps={{
             style: {
               objectFit: "cover",
             },

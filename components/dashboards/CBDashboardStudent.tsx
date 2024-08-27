@@ -63,7 +63,7 @@ export const CBDashboardStudent = (): JSX.Element => {
       [[], []] as [CBAchievementCardProps[], CBAchievementCardProps[]],
     );
 
-  const ctaAchievement =
+  const achievementsLink =
     unachievedAchievements.length > 0
       ? unachievedAchievements[0]
       : achievedAchievements[0];
@@ -98,11 +98,10 @@ export const CBDashboardStudent = (): JSX.Element => {
                 variant="h4"
                 sx={{ fontWeight: (t) => t.typography.fontWeightBold }}
               >
-                Deine Punkte:
+                Dein Level:
               </Typography>
 
               <CBProgressCard
-                image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
                 title={userLvlTitleText}
                 subTitle={
                   maxLevelReached
@@ -113,6 +112,8 @@ export const CBDashboardStudent = (): JSX.Element => {
                         pointsToNextLvl - points !== 1 ? "Punkte" : "Punkt"
                       } bis zur nächsten Auszeichnung!`
                 }
+                image={{ src: "/topics/zelle.jpg", alt: "Zelle" }}
+                imageElementProps={{ priority: true }}
                 progressValue={points}
                 maxValue={pointsToNextLvl}
                 format="percent"
@@ -136,11 +137,11 @@ export const CBDashboardStudent = (): JSX.Element => {
               </Stack>
 
               <CBProgressCard
-                image={ctaAchievement.image}
-                title={ctaAchievement.title}
-                subTitle={ctaAchievement.subTitle}
-                progressValue={ctaAchievement.progressValue}
-                maxValue={ctaAchievement.progressGoal}
+                title={achievementsLink.title}
+                subTitle={achievementsLink.subTitle}
+                image={achievementsLink.image}
+                progressValue={achievementsLink.progressValue}
+                maxValue={achievementsLink.progressGoal}
                 format="fraction"
               />
             </Stack>

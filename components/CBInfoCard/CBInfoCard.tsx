@@ -54,8 +54,7 @@ export const CBInfoCard = ({
           <Box component={motion.div} variants={imageVariants}>
             <CBImage
               image={image}
-              boxProps={{ height: "100%" }}
-              imageProps={{
+              imageElementProps={{
                 style: {
                   objectFit: "cover",
                   filter: disabled ? "grayscale(0.9)" : undefined,

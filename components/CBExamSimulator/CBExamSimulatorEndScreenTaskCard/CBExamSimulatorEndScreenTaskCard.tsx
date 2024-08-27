@@ -9,7 +9,7 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { CBExamSimulatorTaskCardProps } from "./CBExamSimulatorTaskCardInterfaces";
+import { CBExamSimulatorEndScreenTaskCardProps } from "./CBExamSimulatorEndScreenTaskCardInterfaces";
 
 const commonIconStyles: SxProps<Theme> = {
   fontSize: 64,
@@ -17,11 +17,11 @@ const commonIconStyles: SxProps<Theme> = {
   display: "flex",
 };
 
-export const CBExamSimulatorTaskCard = ({
+export const CBExamSimulatorEndScreenTaskCard = ({
   exerciseNumber,
   exercise,
   isCorrect,
-}: CBExamSimulatorTaskCardProps): JSX.Element => {
+}: CBExamSimulatorEndScreenTaskCardProps): JSX.Element => {
   return (
     <Card
       sx={{

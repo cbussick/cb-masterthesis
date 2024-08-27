@@ -26,7 +26,7 @@ export const CBAchievementCard = ({
       <CBImage
         image={image}
         boxProps={{ sx: { width: "30%", height: 150 } }}
-        imageProps={{
+        imageElementProps={{
           style: {
             objectFit: "cover",
           },

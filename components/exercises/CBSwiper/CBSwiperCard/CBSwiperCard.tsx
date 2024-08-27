@@ -57,12 +57,12 @@ export const CBSwiperCard = ({
           <CBImage
             image={image}
             boxProps={{
-              flexGrow: 1,
               sx: {
                 height: 0,
+                flexGrow: 1,
               },
             }}
-            imageProps={{ draggable: false }}
+            imageElementProps={{ draggable: false }}
           />
         )}
       </Stack>

@@ -6,10 +6,11 @@ import { getAuthError } from "@/firebase-client/authErrors";
 import { changeProfilePicture } from "@/firebase-client/changeProfilePicture";
 import { useUser } from "@/firebase-client/useUser";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Avatar, Button, Stack, Typography } from "@mui/material";
+import { Button, ButtonBase, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
+import { CBAvatar } from "../CBAvatar/CBAvatar";
 import { CBAvatarChoice } from "../CBAvatarChoice/CBAvatarChoice";
 import { CBProfilePicture } from "./CBProfileImageSelectorInterfaces";
 
@@ -62,15 +63,15 @@ export const CBProfileImageSelector = (): JSX.Element => {
           alignItems: "center",
         }}
       >
-        <Avatar
-          alt="Profilbild"
-          src={profilePicture}
-          sx={{
-            border: 8,
-            borderColor: (t) => t.palette.primary.light,
-            boxShadow: 3,
-            width: currentAvatarSize,
-            height: currentAvatarSize,
+        <CBAvatar
+          image={{ src: profilePicture, alt: "Profilbild" }}
+          imageSize={currentAvatarSize}
+          avatarProps={{
+            sx: {
+              border: 8,
+              borderColor: (t) => t.palette.primary.light,
+              boxShadow: 3,
+            },
           }}
         />
 
@@ -94,17 +95,13 @@ export const CBProfileImageSelector = (): JSX.Element => {
         <Grid container spacing={2}>
           {profilePictures.map((image) => (
             <Grid key={image.src}>
-              <Button
+              <ButtonBase
                 disabled={!isUnlocked(image)}
                 onClick={() => setProfilePicture(image.src)}
                 sx={{
-                  bgcolor: (t) => `${t.palette.background.default} !important`,
-                  "&:hover": {
-                    bgcolor: (t) => t.palette.background.default,
-                  },
                   borderRadius: "50%",
                   p: 0.75,
-                  boxShadow: (t) => `${t.shadows[6]} !important`,
+                  boxShadow: (t) => t.shadows[3],
                 }}
               >
                 <CBAvatarChoice
@@ -112,7 +109,7 @@ export const CBProfileImageSelector = (): JSX.Element => {
                   imageSize={avatarChoiceSize}
                   unlocked={isUnlocked(image)}
                 />
-              </Button>
+              </ButtonBase>
             </Grid>
           ))}
         </Grid>

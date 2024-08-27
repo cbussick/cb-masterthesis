@@ -1,4 +1,9 @@
-import { LinearProgress, Stack, Typography } from "@mui/material";
+import {
+  LinearProgress,
+  linearProgressClasses,
+  Stack,
+  Typography,
+} from "@mui/material";
 import {
   CBProgressBarHeight,
   CBProgressBarProps,
@@ -42,6 +47,9 @@ export const CBProgressBar = ({
           width: width === undefined ? 300 : width,
           height: heightMap[height === undefined ? "large" : height],
           borderRadius: 5,
+          [`& .${linearProgressClasses.bar}`]: {
+            transitionDuration: "0.25s",
+          },
         }}
       />
 

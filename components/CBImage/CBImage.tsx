@@ -8,7 +8,7 @@ import { CBImageProps } from "./CBImageInterfaces";
 export const CBImage = ({
   image,
   boxProps,
-  imageProps,
+  imageElementProps: imageProps,
 }: CBImageProps): JSX.Element => {
   const [isImageLoading, setImageLoading] = useState<boolean>(true);
 
@@ -32,6 +32,7 @@ export const CBImage = ({
         onLoad={() => setImageLoading(false)}
         {...imageProps}
         style={{ objectFit: "contain", ...imageProps?.style }}
+        quality={100}
       />
 
       {isImageLoading && <CircularProgress size={80} />}
