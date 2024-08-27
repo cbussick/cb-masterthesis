@@ -1,7 +1,8 @@
 "use client";
 
 import { LockRounded } from "@mui/icons-material";
-import { Avatar, Box } from "@mui/material";
+import { Box } from "@mui/material";
+import { CBAvatar } from "../CBAvatar/CBAvatar";
 import { CBAvatarChoiceProps } from "./CBAvatarChoiceInterfaces";
 
 export const CBAvatarChoice = ({
@@ -10,13 +11,16 @@ export const CBAvatarChoice = ({
   unlocked,
 }: CBAvatarChoiceProps): JSX.Element => {
   const avatarComponent: JSX.Element = (
-    <Avatar
-      alt={`Profilbild: ${image.alt}`}
-      src={image.src}
-      sx={{
-        filter: unlocked ? undefined : "blur(3px) brightness(0.75)",
-        width: imageSize,
-        height: imageSize,
+    <CBAvatar
+      image={image}
+      imageSize={imageSize}
+      avatarProps={{
+        sx: {
+          filter:
+            unlocked === true || unlocked === undefined
+              ? undefined
+              : "blur(3px) brightness(0.75)",
+        },
       }}
     />
   );

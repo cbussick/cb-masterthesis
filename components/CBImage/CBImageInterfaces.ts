@@ -6,6 +6,6 @@ import { HTMLAttributes } from "react";
 export interface CBImageProps {
   image: CBImgWithAlt;
   boxProps?: BoxProps;
-  imageProps?: Omit<ImageProps, "src" | "alt"> &
+  imageElementProps?: Omit<ImageProps, "src" | "alt"> &
     HTMLAttributes<HTMLImageElement>;
 }

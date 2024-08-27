@@ -34,7 +34,7 @@ export const CBGraphCard = ({
               flexShrink: 0,
             },
           }}
-          imageProps={{
+          imageElementProps={{
             style: {
               objectFit: "cover",
             },

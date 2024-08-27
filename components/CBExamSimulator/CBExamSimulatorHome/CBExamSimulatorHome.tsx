@@ -44,10 +44,12 @@ export const CBExamSimulatorHome = ({
             alt: "Ein Labor",
           }}
           boxProps={{
-            width: "100%",
-            flex: "1 1 auto",
+            sx: {
+              width: "100%",
+              flex: 1,
+            },
           }}
-          imageProps={{
+          imageElementProps={{
             style: {
               objectFit: "cover",
             },

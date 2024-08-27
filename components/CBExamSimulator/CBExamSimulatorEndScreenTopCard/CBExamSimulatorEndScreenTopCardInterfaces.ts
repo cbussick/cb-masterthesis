@@ -1,7 +1,7 @@
 import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 import { ReactNode } from "react";
 
-export interface CBExamSimulatorTopCardProps {
+export interface CBExamSimulatorEndScreenTopCardProps {
   image: CBImgWithAlt;
   title: ReactNode;
   subTitle: ReactNode;

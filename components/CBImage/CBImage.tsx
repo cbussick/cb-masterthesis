@@ -8,7 +8,7 @@ import { CBImageProps } from "./CBImageInterfaces";
 export const CBImage = ({
   image,
   boxProps,
-  imageProps,
+  imageElementProps: imageProps,
 }: CBImageProps): JSX.Element => {
   const [isImageLoading, setImageLoading] = useState<boolean>(true);
 

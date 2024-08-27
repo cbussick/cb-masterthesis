@@ -29,7 +29,7 @@ export const CBExerciseSequenceEndCard = ({
               height: "100%",
             },
           }}
-          imageProps={{
+          imageElementProps={{
             style: {
               objectFit: "cover",
             },

@@ -8,9 +8,9 @@ import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect } from "react";
 import { CBUnstyledNextLink } from "../../CBUnstyledNextLink/CBUnstyledNextLink";
+import { CBExamSimulatorEndScreenTaskCard } from "../CBExamSimulatorEndScreenTaskCard/CBExamSimulatorEndScreenTaskCard";
+import { CBExamSimulatorEndScreenTopCard } from "../CBExamSimulatorEndScreenTopCard/CBExamSimulatorEndScreenTopCard";
 import { CBExerciseWithCorrectness } from "../CBExamSimulatorInterfaces";
-import { CBExamSimulatorTaskCard } from "../CBExamSimulatorTaskCard/CBExamSimulatorTaskCard";
-import { CBExamSimulatorTopCard } from "../CBExamSimulatorTopCard/CBExamSimulatorTopCard";
 import { CBExamSimulatorEndScreenProps } from "./CBExamSimulatorEndScreenInterfaces";
 
 export const CBExamSimulatorEndScreen = ({
@@ -52,13 +52,13 @@ export const CBExamSimulatorEndScreen = ({
           pb: 1,
         }}
       >
-        <CBExamSimulatorTopCard
+        <CBExamSimulatorEndScreenTopCard
           image={{ src: "/exam-simulator/exercises.png", alt: "Bücher" }}
           title={exerciseAmountTitle}
           subTitle={`${correctExerciseAmount} / ${exercises.length} Aufgaben richtig`}
         />
 
-        <CBExamSimulatorTopCard
+        <CBExamSimulatorEndScreenTopCard
           image={{ src: "/exam-simulator/timer.png", alt: "Sanduhr" }}
           title={completionTimeTitle}
           subTitle={getFormattedTimeInMinutesAndSeconds(passedSeconds)}
@@ -87,7 +87,7 @@ export const CBExamSimulatorEndScreen = ({
       >
         {exercises.map((exercise, index) => (
           <Grid xs={12} lg={3} key={exercise.id}>
-            <CBExamSimulatorTaskCard
+            <CBExamSimulatorEndScreenTaskCard
               isCorrect={exercise.isCorrect}
               exercise="Aufgabe"
               exerciseNumber={index + 1}
