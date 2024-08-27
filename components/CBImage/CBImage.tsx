@@ -32,6 +32,7 @@ export const CBImage = ({
         onLoad={() => setImageLoading(false)}
         {...imageProps}
         style={{ objectFit: "contain", ...imageProps?.style }}
+        quality={100}
       />
 
       {isImageLoading && <CircularProgress size={80} />}
