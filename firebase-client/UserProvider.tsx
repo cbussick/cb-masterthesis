@@ -1,13 +1,15 @@
 "use client";
 
-import { getTopicWorldDocumentReference } from "@/helpers/getTopicWorldDocumentReference";
+import { getIncorrectExerciseCollectionReference } from "@/helpers/getIncorrectExerciseCollectionReference";
+import { getTopicWorldProgressDocumentReference } from "@/helpers/getTopicWorldProgressDocumentReference";
 import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
 import { NextOrObserver, User, onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
-import { CBTopicWorldProgress } from "./TopicWorldProgressConverter";
-import { CBUserCustomData } from "./UserCustomDataConverter";
 import { auth } from "./firebase";
+import { CBIncorrectExercise } from "./incorrectExercisesConverter";
+import { CBTopicWorldProgress } from "./topicWorldProgressConverter";
+import { CBUserCustomData } from "./userCustomDataConverter";
 import { CBUserRole } from "./userRole";
 
 interface UserProviderProps {
@@ -18,6 +20,7 @@ export interface CBUser {
   user: User;
   customData: CBUserCustomData;
   topicWorldProgress: CBTopicWorldProgress;
+  incorrectExercises: CBIncorrectExercise[];
 }
 
 export interface CBUserData {
@@ -25,6 +28,7 @@ export interface CBUserData {
   isUserLoaded: boolean;
   customData: CBUserCustomData;
   topicWorldProgress: CBTopicWorldProgress;
+  incorrectExercises: CBIncorrectExercise[];
 }
 
 const defaultUserData: CBUserData = {
@@ -40,12 +44,12 @@ const defaultUserData: CBUserData = {
     role: CBUserRole.Student,
     unlockedGlossaryEntryIDs: [],
     profilePicture: "",
-    mistakeExercises: [],
     trackedTime: [],
   },
   topicWorldProgress: {
     topics: {},
   },
+  incorrectExercises: [],
 };
 
 export const UserContext = createContext<CBUserData>(defaultUserData);
@@ -61,6 +65,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const [topicWorldProgress, setTopicWorldProgress] =
     useState<CBTopicWorldProgress>(defaultUserData.topicWorldProgress);
+
+  const [incorrectExercises, setIncorrectExercises] = useState<
+    CBIncorrectExercise[]
+  >(defaultUserData.incorrectExercises);
 
   const handleAuthStateChanged: NextOrObserver<User> = async (
     currentUser: User | null,
@@ -79,14 +87,24 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         }
       });
 
-      const topicWorldProgressReference = getTopicWorldDocumentReference(
-        currentUser.uid,
-      );
+      const topicWorldProgressReference =
+        getTopicWorldProgressDocumentReference(currentUser.uid);
 
       onSnapshot(topicWorldProgressReference, (snapshot) => {
         const data = snapshot.data();
         if (data) {
           setTopicWorldProgress(data);
+        }
+      });
+
+      const incorrectExercisesReference =
+        getIncorrectExerciseCollectionReference(currentUser.uid);
+
+      onSnapshot(incorrectExercisesReference, (snapshot) => {
+        const documents = snapshot.docs;
+        if (documents) {
+          const incorrectExerciseData = documents.map((d) => d.data());
+          setIncorrectExercises(incorrectExerciseData);
         }
       });
     } else {
@@ -102,8 +120,14 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   const value = useMemo(() => {
-    return { user, isUserLoaded, customData, topicWorldProgress };
-  }, [customData, isUserLoaded, topicWorldProgress, user]);
+    return {
+      user,
+      isUserLoaded,
+      customData,
+      topicWorldProgress,
+      incorrectExercises,
+    };
+  }, [customData, incorrectExercises, isUserLoaded, topicWorldProgress, user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

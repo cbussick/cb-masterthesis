@@ -1,17 +1,8 @@
-import { CBExercise } from "@/data/exercises/CBExercise";
-import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { CBTopic } from "@/data/topics";
 import {
   FirestoreDataConverter,
   PartialWithFieldValue,
 } from "firebase/firestore";
 import { CBUserRole } from "./userRole";
-
-export interface CBMistakeExercise {
-  id: string;
-  topic: CBTopic;
-  type: CBExerciseType;
-}
 
 export interface CBTrackedTime {
   date: string;
@@ -28,7 +19,6 @@ export interface CBUserCustomData {
   role: CBUserRole;
   unlockedGlossaryEntryIDs: string[];
   profilePicture: string;
-  mistakeExercises: (CBMistakeExercise | CBExercise)[];
   trackedTime: CBTrackedTime[];
 }
 
@@ -49,7 +39,6 @@ export const userCustomDataConverter: FirestoreDataConverter<
       role: userCustomData.role,
       unlockedGlossaryEntryIDs: userCustomData.unlockedGlossaryEntryIDs,
       profilePicture: userCustomData.profilePicture,
-      mistakeExercises: userCustomData.mistakeExercises,
       trackedTime: userCustomData.trackedTime,
     };
   },
@@ -65,7 +54,6 @@ export const userCustomDataConverter: FirestoreDataConverter<
       role: data.role,
       unlockedGlossaryEntryIDs: data.unlockedGlossaryEntryIDs,
       profilePicture: data.profilePicture,
-      mistakeExercises: data.mistakeExercises,
       trackedTime: data.trackedTime,
     };
   },

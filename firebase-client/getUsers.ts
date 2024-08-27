@@ -1,6 +1,6 @@
 import { collection, getDocs, query } from "firebase/firestore";
-import { userCustomDataConverter } from "./UserCustomDataConverter";
 import { firestore } from "./firebase";
+import { userCustomDataConverter } from "./userCustomDataConverter";
 
 export type UsersQueryDocumentSnapshot = Awaited<ReturnType<typeof getUsers>>;
 

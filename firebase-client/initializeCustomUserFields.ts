@@ -24,7 +24,6 @@ export const initializeCustomUserFields = async (
       role,
       unlockedGlossaryEntryIDs,
       profilePicture,
-      mistakeExercises: [],
       trackedTime: [],
     });
   } catch (error) {

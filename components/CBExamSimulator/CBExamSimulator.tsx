@@ -1,9 +1,9 @@
 "use client";
 
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
-import { CBUserCustomData } from "@/firebase-client/UserCustomDataConverter";
 import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";
 import { updateUser } from "@/firebase-client/updateUser";
+import { CBUserCustomData } from "@/firebase-client/userCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { CBRoute, routeMap } from "@/helpers/routes";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";

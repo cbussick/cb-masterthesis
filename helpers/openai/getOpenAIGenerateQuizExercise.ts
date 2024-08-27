@@ -24,8 +24,8 @@ export const getOpenAIQuizExercise = async (
   })) as z.infer<typeof CBGenerateAIQuizExerciseSchema>;
 
   const quizzesWithStaticData: CBQuizExercise[] =
-    generatedQuizzes.questions.map((quiz) => ({
-      id: `${userId}_${dayjsLocalized().unix()}`,
+    generatedQuizzes.questions.map((quiz, index) => ({
+      id: `${userId}_${dayjsLocalized().unix()}_${index}`,
       topic,
       type: CBExerciseType.AIQuiz,
       ...quiz,

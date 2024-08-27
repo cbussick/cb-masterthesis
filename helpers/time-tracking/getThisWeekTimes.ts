@@ -1,4 +1,4 @@
-import { CBTrackedTime } from "@/firebase-client/UserCustomDataConverter";
+import { CBTrackedTime } from "@/firebase-client/userCustomDataConverter";
 import { dayjsLocalized } from "./dayjsLocalized";
 
 export const getThisWeekTimes = (

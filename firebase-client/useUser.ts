@@ -13,6 +13,7 @@ export const useUser = (): CBUser => {
       user: user.user,
       customData: user.customData,
       topicWorldProgress: user.topicWorldProgress,
+      incorrectExercises: user.incorrectExercises,
     };
 
     return fullyLoadedUser;

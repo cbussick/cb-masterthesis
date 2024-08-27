@@ -1,6 +1,6 @@
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
-import { CBTopicWorldProgress } from "@/firebase-client/TopicWorldProgressConverter";
+import { CBTopicWorldProgress } from "@/firebase-client/topicWorldProgressConverter";
 import { getEnumRecordKeyByValue } from "../getEnumRecordKeyByValue";
 import { isTopicCompleted } from "./isTopicCompleted";
 

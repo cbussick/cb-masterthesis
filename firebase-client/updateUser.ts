@@ -1,6 +1,6 @@
 import { getUserCustomDataDocumentReference } from "@/helpers/getUserCustomDataDocumentReference";
 import { updateDoc } from "firebase/firestore";
-import { CBUserCustomData } from "./UserCustomDataConverter";
+import { CBUserCustomData } from "./userCustomDataConverter";
 
 export const updateUser = async (
   uid: string,

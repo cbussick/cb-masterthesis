@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { CBTrackedTime, CBUserCustomData } from "./UserCustomDataConverter";
+import { CBTrackedTime, CBUserCustomData } from "./userCustomDataConverter";
 
 export const makeUpdatedTrackedTime = (
   beginTime: Dayjs,
