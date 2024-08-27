@@ -3,9 +3,8 @@ import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionEx
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
-import { Divider } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
-import { Stack } from "@mui/system";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";
 import { glossaryEntries } from "../CBGlossary/CBGlossaryEntries";
 import { CBInfoCard } from "../CBInfoCard/CBInfoCard";
