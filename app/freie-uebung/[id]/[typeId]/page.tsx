@@ -20,6 +20,7 @@ import { updateUser } from "@/firebase-client/updateUser";
 import { CBUserCustomData } from "@/firebase-client/userCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
+import { useGenerateAILabelImageExerciseQuery } from "@/helpers/queries/useGenerateAIImageQuery";
 import { useGenerateAIQuizQuery } from "@/helpers/queries/useGenerateAIQuizQuery";
 import { retryMistakesPathSegment } from "@/helpers/routes";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
@@ -41,6 +42,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
+  [CBExerciseType.LabelImage]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -50,6 +52,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
+  [CBExerciseType.LabelImage]: 1,
 };
 
 const getRandomExercises = (
@@ -88,12 +91,21 @@ export default function FreePracticeSequencePage({
   const { showSnackbar } = useSnackbar();
   const {
     data: generatedAIQuizData,
-    status,
-    error,
+    status: generatedAIQuizStatus,
+    error: generatedAIQuizError,
   } = useGenerateAIQuizQuery(
     topic,
     exerciseAmountMap[CBExerciseType.AIQuiz],
     exerciseType === CBExerciseType.AIQuiz,
+  );
+
+  const {
+    data: generatedAIImageData,
+    status: generatedAIImageStatus,
+    error: generatedAIImageError,
+  } = useGenerateAILabelImageExerciseQuery(
+    topic,
+    exerciseType === CBExerciseType.LabelImage,
   );
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
@@ -141,6 +153,15 @@ export default function FreePracticeSequencePage({
 
         setExercises(exercisesWithMetaData);
       }
+    } else if (exerciseType === CBExerciseType.LabelImage) {
+      if (generatedAIImageData) {
+        exercisesWithMetaData.push({
+          ...generatedAIImageData,
+          isCompleted: false,
+        });
+
+        setExercises(exercisesWithMetaData);
+      }
     } else if (exerciseType) {
       exercisesWithMetaData = exercisesMap[exerciseType]
         .filter((e) => e.topic === topic)
@@ -170,6 +191,7 @@ export default function FreePracticeSequencePage({
     showSnackbar,
     topic,
     generatedAIQuizData,
+    generatedAIImageData,
   ]);
 
   const onMistake = useCallback(
@@ -242,6 +264,16 @@ export default function FreePracticeSequencePage({
     updateUser(user.uid, userNewData);
   }, [beginTime, customData, user.uid]);
 
+  const requestStatus =
+    exerciseType === CBExerciseType.AIQuiz
+      ? generatedAIQuizStatus
+      : generatedAIImageStatus;
+
+  const errorMessage =
+    exerciseType === CBExerciseType.AIQuiz
+      ? generatedAIQuizError?.message
+      : generatedAIImageError?.message;
+
   return useMemo(
     () => (
       <CBFreePracticeExerciseSequence
@@ -253,20 +285,23 @@ export default function FreePracticeSequencePage({
         onSequenceComplete={onSequenceComplete}
         beginTime={beginTime}
         requestStatus={
-          exerciseType === CBExerciseType.AIQuiz ? status : undefined
+          exerciseType === CBExerciseType.AIQuiz ||
+          exerciseType === CBExerciseType.LabelImage
+            ? requestStatus
+            : undefined
         }
-        errorMessage={error?.message}
+        errorMessage={errorMessage}
       />
     ),
     [
       beginTime,
-      error?.message,
+      errorMessage,
       exerciseType,
       exercises,
       onCompleteExercise,
       onMistake,
       onSequenceComplete,
-      status,
+      requestStatus,
       topic,
     ],
   );

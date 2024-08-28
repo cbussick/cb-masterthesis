@@ -1,4 +1,4 @@
-import { CBGlossaryEntry } from "../CBGlossaryEntries";
+import { CBGlossaryEntry } from "../CBGlossaryEntry";
 
 export interface CBGlossaryDrawerProps {
   selectedEntry: CBGlossaryEntry | null;

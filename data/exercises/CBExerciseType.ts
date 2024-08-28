@@ -5,4 +5,5 @@ export enum CBExerciseType {
   Swiper = "swiper",
   FreeformQuestion = "freiform-frage",
   AIQuiz = "ki-quiz",
+  LabelImage = "bild-beschriften",
 }

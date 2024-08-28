@@ -1,7 +1,8 @@
 import { CBTopic } from "../topics";
 import { CBExerciseType } from "./CBExerciseType";
 
-export interface CBExerciseWithTypeAndTopic {
+export interface CBExerciseWithIDAndTypeAndTopic {
+  id: string;
   type: CBExerciseType;
   topic: CBTopic;
 }

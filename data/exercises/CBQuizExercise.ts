@@ -2,10 +2,9 @@ import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 import { CBTopic } from "../topics";
 import { CBAnswer } from "./CBAnswer";
 import { CBExerciseType } from "./CBExerciseType";
-import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
+import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 
-export interface CBQuizExercise extends CBExerciseWithTypeAndTopic {
-  id: string;
+export interface CBQuizExercise extends CBExerciseWithIDAndTypeAndTopic {
   question: string;
   image?: CBImgWithAlt;
   answers: CBAnswer[];

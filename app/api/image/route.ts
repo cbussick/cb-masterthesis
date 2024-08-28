@@ -12,6 +12,7 @@ export async function POST(req: Request) {
     prompt: body.prompt,
     n: 1,
     size: "1024x1024",
+    response_format: "b64_json",
   });
 
   return NextResponse.json({ output: image }, { status: 200 });

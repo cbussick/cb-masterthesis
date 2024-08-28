@@ -6,16 +6,17 @@ import { CBMatchingGameOption } from "@/components/exercises/CBMatchingGame/CBMa
 import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 import { CBTopic } from "../topics";
 import { CBExerciseType } from "./CBExerciseType";
-import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
+import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 
-export interface CBMatchingGameExercise extends CBExerciseWithTypeAndTopic {
-  id: string;
+export interface CBMatchingGameExercise
+  extends CBExerciseWithIDAndTypeAndTopic {
   image: CBImgWithAlt;
   options: CBMatchingGameOption[];
   correctSelection: number[];
   highlightedComponents: CBMatchingGameHighlightComponent[];
   title: string;
   hint: string;
+  type: CBExerciseType.MatchingGame;
 }
 
 export type CBMatchingGameExerciseWithMetaData = CBMatchingGameExercise & {

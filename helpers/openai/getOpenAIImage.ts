@@ -2,7 +2,7 @@ import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
 import { makeOpenAIImageAPIRequest } from "./makeOpenAIImageAPIRequest";
 
 export const getOpenAIImage = async (prompt: string) => {
-  const imageUrl = await makeOpenAIImageAPIRequest(
+  const image = await makeOpenAIImageAPIRequest(
     prompt,
     apiRouteMap[CBAPIRoute.Image],
   ).catch(() => {
@@ -11,5 +11,5 @@ export const getOpenAIImage = async (prompt: string) => {
     );
   });
 
-  return imageUrl;
+  return image;
 };

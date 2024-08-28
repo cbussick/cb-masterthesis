@@ -116,6 +116,14 @@ export default function FreePracticeSubpage({
           />
         </Grid>
 
+        <Grid {...commonGridItemProps}>
+          <CBInfoCard
+            text={exercisesData[CBExerciseType.LabelImage].name}
+            image={{ src: "/topics/exercise.png", alt: "KI-Quiz" }}
+            href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`}
+          />
+        </Grid>
+
         {user.incorrectExercises.find((e) => e.topic === topic) !==
           undefined && (
           <Grid {...commonGridItemProps}>

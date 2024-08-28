@@ -2,7 +2,7 @@ import { CBFamilyTreePairGender } from "@/components/exercises/CBFamilyTree/CBFa
 import { CBTopic } from "../topics";
 import { CBExerciseDifficulty } from "./CBExerciseDifficulty";
 import { CBExerciseType } from "./CBExerciseType";
-import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
+import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 
 const familyTreeHint =
   'Dominante Vererbung: Ein Merkmal ist dominant vererbt, wenn eine Kopie des dominanten Gens ausreicht, um das Merkmal auszudrücken, z. B. "A" für dominant und "a" für rezessiv.\n\n' +
@@ -32,14 +32,14 @@ export interface CBFamilyTreeExerciseNode {
   solution: string;
 }
 
-export interface CBFamilyTreeExercise extends CBExerciseWithTypeAndTopic {
-  id: string;
+export interface CBFamilyTreeExercise extends CBExerciseWithIDAndTypeAndTopic {
   affectedRule: CBErbgang;
   choices: string[];
   nodes: CBFamilyTreeExerciseNode[];
   hint: string;
   difficulty: CBExerciseDifficulty;
   description: string;
+  type: CBExerciseType.FamilyTree;
 }
 
 export type CBFamilyTreeExerciseWithMetaData = CBFamilyTreeExercise & {

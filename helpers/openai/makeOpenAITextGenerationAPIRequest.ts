@@ -1,5 +1,5 @@
 export const makeOpenAITextGenerationAPIRequest = async (
-  prompt: string,
+  prompt: string | any[],
   apiRoute: string,
 ) => {
   const response = await fetch(apiRoute, {

@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { alphabet } from "@/helpers/alphabet";
 import { CBRoute } from "@/helpers/routes";
 import { LockRounded } from "@mui/icons-material";
@@ -9,7 +10,7 @@ import { CBEmoji } from "../../CBEmoji/CBEmoji";
 import { CBLink } from "../../CBLink/CBLink";
 import { CBUnstyledNextLink } from "../../CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBGlossaryDrawer } from "../CBGlossaryDrawer/CBGlossaryDrawer";
-import { CBGlossaryEntry, glossaryEntries } from "../CBGlossaryEntries";
+import { CBGlossaryEntry } from "../CBGlossaryEntry";
 import { CBGlossaryEntriesListProps } from "./CBGlossaryEntriesListInterfaces";
 
 const scrollToLetter = (letter: string) => {

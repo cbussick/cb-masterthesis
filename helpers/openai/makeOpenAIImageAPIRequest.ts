@@ -13,7 +13,7 @@ export const makeOpenAIImageAPIRequest = async (
 
   if (response.ok) {
     const data = await response.json();
-    return data.output.data[0].url;
+    return data.output.data[0].b64_json;
   }
 
   throw new Error(
