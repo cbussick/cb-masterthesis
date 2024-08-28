@@ -1,4 +1,4 @@
-import { CBAIQuizExercise } from "@/data/exercises/CBAIQuizExercises";
+import { CBAIQuizExercise } from "@/data/exercises/CBAIQuizExercise";
 import { z, ZodType } from "zod";
 
 const CBAIQuizExerciseSchema = z.object({

@@ -1,22 +1,23 @@
 "use client";
 
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
+import { CBImage } from "@/components/CBImage/CBImage";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
-import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
+import { getOpenAIImageLabelEvaluation } from "@/helpers/openai/getOpenAIImageLabelEvaluation";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { Alert, Container, Stack, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
-import { CBFreeformQuestionProps } from "./CBFreeformQuestionInterfaces";
+import { CBLabelImageProps } from "./CBLabelImageInterfaces";
 
-export const CBFreeformQuestion = ({
+export const CBLabelImage = ({
   exercise,
   onCompleteExercise,
   onMistake,
-}: CBFreeformQuestionProps): JSX.Element => {
+}: CBLabelImageProps): JSX.Element => {
   const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const {
     setExercises,
@@ -36,7 +37,8 @@ export const CBFreeformQuestion = ({
 
   const onConfirm = useCallback(() => {
     setAPIRequestState(CBAPIRequestState.Fetching);
-    getOpenAIAnswerEvaluation(exercise.question, answer)
+
+    getOpenAIImageLabelEvaluation(exercise.image.src, answer)
       .then((response) => {
         setAPIRequestState(CBAPIRequestState.Success);
 
@@ -102,8 +104,9 @@ export const CBFreeformQuestion = ({
       <Stack spacing={3}>
         <Alert severity="info" sx={{ alignItems: "center" }}>
           <Typography>
-            Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI)
-            eingesetzt. Hierbei kann es zu Fehlern kommen.
+            Das Bild wurde durch künstliche Intelligenz (KI) erstellt. Außerdem
+            wird zur Auswertung deiner Antwort KI eingesetzt. Hierbei kann es zu
+            Fehlern kommen.
           </Typography>
         </Alert>
 
@@ -113,12 +116,15 @@ export const CBFreeformQuestion = ({
             alignItems: "center",
           }}
         >
+          <CBImage image={exercise.image} />
+
           <CBTextArea
             value={answer}
-            onChange={(event) => setAnswer(event.target.value)}
+            onChange={(e) => setAnswer(e.target.value)}
             label="Deine Antwort"
             disabled={disabled}
             onConfirm={onConfirm}
+            rows={2}
           />
 
           <CBLoadingButton

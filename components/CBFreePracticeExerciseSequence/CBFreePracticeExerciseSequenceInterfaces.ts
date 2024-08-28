@@ -1,7 +1,7 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBTopic } from "@/data/topics";
-import { UseQueryResult } from "@tanstack/react-query";
+import { QueryStatus } from "@tanstack/react-query";
 import { Dayjs } from "dayjs";
 
 export interface CBFreePracticeExerciseSequenceProps {
@@ -12,6 +12,6 @@ export interface CBFreePracticeExerciseSequenceProps {
   onCompleteExercise: (params: any) => void;
   onSequenceComplete: (params: any) => void;
   beginTime: Dayjs;
-  requestStatus?: UseQueryResult["status"];
+  requestStatus?: QueryStatus;
   errorMessage?: string;
 }

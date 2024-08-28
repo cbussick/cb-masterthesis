@@ -3,10 +3,10 @@ import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionEx
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { Divider, Stack } from "@mui/material";
 import Grid, { Grid2Props } from "@mui/material/Unstable_Grid2";
 import { CBDateCalendar } from "../CBDateCalendar/CBDateCalendar";
-import { glossaryEntries } from "../CBGlossary/CBGlossaryEntries";
 import { CBInfoCard } from "../CBInfoCard/CBInfoCard";
 import { CBPageHeader } from "../CBPageHeader/CBPageHeader";
 import { CBSimpleInfoCard } from "../CBSimpleInfoCard/CBSimpleInfoCard";

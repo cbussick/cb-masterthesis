@@ -1,5 +1,6 @@
 "use client";
 
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { getAuthError } from "@/firebase-client/authErrors";
 import { signUpUser } from "@/firebase-client/signUpUser";
 import { CBUserRole } from "@/firebase-client/userRole";
@@ -9,7 +10,6 @@ import { Stack, TextField } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { glossaryEntries } from "../CBGlossary/CBGlossaryEntries";
 import { CBLoadingButton } from "../CBLoadingButton/CBLoadingButton";
 
 interface SignUpFormValues {

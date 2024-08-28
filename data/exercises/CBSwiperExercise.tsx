@@ -1,7 +1,7 @@
 import { CBImgWithAlt } from "@/helpers/CBImgWithAlt";
 import { CBTopic } from "../topics";
 import { CBExerciseType } from "./CBExerciseType";
-import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
+import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 
 const swiperHint =
   "Guck dir das Zellorganell genau an und entscheide, ob es zu einer tierischen oder pflanzlichen Zelle gehört - oder vielleicht zu beiden.";
@@ -35,12 +35,12 @@ export const swiperCellTypes: Record<CBSwiperCellType, CBSwiperCellTypeData> = {
   },
 };
 
-export interface CBSwiperExercise extends CBExerciseWithTypeAndTopic {
-  id: string;
+export interface CBSwiperExercise extends CBExerciseWithIDAndTypeAndTopic {
   name: string;
   image?: CBImgWithAlt;
   belongsTo: CBSwiperCellType;
   hint: string;
+  type: CBExerciseType.Swiper;
 }
 
 export type CBSwiperExerciseWithMetaData = CBSwiperExercise & {

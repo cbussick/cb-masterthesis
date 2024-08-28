@@ -1,11 +1,12 @@
 import { CBExerciseType } from "./CBExerciseType";
-import { CBExerciseWithTypeAndTopic } from "./CBExerciseWithType";
+import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 import { quizExercises } from "./CBQuizExercise";
 
-export interface CBFreeformQuestionExercise extends CBExerciseWithTypeAndTopic {
-  id: string;
+export interface CBFreeformQuestionExercise
+  extends CBExerciseWithIDAndTypeAndTopic {
   question: string;
   hint?: string;
+  type: CBExerciseType.FreeformQuestion;
 }
 
 export type CBFreeformQuestionExerciseWithMetaData =

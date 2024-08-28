@@ -1,6 +1,7 @@
 import { CBExerciseType } from "./CBExerciseType";
 import { CBFamilyTreeExercise } from "./CBFamilyTreeExercise";
 import { CBFreeformQuestionExercise } from "./CBFreeformQuestionExercise";
+import { CBLabelImageExercise } from "./CBLabelImageExercise";
 import { CBMatchingGameExercise } from "./CBMatchingGameExercise";
 import { CBQuizExercise } from "./CBQuizExercise";
 import { CBSwiperExercise } from "./CBSwiperExercise";
@@ -10,7 +11,8 @@ export type CBExercise =
   | CBFamilyTreeExercise
   | CBMatchingGameExercise
   | CBSwiperExercise
-  | CBFreeformQuestionExercise;
+  | CBFreeformQuestionExercise
+  | CBLabelImageExercise;
 
 export type CBExerciseWithMetaData = CBExercise & { isCompleted: boolean };
 
@@ -25,4 +27,5 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.Swiper]: { name: "Zellen-Swiper" },
   [CBExerciseType.FreeformQuestion]: { name: "Freitext-Frage" },
   [CBExerciseType.AIQuiz]: { name: "KI-Quiz" },
+  [CBExerciseType.LabelImage]: { name: "Bild beschriften" },
 };

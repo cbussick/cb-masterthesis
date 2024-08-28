@@ -8,7 +8,7 @@ import { CBImageProps } from "./CBImageInterfaces";
 export const CBImage = ({
   image,
   boxProps,
-  imageElementProps: imageProps,
+  imageElementProps,
 }: CBImageProps): JSX.Element => {
   const [isImageLoading, setImageLoading] = useState<boolean>(true);
 
@@ -29,9 +29,11 @@ export const CBImage = ({
         src={image.src}
         alt={image.alt}
         fill
-        onLoad={() => setImageLoading(false)}
-        {...imageProps}
-        style={{ objectFit: "contain", ...imageProps?.style }}
+        {...imageElementProps}
+        onLoad={() => {
+          setImageLoading(false);
+        }}
+        style={{ objectFit: "contain", ...imageElementProps?.style }}
         quality={100}
       />
 

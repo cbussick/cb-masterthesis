@@ -5,12 +5,12 @@ import { CBContentWrapper } from "@/components/CBContentWrapper/CBContentWrapper
 import { CBExerciseSequenceProvider } from "@/components/CBExerciseSequence/CBExerciseSequenceProvider";
 import { CBExerciseSequenceWrapper } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapper";
 import { CBExerciseSequenceType } from "@/components/CBExerciseSequence/CBExerciseSequenceWrapperInterfaces";
-import { glossaryEntries } from "@/components/CBGlossary/CBGlossaryEntries";
 import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { CBNoAccessTopicWorldView } from "@/components/views/CBNoAccessTopicWorldView";
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseDifficulty } from "@/data/exercises/CBExerciseDifficulty";
 import { pointsToAddForSequenceCompletion } from "@/data/gamification";
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { topicWorldTopics } from "@/data/topicWorld";
 import { CBTopic } from "@/data/topics";
 import { makeUpdatedTrackedTime } from "@/firebase-client/makeUpdatedTrackedTime";

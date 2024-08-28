@@ -4,6 +4,7 @@ import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBFamilyTreeExerciseWithMetaData } from "@/data/exercises/CBFamilyTreeExercise";
 import { CBFreeformQuestionExerciseWithMetaData } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBLabelImageExerciseWithMetaData } from "@/data/exercises/CBLabelImageExercise";
 import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
 import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
@@ -13,6 +14,7 @@ import { useRef } from "react";
 import { CBSnackbar } from "../CBSnackbar/CBSnackbar";
 import { CBFamilyTreeWithProviders } from "../exercises/CBFamilyTree/CBFamilyTreeWithProviders/CBFamilyTreeWithProviders";
 import { CBFreeformQuestion } from "../exercises/CBFreeformQuestion/CBFreeformQuestion";
+import { CBLabelImage } from "../exercises/CBLabelImage/CBLabelImage";
 import { CBMatchingGame } from "../exercises/CBMatchingGame/CBMatchingGame";
 import { CBQuiz } from "../exercises/CBQuiz/CBQuiz";
 import { CBSwiper } from "../exercises/CBSwiper/CBSwiper";
@@ -128,7 +130,6 @@ export const CBExerciseSequence = ({
     },
     [CBExerciseType.Swiper]: (exercise) => {
       const castExercise = exercise as CBSwiperExerciseWithMetaData;
-
       return {
         title: "Ordne die Zellorganellen den richtigen Zelltypen zu.",
         component: (
@@ -149,6 +150,19 @@ export const CBExerciseSequence = ({
         component: (
           <CBFreeformQuestion
             key={castExercise.id}
+            exercise={castExercise}
+            onCompleteExercise={onCompleteExercise}
+            onMistake={onMistake}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.LabelImage]: (exercise) => {
+      const castExercise = exercise as CBLabelImageExerciseWithMetaData;
+      return {
+        title: "Beschrifte das Bild mit dem dazu passenden Begriff.",
+        component: (
+          <CBLabelImage
             exercise={castExercise}
             onCompleteExercise={onCompleteExercise}
             onMistake={onMistake}
