@@ -6,4 +6,5 @@ export enum CBExerciseType {
   FreeformQuestion = "freiform-frage",
   AIQuiz = "ki-quiz",
   LabelImage = "bild-beschriften",
+  LabelImageVariation = "bild-variation-beschriften",
 }

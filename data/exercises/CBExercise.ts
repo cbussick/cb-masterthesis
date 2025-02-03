@@ -28,4 +28,7 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.FreeformQuestion]: { name: "Freitext-Frage" },
   [CBExerciseType.AIQuiz]: { name: "KI-Quiz" },
   [CBExerciseType.LabelImage]: { name: "Bild beschriften" },
+  [CBExerciseType.LabelImageVariation]: {
+    name: "Bild beschriften (Variation)",
+  },
 };

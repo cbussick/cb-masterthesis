@@ -4,18 +4,30 @@ import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBTopic } from "@/data/topics";
 import { base64AddMimeType } from "../base64AddMimeType";
 import { getOpenAIImage } from "./getOpenAIImage";
+import { getOpenAIImageVariation } from "./getOpenAIImageVariation";
 
 export const getOpenAILabelImageExercise = async (
   userId: string,
   topic: CBTopic,
+  isVariation: boolean,
 ) => {
-  const filteredEntries = glossaryEntries.filter((e) => e.topic === topic);
+  const filteredEntries = isVariation
+    ? glossaryEntries.filter((e) => e.topic === topic && e.image)
+    : glossaryEntries.filter((e) => e.topic === topic);
   const randomEntry =
     filteredEntries[Math.floor(Math.random() * filteredEntries.length)];
 
-  const prompt = `Erstelle ein Bild von ${randomEntry.term}.`;
+  let image = "";
+  if (isVariation) {
+    // `image` should be available here, since we filter for that in the `filteredEntries` anyway, but just to make TS happy.
+    if (randomEntry.image) {
+      image = await getOpenAIImageVariation(randomEntry.image);
+    }
+  } else {
+    const generationPrompt = `Erstelle ein Bild von ${randomEntry.term}.`;
 
-  const image = await getOpenAIImage(prompt);
+    image = await getOpenAIImage(generationPrompt);
+  }
 
   const labelImageExercise: CBLabelImageExercise = {
     id: `${userId}_${Date.now()}_label_image`,

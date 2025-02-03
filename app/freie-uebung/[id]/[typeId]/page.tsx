@@ -43,6 +43,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
   [CBExerciseType.LabelImage]: [],
+  [CBExerciseType.LabelImageVariation]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -53,6 +54,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
   [CBExerciseType.LabelImage]: 1,
+  [CBExerciseType.LabelImageVariation]: 1,
 };
 
 const getRandomExercises = (
@@ -105,7 +107,9 @@ export default function FreePracticeSequencePage({
     error: generatedAIImageError,
   } = useGenerateAILabelImageExerciseQuery(
     topic,
-    exerciseType === CBExerciseType.LabelImage,
+    exerciseType === CBExerciseType.LabelImage ||
+      exerciseType === CBExerciseType.LabelImageVariation,
+    exerciseType === CBExerciseType.LabelImageVariation,
   );
 
   const [exercises, setExercises] = useState<CBExerciseWithMetaData[]>([]);
@@ -153,7 +157,10 @@ export default function FreePracticeSequencePage({
 
         setExercises(exercisesWithMetaData);
       }
-    } else if (exerciseType === CBExerciseType.LabelImage) {
+    } else if (
+      exerciseType === CBExerciseType.LabelImage ||
+      exerciseType === CBExerciseType.LabelImageVariation
+    ) {
       if (generatedAIImageData) {
         exercisesWithMetaData.push({
           ...generatedAIImageData,
@@ -286,7 +293,8 @@ export default function FreePracticeSequencePage({
         beginTime={beginTime}
         requestStatus={
           exerciseType === CBExerciseType.AIQuiz ||
-          exerciseType === CBExerciseType.LabelImage
+          exerciseType === CBExerciseType.LabelImage ||
+          exerciseType === CBExerciseType.LabelImageVariation
             ? requestStatus
             : undefined
         }

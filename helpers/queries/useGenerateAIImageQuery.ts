@@ -7,16 +7,17 @@ import { getOpenAILabelImageExercise } from "../openai/getOpenAILabelImageExerci
 export const useGenerateAILabelImageExerciseQuery = (
   topic: CBTopic,
   enabled: boolean,
+  isVariation: boolean,
 ) => {
   const { user } = useUser();
 
-  const queryGenerateAIQuiz = useQuery({
-    queryKey: [CBAPIRoute.GenerateQuizExercise],
-    queryFn: () => getOpenAILabelImageExercise(user.uid, topic),
+  const queryGenerateAILabelImageExercise = useQuery({
+    queryKey: [isVariation ? CBAPIRoute.ImageVariation : CBAPIRoute.Image],
+    queryFn: () => getOpenAILabelImageExercise(user.uid, topic, isVariation),
     enabled,
     // Allows clearing the cache on unmount (e.g. when the user switches the page)
     gcTime: 0,
   });
 
-  return queryGenerateAIQuiz;
+  return queryGenerateAILabelImageExercise;
 };

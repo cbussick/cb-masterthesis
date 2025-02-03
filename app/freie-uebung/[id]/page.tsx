@@ -142,6 +142,25 @@ export default function FreePracticeSubpage({
             </Box>
           </Grid>
 
+          <Grid {...commonGridItemProps}>
+            <Box
+              onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+            >
+              <CBInfoCard
+                text={exercisesData[CBExerciseType.LabelImageVariation].name}
+                image={{
+                  src: "/topics/exercise.png",
+                  alt: "Bild beschriften (Variation)",
+                }}
+                href={
+                  hasAccessToAI
+                    ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`
+                    : undefined
+                }
+              />
+            </Box>
+          </Grid>
+
           {incorrectExercises.find((e) => e.topic === topic) !== undefined && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
