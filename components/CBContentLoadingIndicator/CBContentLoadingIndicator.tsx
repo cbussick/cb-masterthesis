@@ -37,7 +37,7 @@ export const CBContentLoadingIndicator = (): JSX.Element => {
             }}
           />
 
-          <Typography>Deine Inhalte werden geladen...</Typography>
+          <Typography>Deine Inhalte werden vorbereitet...</Typography>
 
           <CircularProgress size={80} />
         </Stack>

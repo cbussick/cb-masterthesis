@@ -170,6 +170,19 @@ export const CBExerciseSequence = ({
         ),
       };
     },
+    [CBExerciseType.LabelImageVariation]: (exercise) => {
+      const castExercise = exercise as CBLabelImageExerciseWithMetaData;
+      return {
+        title: "Beschrifte das Bild mit dem dazu passenden Begriff.",
+        component: (
+          <CBLabelImage
+            exercise={castExercise}
+            onCompleteExercise={onCompleteExercise}
+            onMistake={onMistake}
+          />
+        ),
+      };
+    },
   };
 
   const componentInformation =
