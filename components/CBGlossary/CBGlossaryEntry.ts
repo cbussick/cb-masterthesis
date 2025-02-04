@@ -5,6 +5,7 @@ export interface CBGlossaryEntry {
   term: string;
   definition: string;
   image?: string;
+  image1x1?: string;
   unlockLevel: number;
   topic: CBTopic;
 }

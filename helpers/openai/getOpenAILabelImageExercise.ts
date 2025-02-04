@@ -12,19 +12,22 @@ export const getOpenAILabelImageExercise = async (
   isVariation: boolean,
 ) => {
   const filteredEntries = isVariation
-    ? glossaryEntries.filter((e) => e.topic === topic && e.image)
+    ? glossaryEntries.filter((e) => e.topic === topic && e.image1x1)
     : glossaryEntries.filter((e) => e.topic === topic);
   const randomEntry =
-    filteredEntries[Math.floor(Math.random() * filteredEntries.length)];
+    filteredEntries.length > 0
+      ? filteredEntries[Math.floor(Math.random() * filteredEntries.length)]
+      : undefined;
 
   let image = "";
+
   if (isVariation) {
-    // `image` should be available here, since we filter for that in the `filteredEntries` anyway, but just to make TS happy.
-    if (randomEntry.image) {
-      image = await getOpenAIImageVariation(randomEntry.image);
+    // `image1x1` should be available here, since we filter for that in the `filteredEntries` anyway, but just to make TS happy.
+    if (randomEntry?.image1x1) {
+      image = await getOpenAIImageVariation(randomEntry.image1x1);
     }
   } else {
-    const generationPrompt = `Erstelle ein Bild von ${randomEntry.term}.`;
+    const generationPrompt = `Erstelle ein Bild von ${randomEntry?.term}.`;
 
     image = await getOpenAIImage(generationPrompt);
   }
