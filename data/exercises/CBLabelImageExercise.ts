@@ -4,7 +4,6 @@ import { CBExerciseWithIDAndTypeAndTopic } from "./CBExerciseWithType";
 
 export interface CBLabelImageExercise extends CBExerciseWithIDAndTypeAndTopic {
   image: CBImgWithAlt;
-  hint?: string;
   type: CBExerciseType.LabelImage;
 }
 

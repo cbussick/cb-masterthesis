@@ -15,7 +15,6 @@ export interface CBMatchingGameExercise
   correctSelection: number[];
   highlightedComponents: CBMatchingGameHighlightComponent[];
   title: string;
-  hint: string;
   type: CBExerciseType.MatchingGame;
 }
 
@@ -66,7 +65,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Basen sind hier gesucht?",
-    hint: "Schaue dir die Basen genau an.",
   },
   {
     id: "matching-game-2",
@@ -110,7 +108,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-3",
@@ -154,7 +151,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-4",
@@ -198,7 +194,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-5",
@@ -242,7 +237,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-6",
@@ -286,7 +280,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-7",
@@ -330,7 +323,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-8",
@@ -374,7 +366,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-9",
@@ -418,7 +409,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-10",
@@ -462,7 +452,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Ordne die Begriffe den entsprechenden Zellorganellen zu.",
-    hint: "Benenne die einzelnen Bestandteile der gezeigten Zellen, in der angezeigten Reihenfolge.",
   },
   {
     id: "matching-game-11",
@@ -506,7 +495,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Mitose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Mitose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-12",
@@ -550,7 +538,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Mitose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Mitose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-13",
@@ -594,7 +581,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Mitose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Mitose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-14",
@@ -638,7 +624,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Meiose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Meiose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-15",
@@ -682,7 +667,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Meiose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Meiose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-16",
@@ -726,7 +710,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Meiose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Meiose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-17",
@@ -770,7 +753,6 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Meiose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Meiose in der korrekten Reihenfolge an.",
   },
   {
     id: "matching-game-18",
@@ -814,6 +796,5 @@ export const matchingGameExercises: CBMatchingGameExercise[] = [
       },
     ],
     title: "Welche Phase der Meiose ist hier gesucht?",
-    hint: "Ordne die verschiedenen Phasen der Meiose in der korrekten Reihenfolge an.",
   },
 ];

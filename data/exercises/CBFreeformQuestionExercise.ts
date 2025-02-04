@@ -5,7 +5,6 @@ import { quizExercises } from "./CBQuizExercise";
 export interface CBFreeformQuestionExercise
   extends CBExerciseWithIDAndTypeAndTopic {
   question: string;
-  hint?: string;
   type: CBExerciseType.FreeformQuestion;
 }
 
@@ -18,5 +17,4 @@ export const freeformQuestionExercises: CBFreeformQuestionExercise[] =
     type: CBExerciseType.FreeformQuestion,
     topic: exercise.topic,
     question: exercise.question,
-    hint: exercise.hint,
   }));
