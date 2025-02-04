@@ -141,10 +141,12 @@ export const CBExerciseSequenceBottomBar = ({
     </Button>
   );
 
+  const hasStaticHint = "hint" in currentExercise && currentExercise.hint;
+
   const onClickHint = () => {
     if (shouldGenerateHint) {
       refetch();
-    } else if (currentExercise.hint) {
+    } else if (hasStaticHint) {
       setHint(currentExercise.hint);
     }
   };
@@ -165,18 +167,19 @@ export const CBExerciseSequenceBottomBar = ({
       )}
 
       <Stack direction="row" spacing={2}>
-        {type !== CBExerciseSequenceType.ExamSimulator && (
-          <CBDinaHint
-            onClick={onClickHint}
-            hint={hint}
-            isLoading={fetchStatus === "fetching"}
-            disabled={
-              fetchStatus === "fetching" ||
-              error !== null ||
-              isCurrentExerciseFinished
-            }
-          />
-        )}
+        {type !== CBExerciseSequenceType.ExamSimulator &&
+          (shouldGenerateHint || hasStaticHint) && (
+            <CBDinaHint
+              onClick={onClickHint}
+              hint={hint}
+              isLoading={fetchStatus === "fetching"}
+              disabled={
+                fetchStatus === "fetching" ||
+                error !== null ||
+                isCurrentExerciseFinished
+              }
+            />
+          )}
 
         {exerciseTypesWithConfirmButton.includes(currentExerciseType) && (
           <Button
