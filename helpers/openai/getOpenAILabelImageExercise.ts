@@ -20,6 +20,7 @@ export const getOpenAILabelImageExercise = async (
       : undefined;
 
   let image = "";
+
   if (isVariation) {
     // `image1x1` should be available here, since we filter for that in the `filteredEntries` anyway, but just to make TS happy.
     if (randomEntry?.image1x1) {
