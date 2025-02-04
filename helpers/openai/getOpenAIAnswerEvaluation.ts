@@ -6,8 +6,7 @@ export const getOpenAIAnswerEvaluation = async (
   question: string,
   answer: string,
 ): Promise<CBFreeformQuestionEvaluation> => {
-  // TODO: Das "Ja" und "Nein" ist wegen Structured Outputs nicht mehr richtig oder?
-  const prompt = `Ist die Antwort "${answer}" eine korrekte Antwort auf die Frage "${question}"? Beginne deine Antwort mit "Ja;;" oder "Nein;;". Gib danach nur den Grund an.`;
+  const prompt = `Ist die Antwort "${answer}" eine richtige Antwort auf die Frage "${question}"?. Schreibe deine Bewertung in das Feld "evaluation", indem du "false" für "falsch" schreibst und "true" für "richtig". Schreibe eine kurze Begründung ist das Feld "reason".`;
 
   const evaluation = await makeOpenAITextGenerationAPIRequest(
     prompt,
