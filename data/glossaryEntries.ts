@@ -9,6 +9,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Der Zellkern ist das membranumhüllte Zellorganell, das das genetische Material (DNA) enthält und für die Steuerung der zellulären Aktivitäten verantwortlich ist.",
     unlockLevel: 1,
     image: "/cell-organelles/zellkern.png",
+    image1x1: "/cell-organelles/zellkern_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -18,6 +19,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Mitochondrien sind Zellorganellen, die als Kraftwerke der Zelle dienen und Energie in Form von ATP durch Zellatmung produzieren.",
     unlockLevel: 1,
     image: "/cell-organelles/mitochondrium.png",
+    image1x1: "/cell-organelles/mitochondrium_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -27,6 +29,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Chloroplasten sind für pflanzliche Zellen spezifische Zellorganellen und sind für die Photosynthese verantwortlich. Sie enthalten den Farbstoff Chlorophyll, das Lichtenergie einfängt und in chemische Energie umwandelt.",
     unlockLevel: 1,
     image: "/cell-organelles/chloroplast.png",
+    image1x1: "/cell-organelles/chloroplast_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -36,6 +39,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Proteinsynthese, Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle.",
     unlockLevel: 1,
     image: "/cell-organelles/endoplasmatisches-retikulum.png",
+    image1x1: "/cell-organelles/endoplasmatisches-retikulum_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -45,6 +49,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Der Golgi-Apparat ist ein Zellorganell und für die Modifikation, Sortierung und den Transport von Proteinen und Lipiden innerhalb der Zelle zuständig. Er besteht aus Stapeln flacher Membransäckchen.",
     unlockLevel: 1,
     image: "/cell-organelles/golgi-apparat.png",
+    image1x1: "/cell-organelles/golgi-apparat_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -54,6 +59,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Lysosomen sind membranumhüllte Zellorganellen, die Verdauungsenzyme enthalten und für den Abbau von Makromolekülen, abgenutzten Organellen und Fremdstoffen verantwortlich sind.",
     unlockLevel: 1,
     image: "/cell-organelles/lysosomen.png",
+    image1x1: "/cell-organelles/lysosomen_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -63,6 +69,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Vesikel sind kleine membranumhüllte Strukturen, die den Transport von Stoffen innerhalb der Zelle ermöglichen.",
     unlockLevel: 1,
     image: "/cell-organelles/vesikel.png",
+    image1x1: "/cell-organelles/vesikel_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -72,6 +79,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Die Plasmamembran grenzt das Zellinnere vom -äußeren ab und reguliert den Ein- und Austritt von Stoffen.",
     unlockLevel: 1,
     image: "/cell-organelles/plasmamembran.png",
+    image1x1: "/cell-organelles/plasmamembran_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -81,6 +89,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Peroxisomen sind membranumhüllte Zellorganellen, die an verschiedenen Stoffwechselprozessen beteiligt sind, einschließlich dem Abbau von Fettsäuren und der Entgiftung von schädlichen Verbindungen.",
     unlockLevel: 1,
     image: "/cell-organelles/peroxisome.png",
+    image1x1: "/cell-organelles/peroxisome_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -90,6 +99,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Ribosomen sind Zellorganellen, die an der Proteinbiosynthese beteiligt sind und entweder im Zytoplasma oder an der Oberfläche des endoplasmatischen Retikulums vorkommen.",
     unlockLevel: 1,
     image: "/cell-organelles/ribosom.png",
+    image1x1: "/cell-organelles/ribosom_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -99,6 +109,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Mikrotubuli sind Teil des Cytoskeletts und bestehen aus dem Protein Tubulin. Sie sind wichtig für die Zellstruktur, die Zellteilung, den Transport von Organellen und den Aufbau von Zellfortsätzen wie Zilien und Flagellen.",
     unlockLevel: 1,
     image: "/cell-organelles/mikrotubuli.png",
+    image1x1: "/cell-organelles/mikrotubuli_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -116,6 +127,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Vakuolen sind große, flüssigkeitsgefüllte Vesikel in pflanzlichen Zellen. Sie sind für die Speicherung von Wasser, Nährstoffen, Abfallstoffen und Pigmenten verantwortlich. Vakuolen spielen auch eine Rolle bei der Aufrechterhaltung des osmotischen Drucks und der Stabilität der Zelle.",
     unlockLevel: 1,
     image: "/cell-organelles/vakuole.png",
+    image1x1: "/cell-organelles/vakuole_1x1.png",
     topic: CBTopic.Zelle,
   },
   {
@@ -149,6 +161,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Centriolen sind zylinderförmige Strukturen, die eine wichtige Rolle bei der Zellteilung spielen. Sie sind auch an der Bildung von Zellfortsätzen wie Zilien und Flagellen beteiligt.",
     unlockLevel: 1,
     image: "/cell-organelles/centriolen.png",
+    image1x1: "/cell-organelles/centriolen_1x1.png",
     topic: CBTopic.Zelle,
   },
 

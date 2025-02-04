@@ -12,6 +12,7 @@ import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionEx
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBTopic, topics } from "@/data/topics";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumRecordObjectValueByStringKey } from "@/helpers/getEnumRecordObjectValueByStringKey";
@@ -49,6 +50,9 @@ export default function FreePracticeSubpage({
   const [hasAccessToAI, setAccessToAI] = useState<boolean>(false);
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const [aiAccessText, setAIAccessText] = useState<string>("");
+
+  const isImageVariationExerciseAvailable =
+    glossaryEntries.filter((e) => e.topic === topic && e.image1x1).length > 0;
 
   return (
     <>
@@ -142,24 +146,26 @@ export default function FreePracticeSubpage({
             </Box>
           </Grid>
 
-          <Grid {...commonGridItemProps}>
-            <Box
-              onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
-            >
-              <CBInfoCard
-                text={exercisesData[CBExerciseType.LabelImageVariation].name}
-                image={{
-                  src: "/topics/exercise.png",
-                  alt: "Bild beschriften (Variation)",
-                }}
-                href={
-                  hasAccessToAI
-                    ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`
-                    : undefined
-                }
-              />
-            </Box>
-          </Grid>
+          {isImageVariationExerciseAvailable && (
+            <Grid {...commonGridItemProps}>
+              <Box
+                onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+              >
+                <CBInfoCard
+                  text={exercisesData[CBExerciseType.LabelImageVariation].name}
+                  image={{
+                    src: "/topics/exercise.png",
+                    alt: "Bild beschriften (Variation)",
+                  }}
+                  href={
+                    hasAccessToAI
+                      ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`
+                      : undefined
+                  }
+                />
+              </Box>
+            </Grid>
+          )}
 
           {incorrectExercises.find((e) => e.topic === topic) !== undefined && (
             <Grid {...commonGridItemProps}>
