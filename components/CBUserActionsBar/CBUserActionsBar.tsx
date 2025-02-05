@@ -39,11 +39,13 @@ export const CBUserActionsBar = (): JSX.Element => {
           aria-describedby={notificationMenuId}
         />
 
-        <CBIconButton
-          onClick={() => setSearchMenuOpen((prevOpen) => !prevOpen)}
-          icon={<Search />}
-          label="Suche"
-        />
+        {false && (
+          <CBIconButton
+            onClick={() => setSearchMenuOpen((prevOpen) => !prevOpen)}
+            icon={<Search />}
+            label="Suche"
+          />
+        )}
       </Stack>
 
       <CBNotificationMenu

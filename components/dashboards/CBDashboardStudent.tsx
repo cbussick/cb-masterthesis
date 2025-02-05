@@ -120,31 +120,37 @@ export const CBDashboardStudent = (): JSX.Element => {
               />
             </Stack>
 
-            <Stack spacing={2}>
-              <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-                <Typography
-                  variant="h4"
-                  sx={{ fontWeight: (t) => t.typography.fontWeightBold }}
+            {false && (
+              <Stack spacing={2}>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ alignItems: "center" }}
                 >
-                  Deine Achievements:
-                </Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ fontWeight: (t) => t.typography.fontWeightBold }}
+                  >
+                    Deine Achievements:
+                  </Typography>
 
-                <Typography variant="body2">
-                  <CBLink href={CBRoute.Achievements}>
-                    Alle Achievements ansehen
-                  </CBLink>
-                </Typography>
+                  <Typography variant="body2">
+                    <CBLink href={CBRoute.Achievements}>
+                      Alle Achievements ansehen
+                    </CBLink>
+                  </Typography>
+                </Stack>
+
+                <CBProgressCard
+                  title={achievementsLink.title}
+                  subTitle={achievementsLink.subTitle}
+                  image={achievementsLink.image}
+                  progressValue={achievementsLink.progressValue}
+                  maxValue={achievementsLink.progressGoal}
+                  format="fraction"
+                />
               </Stack>
-
-              <CBProgressCard
-                title={achievementsLink.title}
-                subTitle={achievementsLink.subTitle}
-                image={achievementsLink.image}
-                progressValue={achievementsLink.progressValue}
-                maxValue={achievementsLink.progressGoal}
-                format="fraction"
-              />
-            </Stack>
+            )}
           </Stack>
 
           <CBDateCalendar />

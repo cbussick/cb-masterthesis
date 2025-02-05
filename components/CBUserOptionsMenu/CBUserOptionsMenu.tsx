@@ -36,15 +36,17 @@ export const CBUserOptionsMenu = ({
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <CBUnstyledNextLink href={CBRoute.Einstellungen}>
-        <MenuItem onClick={onClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
+      {false && (
+        <CBUnstyledNextLink href={CBRoute.Einstellungen}>
+          <MenuItem onClick={onClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
 
-          <ListItemText>Einstellungen</ListItemText>
-        </MenuItem>
-      </CBUnstyledNextLink>
+            <ListItemText>Einstellungen</ListItemText>
+          </MenuItem>
+        </CBUnstyledNextLink>
+      )}
 
       <MenuItem onClick={onClickLogOut}>
         <ListItemIcon>

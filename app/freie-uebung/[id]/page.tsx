@@ -69,7 +69,7 @@ export default function FreePracticeSubpage({
         />
 
         <Grid container spacing={4}>
-          {quizExercises.some((e) => e.topic === topic) && (
+          {false && quizExercises.some((e) => e.topic === topic) && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text={exercisesData[CBExerciseType.Quiz].name}
@@ -79,7 +79,7 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
-          {matchingGameExercises.some((e) => e.topic === topic) && (
+          {false && matchingGameExercises.some((e) => e.topic === topic) && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text={exercisesData[CBExerciseType.MatchingGame].name}
@@ -89,7 +89,7 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
-          {swiperExercises.some((e) => e.topic === topic) && (
+          {false && swiperExercises.some((e) => e.topic === topic) && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text={exercisesData[CBExerciseType.Swiper].name}
@@ -99,7 +99,7 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
-          {familyTreeExercises.some((e) => e.topic === topic) && (
+          {false && familyTreeExercises.some((e) => e.topic === topic) && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text={exercisesData[CBExerciseType.FamilyTree].name}
