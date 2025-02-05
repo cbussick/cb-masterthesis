@@ -131,6 +131,14 @@ export default function FreePracticeSubpage({
           </Grid>
 
           <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.AIGeneratedQuestion].name}
+              image={{ src: "/topics/quiz.png", alt: "KI-generierte Fragen" }}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIGeneratedQuestion}`}
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
             <Box
               onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
             >

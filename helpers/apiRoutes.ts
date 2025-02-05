@@ -6,6 +6,7 @@ export enum CBAPIRoute {
   Image = "image",
   ImageVariation = "image-variation",
   TextToSpeech = "text-to-speech",
+  GenerateQuestionExercise = "generate-question-exercise",
   GenerateQuizExercise = "generate-quiz-exercise",
   ImageLabelEvaluation = "image-label-evaluation",
 }
@@ -13,6 +14,7 @@ export enum CBAPIRoute {
 export const apiRouteMap: Record<CBAPIRoute, string> = {
   [CBAPIRoute.EvaluateFreeformQuestion]: `${apiBaseUrl}${CBAPIRoute.EvaluateFreeformQuestion}`,
   [CBAPIRoute.DiNAsHint]: `${apiBaseUrl}${CBAPIRoute.DiNAsHint}`,
+  [CBAPIRoute.GenerateQuestionExercise]: `${apiBaseUrl}${CBAPIRoute.GenerateQuestionExercise}`,
   [CBAPIRoute.GenerateQuizExercise]: `${apiBaseUrl}${CBAPIRoute.GenerateQuizExercise}`,
   [CBAPIRoute.Image]: `${apiBaseUrl}${CBAPIRoute.Image}`,
   [CBAPIRoute.ImageVariation]: `${apiBaseUrl}${CBAPIRoute.ImageVariation}`,

@@ -5,8 +5,12 @@ import { CBFreeformQuestionEvaluation } from "./schemas/CBFreeformQuestionEvalua
 export const getOpenAIAnswerEvaluation = async (
   question: string,
   answer: string,
+  definition: string,
 ): Promise<CBFreeformQuestionEvaluation> => {
-  const prompt = `Ist die Antwort "${answer}" eine richtige Antwort auf die Frage "${question}"?. Schreibe deine Bewertung in das Feld "evaluation", indem du "false" für "falsch" schreibst und "true" für "richtig". Schreibe eine kurze Begründung ist das Feld "reason".`;
+  const prompt = `Bewerten Sie die folgende Antwort auf die Frage unter Berücksichtigung der Begriffsdefinition.
+Die Begriffsdefinition: "${definition}"
+Die Frage für diese Begriffsdefinition: "${question}"
+Die Antwort: "${answer}"`;
 
   const evaluation = await makeOpenAITextGenerationAPIRequest(
     prompt,

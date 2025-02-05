@@ -169,7 +169,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "mitose",
     term: "Mitose",
     definition:
-      "Die Mitose ist ein Prozess der Zellteilung, der in Körperzellen (somatischen Zellen) vorkommt. Sie besteht aus mehreren Phasen und führt zur Bildung von zwei nahezu genetisch identischen Tochterzellen. ",
+      "Die Mitose ist ein Prozess der Zellteilung, der in Körperzellen (somatischen Zellen) vorkommt. Sie besteht aus mehreren Phasen und führt zur Bildung von zwei nahezu genetisch identischen Tochterzellen.",
     unlockLevel: 2,
     topic: CBTopic.MitoseMeiose,
   },

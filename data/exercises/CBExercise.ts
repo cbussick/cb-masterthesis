@@ -26,6 +26,7 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.MatchingGame]: { name: "Zuordnungsspiel" },
   [CBExerciseType.Swiper]: { name: "Zellen-Swiper" },
   [CBExerciseType.FreeformQuestion]: { name: "Freitext-Frage" },
+  [CBExerciseType.AIGeneratedQuestion]: { name: "KI-generierte Fragen" },
   [CBExerciseType.AIQuiz]: { name: "KI-Quiz" },
   [CBExerciseType.LabelImage]: { name: "Bild beschriften" },
   [CBExerciseType.LabelImageVariation]: {

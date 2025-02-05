@@ -157,6 +157,20 @@ export const CBExerciseSequence = ({
         ),
       };
     },
+    [CBExerciseType.AIGeneratedQuestion]: (exercise) => {
+      const castExercise = exercise as CBFreeformQuestionExerciseWithMetaData;
+      return {
+        title: castExercise.question,
+        component: (
+          <CBFreeformQuestion
+            key={castExercise.id}
+            exercise={castExercise}
+            onCompleteExercise={onCompleteExercise}
+            onMistake={onMistake}
+          />
+        ),
+      };
+    },
     [CBExerciseType.LabelImage]: (exercise) => {
       const castExercise = exercise as CBLabelImageExerciseWithMetaData;
       return {
