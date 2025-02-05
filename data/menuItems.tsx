@@ -3,6 +3,7 @@ import {
   BookRounded,
   DashboardRounded,
   MenuBookRounded,
+  SettingsRounded,
 } from "@mui/icons-material";
 import { CBSidebarMenuItem } from "../components/CBSidebar/CBSidebarInterfaces";
 
@@ -43,8 +44,8 @@ export const menuItems: CBSidebarMenuItem[] = [
   //   ...makeSidebarMenuItemFromRoute(CBRoute.Achievements),
   //   icon: <EmojiEventsRounded />,
   // },
-  // {
-  //   ...makeSidebarMenuItemFromRoute(CBRoute.Einstellungen),
-  //   icon: <SettingsRounded />,
-  // },
+  {
+    ...makeSidebarMenuItemFromRoute(CBRoute.Einstellungen),
+    icon: <SettingsRounded />,
+  },
 ];
