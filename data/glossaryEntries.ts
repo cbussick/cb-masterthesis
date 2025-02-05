@@ -230,7 +230,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "meiose",
     term: "Meiose",
     definition:
-      "Die Meiose ist ein Prozess der reduktiven Zellteilung, der in den Keimzellen stattfindet und zur Bildung von Gameten (Ei- und Spermazellen) führt. Im Gegensatz zur Mitose wird die Meiose in zwei aufeinanderfolgenden Teilungen durchgeführt und führt zur Bildung von vier haploiden Zellen.",
+      "Die Meiose ist ein Prozess der reduktiven Zellteilung, der zur Bildung von Gameten (Ei- und Spermazellen) führt. Im Gegensatz zur Mitose wird die Meiose in zwei aufeinanderfolgenden Teilungen durchgeführt und führt zur Bildung von vier haploiden Zellen.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose.png",
     topic: CBTopic.MitoseMeiose,
