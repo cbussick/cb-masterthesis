@@ -10,6 +10,7 @@ export enum CBAPIRoute {
   GenerateQuestionExercise = "generate-question-exercise",
   GenerateQuizExercise = "generate-quiz-exercise",
   ImageLabelEvaluation = "image-label-evaluation",
+  ImageDescription = "image-description",
 }
 
 export const apiRouteMap: Record<CBAPIRoute, string> = {
@@ -22,4 +23,5 @@ export const apiRouteMap: Record<CBAPIRoute, string> = {
   [CBAPIRoute.ImageVariation]: `${apiBaseUrl}${CBAPIRoute.ImageVariation}`,
   [CBAPIRoute.TextToSpeech]: `${apiBaseUrl}${CBAPIRoute.TextToSpeech}`,
   [CBAPIRoute.ImageLabelEvaluation]: `${apiBaseUrl}${CBAPIRoute.ImageLabelEvaluation}`,
+  [CBAPIRoute.ImageDescription]: `${apiBaseUrl}${CBAPIRoute.ImageDescription}`,
 };

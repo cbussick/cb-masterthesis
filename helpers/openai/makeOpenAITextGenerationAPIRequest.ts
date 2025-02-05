@@ -14,7 +14,10 @@ export const makeOpenAITextGenerationAPIRequest = async (
   if (response.ok) {
     const data = await response.json();
 
-    return data.output[0].message.parsed;
+    if (data.output[0].message.parsed) {
+      return data.output[0].message.parsed;
+    }
+    return data.output[0].message.content;
   }
 
   throw new Error(
