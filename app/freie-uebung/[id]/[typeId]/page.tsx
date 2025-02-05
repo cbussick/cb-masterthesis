@@ -94,7 +94,8 @@ export default function FreePracticeSequencePage({
 
   const definitionsForAIQuestions = freeformQuestionExercises
     .filter((e) => e.topic === topic)
-    .map((e) => e.definition);
+    .map((e) => e.definition)
+    .sort(() => Math.random() - 0.5);
 
   const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
