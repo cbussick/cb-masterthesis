@@ -38,7 +38,7 @@ export const CBLabelImage = ({
   const onConfirm = useCallback(() => {
     setAPIRequestState(CBAPIRequestState.Fetching);
 
-    getOpenAIImageLabelEvaluation(exercise.image.src, answer)
+    getOpenAIImageLabelEvaluation(exercise.image.src, answer, exercise.term)
       .then((response) => {
         setAPIRequestState(CBAPIRequestState.Success);
 
