@@ -179,7 +179,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die längste Phase des Zellzyklus, in der die Zelle wächst, sich auf die Teilung vorbereitet und DNA repliziert.",
     unlockLevel: 2,
-    image: "/cell-devision/mitosis/mitose-interphase.png",
+    image: "/cell-division/mitosis/mitose-interphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -188,7 +188,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die Chromosomen kondensieren, die Kernkörperchen und das Kernmembran lösen sich auf, und der Spindelapparat bildet sich.",
     unlockLevel: 2,
-    image: "/cell-devision/mitosis/mitose-prophase.png",
+    image: "/cell-division/mitosis/mitose-prophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -197,7 +197,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die kondensierten Chromosomen ordnen sich an der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
     unlockLevel: 2,
-    image: "/cell-devision/mitosis/mitose-metaphase.png",
+    image: "/cell-division/mitosis/mitose-metaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -206,7 +206,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die Schwesterchromatiden der Chromosomen werden getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
     unlockLevel: 2,
-    image: "/cell-devision/mitosis/mitose-anaphase.png",
+    image: "/cell-division/mitosis/mitose-anaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -215,7 +215,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die Chromosomen entspiralisieren und werden zu einem neuen Satz von Chromosomen in den Tochterzellen. Das Kernkörperchen und die Kernmembran bilden sich aus.",
     unlockLevel: 2,
-    image: "/cell-devision/mitosis/mitose-telophase.png",
+    image: "/cell-division/mitosis/mitose-telophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -232,7 +232,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die Meiose ist ein Prozess der reduktiven Zellteilung, der in den Keimzellen stattfindet und zur Bildung von Gameten (Ei- und Spermazellen) führt. Im Gegensatz zur Mitose wird die Meiose in zwei aufeinanderfolgenden Teilungen durchgeführt und führt zur Bildung von vier haploiden Zellen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose.png",
+    image: "/cell-division/meiosis/meiose.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -249,7 +249,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die längste Phase der Meiose I, in der Chromosomen kondensieren, Crossing-Over stattfindet und die Kernmembran sich auflöst.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-i-prophase.png",
+    image: "/cell-division/meiosis/meiose-i-prophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -258,7 +258,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die homologen Chromosomenpaare ordnen sich in der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-i-metaphase.png",
+    image: "/cell-division/meiosis/meiose-i-metaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -267,7 +267,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die homologen Chromosomen werden getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-i-anaphase.png",
+    image: "/cell-division/meiosis/meiose-i-anaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -276,7 +276,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Die Chromosomen entspiralisieren, das Kernkörperchen und die Kernmembran bilden sich aus, und es erfolgt eine vorläufige Aufteilung der Zelle.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-i-telophase.png",
+    image: "/cell-division/meiosis/meiose-i-telophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -293,7 +293,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-ii-prophase.png",
+    image: "/cell-division/meiosis/meiose-ii-prophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -302,7 +302,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-ii-metaphase.png",
+    image: "/cell-division/meiosis/meiose-ii-metaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -311,7 +311,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-ii-anaphase.png",
+    image: "/cell-division/meiosis/meiose-ii-anaphase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
@@ -320,7 +320,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     definition:
       "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
     unlockLevel: 2,
-    image: "/cell-devision/meiosis/meiose-ii-telophase.png",
+    image: "/cell-division/meiosis/meiose-ii-telophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
