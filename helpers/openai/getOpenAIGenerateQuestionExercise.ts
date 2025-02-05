@@ -1,5 +1,5 @@
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBFreeformQuestionExerciseAIGenerated } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBTopic } from "@/data/topics";
 import { z } from "zod";
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
@@ -11,7 +11,7 @@ export const getOpenAIQuestionExercise = async (
   userId: string,
   topic: CBTopic,
   definitions: string[],
-): Promise<CBFreeformQuestionExercise[]> => {
+): Promise<CBFreeformQuestionExerciseAIGenerated[]> => {
   const prompt = `Erstelle für jede der folgenden Definitionen eine Frage. Schreibe die Frage in das Feld "question". Schreibe die Definition, die du hier übergeben bekommst in das Feld "definition".
   Die Definitionen: "${definitions.join(`",\n"`)}".`;
 
@@ -24,7 +24,7 @@ export const getOpenAIQuestionExercise = async (
     );
   })) as z.infer<typeof CBGenerateAIQuestionExerciseSchema>;
 
-  const freeformQuestionExerciseWithStaticData: CBFreeformQuestionExercise[] =
+  const freeformQuestionExerciseWithStaticData: CBFreeformQuestionExerciseAIGenerated[] =
     generatedQuestions.questions.map((question, index) => ({
       id: `${userId}_${dayjsLocalized().unix()}_${index}`,
       topic,

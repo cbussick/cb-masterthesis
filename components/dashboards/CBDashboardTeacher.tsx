@@ -1,5 +1,4 @@
 import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
-import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
@@ -46,8 +45,7 @@ export const CBDashboardTeacher = (): JSX.Element => {
                 quizExercises.length +
                 swiperExercises.length +
                 matchingGameExercises.length +
-                familyTreeExercises.length +
-                freeformQuestionExercises.length
+                familyTreeExercises.length
               }`}
             />
           </Stack>

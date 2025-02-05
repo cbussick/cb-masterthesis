@@ -8,7 +8,7 @@ import { CBPageHeader } from "@/components/CBPageHeader/CBPageHeader";
 import { exercisesData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
-import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
+import { freeformQuestionExercisesWithCorrectAnswer } from "@/data/exercises/CBFreeformQuestionExercise";
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
@@ -112,12 +112,18 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
-          {freeformQuestionExercises.some((e) => e.topic === topic) && (
+          {freeformQuestionExercisesWithCorrectAnswer.some(
+            (e) => e.topic === topic,
+          ) && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard
-                text={exercisesData[CBExerciseType.FreeformQuestion].name}
+                text={
+                  exercisesData[
+                    CBExerciseType.FreeformQuestionWithCorrectAnswer
+                  ].name
+                }
                 image={{ src: "/topics/freetext.png", alt: "Freitext" }}
-                href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FreeformQuestion}`}
+                href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FreeformQuestionWithCorrectAnswer}`}
               />
             </Grid>
           )}

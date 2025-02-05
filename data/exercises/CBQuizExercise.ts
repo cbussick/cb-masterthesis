@@ -10,10 +10,6 @@ export interface CBQuizExercise extends CBExerciseWithIDAndTypeAndTopic {
   answers: CBAnswer[];
   correctAnswer: string;
   type: CBExerciseType.Quiz | CBExerciseType.AIQuiz;
-  /**
-   * The ID of the glossary definition that is associated with this exercise.
-   */
-  definitionId?: string;
 }
 
 export type CBQuizExerciseWithMetaData = CBQuizExercise & {
@@ -45,7 +41,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "endoplasmatisches retikulum",
   },
   {
     id: "zelle-grundlagen-3",
@@ -63,7 +58,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Produktion von ATP (Adenosintriphosphat)" },
     ],
     correctAnswer: "B",
-    definitionId: "endoplasmatisches retikulum",
   },
   {
     id: "zelle-grundlagen-4",
@@ -86,7 +80,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "mitochondrien",
   },
   {
     id: "zelle-grundlagen-5",
@@ -113,7 +106,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    definitionId: "mitochondrien",
   },
   {
     id: "zelle-grundlagen-6",
@@ -264,7 +256,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    definitionId: "zellkern",
   },
   {
     id: "zelle-grundlagen-13",
@@ -282,7 +273,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Speicherort von Enzymen für den Zellstoffwechsel" },
     ],
     correctAnswer: "A",
-    definitionId: "zellkern",
   },
 
   {
@@ -300,7 +290,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus Ribonukleinsäure (RNA) und Proteinen" },
     ],
     correctAnswer: "D",
-    definitionId: "ribosomen",
   },
   {
     id: "zelle-grundlagen-15",
@@ -315,7 +304,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Verdauung von Nährstoffen" },
     ],
     correctAnswer: "A",
-    definitionId: "ribosomen",
   },
   {
     id: "zelle-grundlagen-16",
@@ -332,7 +320,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus Cytoskelett und Vesikeln" },
     ],
     correctAnswer: "A",
-    definitionId: "golgi-apparat",
   },
   {
     id: "zelle-grundlagen-17",
@@ -347,7 +334,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Proteinbiosynthese" },
     ],
     correctAnswer: "B",
-    definitionId: "golgi-apparat",
   },
   {
     id: "zelle-grundlagen-18",
@@ -370,7 +356,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    definitionId: "chloroplasten",
   },
   {
     id: "zelle-grundlagen-19",
@@ -385,7 +370,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Stofftransport" },
     ],
     correctAnswer: "C",
-    definitionId: "chloroplasten",
   },
   {
     id: "zelle-grundlagen-20",
@@ -435,7 +419,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Aus einem flüssigkeitsgefüllten Raum im Zellplasma" },
     ],
     correctAnswer: "B",
-    definitionId: "vakuolen",
   },
   {
     id: "zelle-grundlagen-23",
@@ -453,7 +436,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Ort der Fotosynthese" },
     ],
     correctAnswer: "C",
-    definitionId: "vakuolen",
   },
   {
     id: "mitose-meiose-1",
@@ -487,7 +469,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Produktion von Energie in der Zelle" },
     ],
     correctAnswer: "C",
-    definitionId: "mitose",
   },
   {
     id: "mitose-meiose-4",
@@ -510,7 +491,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "prophase",
   },
   {
     id: "mitose-meiose-5",
@@ -533,7 +513,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "metaphase",
   },
   {
     id: "mitose-meiose-6",
@@ -553,7 +532,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    definitionId: "anaphase",
   },
   {
     id: "mitose-meiose-7",
@@ -573,7 +551,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    definitionId: "telophase",
   },
   {
     id: "mitose-meiose-8",
@@ -593,7 +570,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Chromosomen werden getrennt" },
     ],
     correctAnswer: "B",
-    definitionId: "interphase",
   },
   {
     id: "mitose-meiose-9",
@@ -617,7 +593,6 @@ export const quizExercises: CBQuizExercise[] = [
       { id: "D", text: "Die Zellteilung zur Bildung von Tochterzellen" },
     ],
     correctAnswer: "C",
-    definitionId: "meiose",
   },
   {
     id: "mitose-meiose-10",
@@ -647,7 +622,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    definitionId: "mitose",
   },
   {
     id: "mitose-meiose-11",
@@ -677,7 +651,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "meiose",
   },
   {
     id: "aufbau-der-dna-1",
@@ -834,7 +807,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "C",
-    definitionId: "nukleotide",
   },
   {
     id: "aufbau-der-dna-7",
@@ -860,7 +832,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "nukleotide",
   },
   {
     id: "aufbau-der-dna-8",
@@ -886,7 +857,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "B",
-    definitionId: "karyogramm",
   },
   {
     id: "aufbau-der-dna-9",
@@ -990,7 +960,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "D",
-    definitionId: "phänotyp",
   },
   {
     id: "aufbau-der-dna-13",
@@ -1016,7 +985,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "genotyp",
   },
   {
     id: "aufbau-der-dna-14",
@@ -1146,7 +1114,6 @@ export const quizExercises: CBQuizExercise[] = [
       },
     ],
     correctAnswer: "A",
-    definitionId: "gen",
   },
   {
     id: "aufbau-der-dna-19",
