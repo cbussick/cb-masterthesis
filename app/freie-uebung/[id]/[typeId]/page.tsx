@@ -95,6 +95,7 @@ export default function FreePracticeSequencePage({
   const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
   const definitionsForAIQuestions = glossaryEntries
+    .filter((entry) => entry.topic === topic)
     .map((entry) => entry.definition)
     .sort(() => Math.random() - 0.5);
 
