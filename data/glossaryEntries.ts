@@ -300,7 +300,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "metaphase II",
     term: "Metaphase II",
     definition:
-      "Die Metaphase II ist die Phase der zweiten meiotischen Teilung, in der sich die Chromosomen in der Äquatorialebene der Zelle anordnen und die Schwesterchromatiden durch die Spindelfasern mit den Zellpolen verbunden werden.",
+      "Die Metaphase II ist die Phase der zweiten meiotischen Teilung, in der sich die Chromosomen in der Äquatorialebene der Zelle anordnen und die Chromosomen durch die Spindelfasern mit den Zellpolen verbunden werden.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-ii-metaphase.png",
     topic: CBTopic.MitoseMeiose,
