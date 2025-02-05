@@ -92,10 +92,14 @@ export default function FreePracticeSequencePage({
 
   const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
-  const definitionsForAIQuestions = freeformQuestionExercises
-    .filter((e) => e.topic === topic)
-    .map((e) => e.definition)
-    .sort(() => Math.random() - 0.5);
+  const definitionsForAIQuestions = Array.from(
+    // Using a `Set` to remove duplicate definitions
+    new Set(
+      freeformQuestionExercises
+        .filter((e) => e.topic === topic)
+        .map((e) => e.definition),
+    ),
+  ).sort(() => Math.random() - 0.5);
 
   const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
