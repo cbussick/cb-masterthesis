@@ -11,10 +11,10 @@ export async function POST(req: Request) {
 
   const completion = await openai.beta.chat.completions.parse({
     messages: [
-      {
-        role: "system",
-        content: "Du bist ein hilfreicher Biologie-Lehrer.",
-      },
+      // {
+      //   role: "system",
+      //   content: "Du bist ein hilfreicher Biologie-Lehrer.",
+      // },
       {
         role: "user",
         content: body.messages[0].content,
