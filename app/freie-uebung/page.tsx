@@ -52,29 +52,35 @@ export default function FreePractice() {
           />
         </Grid>
 
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
-            text="DNA-Replikation"
-            disabled
-          />
-        </Grid>
+        {false && (
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
+              text="DNA-Replikation"
+              disabled
+            />
+          </Grid>
+        )}
 
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
-            text="Proteinbiosynthese"
-            disabled
-          />
-        </Grid>
+        {false && (
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
+              text="Proteinbiosynthese"
+              disabled
+            />
+          </Grid>
+        )}
 
-        <Grid {...commonGridItemProps}>
-          <CBInfoCard
-            image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
-            text="(Gen-) Mutationen"
-            disabled
-          />
-        </Grid>
+        {false && (
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              image={{ src: "/coming-soon.jpg", alt: "Coming soon" }}
+              text="(Gen-) Mutationen"
+              disabled
+            />
+          </Grid>
+        )}
       </Grid>
     </CBContentWrapper>
   );
