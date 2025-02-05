@@ -14,9 +14,11 @@ export const CBGlossary = (): JSX.Element => {
 
   const { unlockedGlossaryEntryIDs } = user.customData;
 
-  const unlockedGlossaryEntries = glossaryEntries.filter((entry) => {
-    return unlockedGlossaryEntryIDs.includes(entry.id);
-  });
+  // const unlockedGlossaryEntries = glossaryEntries.filter((entry) => {
+  //   return unlockedGlossaryEntryIDs.includes(entry.id);
+  // });
+
+  const unlockedGlossaryEntries = glossaryEntries;
 
   const [filteredGlossaryEntries, setFilteredGlossaryEntries] = useState<
     CBGlossaryEntry[]
