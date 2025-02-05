@@ -36,7 +36,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "endoplasmatisches retikulum",
     term: "Endoplasmatisches Retikulum (ER)",
     definition:
-      "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Proteinsynthese, Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle.",
+      "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle.",
     unlockLevel: 1,
     image: "/cell-organelles/endoplasmatisches-retikulum.png",
     image1x1: "/cell-organelles/endoplasmatisches-retikulum_1x1.png",

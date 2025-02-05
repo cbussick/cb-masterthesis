@@ -10,7 +10,7 @@ const examples: ChatCompletionMessageParam[] = [
   {
     role: "user",
     content: `Bewerten Sie die folgende Antwort auf die Frage unter Berücksichtigung der Begriffsdefinition.
-  Die Begriffsdefinition: "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Proteinsynthese, Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle."
+  Die Begriffsdefinition: "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle."
   Die Frage für diese Begriffsdefinition: "Wie ist das Endoplasmatische Retikulum (ER) aufgebaut?"
   Die Antwort: "Wofür muss ich das können?"`,
   },
@@ -21,7 +21,7 @@ const examples: ChatCompletionMessageParam[] = [
   {
     role: "user",
     content: `Bewerten Sie die folgende Antwort auf die Frage unter Berücksichtigung der Begriffsdefinition.
-  Die Begriffsdefinition: "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Proteinsynthese, Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle."
+  Die Begriffsdefinition: "Das Zellorganell endoplasmatisches Retikulum ist ein membranumhülltes Netzwerk von Kanälen und Röhren, das eine Vielzahl von Funktionen erfüllt, einschließlich der Lipid- und Hormonsynthese sowie des Transports von Stoffen innerhalb der Zelle."
   Die Frage für diese Begriffsdefinition: "Was ist die Funktion des Endoplasmatischen Retikulums (ER)?"
   Die Antwort: "Es dient zum Schutz der Zelle."`,
   },
