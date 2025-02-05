@@ -40,6 +40,7 @@ export const getOpenAILabelImageExercise = async (
       src: base64AddMimeType(image, "image/jpg"),
       alt: "",
     },
+    term: randomEntry?.term || "",
   };
 
   return labelImageExercise;

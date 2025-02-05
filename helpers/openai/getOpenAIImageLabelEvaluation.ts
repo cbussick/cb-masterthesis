@@ -1,16 +1,14 @@
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
 import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
-import { CBFreeformQuestionEvaluation } from "./schemas/CBFreeformQuestionEvaluation";
+import { CBImageLabelEvaluation } from "./schemas/CBImageLabelEvaluation";
 
 export const getOpenAIImageLabelEvaluation = async (
   imageSrc: string,
   answer: string,
-): Promise<CBFreeformQuestionEvaluation> => {
-  // TODO: Überarbeiten
-  //
-  // Das "Sei nicht zu strikt bei der Auswertung." ist wichtig, da sonst Antworten sehr schnell als falsch bewertet werden,
-  // falls noch andere Elemente auf dem Bild zu sehen sind.
-  const prompt = `Ist "${answer}" eine korrekte Beschriftung dieses Bildes? Sei nicht zu strikt bei der Auswertung. Begründe deine Antwort.`;
+  term: string,
+): Promise<CBImageLabelEvaluation> => {
+  const prompt = `Antwort des Schülers: "${answer}".
+  Musterlösung: "${term}".`;
 
   const evaluation = await makeOpenAITextGenerationAPIRequest(
     [
