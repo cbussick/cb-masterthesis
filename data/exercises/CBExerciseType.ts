@@ -3,7 +3,7 @@ export enum CBExerciseType {
   FamilyTree = "stammbaumanalyse",
   MatchingGame = "zuordnungsspiel",
   Swiper = "swiper",
-  FreeformQuestion = "freiform-frage",
+  FreeformQuestionWithCorrectAnswer = "freeform-question-with-correct-answer",
   AIGeneratedQuestion = "ai-generated-question",
   AIQuiz = "ki-quiz",
   LabelImage = "bild-beschriften",

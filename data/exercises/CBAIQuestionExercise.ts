@@ -1,6 +1,6 @@
-import { CBFreeformQuestionExercise } from "./CBFreeformQuestionExercise";
+import { CBFreeformQuestionExerciseAIGenerated } from "./CBFreeformQuestionExercise";
 
 export type CBAIQuestionExercise = Omit<
-  CBFreeformQuestionExercise,
+  CBFreeformQuestionExerciseAIGenerated,
   "id" | "topic" | "type"
 >;

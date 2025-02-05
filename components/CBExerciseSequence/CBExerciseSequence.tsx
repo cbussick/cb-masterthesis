@@ -3,7 +3,10 @@
 import { CBExerciseWithMetaData } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBFamilyTreeExerciseWithMetaData } from "@/data/exercises/CBFamilyTreeExercise";
-import { CBFreeformQuestionExerciseWithMetaData } from "@/data/exercises/CBFreeformQuestionExercise";
+import {
+  CBFreeformQuestionExerciseWithCorrectAnswerWithMetaData,
+  CBFreeformQuestionExerciseWithMetaData,
+} from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBLabelImageExerciseWithMetaData } from "@/data/exercises/CBLabelImageExercise";
 import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
 import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
@@ -143,8 +146,9 @@ export const CBExerciseSequence = ({
         ),
       };
     },
-    [CBExerciseType.FreeformQuestion]: (exercise) => {
-      const castExercise = exercise as CBFreeformQuestionExerciseWithMetaData;
+    [CBExerciseType.FreeformQuestionWithCorrectAnswer]: (exercise) => {
+      const castExercise =
+        exercise as CBFreeformQuestionExerciseWithCorrectAnswerWithMetaData;
       return {
         title: castExercise.question,
         component: (

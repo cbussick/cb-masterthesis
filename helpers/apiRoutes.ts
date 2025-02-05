@@ -2,6 +2,7 @@ const apiBaseUrl = "/api/";
 
 export enum CBAPIRoute {
   EvaluateFreeformQuestion = "evaluate-freeform-question",
+  EvaluateFreeformQuestionWithCorrectAnswer = "evaluate-freeform-question-with-correct-answer",
   DiNAsHint = "dinas-hint",
   Image = "image",
   ImageVariation = "image-variation",
@@ -13,6 +14,7 @@ export enum CBAPIRoute {
 
 export const apiRouteMap: Record<CBAPIRoute, string> = {
   [CBAPIRoute.EvaluateFreeformQuestion]: `${apiBaseUrl}${CBAPIRoute.EvaluateFreeformQuestion}`,
+  [CBAPIRoute.EvaluateFreeformQuestionWithCorrectAnswer]: `${apiBaseUrl}${CBAPIRoute.EvaluateFreeformQuestionWithCorrectAnswer}`,
   [CBAPIRoute.DiNAsHint]: `${apiBaseUrl}${CBAPIRoute.DiNAsHint}`,
   [CBAPIRoute.GenerateQuestionExercise]: `${apiBaseUrl}${CBAPIRoute.GenerateQuestionExercise}`,
   [CBAPIRoute.GenerateQuizExercise]: `${apiBaseUrl}${CBAPIRoute.GenerateQuizExercise}`,

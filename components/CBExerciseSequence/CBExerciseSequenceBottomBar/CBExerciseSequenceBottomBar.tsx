@@ -3,7 +3,7 @@
 import { CBDinaHint } from "@/components/CBDinaHint/CBDinaHint";
 import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
-import { CBFreeformQuestionExercise } from "@/data/exercises/CBFreeformQuestionExercise";
+import { CBFreeformQuestionExerciseAIGenerated } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBQuizExercise } from "@/data/exercises/CBQuizExercise";
 import { CBAPIRoute } from "@/helpers/apiRoutes";
 import { useGenerateHintQuery } from "@/helpers/queries/useGenerateHintQuery";
@@ -57,7 +57,7 @@ export const CBExerciseSequenceBottomBar = ({
   const shouldGenerateHint =
     currentExerciseType === CBExerciseType.Quiz ||
     currentExerciseType === CBExerciseType.AIQuiz ||
-    currentExerciseType === CBExerciseType.FreeformQuestion;
+    currentExerciseType === CBExerciseType.FreeformQuestionWithCorrectAnswer;
 
   const {
     data: generatedHintData,
@@ -65,7 +65,8 @@ export const CBExerciseSequenceBottomBar = ({
     error,
     refetch,
   } = useGenerateHintQuery(
-    (currentExercise as CBQuizExercise | CBFreeformQuestionExercise)?.question,
+    (currentExercise as CBQuizExercise | CBFreeformQuestionExerciseAIGenerated)
+      ?.question,
   );
 
   const queryClient = useQueryClient();

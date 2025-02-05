@@ -142,7 +142,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "nukleolus",
     term: "Nukleolus (Kernkörperchen)",
     definition:
-      "Das Kernkörperchen ist ein Bereich im Zellkern, der an der Synthese von ribosomaler RNA (rRNA) und der Zusammenbau von Ribosomen beteiligt ",
+      "Der Nukelolus (Kernkörperchen) ist ein Bereich im Zellkern, der an der Synthese von ribosomaler RNA (rRNA) und der Zusammenbau von Ribosomen beteiligt ",
     unlockLevel: 1,
     topic: CBTopic.Zelle,
   },
@@ -177,7 +177,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "interphase",
     term: "Interphase",
     definition:
-      "Die längste Phase des Zellzyklus, in der die Zelle wächst, sich auf die Teilung vorbereitet und DNA repliziert.",
+      "Die Interphase ist die längste Phase des Zellzyklus, in der die Zelle wächst, sich auf die Teilung vorbereitet und DNA repliziert.",
     unlockLevel: 2,
     image: "/cell-division/mitosis/mitose-interphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -186,7 +186,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "prophase",
     term: "Prophase",
     definition:
-      "Die Chromosomen kondensieren, die Kernkörperchen und das Kernmembran lösen sich auf, und der Spindelapparat bildet sich.",
+      "In der Prophase kondensieren die Chromosomen, die Kernkörperchen und das Kernmembran lösen sich auf, und der Spindelapparat bildet sich.",
     unlockLevel: 2,
     image: "/cell-division/mitosis/mitose-prophase.png",
     topic: CBTopic.MitoseMeiose,
@@ -195,7 +195,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "metaphase",
     term: "Metaphase",
     definition:
-      "Die kondensierten Chromosomen ordnen sich an der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
+      "In der Metaphase ordnen sich die kondensierten Chromosomen an der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
     unlockLevel: 2,
     image: "/cell-division/mitosis/mitose-metaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -204,7 +204,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "anaphase",
     term: "Anaphase",
     definition:
-      "Die Schwesterchromatiden der Chromosomen werden getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
+      "In der Anaphase werden die Schwesterchromatiden der Chromosomen getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
     unlockLevel: 2,
     image: "/cell-division/mitosis/mitose-anaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -213,7 +213,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "telophase",
     term: "Telophase",
     definition:
-      "Die Chromosomen entspiralisieren und werden zu einem neuen Satz von Chromosomen in den Tochterzellen. Das Kernkörperchen und die Kernmembran bilden sich aus.",
+      "In der Telophase entspiralisieren die Chromosomen sich und werden zu einem neuen Satz von Chromosomen in den Tochterzellen. Das Kernkörperchen und die Kernmembran bilden sich aus.",
     unlockLevel: 2,
     image: "/cell-division/mitosis/mitose-telophase.png",
     topic: CBTopic.MitoseMeiose,
@@ -239,7 +239,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "meiose I",
     term: "Meiose I",
     definition:
-      "Die erste Teilung der Meiose, bei der die homologen Chromosomen voneinander getrennt werden.",
+      "Die Meiose I ist die erste Teilung der Meiose, bei der die homologen Chromosomen voneinander getrennt werden.",
     unlockLevel: 2,
     topic: CBTopic.MitoseMeiose,
   },
@@ -247,7 +247,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "prophase I",
     term: "Prophase I",
     definition:
-      "Die längste Phase der Meiose I, in der Chromosomen kondensieren, Crossing-Over stattfindet und die Kernmembran sich auflöst.",
+      "Die Prophase I ist die längste Phase der Meiose I, in der Chromosomen kondensieren, Crossing-Over stattfindet und die Kernmembran sich auflöst.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-i-prophase.png",
     topic: CBTopic.MitoseMeiose,
@@ -256,7 +256,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "metaphase I",
     term: "Metaphase I",
     definition:
-      "Die homologen Chromosomenpaare ordnen sich in der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
+      "In der Metaphase I ordnen sich die homologen Chromosomenpaare in der Äquatorialebene - in der Mitte der Zelle - an und sind mit dem Spindelapparat verbunden.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-i-metaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -265,7 +265,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "anaphase I",
     term: "Anaphase I",
     definition:
-      "Die homologen Chromosomen werden getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
+      "In der Anaphase I werden die homologen Chromosomen getrennt und zu entgegengesetzten Polen der Zelle gezogen.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-i-anaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -274,7 +274,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "telophase I",
     term: "Telophase I",
     definition:
-      "Die Chromosomen entspiralisieren, das Kernkörperchen und die Kernmembran bilden sich aus, und es erfolgt eine vorläufige Aufteilung der Zelle.",
+      "In der Telophase I entspiralisieren die Chromosomen sich, das Kernkörperchen und die Kernmembran bilden sich aus, und es erfolgt eine vorläufige Aufteilung der Zelle.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-i-telophase.png",
     topic: CBTopic.MitoseMeiose,
@@ -283,7 +283,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "meiose II",
     term: "Meiose II",
     definition:
-      "Die zweite Teilung der Meiose, bei der die Schwesterchromatiden getrennt werden.",
+      "Die Meiose II ist die zweite Teilung der Meiose, bei der die Schwesterchromatiden getrennt werden.",
     unlockLevel: 2,
     topic: CBTopic.MitoseMeiose,
   },
@@ -291,7 +291,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "prophase II",
     term: "Prophase II",
     definition:
-      "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
+      "Die Prophase II ist die erste Phase der zweiten meiotischen Teilung, in der sich die Chromosomen wieder verdichten, die Kernhülle zerfällt und der Spindelapparat erneut ausgebildet wird, ohne dass vorher eine DNA-Replikation stattfindet.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-ii-prophase.png",
     topic: CBTopic.MitoseMeiose,
@@ -300,7 +300,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "metaphase II",
     term: "Metaphase II",
     definition:
-      "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
+      "Die Metaphase II ist die Phase der zweiten meiotischen Teilung, in der sich die Chromosomen in der Äquatorialebene der Zelle anordnen und die Schwesterchromatiden durch die Spindelfasern mit den Zellpolen verbunden werden.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-ii-metaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -309,7 +309,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "anaphase II",
     term: "Anaphase II",
     definition:
-      "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
+      "Die Anaphase II ist die Phase der zweiten meiotischen Teilung, in der die Schwesterchromatiden der Chromosomen voneinander getrennt und von den Spindelfasern zu den entgegengesetzten Polen der Zelle gezogen werden.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-ii-anaphase.png",
     topic: CBTopic.MitoseMeiose,
@@ -318,16 +318,16 @@ export const glossaryEntries: CBGlossaryEntry[] = [
     id: "telophase II",
     term: "Telophase II",
     definition:
-      "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
+      "Die Telophase II ist die letzte Phase der zweiten meiotischen Teilung, in der sich an den Zellpolen neue Kernhüllen um die Chromosomen bilden, die Chromosomen dekondensieren und die Zelle sich durch Zytokinese in vier haploide Tochterzellen teilt.",
     unlockLevel: 2,
     image: "/cell-division/meiosis/meiose-ii-telophase.png",
     topic: CBTopic.MitoseMeiose,
   },
   {
     id: "zytokinese-meiose",
-    term: "Zytokinese Meiose",
+    term: "Zytokinese der Meiose",
     definition:
-      "Diese Phasen ähneln denen der Mitose, wobei die Chromosomen der Schwesterchromatiden getrennt werden und vier haploide Zellen entstehen.",
+      "Die Zytokinese der Meiose II ist der abschließende Prozess, bei dem das Zellplasma nach der Telophase II aufgeteilt wird, sodass aus den beiden Zellen der Meiose I vier genetisch unterschiedliche haploide Tochterzellen entstehen.",
     unlockLevel: 2,
     topic: CBTopic.MitoseMeiose,
   },
@@ -367,7 +367,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "adenin",
     term: "Adenin (A)",
-    definition: "Base in der DNA. Komplementäre Base: Thymin",
+    definition: "Adenin ist eine Base in der DNA. Komplementäre Base: Thymin",
     unlockLevel: 3,
     image: "/dna/adenin.png",
     topic: CBTopic.AufbauDNA,
@@ -375,7 +375,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "thymin",
     term: "Thymin (T)",
-    definition: "Base in der DNA. Komplementäre Base: Adenin",
+    definition: "Thymin ist eine Base in der DNA. Komplementäre Base: Adenin",
     unlockLevel: 3,
     image: "/dna/thymin.png",
     topic: CBTopic.AufbauDNA,
@@ -383,7 +383,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "cytosin",
     term: "Cytosin (C)",
-    definition: "Base in der DNA. Komplementäre Base: Guanin",
+    definition: "Cytosin ist eine Base in der DNA. Komplementäre Base: Guanin",
     unlockLevel: 3,
     image: "/dna/cytosin.png",
     topic: CBTopic.AufbauDNA,
@@ -391,7 +391,7 @@ export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "guanin",
     term: "Guanin (G)",
-    definition: "Base in der DNA. Komplementäre Base: Cytosin",
+    definition: "Guanin ist eine Base in der DNA. Komplementäre Base: Cytosin",
     unlockLevel: 3,
     image: "/dna/guanin.png",
     topic: CBTopic.AufbauDNA,
@@ -412,14 +412,6 @@ export const glossaryEntries: CBGlossaryEntry[] = [
       "Die Basenpaarung ist die spezifische Verbindung zwischen den Basen der beiden DNA-Stränge. Adenin (A) bindet über zwei Wasserstoffbrückenbindungen an Thymin (T), während Cytosin (C) über drei Wasserstoffbrückenbindungen an Guanin (G) bindet.",
     unlockLevel: 3,
     image: "/dna/basenpaarung.png",
-    topic: CBTopic.AufbauDNA,
-  },
-  {
-    id: "antiparalleler Strang",
-    term: "Antiparalleler Strang",
-    definition:
-      "Die beiden DNA-Stränge in der Doppelhelix laufen in entgegengesetzter Richtung. Einer der Stränge wird als 5'-Strang bezeichnet, da er in Richtung des 5'-Endes des Zuckers zeigt, während der andere Strang als 3'-Strang bezeichnet wird.",
-    unlockLevel: 3,
     topic: CBTopic.AufbauDNA,
   },
   {
@@ -450,14 +442,6 @@ export const glossaryEntries: CBGlossaryEntry[] = [
   {
     id: "autosome",
     term: "Autosome",
-    definition:
-      "Chromosomen sind eine strukturierte Form der DNA, die die gesamte genetische Information eines Organismus enthalten und sich im Zellkern befinden. Chromosomen bestehen aus einer langen DNA-Sequenz, die mit Hilfe von Proteinen (=Histonen) verpackt und kondensiert ist.",
-    unlockLevel: 3,
-    topic: CBTopic.AufbauDNA,
-  },
-  {
-    id: "diploid",
-    term: "Diploid",
     definition:
       "Autosomen sind Chromosomen, die nicht geschlechtsbestimmend sind. Ein Mensch hat 22 Autosomen-Paare.",
     unlockLevel: 3,

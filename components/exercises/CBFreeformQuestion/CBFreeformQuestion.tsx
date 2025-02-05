@@ -3,8 +3,10 @@
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
+import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIAnswerEvaluation } from "@/helpers/openai/getOpenAIAnswerEvaluation";
+import { getOpenAIAnswerEvaluationWithCorrectAnswer } from "@/helpers/openai/getOpenAIAnswerEvaluationWithCorrectAnswer";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -36,7 +38,19 @@ export const CBFreeformQuestion = ({
 
   const onConfirm = useCallback(() => {
     setAPIRequestState(CBAPIRequestState.Fetching);
-    getOpenAIAnswerEvaluation(exercise.question, answer, exercise.definition)
+
+    (exercise.type === CBExerciseType.AIGeneratedQuestion
+      ? getOpenAIAnswerEvaluation(
+          exercise.question,
+          answer,
+          exercise.definition,
+        )
+      : getOpenAIAnswerEvaluationWithCorrectAnswer(
+          exercise.question,
+          answer,
+          "answer" in exercise && exercise.answer ? exercise.answer : "",
+        )
+    )
       .then((response) => {
         setAPIRequestState(CBAPIRequestState.Success);
 

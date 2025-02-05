@@ -7,10 +7,11 @@ import {
 } from "@/data/exercises/CBExercise";
 import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { familyTreeExercises } from "@/data/exercises/CBFamilyTreeExercise";
-import { freeformQuestionExercises } from "@/data/exercises/CBFreeformQuestionExercise";
+import { freeformQuestionExercisesWithCorrectAnswer } from "@/data/exercises/CBFreeformQuestionExercise";
 import { matchingGameExercises } from "@/data/exercises/CBMatchingGameExercise";
 import { quizExercises } from "@/data/exercises/CBQuizExercise";
 import { swiperExercises } from "@/data/exercises/CBSwiperExercise";
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBTopic } from "@/data/topics";
 import { addIncorrectExercise } from "@/firebase-client/addIncorrectExercise";
 import { CBIncorrectExercise } from "@/firebase-client/incorrectExercisesConverter";
@@ -42,7 +43,8 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.FamilyTree]: familyTreeExercises,
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
-  [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
+  [CBExerciseType.FreeformQuestionWithCorrectAnswer]:
+    freeformQuestionExercisesWithCorrectAnswer,
   [CBExerciseType.AIGeneratedQuestion]: [],
   [CBExerciseType.LabelImage]: [],
   [CBExerciseType.LabelImageVariation]: [],
@@ -54,7 +56,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.FamilyTree]: 2,
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
-  [CBExerciseType.FreeformQuestion]: 5,
+  [CBExerciseType.FreeformQuestionWithCorrectAnswer]: 5,
   [CBExerciseType.AIGeneratedQuestion]: 5,
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
@@ -92,14 +94,9 @@ export default function FreePracticeSequencePage({
 
   const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
-  const definitionsForAIQuestions = Array.from(
-    // Using a `Set` to remove duplicate definitions
-    new Set(
-      freeformQuestionExercises
-        .filter((e) => e.topic === topic)
-        .map((e) => e.definition),
-    ),
-  ).sort(() => Math.random() - 0.5);
+  const definitionsForAIQuestions = glossaryEntries
+    .map((entry) => entry.definition)
+    .sort(() => Math.random() - 0.5);
 
   const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
