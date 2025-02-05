@@ -12,8 +12,7 @@ export const getOpenAIQuestionExercise = async (
   topic: CBTopic,
   definitions: string[],
 ): Promise<CBFreeformQuestionExerciseAIGenerated[]> => {
-  const prompt = `Erstelle für jede der folgenden Definitionen eine Frage. Schreibe die Frage in das Feld "question". Schreibe die Definition, die du hier übergeben bekommst in das Feld "definition".
-Die Definitionen: "${definitions.join(`",\n"`)}".`;
+  const prompt = `Die Definitionen: "${definitions.join(`",\n"`)}".`;
 
   const generatedQuestions = (await makeOpenAITextGenerationAPIRequest(
     prompt,
