@@ -21,6 +21,7 @@ import { CBUserCustomData } from "@/firebase-client/userCustomDataConverter";
 import { useUser } from "@/firebase-client/useUser";
 import { getEnumValueByStringValue } from "@/helpers/getEnumValueByStringValue";
 import { useGenerateAILabelImageExerciseQuery } from "@/helpers/queries/useGenerateAIImageQuery";
+import { useGenerateAIQuestionQuery } from "@/helpers/queries/useGenerateAIQuestionQuery";
 import { useGenerateAIQuizQuery } from "@/helpers/queries/useGenerateAIQuizQuery";
 import { retryMistakesPathSegment } from "@/helpers/routes";
 import { dayjsLocalized } from "@/helpers/time-tracking/dayjsLocalized";
@@ -42,6 +43,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.MatchingGame]: matchingGameExercises,
   [CBExerciseType.Swiper]: swiperExercises,
   [CBExerciseType.FreeformQuestion]: freeformQuestionExercises,
+  [CBExerciseType.AIGeneratedQuestion]: [],
   [CBExerciseType.LabelImage]: [],
   [CBExerciseType.LabelImageVariation]: [],
 };
@@ -53,6 +55,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
   [CBExerciseType.FreeformQuestion]: 5,
+  [CBExerciseType.AIGeneratedQuestion]: 5,
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
 };
@@ -89,8 +92,21 @@ export default function FreePracticeSequencePage({
 
   const exerciseType = getEnumValueByStringValue(CBExerciseType, params.typeId);
 
+  const definitionsForAIQuestions = freeformQuestionExercises
+    .filter((e) => e.topic === topic)
+    .map((e) => e.definition);
+
   const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
+  const {
+    data: generatedAIGeneratedQuestionData,
+    status: generatedAIGeneratedQuestionStatus,
+    error: generatedAIGeneratedQuestionError,
+  } = useGenerateAIQuestionQuery(
+    topic,
+    definitionsForAIQuestions,
+    exerciseType === CBExerciseType.AIGeneratedQuestion,
+  );
   const {
     data: generatedAIQuizData,
     status: generatedAIQuizStatus,
@@ -157,6 +173,17 @@ export default function FreePracticeSequencePage({
 
         setExercises(exercisesWithMetaData);
       }
+    } else if (exerciseType === CBExerciseType.AIGeneratedQuestion) {
+      if (generatedAIGeneratedQuestionData) {
+        exercisesWithMetaData = generatedAIGeneratedQuestionData.map(
+          (question) => ({
+            ...question,
+            isCompleted: false,
+          }),
+        );
+
+        setExercises(exercisesWithMetaData);
+      }
     } else if (
       exerciseType === CBExerciseType.LabelImage ||
       exerciseType === CBExerciseType.LabelImageVariation
@@ -198,6 +225,7 @@ export default function FreePracticeSequencePage({
     showSnackbar,
     topic,
     generatedAIQuizData,
+    generatedAIGeneratedQuestionData,
     generatedAIImageData,
   ]);
 
@@ -272,14 +300,20 @@ export default function FreePracticeSequencePage({
   }, [beginTime, customData, user.uid]);
 
   const requestStatus =
+    // eslint-disable-next-line no-nested-ternary
     exerciseType === CBExerciseType.AIQuiz
       ? generatedAIQuizStatus
-      : generatedAIImageStatus;
+      : exerciseType === CBExerciseType.AIGeneratedQuestion
+        ? generatedAIGeneratedQuestionStatus
+        : generatedAIImageStatus;
 
   const errorMessage =
+    // eslint-disable-next-line no-nested-ternary
     exerciseType === CBExerciseType.AIQuiz
       ? generatedAIQuizError?.message
-      : generatedAIImageError?.message;
+      : exerciseType === CBExerciseType.AIGeneratedQuestion
+        ? generatedAIGeneratedQuestionError?.message
+        : generatedAIImageError?.message;
 
   return useMemo(
     () => (
@@ -293,6 +327,7 @@ export default function FreePracticeSequencePage({
         beginTime={beginTime}
         requestStatus={
           exerciseType === CBExerciseType.AIQuiz ||
+          exerciseType === CBExerciseType.AIGeneratedQuestion ||
           exerciseType === CBExerciseType.LabelImage ||
           exerciseType === CBExerciseType.LabelImageVariation
             ? requestStatus

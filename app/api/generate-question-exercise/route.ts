@@ -1,4 +1,4 @@
-import { CBGenerateAIQuizExerciseSchema } from "@/helpers/openai/schemas/CBGenerateAIQuizExerciseSchema";
+import { CBGenerateAIQuestionExerciseSchema } from "@/helpers/openai/schemas/CBGenerateAIQuestionExerciseSchema";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { zodResponseFormat } from "openai/helpers/zod.mjs";
@@ -11,10 +11,10 @@ export async function POST(req: Request) {
 
   const completion = await openai.beta.chat.completions.parse({
     messages: [
-      {
-        role: "system",
-        content: "Du bist ein hilfreicher Biologie-Lehrer.",
-      },
+      // {
+      //   role: "system",
+      //   content: "Du bist ein hilfreicher Biologie-Lehrer.",
+      // },
       {
         role: "user",
         content: body.messages[0].content,
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     ],
     model: "gpt-4o-mini",
     response_format: zodResponseFormat(
-      CBGenerateAIQuizExerciseSchema,
+      CBGenerateAIQuestionExerciseSchema,
       "generate-quiz-exercise",
     ),
   });

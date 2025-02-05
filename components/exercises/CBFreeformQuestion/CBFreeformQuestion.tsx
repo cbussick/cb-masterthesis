@@ -36,12 +36,12 @@ export const CBFreeformQuestion = ({
 
   const onConfirm = useCallback(() => {
     setAPIRequestState(CBAPIRequestState.Fetching);
-    getOpenAIAnswerEvaluation(exercise.question, answer)
+    getOpenAIAnswerEvaluation(exercise.question, answer, exercise.definition)
       .then((response) => {
         setAPIRequestState(CBAPIRequestState.Success);
 
         setCurrentExerciseFinished(true);
-        const isCorrect = response.evaluation;
+        const isCorrect = response.evaluation >= 3;
 
         if (isCorrect) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });
@@ -71,7 +71,7 @@ export const CBFreeformQuestion = ({
 
         showSnackbar(
           isCorrect ? "Richtige Antwort" : "Falsche Antwort",
-          response.reason,
+          response.feedback,
           isCorrect ? "success" : "error",
         );
       })

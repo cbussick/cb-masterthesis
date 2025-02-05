@@ -73,7 +73,7 @@ export const CBLabelImage = ({
 
         showSnackbar(
           isCorrect ? "Richtige Antwort" : "Falsche Antwort",
-          response.reason,
+          response.feedback,
           isCorrect ? "success" : "error",
         );
       })

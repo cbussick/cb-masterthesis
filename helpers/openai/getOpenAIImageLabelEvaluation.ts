@@ -6,6 +6,8 @@ export const getOpenAIImageLabelEvaluation = async (
   imageSrc: string,
   answer: string,
 ): Promise<CBFreeformQuestionEvaluation> => {
+  // TODO: Überarbeiten
+  //
   // Das "Sei nicht zu strikt bei der Auswertung." ist wichtig, da sonst Antworten sehr schnell als falsch bewertet werden,
   // falls noch andere Elemente auf dem Bild zu sehen sind.
   const prompt = `Ist "${answer}" eine korrekte Beschriftung dieses Bildes? Sei nicht zu strikt bei der Auswertung. Begründe deine Antwort.`;
