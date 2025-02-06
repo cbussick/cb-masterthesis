@@ -1,6 +1,8 @@
 "use client";
 
 import { CBAvatar } from "@/components/CBAvatar/CBAvatar";
+import { CBChatIsTypingIndicator } from "@/components/CBChatIsTypingIndicator/CBChatIsTypingIndicator";
+import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualization/CBChatMessageVisualization";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
@@ -138,37 +140,19 @@ export const CBProtegeChat = ({
               }}
             >
               {chatMessages.map((message, index) => {
-                const isAI = message.role === CBChatMessageRole.AI;
-
                 return (
-                  <Stack
-                    // eslint-disable-next-line react/no-array-index-key
+                  <CBChatMessageVisualization // eslint-disable-next-line react/no-array-index-key
                     key={`${message.role}_${index}`}
-                    spacing={1}
-                    sx={{
-                      alignSelf: isAI ? "flex-start" : "flex-end",
-                      bgcolor: (t) =>
-                        isAI ? t.palette.grey[100] : t.palette.primary.light,
-                      color: (t) =>
-                        isAI ? undefined : t.palette.primary.contrastText,
-                      p: 2,
-                      borderRadius: 3,
-                      width: "60%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontWeight: (t) => t.typography.fontWeightBold,
-                      }}
-                    >
-                      {isAI ? "DiNA" : "Du"}
-                    </Typography>
-
-                    <Typography>{message.content}</Typography>
-                  </Stack>
+                    message={message}
+                  />
                 );
               })}
 
+              {apiRequestState === CBAPIRequestState.Fetching && (
+                <CBChatIsTypingIndicator />
+              )}
+
+              {/* Used to scroll to the bottom when a new message arrives in the chat */}
               <div ref={messagesEndRef} />
             </Stack>
 
