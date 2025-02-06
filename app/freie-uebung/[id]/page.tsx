@@ -112,6 +112,14 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.AIQuiz].name}
+              image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
+            />
+          </Grid>
+
           {freeformQuestionExercisesWithCorrectAnswer.some(
             (e) => e.topic === topic,
           ) && (
@@ -127,14 +135,6 @@ export default function FreePracticeSubpage({
               />
             </Grid>
           )}
-
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
-              text={exercisesData[CBExerciseType.AIQuiz].name}
-              image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
-              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
-            />
-          </Grid>
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
