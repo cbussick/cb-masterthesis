@@ -48,7 +48,7 @@ export const CBChatMessageVisualization = ({
         {isAI ? "DiNA" : "Du"}
       </Typography>
 
-      <Typography>{message.content}</Typography>
+      <Typography sx={{ whiteSpace: "pre-wrap" }}>{message.content}</Typography>
     </Stack>
   );
 };
