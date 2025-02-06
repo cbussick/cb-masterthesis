@@ -11,6 +11,7 @@ import {
   CBChatMessage,
   CBChatMessageRole,
 } from "@/data/exercises/CBChatMessage";
+import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
@@ -34,7 +35,9 @@ export const CBProtegeChat = ({
     CBAPIRequestState.Fetching,
   );
 
-  const termsToExplain: string[] = ["Zellkern", "Golgi-Apparat"];
+  const termsToExplain: string[] = glossaryEntries.map((entry) => entry.term);
+
+  console.log(termsToExplain);
 
   const initialAISystemPrompt = `Du bist eine Schülerin, die ein Thema gelernt hat. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
 
