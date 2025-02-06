@@ -181,6 +181,17 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.ProtegeChat].name}
+              image={{
+                src: "/topics/freetext.png",
+                alt: "Protégé-Chat",
+              }}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChat}`}
+            />
+          </Grid>
+
           {incorrectExercises.find((e) => e.topic === topic) !== undefined && (
             <Grid {...commonGridItemProps}>
               <CBInfoCard

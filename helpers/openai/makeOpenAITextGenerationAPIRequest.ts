@@ -1,6 +1,9 @@
+import { CBChatMessage } from "@/data/exercises/CBChatMessage";
+
 export const makeOpenAITextGenerationAPIRequest = async (
   prompt: string | any[],
   apiRoute: string,
+  messages?: CBChatMessage[],
 ) => {
   const response = await fetch(apiRoute, {
     method: "POST",
@@ -8,7 +11,9 @@ export const makeOpenAITextGenerationAPIRequest = async (
       "Content-Type": "application/json",
     },
 
-    body: JSON.stringify({ messages: [{ role: "user", content: prompt }] }),
+    body: JSON.stringify({
+      messages: messages || [{ role: "user", content: prompt }],
+    }),
   });
 
   if (response.ok) {

@@ -9,6 +9,7 @@ import {
 } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBLabelImageExerciseWithMetaData } from "@/data/exercises/CBLabelImageExercise";
 import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
+import { CBProtegeChatExerciseWithMetaData } from "@/data/exercises/CBProtegeChatExercise";
 import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -19,6 +20,7 @@ import { CBFamilyTreeWithProviders } from "../exercises/CBFamilyTree/CBFamilyTre
 import { CBFreeformQuestion } from "../exercises/CBFreeformQuestion/CBFreeformQuestion";
 import { CBLabelImage } from "../exercises/CBLabelImage/CBLabelImage";
 import { CBMatchingGame } from "../exercises/CBMatchingGame/CBMatchingGame";
+import { CBProtegeChat } from "../exercises/CBProtegeChat/CBProtegeChat";
 import { CBQuiz } from "../exercises/CBQuiz/CBQuiz";
 import { CBSwiper } from "../exercises/CBSwiper/CBSwiper";
 import { CBExerciseSequenceBottomBar } from "./CBExerciseSequenceBottomBar/CBExerciseSequenceBottomBar";
@@ -199,6 +201,13 @@ export const CBExerciseSequence = ({
             onMistake={onMistake}
           />
         ),
+      };
+    },
+    [CBExerciseType.ProtegeChat]: (exercise) => {
+      const castExercise = exercise as CBProtegeChatExerciseWithMetaData;
+      return {
+        title: "Protégé-Chat - Erkläre den Begriff.",
+        component: <CBProtegeChat exercise={castExercise} />,
       };
     },
   };

@@ -48,6 +48,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.AIGeneratedQuestion]: [],
   [CBExerciseType.LabelImage]: [],
   [CBExerciseType.LabelImageVariation]: [],
+  [CBExerciseType.ProtegeChat]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -60,6 +61,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.AIGeneratedQuestion]: 5,
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
+  [CBExerciseType.ProtegeChat]: 1,
 };
 
 const getRandomExercises = (
@@ -199,6 +201,17 @@ export default function FreePracticeSequencePage({
 
         setExercises(exercisesWithMetaData);
       }
+    } else if (exerciseType === CBExerciseType.ProtegeChat) {
+      // Todo: This is just a hardcoded test exercise
+      exercisesWithMetaData.push({
+        id: "1",
+        topic,
+        type: CBExerciseType.ProtegeChat,
+        term: "Zellkern",
+        isCompleted: false,
+      });
+
+      setExercises(exercisesWithMetaData);
     } else if (exerciseType) {
       exercisesWithMetaData = exercisesMap[exerciseType]
         .filter((e) => e.topic === topic)

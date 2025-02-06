@@ -11,6 +11,7 @@ export enum CBAPIRoute {
   GenerateQuizExercise = "generate-quiz-exercise",
   ImageLabelEvaluation = "image-label-evaluation",
   ImageDescription = "image-description",
+  ProtegeChat = "protege-chat",
 }
 
 export const apiRouteMap: Record<CBAPIRoute, string> = {
@@ -24,4 +25,5 @@ export const apiRouteMap: Record<CBAPIRoute, string> = {
   [CBAPIRoute.TextToSpeech]: `${apiBaseUrl}${CBAPIRoute.TextToSpeech}`,
   [CBAPIRoute.ImageLabelEvaluation]: `${apiBaseUrl}${CBAPIRoute.ImageLabelEvaluation}`,
   [CBAPIRoute.ImageDescription]: `${apiBaseUrl}${CBAPIRoute.ImageDescription}`,
+  [CBAPIRoute.ProtegeChat]: `${apiBaseUrl}${CBAPIRoute.ProtegeChat}`,
 };
