@@ -14,7 +14,7 @@ export const CBChatMessageVisualization = ({
       spacing={1}
       sx={{
         alignSelf: isAI ? "flex-start" : "flex-end",
-        bgcolor: (t) => (isAI ? t.palette.grey[100] : t.palette.primary.light),
+        bgcolor: (t) => (isAI ? t.palette.grey[50] : t.palette.primary.light),
         color: (t) => (isAI ? undefined : t.palette.primary.contrastText),
         p: 2,
         borderRadius: 3,

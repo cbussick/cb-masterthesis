@@ -12,20 +12,58 @@ import {
 } from "@/data/exercises/CBChatMessage";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
+import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
+import { SendRounded } from "@mui/icons-material";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
+
+// Todo: Hier Prompt Engineering AI Student! :) Siehe Mollick
+const initialAISystemPrompt =
+  "Dies ist der Beginn deiner Unterhaltung mit einem Schüler. Bring ihm bei wie Taktik im Fußball funktioniert. Beginne mit einer Begrüßung. Formuliere deine Nachrichten in maximal 2 Sätzen.";
+const initialMessage: CBChatMessage = {
+  role: CBChatMessageRole.System,
+  content: initialAISystemPrompt,
+};
 
 export const CBProtegeChat = ({
   exercise,
 }: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished } = useCBExerciseSequence();
 
+  console.log("exercise", exercise);
+
   const [answer, setAnswer] = useState<string>("");
 
   const [chatMessages, setChatMessages] = useState<CBChatMessage[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
+    CBAPIRequestState.Fetching,
+  );
+
+  // I'm really only using this Query to work around the fact that React Strict Mode renders the `useEffect` twice.
+  const {
+    data: generatedInitialChatMessageData,
+    status: generatedInitialChatMessageStatus,
+  } = useGenerateInitialProtegeChatResponse(initialMessage);
+
+  useEffect(() => {
+    if (generatedInitialChatMessageStatus === "success") {
+      setAPIRequestState(CBAPIRequestState.Success);
+
+      const messagesWithSystemRoleAndAIResponse = [
+        initialMessage,
+        {
+          role: CBChatMessageRole.AI,
+          content: generatedInitialChatMessageData,
+        },
+      ];
+
+      setChatMessages(messagesWithSystemRoleAndAIResponse);
+    }
+  }, [generatedInitialChatMessageData, generatedInitialChatMessageStatus]);
 
   const scrollToChatBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,16 +73,11 @@ export const CBProtegeChat = ({
     scrollToChatBottom();
   }, [chatMessages]);
 
-  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
-    CBAPIRequestState.Idle,
-  );
-
   const disabled =
     apiRequestState === CBAPIRequestState.Fetching ||
     apiRequestState === CBAPIRequestState.Error ||
     isCurrentExerciseFinished;
 
-  // Update the chat on the client with the user's message right away.
   const onSendMessage = useCallback(() => {
     setAPIRequestState(CBAPIRequestState.Fetching);
 
@@ -139,7 +172,7 @@ export const CBProtegeChat = ({
                 scrollBehavior: "smooth",
               }}
             >
-              {chatMessages.map((message, index) => {
+              {chatMessages.slice(1).map((message, index) => {
                 return (
                   <CBChatMessageVisualization // eslint-disable-next-line react/no-array-index-key
                     key={`${message.role}_${index}`}
@@ -170,7 +203,8 @@ export const CBProtegeChat = ({
                   onClick={onSendMessage}
                   isLoading={apiRequestState === CBAPIRequestState.Fetching}
                   disabled={disabled}
-                  sx={{ width: 150 }}
+                  endIcon={<SendRounded />}
+                  sx={{ width: 125 }}
                 >
                   Abschicken
                 </CBLoadingButton>

@@ -8,15 +8,7 @@ export async function POST(req: Request) {
   const body = await req.json();
 
   const completion = await openai.beta.chat.completions.parse({
-    messages: [
-      // {
-      //   role: "system",
-      //   content: "Du bist ein hilfreicher Biologie-Lehrer.",
-      // },
-      //
-
-      ...body.messages,
-    ],
+    messages: [...body.messages],
     model: "gpt-4o-mini",
   });
 
