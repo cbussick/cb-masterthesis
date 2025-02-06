@@ -5,7 +5,6 @@ import { CBChatIsTypingIndicator } from "@/components/CBChatIsTypingIndicator/CB
 import { CBChatMessageSuggestion } from "@/components/CBChatMessageSuggestion/CBChatMessageSuggestion";
 import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualization/CBChatMessageVisualization";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
-import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
 import {
   CBChatMessage,
@@ -16,7 +15,14 @@ import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
 import { SendRounded } from "@mui/icons-material";
-import { Alert, Box, Container, Stack, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
 
@@ -251,15 +257,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
               </Stack>
 
               <Box>
-                <CBLoadingButton
+                <Button
                   onClick={onSendMessage}
-                  isLoading={apiRequestState === CBAPIRequestState.Fetching}
                   disabled={disabled}
                   endIcon={<SendRounded />}
-                  sx={{ width: 125 }}
                 >
                   Abschicken
-                </CBLoadingButton>
+                </Button>
               </Box>
             </Stack>
           </Stack>
