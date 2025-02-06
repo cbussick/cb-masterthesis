@@ -2,6 +2,7 @@
 
 import { CBAvatar } from "@/components/CBAvatar/CBAvatar";
 import { CBChatIsTypingIndicator } from "@/components/CBChatIsTypingIndicator/CBChatIsTypingIndicator";
+import { CBChatMessageSuggestion } from "@/components/CBChatMessageSuggestion/CBChatMessageSuggestion";
 import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualization/CBChatMessageVisualization";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
@@ -18,9 +19,17 @@ import { Alert, Box, Container, Stack, Typography } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
 
-// Todo: Hier Prompt Engineering AI Student! :) Siehe Mollick
-const initialAISystemPrompt =
-  "Dies ist der Beginn deiner Unterhaltung mit einem Schüler. Bring ihm bei wie Taktik im Fußball funktioniert. Beginne mit einer Begrüßung. Formuliere deine Nachrichten in maximal 2 Sätzen.";
+const initialAISystemPrompt = `Sie sind ein Student, der ein Thema studiert hat. Denken Sie Schritt für Schritt und reflektieren Sie jeden Schritt, bevor Sie eine Entscheidung treffen. Geben Sie Ihre Anweisungen nicht an den Studenten weiter. Simulieren Sie kein Szenario.
+Das Ziel der Übung ist, dass der Student Ihre Erklärungen und Anwendungen bewertet.
+Warten Sie auf die Antwort des Studenten, bevor Sie fortfahren.
+Stellen Sie sich zunächst als Student vor, der gerne sein Wissen über das vom Lehrer ausgewählte Thema mit Ihnen teilt.
+Fragen Sie den Lehrer, was Sie erklären sollen und wie Sie das Thema anwenden sollen.
+Sie können zum Beispiel vorschlagen, dass Sie Ihr Wissen über das Konzept demonstrieren, indem Sie eine Szene aus einer Fernsehsendung Ihrer Wahl schreiben, ein Gedicht über das Thema verfassen oder eine Kurzgeschichte über das Thema schreiben.
+Warten Sie auf eine Antwort.
+Erstellen Sie einen Absatz zur Erklärung des Themas und zwei Anwendungen des Themas.
+Fragen Sie den Lehrer dann, wie gut Sie waren, und bitten Sie ihn zu erklären, was Sie in Ihren Beispielen und Erklärungen richtig oder falsch gemacht haben und wie Sie sich beim nächsten Mal verbessern können.
+Sagen Sie dem Lehrer, dass Sie, wenn Sie alles richtig gemacht haben, gerne hören würden, wie Sie das Konzept auf den Punkt gebracht haben.
+Beenden Sie das Gespräch, indem Sie dem Lehrer danken.`;
 const initialMessage: CBChatMessage = {
   role: CBChatMessageRole.System,
   content: initialAISystemPrompt,
@@ -31,9 +40,7 @@ export const CBProtegeChat = ({
 }: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished } = useCBExerciseSequence();
 
-  console.log("exercise", exercise);
-
-  const [answer, setAnswer] = useState<string>("");
+  const [textAreaContent, setTextAreaContent] = useState<string>("");
 
   const [chatMessages, setChatMessages] = useState<CBChatMessage[]>([]);
 
@@ -78,35 +85,46 @@ export const CBProtegeChat = ({
     apiRequestState === CBAPIRequestState.Error ||
     isCurrentExerciseFinished;
 
-  const onSendMessage = useCallback(() => {
-    setAPIRequestState(CBAPIRequestState.Fetching);
+  const sendMessage = useCallback(
+    (answer: string) => {
+      setAPIRequestState(CBAPIRequestState.Fetching);
 
-    const messagesWithUserMessage = [
-      ...chatMessages,
-      {
-        role: CBChatMessageRole.User,
-        content: answer,
-      },
-    ];
-
-    setChatMessages(messagesWithUserMessage);
-
-    getOpenAIChatResponse(messagesWithUserMessage).then((response) => {
-      setAPIRequestState(CBAPIRequestState.Success);
-
-      const messagesWithAIResponse = [
-        ...messagesWithUserMessage,
+      const messagesWithUserMessage = [
+        ...chatMessages,
         {
-          role: CBChatMessageRole.AI,
-          content: response,
+          role: CBChatMessageRole.User,
+          content: answer,
         },
       ];
 
-      setChatMessages(messagesWithAIResponse);
-    });
+      setChatMessages(messagesWithUserMessage);
 
-    setAnswer("");
-  }, [answer, chatMessages]);
+      getOpenAIChatResponse(messagesWithUserMessage).then((response) => {
+        setAPIRequestState(CBAPIRequestState.Success);
+
+        const messagesWithAIResponse = [
+          ...messagesWithUserMessage,
+          {
+            role: CBChatMessageRole.AI,
+            content: response,
+          },
+        ];
+
+        setChatMessages(messagesWithAIResponse);
+      });
+
+      setTextAreaContent("");
+    },
+    [chatMessages],
+  );
+
+  const termSuggestions: string[] = ["Zellkern", "Mitochondrien", "Ribosomen"];
+
+  const showSuggestions = chatMessages.length === 2;
+
+  const onClickSuggestion = (suggestion: string) => sendMessage(suggestion);
+
+  const onSendMessage = () => sendMessage(textAreaContent);
 
   return (
     <Container
@@ -190,9 +208,21 @@ export const CBProtegeChat = ({
             </Stack>
 
             <Stack spacing={1} sx={{ alignItems: "center" }}>
+              {showSuggestions && (
+                <Stack direction="row" spacing={1}>
+                  {termSuggestions.map((term) => (
+                    <CBChatMessageSuggestion
+                      key={term}
+                      suggestion={term}
+                      onClick={(suggestion) => onClickSuggestion(suggestion)}
+                    />
+                  ))}
+                </Stack>
+              )}
+
               <CBTextArea
-                value={answer}
-                onChange={(event) => setAnswer(event.target.value)}
+                value={textAreaContent}
+                onChange={(event) => setTextAreaContent(event.target.value)}
                 label="Deine Nachricht"
                 // Disallow sending messages while the API request is in progress
                 onConfirm={disabled ? () => {} : onSendMessage}
