@@ -36,7 +36,7 @@ export const CBChatMessageVisualization = ({
         width: "60%",
       }}
       component={motion.div}
-      initial={{ scale: 0, opacity: 0 }}
+      initial={{ scale: 0.8, opacity: 0 }}
       animate={animationControls}
       variants={animationVariants}
     >
