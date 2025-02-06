@@ -16,24 +16,8 @@ import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
 import { SendRounded } from "@mui/icons-material";
 import { Alert, Box, Container, Stack, Typography } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
-
-const initialAISystemPrompt = `Sie sind ein Student, der ein Thema studiert hat. Denken Sie Schritt für Schritt und reflektieren Sie jeden Schritt, bevor Sie eine Entscheidung treffen. Geben Sie Ihre Anweisungen nicht an den Studenten weiter. Simulieren Sie kein Szenario.
-Das Ziel der Übung ist, dass der Student Ihre Erklärungen und Anwendungen bewertet.
-Warten Sie auf die Antwort des Studenten, bevor Sie fortfahren.
-Stellen Sie sich zunächst als Student vor, der gerne sein Wissen über das vom Lehrer ausgewählte Thema mit Ihnen teilt.
-Fragen Sie den Lehrer, was Sie erklären sollen und wie Sie das Thema anwenden sollen.
-Sie können zum Beispiel vorschlagen, dass Sie Ihr Wissen über das Konzept demonstrieren, indem Sie eine Szene aus einer Fernsehsendung Ihrer Wahl schreiben, ein Gedicht über das Thema verfassen oder eine Kurzgeschichte über das Thema schreiben.
-Warten Sie auf eine Antwort.
-Erstellen Sie einen Absatz zur Erklärung des Themas und zwei Anwendungen des Themas.
-Fragen Sie den Lehrer dann, wie gut Sie waren, und bitten Sie ihn zu erklären, was Sie in Ihren Beispielen und Erklärungen richtig oder falsch gemacht haben und wie Sie sich beim nächsten Mal verbessern können.
-Sagen Sie dem Lehrer, dass Sie, wenn Sie alles richtig gemacht haben, gerne hören würden, wie Sie das Konzept auf den Punkt gebracht haben.
-Beenden Sie das Gespräch, indem Sie dem Lehrer danken.`;
-const initialMessage: CBChatMessage = {
-  role: CBChatMessageRole.System,
-  content: initialAISystemPrompt,
-};
 
 export const CBProtegeChat = ({
   exercise,
@@ -48,6 +32,31 @@ export const CBProtegeChat = ({
 
   const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
     CBAPIRequestState.Fetching,
+  );
+
+  const termsToExplain: string[] = ["Zellkern", "Golgi-Apparat"];
+
+  const initialAISystemPrompt = `Du bist eine Schülerin, die ein Thema gelernt hat. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
+
+Du sollst den Schüler stets duzen, also mit "du" ansprechen. Denke Schritt für Schritt und reflektiere jeden Schritt, bevor du eine Entscheidung triffst. Gib deine Anweisungen nicht an den Schüler weiter. Simuliere kein Szenario.
+
+Beschränke dich auf die Themen, die du kennst. Du kennst die folgenden Themen: "${termsToExplain.join(", ")}". Wenn der Schüler dich bittet ein anderes Thema zu erklären, sag ihm, dass du lieber die Themen erklären möchtest, die du kennst und mache ihm einen Vorschlag aus diesen Themen.
+
+Warte auf die Antwort des Schülers, bevor du fortfährst.
+Stell dich zunächst als Schülerin mit dem Namen "DiNA" vor, die gerne ihr Wissen über das vom älteren Schüler ausgewählte Thema teilt.
+Frag den Schüler, was du erklären sollst und wie du das Thema anwenden sollst.
+Du kannst zum Beispiel vorschlagen, dass du dein Wissen über das Konzept demonstrierst, indem du eine Szene aus einer Fernsehsendung seiner Wahl schreibst, ein Gedicht über das Thema verfasst oder eine Kurzgeschichte über das Thema schreibst.
+Warte auf eine Antwort.
+Erstelle einen Absatz zur Erklärung des Themas und zwei Anwendungen des Themas.
+Frag den Schüler dann, wie gut du warst, und bitte ihn zu erklären, was du in deinen Beispielen und Erklärungen richtig oder falsch gemacht hast und wie du dich beim nächsten Mal verbessern kannst.
+Sag dem Schüler, dass du, wenn du alles richtig gemacht hast, gerne hören würdest, wie du das Konzept auf den Punkt gebracht hast.
+Beende das Gespräch, indem du dem Schüler dankst.`;
+  const initialMessage: CBChatMessage = useMemo(
+    () => ({
+      role: CBChatMessageRole.System,
+      content: initialAISystemPrompt,
+    }),
+    [initialAISystemPrompt],
   );
 
   // I'm really only using this Query to work around the fact that React Strict Mode renders the `useEffect` twice.
@@ -70,7 +79,11 @@ export const CBProtegeChat = ({
 
       setChatMessages(messagesWithSystemRoleAndAIResponse);
     }
-  }, [generatedInitialChatMessageData, generatedInitialChatMessageStatus]);
+  }, [
+    generatedInitialChatMessageData,
+    generatedInitialChatMessageStatus,
+    initialMessage,
+  ]);
 
   const scrollToChatBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -118,7 +131,11 @@ export const CBProtegeChat = ({
     [chatMessages],
   );
 
-  const termSuggestions: string[] = ["Zellkern", "Mitochondrien", "Ribosomen"];
+  const termSuggestions: string[] = [
+    "Aufbau des Zellkerns",
+    "Mitochondrien",
+    "Golgi-Apparat als Gedicht",
+  ];
 
   const showSuggestions = chatMessages.length === 2;
 
@@ -192,7 +209,8 @@ export const CBProtegeChat = ({
             >
               {chatMessages.slice(1).map((message, index) => {
                 return (
-                  <CBChatMessageVisualization // eslint-disable-next-line react/no-array-index-key
+                  <CBChatMessageVisualization
+                    // eslint-disable-next-line react/no-array-index-key
                     key={`${message.role}_${index}`}
                     message={message}
                   />
@@ -208,26 +226,28 @@ export const CBProtegeChat = ({
             </Stack>
 
             <Stack spacing={1} sx={{ alignItems: "center" }}>
-              {showSuggestions && (
-                <Stack direction="row" spacing={1}>
-                  {termSuggestions.map((term) => (
-                    <CBChatMessageSuggestion
-                      key={term}
-                      suggestion={term}
-                      onClick={(suggestion) => onClickSuggestion(suggestion)}
-                    />
-                  ))}
-                </Stack>
-              )}
+              <Stack spacing={2} sx={{ alignItems: "center" }}>
+                {showSuggestions && (
+                  <Stack direction="row" spacing={1}>
+                    {termSuggestions.map((term) => (
+                      <CBChatMessageSuggestion
+                        key={term}
+                        suggestion={term}
+                        onClick={(suggestion) => onClickSuggestion(suggestion)}
+                      />
+                    ))}
+                  </Stack>
+                )}
 
-              <CBTextArea
-                value={textAreaContent}
-                onChange={(event) => setTextAreaContent(event.target.value)}
-                label="Deine Nachricht"
-                // Disallow sending messages while the API request is in progress
-                onConfirm={disabled ? () => {} : onSendMessage}
-                rows={3}
-              />
+                <CBTextArea
+                  value={textAreaContent}
+                  onChange={(event) => setTextAreaContent(event.target.value)}
+                  label="Deine Nachricht"
+                  // Disallow sending messages while the API request is in progress
+                  onConfirm={disabled ? () => {} : onSendMessage}
+                  rows={3}
+                />
+              </Stack>
 
               <Box>
                 <CBLoadingButton
