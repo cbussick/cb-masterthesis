@@ -192,15 +192,16 @@ export default function FreePracticeSubpage({
             />
           </Grid>
 
-          {incorrectExercises.find((e) => e.topic === topic) !== undefined && (
-            <Grid {...commonGridItemProps}>
-              <CBInfoCard
-                text="Fehler wiederholen"
-                image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
-                href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
-              />
-            </Grid>
-          )}
+          {false &&
+            incorrectExercises.find((e) => e.topic === topic) !== undefined && (
+              <Grid {...commonGridItemProps}>
+                <CBInfoCard
+                  text="Fehler wiederholen"
+                  image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
+                  href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
+                />
+              </Grid>
+            )}
         </Grid>
       </CBContentWrapper>
 
