@@ -10,7 +10,7 @@ const animationVariants: MotionProps["variants"] = {
   show: {
     scale: 1,
     opacity: 1,
-    transition: { type: "tween", ease: "easeOut", duration: 0.3 },
+    transition: { type: "tween", ease: "easeOut", duration: 0.2 },
   },
 };
 export const CBChatMessageVisualization = ({
