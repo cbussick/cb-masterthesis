@@ -194,7 +194,8 @@ export const CBProtegeChat = ({
                 value={answer}
                 onChange={(event) => setAnswer(event.target.value)}
                 label="Deine Nachricht"
-                onConfirm={onSendMessage}
+                // Disallow sending messages while the API request is in progress
+                onConfirm={disabled ? () => {} : onSendMessage}
                 rows={3}
               />
 
