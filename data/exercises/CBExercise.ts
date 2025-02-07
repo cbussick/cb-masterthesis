@@ -34,11 +34,11 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.FreeformQuestionWithCorrectAnswer]: {
     name: "Freitext-Frage",
   },
-  [CBExerciseType.AIGeneratedQuestion]: { name: "KI-generierte Fragen" },
-  [CBExerciseType.AIQuiz]: { name: "KI-Quiz" },
+  [CBExerciseType.AIGeneratedQuestion]: { name: "KI-Fragen" },
+  [CBExerciseType.AIQuiz]: { name: "KI-Multiple-Choice-Quiz" },
   [CBExerciseType.LabelImage]: { name: "Bild beschriften" },
   [CBExerciseType.LabelImageVariation]: {
-    name: "Bild beschriften (Variation)",
+    name: "Bildvariation beschriften",
   },
   [CBExerciseType.ProtegeChat]: { name: "Protégé-Chat" },
 };
