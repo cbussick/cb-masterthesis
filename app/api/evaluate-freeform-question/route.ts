@@ -40,7 +40,18 @@ Die Antwort: "Proteinbiosynthese."`,
     role: "assistant",
     content: `{evaluation: 3, feedback: "Die Antwort ist richtig, aber es fehlen zusätzliche Details für eine vollständige Antwort. Um deine Antwort zu verbessern könntest du erklären, wie Ribosomen an der Proteinbiosynthese beteiligt sind."}`,
   },
-  // TODO: Hier noch eine "gute" (wert 5) Antwort einfügen
+  {
+    role: "user",
+    content: `Bewerten Sie die folgende Antwort auf die Frage unter Berücksichtigung der Begriffsdefinition.
+Die Begriffsdefinition: "Kernporen sind komplexe Proteinstrukturen in der Kernmembran, die den Transport von Molekülen zwischen dem Zellkern und dem Zytoplasma ermöglichen."
+Die Frage für diese Begriffsdefinition: "Was sind Kernporen und welche Funktion haben sie?"
+Die Antwort: "Kernporen sind Proteinstrukturen in der Kernmembran. Sie erlauben den Transport von Molekülen zwischen Zellkern und Zytoplasma."`,
+  },
+  {
+    role: "assistant",
+    content: `{"evaluation": 5,
+      "feedback": "Sehr gut! Deine Antwort ist präzise und entspricht exakt der Begriffsdefinition. Mach weiter so und vertiefe dein Wissen über Zellorganellen!"}`,
+  },
 ];
 
 export const runtime = "edge";
