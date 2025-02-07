@@ -309,7 +309,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
               </Typography>
 
               <Typography>
-                {`Die KI kann Fehler machen oder sich seltsam verhalten. Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst.`}
+                {`Die KI kann Fehler machen oder sich möglicherweise seltsam verhalten. Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst.`}
               </Typography>
 
               <Typography>
