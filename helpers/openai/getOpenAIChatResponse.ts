@@ -1,10 +1,11 @@
 import { CBChatMessage } from "@/data/exercises/CBChatMessage";
 import { apiRouteMap, CBAPIRoute } from "../apiRoutes";
 import { makeOpenAITextGenerationAPIRequest } from "./makeOpenAITextGenerationAPIRequest";
+import { CBAIChatResponse } from "./schemas/CBAIChatResponse";
 
 export const getOpenAIChatResponse = async (
   chatMessages: CBChatMessage[],
-): Promise<string> => {
+): Promise<CBAIChatResponse> => {
   const chatResponse = await makeOpenAITextGenerationAPIRequest(
     // Leave prompt empty, because it is ignored here anyway.
     // `chatMessages` contains all necessary information.
