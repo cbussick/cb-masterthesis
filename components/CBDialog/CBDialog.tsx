@@ -18,6 +18,7 @@ export const CBDialog = ({
   fullWidth,
   dialogContentProps,
   formProps,
+  showCloseButton = true,
 }: CBDialogProps): JSX.Element => {
   const contentAndActions = (
     <>
@@ -49,9 +50,11 @@ export const CBDialog = ({
           overflow: "hidden",
         }}
       >
-        <IconButton sx={{ alignSelf: "flex-end" }} onClick={onClose}>
-          <Close />
-        </IconButton>
+        {showCloseButton && (
+          <IconButton sx={{ alignSelf: "flex-end" }} onClick={onClose}>
+            <Close />
+          </IconButton>
+        )}
 
         <Stack sx={{ overflow: "auto" }}>
           {title && (

@@ -27,6 +27,7 @@ export const CBLoadingButton = ({
           // To keep the endIcon on the right side of the button while loading
           marginLeft: isLoading ? "auto" : undefined,
         },
+        ...props.sx,
       }}
     >
       {isLoading ? (

@@ -6,6 +6,7 @@ import {
 } from "./CBFreeformQuestionExercise";
 import { CBLabelImageExercise } from "./CBLabelImageExercise";
 import { CBMatchingGameExercise } from "./CBMatchingGameExercise";
+import { CBProtegeChatExercise } from "./CBProtegeChatExercise";
 import { CBQuizExercise } from "./CBQuizExercise";
 import { CBSwiperExercise } from "./CBSwiperExercise";
 
@@ -16,7 +17,8 @@ export type CBExercise =
   | CBSwiperExercise
   | CBFreeformQuestionExerciseAIGenerated
   | CBFreeformQuestionExerciseWithCorrectAnswer
-  | CBLabelImageExercise;
+  | CBLabelImageExercise
+  | CBProtegeChatExercise;
 
 export type CBExerciseWithMetaData = CBExercise & { isCompleted: boolean };
 
@@ -38,4 +40,5 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.LabelImageVariation]: {
     name: "Bild beschriften (Variation)",
   },
+  [CBExerciseType.ProtegeChat]: { name: "Protégé-Chat" },
 };

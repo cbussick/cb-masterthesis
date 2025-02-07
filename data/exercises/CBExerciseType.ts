@@ -8,4 +8,5 @@ export enum CBExerciseType {
   AIQuiz = "ki-quiz",
   LabelImage = "bild-beschriften",
   LabelImageVariation = "bild-variation-beschriften",
+  ProtegeChat = "protege-chat",
 }

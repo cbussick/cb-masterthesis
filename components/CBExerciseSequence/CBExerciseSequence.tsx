@@ -19,6 +19,7 @@ import { CBFamilyTreeWithProviders } from "../exercises/CBFamilyTree/CBFamilyTre
 import { CBFreeformQuestion } from "../exercises/CBFreeformQuestion/CBFreeformQuestion";
 import { CBLabelImage } from "../exercises/CBLabelImage/CBLabelImage";
 import { CBMatchingGame } from "../exercises/CBMatchingGame/CBMatchingGame";
+import { CBProtegeChat } from "../exercises/CBProtegeChat/CBProtegeChat";
 import { CBQuiz } from "../exercises/CBQuiz/CBQuiz";
 import { CBSwiper } from "../exercises/CBSwiper/CBSwiper";
 import { CBExerciseSequenceBottomBar } from "./CBExerciseSequenceBottomBar/CBExerciseSequenceBottomBar";
@@ -199,6 +200,12 @@ export const CBExerciseSequence = ({
             onMistake={onMistake}
           />
         ),
+      };
+    },
+    [CBExerciseType.ProtegeChat]: () => {
+      return {
+        title: "Protégé-Chat - Hilf der KI beim Verstehen.",
+        component: <CBProtegeChat />,
       };
     },
   };

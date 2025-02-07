@@ -112,6 +112,16 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
+          {false && (
+            <Grid {...commonGridItemProps}>
+              <CBInfoCard
+                text={exercisesData[CBExerciseType.AIQuiz].name}
+                image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
+                href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
+              />
+            </Grid>
+          )}
+
           {freeformQuestionExercisesWithCorrectAnswer.some(
             (e) => e.topic === topic,
           ) && (
@@ -130,35 +140,32 @@ export default function FreePracticeSubpage({
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              text={exercisesData[CBExerciseType.AIQuiz].name}
-              image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
-              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
-            />
-          </Grid>
-
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
               text={exercisesData[CBExerciseType.AIGeneratedQuestion].name}
               image={{ src: "/topics/quiz.png", alt: "KI-generierte Fragen" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIGeneratedQuestion}`}
             />
           </Grid>
 
-          <Grid {...commonGridItemProps}>
-            <Box
-              onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
-            >
-              <CBInfoCard
-                text={exercisesData[CBExerciseType.LabelImage].name}
-                image={{ src: "/topics/exercise.png", alt: "Bild beschriften" }}
-                href={
-                  hasAccessToAI
-                    ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
-                    : undefined
-                }
-              />
-            </Box>
-          </Grid>
+          {topic === CBTopic.Zelle && (
+            <Grid {...commonGridItemProps}>
+              <Box
+                onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+              >
+                <CBInfoCard
+                  text={exercisesData[CBExerciseType.LabelImage].name}
+                  image={{
+                    src: "/topics/exercise.png",
+                    alt: "Bild beschriften",
+                  }}
+                  href={
+                    hasAccessToAI
+                      ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
+                      : undefined
+                  }
+                />
+              </Box>
+            </Grid>
+          )}
 
           {isImageVariationExerciseAvailable && (
             <Grid {...commonGridItemProps}>
@@ -181,15 +188,27 @@ export default function FreePracticeSubpage({
             </Grid>
           )}
 
-          {incorrectExercises.find((e) => e.topic === topic) !== undefined && (
-            <Grid {...commonGridItemProps}>
-              <CBInfoCard
-                text="Fehler wiederholen"
-                image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
-                href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
-              />
-            </Grid>
-          )}
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.ProtegeChat].name}
+              image={{
+                src: "/topics/freetext.png",
+                alt: "Protégé-Chat",
+              }}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChat}`}
+            />
+          </Grid>
+
+          {false &&
+            incorrectExercises.find((e) => e.topic === topic) !== undefined && (
+              <Grid {...commonGridItemProps}>
+                <CBInfoCard
+                  text="Fehler wiederholen"
+                  image={{ src: "/topics/repeat.png", alt: "Wiederholen" }}
+                  href={`${CBRoute.FreieUebung}/${topic}/${retryMistakesPathSegment}`}
+                />
+              </Grid>
+            )}
         </Grid>
       </CBContentWrapper>
 
