@@ -168,7 +168,8 @@ export const CBExerciseSequenceBottomBar = ({
       )}
 
       <Stack direction="row" spacing={2}>
-        {type !== CBExerciseSequenceType.ExamSimulator &&
+        {false &&
+          type !== CBExerciseSequenceType.ExamSimulator &&
           (shouldGenerateHint || hasStaticHint) && (
             <CBDinaHint
               onClick={onClickHint}
