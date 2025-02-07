@@ -57,8 +57,8 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.FamilyTree]: 2,
   [CBExerciseType.MatchingGame]: 5,
   [CBExerciseType.Swiper]: 10,
-  [CBExerciseType.FreeformQuestionWithCorrectAnswer]: 5,
-  [CBExerciseType.AIGeneratedQuestion]: 5,
+  [CBExerciseType.FreeformQuestionWithCorrectAnswer]: 10,
+  [CBExerciseType.AIGeneratedQuestion]: 10,
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
   [CBExerciseType.ProtegeChat]: 1,
@@ -99,7 +99,8 @@ export default function FreePracticeSequencePage({
   const definitionsForAIQuestions = glossaryEntries
     .filter((entry) => entry.topic === topic)
     .map((entry) => entry.definition)
-    .sort(() => Math.random() - 0.5);
+    .sort(() => Math.random() - 0.5)
+    .slice(undefined, exerciseAmountMap[CBExerciseType.AIGeneratedQuestion]);
 
   const { user, customData, incorrectExercises } = useUser();
   const { showSnackbar } = useSnackbar();
@@ -202,12 +203,10 @@ export default function FreePracticeSequencePage({
         setExercises(exercisesWithMetaData);
       }
     } else if (exerciseType === CBExerciseType.ProtegeChat) {
-      // Todo: This is just a hardcoded test exercise
       exercisesWithMetaData.push({
         id: "1",
         topic,
         type: CBExerciseType.ProtegeChat,
-        term: "Zellkern",
         isCompleted: false,
       });
 

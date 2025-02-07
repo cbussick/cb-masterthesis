@@ -116,8 +116,11 @@ export const CBFreeformQuestion = ({
       <Stack spacing={3}>
         <Alert severity="info" sx={{ alignItems: "center" }}>
           <Typography>
-            Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI)
-            eingesetzt. Hierbei kann es zu Fehlern kommen.
+            {`${
+              exercise.type === CBExerciseType.AIGeneratedQuestion
+                ? "Diese Fragen wurden von einer künstlichen Intelligenz (KI) erstellt. Außerdem wird KI zur Auswertung deiner Antwort eingesetzt. Sowohl bei der Erstellung der Fragen als bei der Auswertung kann es zu Fehlern kommen."
+                : "Zur Auswertung deiner Antwort wird künstliche Intelligenz (KI) eingesetzt. Hierbei kann es zu Fehlern kommen."
+            }`}
           </Typography>
         </Alert>
 
