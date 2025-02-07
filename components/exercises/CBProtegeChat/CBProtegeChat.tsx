@@ -61,6 +61,7 @@ Erstelle einen Absatz zur Erklärung des Themas und zwei Anwendungen des Themas.
 Frag den Schüler dann, wie gut du warst, und bitte ihn zu erklären, was du in deinen Beispielen und Erklärungen richtig oder falsch gemacht hast und wie du dich beim nächsten Mal verbessern kannst.
 Sag dem Schüler, dass du, wenn du alles richtig gemacht hast, gerne hören würdest, wie du das Konzept auf den Punkt gebracht hast.
 Beende das Gespräch, indem du dem Schüler dankst.`;
+
   const initialMessage: CBChatMessage = useMemo(
     () => ({
       role: CBChatMessageRole.System,
