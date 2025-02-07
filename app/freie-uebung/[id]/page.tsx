@@ -152,7 +152,7 @@ export default function FreePracticeSubpage({
           {topic === CBTopic.Zelle && (
             <Grid {...commonGridItemProps}>
               <Box
-                onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+              // onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
               >
                 <CBInfoCard
                   text={exercisesData[CBExerciseType.LabelImage].name}
@@ -160,11 +160,12 @@ export default function FreePracticeSubpage({
                     src: "/image-labelling-card.png",
                     alt: "Bild beschriften",
                   }}
-                  href={
-                    hasAccessToAI
-                      ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
-                      : undefined
-                  }
+                  // href={
+                  //   hasAccessToAI
+                  //     ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
+                  //     : undefined
+                  // }
+                  href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`}
                 />
               </Box>
             </Grid>
@@ -173,7 +174,7 @@ export default function FreePracticeSubpage({
           {isImageVariationExerciseAvailable && (
             <Grid {...commonGridItemProps}>
               <Box
-                onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+              // onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
               >
                 <CBInfoCard
                   text={exercisesData[CBExerciseType.LabelImageVariation].name}
@@ -181,11 +182,12 @@ export default function FreePracticeSubpage({
                     src: "/image-variation-labelling-card.png",
                     alt: "Bildvariation beschriften",
                   }}
-                  href={
-                    hasAccessToAI
-                      ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`
-                      : undefined
-                  }
+                  // href={
+                  //   hasAccessToAI
+                  //     ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`
+                  //     : undefined
+                  // }
+                  href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImageVariation}`}
                 />
               </Box>
             </Grid>
@@ -215,28 +217,30 @@ export default function FreePracticeSubpage({
         </Grid>
       </CBContentWrapper>
 
-      <CBDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
-        <Stack spacing={1}>
-          <Typography>
-            Dieser Inhalt ist geschützt. Bitte gib das Passwort ein, um Zugriff
-            zu erhalten.
-          </Typography>
+      {false && (
+        <CBDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
+          <Stack spacing={1}>
+            <Typography>
+              Dieser Inhalt ist geschützt. Bitte gib das Passwort ein, um
+              Zugriff zu erhalten.
+            </Typography>
 
-          <TextField
-            value={aiAccessText}
-            onChange={(e) => setAIAccessText(e.target.value)}
-          />
+            <TextField
+              value={aiAccessText}
+              onChange={(e) => setAIAccessText(e.target.value)}
+            />
 
-          <Button
-            onClick={() => {
-              setAccessToAI(aiAccessText === "aidev");
-              setDialogOpen(false);
-            }}
-          >
-            Abschicken
-          </Button>
-        </Stack>
-      </CBDialog>
+            <Button
+              onClick={() => {
+                setAccessToAI(aiAccessText === "aidev");
+                setDialogOpen(false);
+              }}
+            >
+              Abschicken
+            </Button>
+          </Stack>
+        </CBDialog>
+      )}
     </>
   );
 }
