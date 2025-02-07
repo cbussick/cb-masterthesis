@@ -5,6 +5,7 @@ import { CBChatIsTypingIndicator } from "@/components/CBChatIsTypingIndicator/CB
 import { CBChatMessageSuggestion } from "@/components/CBChatMessageSuggestion/CBChatMessageSuggestion";
 import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualization/CBChatMessageVisualization";
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
+import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
 import {
   CBChatMessage,
@@ -266,26 +267,46 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                     </Stack>
                   )}
 
-                  <CBTextArea
-                    value={textAreaContent}
-                    onChange={(event) => setTextAreaContent(event.target.value)}
-                    label="Deine Nachricht"
-                    disabled={isCurrentExerciseFinished}
-                    // Disallow sending messages while the API request is in progress
-                    onConfirm={disabled ? () => {} : onSendMessage}
-                    rows={3}
-                  />
+                  {isCurrentExerciseFinished ? (
+                    <Stack spacing={1} sx={{ alignItems: "center" }}>
+                      <Alert severity="info">
+                        <Typography>
+                          Du hast die Übung abgeschlossen.
+                        </Typography>
+                      </Alert>
+
+                      <Box>
+                        <CBLoadingButton isLoading={false}>
+                          Bewertung ansehen
+                        </CBLoadingButton>
+                      </Box>
+                    </Stack>
+                  ) : (
+                    <CBTextArea
+                      value={textAreaContent}
+                      onChange={(event) =>
+                        setTextAreaContent(event.target.value)
+                      }
+                      label="Deine Nachricht"
+                      disabled={isCurrentExerciseFinished}
+                      // Disallow sending messages while the API request is in progress
+                      onConfirm={disabled ? () => {} : onSendMessage}
+                      rows={3}
+                    />
+                  )}
                 </Stack>
 
-                <Box>
-                  <Button
-                    onClick={onSendMessage}
-                    disabled={disabled}
-                    endIcon={<SendRounded />}
-                  >
-                    Abschicken
-                  </Button>
-                </Box>
+                {!isCurrentExerciseFinished && (
+                  <Box>
+                    <Button
+                      onClick={onSendMessage}
+                      disabled={disabled}
+                      endIcon={<SendRounded />}
+                    >
+                      Abschicken
+                    </Button>
+                  </Box>
+                )}
               </Stack>
             </Stack>
           </Stack>
