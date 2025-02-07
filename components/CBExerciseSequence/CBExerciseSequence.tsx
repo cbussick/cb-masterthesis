@@ -9,7 +9,6 @@ import {
 } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBLabelImageExerciseWithMetaData } from "@/data/exercises/CBLabelImageExercise";
 import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
-import { CBProtegeChatExerciseWithMetaData } from "@/data/exercises/CBProtegeChatExercise";
 import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -203,11 +202,10 @@ export const CBExerciseSequence = ({
         ),
       };
     },
-    [CBExerciseType.ProtegeChat]: (exercise) => {
-      const castExercise = exercise as CBProtegeChatExerciseWithMetaData;
+    [CBExerciseType.ProtegeChat]: () => {
       return {
-        title: "Protégé-Chat - Erkläre den Begriff.",
-        component: <CBProtegeChat exercise={castExercise} />,
+        title: "Protégé-Chat - Hilf der KI beim Verstehen.",
+        component: <CBProtegeChat />,
       };
     },
   };

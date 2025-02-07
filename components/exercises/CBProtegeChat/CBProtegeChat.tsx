@@ -31,11 +31,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
 
-export const CBProtegeChat = ({
-  exercise,
-}: CBProtegeChatProps): JSX.Element => {
+export const CBProtegeChat = (): JSX.Element => {
   const { isCurrentExerciseFinished, setCurrentExerciseFinished } =
     useCBExerciseSequence();
   const { showSnackbar } = useCBExerciseSequenceSnackbar();
@@ -160,8 +157,8 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
   );
 
   const termSuggestions: string[] = [
-    "Aufbau des Zellkerns",
-    "Mitochondrien",
+    "Aufbau des Zellkerns als Fußballstadion",
+    "Aufgabe von Mitochondrien",
     "Golgi-Apparat als Gedicht",
   ];
 
@@ -217,14 +214,9 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
       >
         <Stack spacing={3} sx={{ flex: 1, minHeight: 0 }}>
           <Alert severity="info" sx={{ alignItems: "center" }}>
-            <Typography>
-              Du führst hier eine Unterhaltung mit einer künstlichen Intelligenz
-              (KI). Die Antworten, die du erhältst, kommen nicht von einem
-              echten Menschen. Hierbei kann es zu Fehlern kommen.
-            </Typography>
-
-            <Typography>
-              {`Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst. Falls du Fragen hast, dir etwas unklar ist oder du Hilfe benötigst,
+            <Typography variant="body2">
+              {`Du führst hier eine Unterhaltung mit einer künstlichen Intelligenz
+              (KI). Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst. Falls du Fragen hast, dir etwas unklar ist oder du Hilfe benötigst,
             wende dich an deine Lehrkraft.`}
             </Typography>
           </Alert>
@@ -237,7 +229,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
             }}
           >
             <Stack
-              spacing={3}
+              spacing={1}
               sx={{
                 minHeight: 0,
                 flex: 1,
@@ -247,12 +239,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                 alignItems: "center",
                 border: (t) => `2px solid ${t.palette.grey[300]}`,
                 borderRadius: 3,
-                p: 2,
+                py: 1,
+                px: 2,
               }}
             >
               <CBAvatar
                 image={{ src: "/logo/dina.svg", alt: "DiNA" }}
-                imageSize={110}
+                imageSize={75}
                 avatarProps={{
                   sx: { border: (t) => `2px solid ${t.palette.grey[300]}` },
                 }}
@@ -330,7 +323,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                       disabled={isCurrentExerciseFinished}
                       // Disallow sending messages while the API request is in progress
                       onConfirm={disabled ? () => {} : onSendMessage}
-                      rows={3}
+                      rows={1}
                     />
                   )}
                 </Stack>

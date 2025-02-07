@@ -5,7 +5,6 @@ import { topics } from "@/data/topics";
 import { CBRoute } from "@/helpers/routes";
 import { Stack, Typography } from "@mui/material";
 import { UseQueryResult } from "@tanstack/react-query";
-import { CBBreadcrumbs } from "../CBBreadcrumbs/CBBreadcrumbs";
 import { CBContentErrorMessage } from "../CBContentErrorMessage/CBContentErrorMessage";
 import { CBContentLoadingIndicator } from "../CBContentLoadingIndicator/CBContentLoadingIndicator";
 import { CBContentWrapper } from "../CBContentWrapper/CBContentWrapper";
@@ -65,18 +64,7 @@ export const CBFreePracticeExerciseSequence = ({
         }}
       >
         <CBPageHeader
-          title={
-            <CBBreadcrumbs
-              previousLinks={[
-                { label: "Freie Übung", href: CBRoute.FreieUebung },
-                {
-                  label: topicData.name,
-                  href: onCompleteHref,
-                },
-              ]}
-            />
-          }
-          subTitle={<Typography variant="h2">{subtitle}</Typography>}
+          title={<Typography variant="h2">{subtitle}</Typography>}
         />
 
         {requestStatus ? contentMap[requestStatus] : contentMap.success}
