@@ -14,7 +14,11 @@ import {
 import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
+import { getOpenAIProtegeChatEvaluation } from "@/helpers/openai/getOpenAIProtegeChatEvaluation";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
+import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
+import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
+import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
 import { InfoOutlined, SendRounded } from "@mui/icons-material";
 import {
   Alert,
@@ -34,6 +38,7 @@ export const CBProtegeChat = ({
 }: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished, setCurrentExerciseFinished } =
     useCBExerciseSequence();
+  const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const theme = useTheme();
 
   const [textAreaContent, setTextAreaContent] = useState<string>("");
@@ -42,9 +47,13 @@ export const CBProtegeChat = ({
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const [apiRequestState, setAPIRequestState] = useState<CBAPIRequestState>(
-    CBAPIRequestState.Fetching,
-  );
+  const [apiGetChatMessageRequestState, setAPIGetChatMessageRequestState] =
+    useState<CBAPIRequestState>(CBAPIRequestState.Fetching);
+
+  const [
+    apiGetChatEvaluationRequestState,
+    setAPIGetChatEvaluationRequestState,
+  ] = useState<CBAPIRequestState>(CBAPIRequestState.Idle);
 
   const termsToExplain: string[] = glossaryEntries.map((entry) => entry.term);
 
@@ -82,7 +91,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   useEffect(() => {
     if (generatedInitialChatMessageStatus === "success") {
-      setAPIRequestState(CBAPIRequestState.Success);
+      setAPIGetChatMessageRequestState(CBAPIRequestState.Success);
 
       const messagesWithSystemRoleAndAIResponse = [
         initialMessage,
@@ -109,13 +118,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
   }, [chatMessages]);
 
   const disabled =
-    apiRequestState === CBAPIRequestState.Fetching ||
-    apiRequestState === CBAPIRequestState.Error ||
+    apiGetChatMessageRequestState === CBAPIRequestState.Fetching ||
+    apiGetChatMessageRequestState === CBAPIRequestState.Error ||
     isCurrentExerciseFinished;
 
   const sendMessage = useCallback(
     (answer: string) => {
-      setAPIRequestState(CBAPIRequestState.Fetching);
+      setAPIGetChatMessageRequestState(CBAPIRequestState.Fetching);
 
       const messagesWithUserMessage = [
         ...chatMessages,
@@ -128,7 +137,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
       setChatMessages(messagesWithUserMessage);
 
       getOpenAIChatResponse(messagesWithUserMessage).then((response) => {
-        setAPIRequestState(CBAPIRequestState.Success);
+        setAPIGetChatMessageRequestState(CBAPIRequestState.Success);
 
         const messagesWithAIResponse = [
           ...messagesWithUserMessage,
@@ -167,6 +176,31 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
     if (!reason || reason !== "backdropClick") {
       setDialogOpen(false);
     }
+  };
+
+  const onClickSeeEvaluation = () => {
+    setAPIGetChatEvaluationRequestState(CBAPIRequestState.Fetching);
+
+    const chatMessagesWithoutSystemPrompt = chatMessages.slice(1);
+    getOpenAIProtegeChatEvaluation(chatMessagesWithoutSystemPrompt).then(
+      (response) => {
+        setAPIGetChatEvaluationRequestState(CBAPIRequestState.Success);
+
+        const isCorrect = response.evaluation >= 3;
+
+        if (isCorrect) {
+          playCorrectSound();
+        } else {
+          playIncorrectSound();
+        }
+
+        showSnackbar(
+          isCorrect ? "Gut gemacht" : "Bleib dran",
+          response.feedback,
+          isCorrect ? "success" : "error",
+        );
+      },
+    );
   };
 
   return (
@@ -243,9 +277,8 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                   );
                 })}
 
-                {apiRequestState === CBAPIRequestState.Fetching && (
-                  <CBChatIsTypingIndicator />
-                )}
+                {apiGetChatMessageRequestState ===
+                  CBAPIRequestState.Fetching && <CBChatIsTypingIndicator />}
 
                 {/* Used to scroll to the bottom when a new message arrives in the chat */}
                 <div ref={messagesEndRef} />
@@ -276,7 +309,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                       </Alert>
 
                       <Box>
-                        <CBLoadingButton isLoading={false}>
+                        <CBLoadingButton
+                          isLoading={
+                            apiGetChatEvaluationRequestState ===
+                            CBAPIRequestState.Fetching
+                          }
+                          onClick={onClickSeeEvaluation}
+                        >
                           Bewertung ansehen
                         </CBLoadingButton>
                       </Box>
