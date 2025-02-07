@@ -302,9 +302,10 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
               </Typography>
 
               <Typography>
-                Die KI bekommt die Aufgabe, dir einen Begriff zu erklären. Deine
+                {`Die KI bekommt die Aufgabe, dir einen Begriff zu erklären. Deine
                 Aufgabe ist es, die Erklärungen der KI zu bewerten und
-                Verbesserungsvorschläge zu machen.
+                Verbesserungsvorschläge zu machen. Das hilft dir dein Wissen
+                über das Thema zu festigen. Dies nennt sich "Protégé-Effekt".`}
               </Typography>
 
               <Typography>
