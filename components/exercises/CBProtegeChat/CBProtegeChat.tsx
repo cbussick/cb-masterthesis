@@ -7,6 +7,7 @@ import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualizat
 import { useCBExerciseSequence } from "@/components/CBExerciseSequence/useCBExerciseSequenceProvider";
 import { CBLoadingButton } from "@/components/CBLoadingButton/CBLoadingButton";
 import { CBTextArea } from "@/components/CBTextArea/CBTextArea";
+import { CBUnstyledNextLink } from "@/components/CBUnstyledNextLink/CBUnstyledNextLink";
 import {
   CBChatMessage,
   CBChatMessageRole,
@@ -15,11 +16,17 @@ import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
 import { getOpenAIProtegeChatEvaluation } from "@/helpers/openai/getOpenAIProtegeChatEvaluation";
+import { CBFreeformQuestionEvaluation } from "@/helpers/openai/schemas/CBFreeformQuestionEvaluation";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
 import { playCorrectSound } from "@/helpers/sounds/playCorrectSound";
 import { playIncorrectSound } from "@/helpers/sounds/playIncorrectSound";
-import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
-import { InfoOutlined, SendRounded } from "@mui/icons-material";
+import {
+  ArrowBack,
+  InfoOutlined,
+  SendRounded,
+  ThumbDown,
+  ThumbUp,
+} from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -31,16 +38,22 @@ import {
   useTheme,
 } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
 
-export const CBProtegeChat = (): JSX.Element => {
+export const CBProtegeChat = ({
+  onCompleteHref,
+}: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished, setCurrentExerciseFinished } =
     useCBExerciseSequence();
-  const { showSnackbar } = useCBExerciseSequenceSnackbar();
   const theme = useTheme();
 
   const [textAreaContent, setTextAreaContent] = useState<string>("");
+  const [evaluation, setEvaluation] = useState<CBFreeformQuestionEvaluation>();
   const [chatMessages, setChatMessages] = useState<CBChatMessage[]>([]);
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(true);
+  const [isIntroductionDialogOpen, setIntroductionDialogOpen] =
+    useState<boolean>(true);
+  const [isEvaluationDialogOpen, setEvaluationDialogOpen] =
+    useState<boolean>(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -168,36 +181,38 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   const onSendMessage = () => sendMessage(textAreaContent);
 
-  const onCloseDialog = (event: any, reason: any) => {
+  const onCloseIntroductionDialog = (event: any, reason: any) => {
     // Prevent closing the dialog when clicking outside of it
     if (!reason || reason !== "backdropClick") {
-      setDialogOpen(false);
+      setIntroductionDialogOpen(false);
     }
   };
 
   const onClickSeeEvaluation = () => {
-    setAPIGetChatEvaluationRequestState(CBAPIRequestState.Fetching);
+    if (evaluation) {
+      setEvaluationDialogOpen(true);
+    } else {
+      setAPIGetChatEvaluationRequestState(CBAPIRequestState.Fetching);
 
-    const chatMessagesWithoutSystemPrompt = chatMessages.slice(1);
-    getOpenAIProtegeChatEvaluation(chatMessagesWithoutSystemPrompt).then(
-      (response) => {
-        setAPIGetChatEvaluationRequestState(CBAPIRequestState.Success);
+      const chatMessagesWithoutSystemPrompt = chatMessages.slice(1);
 
-        const isCorrect = response.evaluation >= 3;
+      getOpenAIProtegeChatEvaluation(chatMessagesWithoutSystemPrompt).then(
+        (response) => {
+          setAPIGetChatEvaluationRequestState(CBAPIRequestState.Success);
 
-        if (isCorrect) {
-          playCorrectSound();
-        } else {
-          playIncorrectSound();
-        }
+          const isCorrect = response.evaluation >= 3;
 
-        showSnackbar(
-          isCorrect ? "Gut gemacht" : "Bleib dran",
-          response.feedback,
-          isCorrect ? "success" : "error",
-        );
-      },
-    );
+          setEvaluation(response);
+          setEvaluationDialogOpen(true);
+
+          if (isCorrect) {
+            playCorrectSound();
+          } else {
+            playIncorrectSound();
+          }
+        },
+      );
+    }
   };
 
   return (
@@ -345,7 +360,11 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
         </Stack>
       </Container>
 
-      <Dialog open={isDialogOpen} onClose={onCloseDialog} fullWidth>
+      <Dialog
+        open={isIntroductionDialogOpen}
+        onClose={onCloseIntroductionDialog}
+        fullWidth
+      >
         <Stack spacing={6} sx={{ p: 4, alignItems: "center" }}>
           <Stack spacing={2} sx={{ alignItems: "center" }}>
             <InfoOutlined
@@ -381,10 +400,52 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
           </Stack>
 
           <Box>
-            <Button onClick={(event) => onCloseDialog(event, null)}>
+            <Button onClick={(event) => onCloseIntroductionDialog(event, null)}>
               Bestätigen
             </Button>
           </Box>
+        </Stack>
+      </Dialog>
+
+      <Dialog
+        open={isEvaluationDialogOpen}
+        onClose={() => setEvaluationDialogOpen(false)}
+        fullWidth
+      >
+        <Stack spacing={6} sx={{ p: 4, alignItems: "center" }}>
+          <Stack spacing={2} sx={{ alignItems: "center" }}>
+            {evaluation && evaluation?.evaluation >= 3 ? (
+              <ThumbUp
+                fontSize="large"
+                htmlColor={theme.palette.success.main}
+              />
+            ) : (
+              <ThumbDown
+                fontSize="large"
+                htmlColor={theme.palette.error.main}
+              />
+            )}
+
+            <Typography variant="h2">Auswertung</Typography>
+
+            <Stack spacing={2}>
+              <Typography>{evaluation?.feedback}</Typography>
+            </Stack>
+          </Stack>
+
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              startIcon={<ArrowBack />}
+              onClick={() => setEvaluationDialogOpen(false)}
+            >
+              Zurück zum Chat
+            </Button>
+
+            <CBUnstyledNextLink href={onCompleteHref}>
+              <Button>Übung beenden</Button>
+            </CBUnstyledNextLink>
+          </Stack>
         </Stack>
       </Dialog>
     </>

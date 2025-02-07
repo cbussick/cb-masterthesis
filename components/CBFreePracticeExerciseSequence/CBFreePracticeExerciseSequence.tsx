@@ -1,7 +1,6 @@
 "use client";
 
 import { exercisesData } from "@/data/exercises/CBExercise";
-import { topics } from "@/data/topics";
 import { CBRoute } from "@/helpers/routes";
 import { Stack, Typography } from "@mui/material";
 import { UseQueryResult } from "@tanstack/react-query";
@@ -25,7 +24,6 @@ export const CBFreePracticeExerciseSequence = ({
   requestStatus,
   errorMessage,
 }: CBFreePracticeExerciseSequenceProps): JSX.Element => {
-  const topicData = topics[topic];
   const subtitle = exerciseType
     ? exercisesData[exerciseType].name
     : "Fehler Wiederholung";
