@@ -14,14 +14,16 @@ import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
 import { useGenerateInitialProtegeChatResponse } from "@/helpers/queries/useGenerateInitialProtegeChatResponse";
-import { SendRounded } from "@mui/icons-material";
+import { InfoOutlined, SendRounded } from "@mui/icons-material";
 import {
   Alert,
   Box,
   Button,
   Container,
+  Dialog,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
@@ -30,10 +32,11 @@ export const CBProtegeChat = ({
   exercise,
 }: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished } = useCBExerciseSequence();
+  const theme = useTheme();
 
   const [textAreaContent, setTextAreaContent] = useState<string>("");
-
   const [chatMessages, setChatMessages] = useState<CBChatMessage[]>([]);
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(true);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -150,125 +153,177 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   const onSendMessage = () => sendMessage(textAreaContent);
 
+  const onCloseDialog = (event: any, reason: any) => {
+    // Prevent closing the dialog when clicking outside of it
+    if (!reason || reason !== "backdropClick") {
+      setDialogOpen(false);
+    }
+  };
+
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        flexDirection: "column",
-        minHeight: 0,
-      }}
-    >
-      <Stack spacing={3} sx={{ flex: 1, minHeight: 0 }}>
-        <Alert severity="info" sx={{ alignItems: "center" }}>
-          <Typography>
-            Du führst hier eine Unterhaltung mit einer künstlichen Intelligenz
-            (KI). Die Antworten, die du erhältst, kommen nicht von einem echten
-            Menschen. Hierbei kann es zu Fehlern kommen.
-          </Typography>
+    <>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0,
+        }}
+      >
+        <Stack spacing={3} sx={{ flex: 1, minHeight: 0 }}>
+          <Alert severity="info" sx={{ alignItems: "center" }}>
+            <Typography>
+              Du führst hier eine Unterhaltung mit einer künstlichen Intelligenz
+              (KI). Die Antworten, die du erhältst, kommen nicht von einem
+              echten Menschen. Hierbei kann es zu Fehlern kommen.
+            </Typography>
 
-          <Typography>
-            {`Behalte stets im Hinterkopf, dass du die Kontrolle über diese
-            Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst. Falls du Fragen hast, dir etwas unklar ist oder du Hilfe benötigst,
+            <Typography>
+              {`Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst. Falls du Fragen hast, dir etwas unklar ist oder du Hilfe benötigst,
             wende dich an deine Lehrkraft.`}
-          </Typography>
-        </Alert>
+            </Typography>
+          </Alert>
 
-        <Stack
-          sx={{
-            alignItems: "center",
-            flex: 1,
-            minHeight: 0,
-          }}
-        >
           <Stack
-            spacing={3}
             sx={{
-              minHeight: 0,
-              flex: 1,
-              width: 900,
-              maxWidth: "100%",
-              justifyContent: "space-between",
               alignItems: "center",
-              border: (t) => `2px solid ${t.palette.grey[300]}`,
-              borderRadius: 3,
-              p: 2,
+              flex: 1,
+              minHeight: 0,
             }}
           >
-            <CBAvatar
-              image={{ src: "/logo/dina.svg", alt: "DiNA" }}
-              imageSize={110}
-              avatarProps={{
-                sx: { border: (t) => `2px solid ${t.palette.grey[300]}` },
-              }}
-            />
-
             <Stack
-              spacing={2}
+              spacing={3}
               sx={{
+                minHeight: 0,
                 flex: 1,
-                overflowY: "auto",
-                width: "100%",
-                scrollBehavior: "smooth",
+                width: 900,
+                maxWidth: "100%",
+                justifyContent: "space-between",
+                alignItems: "center",
+                border: (t) => `2px solid ${t.palette.grey[300]}`,
+                borderRadius: 3,
+                p: 2,
               }}
             >
-              {chatMessages.slice(1).map((message, index) => {
-                return (
-                  <CBChatMessageVisualization
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={`${message.role}_${index}`}
-                    message={message}
-                  />
-                );
-              })}
+              <CBAvatar
+                image={{ src: "/logo/dina.svg", alt: "DiNA" }}
+                imageSize={110}
+                avatarProps={{
+                  sx: { border: (t) => `2px solid ${t.palette.grey[300]}` },
+                }}
+              />
 
-              {apiRequestState === CBAPIRequestState.Fetching && (
-                <CBChatIsTypingIndicator />
-              )}
+              <Stack
+                spacing={2}
+                sx={{
+                  flex: 1,
+                  overflowY: "auto",
+                  width: "100%",
+                  scrollBehavior: "smooth",
+                }}
+              >
+                {chatMessages.slice(1).map((message, index) => {
+                  return (
+                    <CBChatMessageVisualization
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={`${message.role}_${index}`}
+                      message={message}
+                    />
+                  );
+                })}
 
-              {/* Used to scroll to the bottom when a new message arrives in the chat */}
-              <div ref={messagesEndRef} />
-            </Stack>
-
-            <Stack spacing={1} sx={{ alignItems: "center" }}>
-              <Stack spacing={2} sx={{ alignItems: "center" }}>
-                {showSuggestions && (
-                  <Stack direction="row" spacing={1}>
-                    {termSuggestions.map((term) => (
-                      <CBChatMessageSuggestion
-                        key={term}
-                        suggestion={term}
-                        onClick={(suggestion) => onClickSuggestion(suggestion)}
-                      />
-                    ))}
-                  </Stack>
+                {apiRequestState === CBAPIRequestState.Fetching && (
+                  <CBChatIsTypingIndicator />
                 )}
 
-                <CBTextArea
-                  value={textAreaContent}
-                  onChange={(event) => setTextAreaContent(event.target.value)}
-                  label="Deine Nachricht"
-                  // Disallow sending messages while the API request is in progress
-                  onConfirm={disabled ? () => {} : onSendMessage}
-                  rows={3}
-                />
+                {/* Used to scroll to the bottom when a new message arrives in the chat */}
+                <div ref={messagesEndRef} />
               </Stack>
 
-              <Box>
-                <Button
-                  onClick={onSendMessage}
-                  disabled={disabled}
-                  endIcon={<SendRounded />}
-                >
-                  Abschicken
-                </Button>
-              </Box>
+              <Stack spacing={1} sx={{ alignItems: "center" }}>
+                <Stack spacing={2} sx={{ alignItems: "center" }}>
+                  {showSuggestions && (
+                    <Stack direction="row" spacing={1}>
+                      {termSuggestions.map((term) => (
+                        <CBChatMessageSuggestion
+                          key={term}
+                          suggestion={term}
+                          onClick={(suggestion) =>
+                            onClickSuggestion(suggestion)
+                          }
+                        />
+                      ))}
+                    </Stack>
+                  )}
+
+                  <CBTextArea
+                    value={textAreaContent}
+                    onChange={(event) => setTextAreaContent(event.target.value)}
+                    label="Deine Nachricht"
+                    // Disallow sending messages while the API request is in progress
+                    onConfirm={disabled ? () => {} : onSendMessage}
+                    rows={3}
+                  />
+                </Stack>
+
+                <Box>
+                  <Button
+                    onClick={onSendMessage}
+                    disabled={disabled}
+                    endIcon={<SendRounded />}
+                  >
+                    Abschicken
+                  </Button>
+                </Box>
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+
+      <Dialog open={isDialogOpen} onClose={onCloseDialog} fullWidth>
+        <Stack spacing={6} sx={{ p: 4, alignItems: "center" }}>
+          <Stack spacing={2} sx={{ alignItems: "center" }}>
+            <InfoOutlined
+              fontSize="large"
+              htmlColor={theme.palette.info.main}
+            />
+
+            <Typography variant="h2">Protégé-Chat</Typography>
+
+            <Stack spacing={2}>
+              <Typography>
+                Du wirst nun eine Chat-Unterhaltung mit einer künstlichen
+                Intelligenz (KI) führen. Die Antworten, die du erhältst, kommen
+                nicht von einem echten Menschen.
+              </Typography>
+
+              <Typography>
+                Die KI bekommt die Aufgabe, dir einen Begriff zu erklären. Deine
+                Aufgabe ist es, die Erklärungen der KI zu bewerten und
+                Verbesserungsvorschläge zu machen.
+              </Typography>
+
+              <Typography>
+                {`Die KI kann Fehler machen oder sich seltsam verhalten. Behalte stets im Kopf, dass du die Kontrolle über diese Unterhaltung hast. Du kannst die Unterhaltung jederzeit abbrechen, indem du den Button "Übung beenden" unten links klickst.`}
+              </Typography>
+
+              <Typography>
+                Falls du Fragen hast, dir etwas unklar ist oder du Hilfe
+                benötigst, wende dich an deine Lehrkraft.
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Box>
+            <Button onClick={(event) => onCloseDialog(event, null)}>
+              Bestätigen
+            </Button>
+          </Box>
+        </Stack>
+      </Dialog>
+    </>
   );
 };

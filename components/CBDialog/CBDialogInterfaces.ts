@@ -14,4 +14,8 @@ export interface CBDialogProps {
   fullWidth?: DialogProps["fullWidth"];
   dialogContentProps?: DialogContentProps;
   formProps?: FormHTMLAttributes<HTMLFormElement>;
+  /**
+   * @default true
+   */
+  showCloseButton?: boolean;
 }
