@@ -116,7 +116,10 @@ export default function FreePracticeSubpage({
             <Grid {...commonGridItemProps}>
               <CBInfoCard
                 text={exercisesData[CBExerciseType.AIQuiz].name}
-                image={{ src: "/topics/quiz.png", alt: "KI-Quiz" }}
+                image={{
+                  src: "/topics/quiz.png",
+                  alt: "KI-Multiple-Choice-Quiz",
+                }}
                 href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIQuiz}`}
               />
             </Grid>
@@ -132,7 +135,7 @@ export default function FreePracticeSubpage({
                     CBExerciseType.FreeformQuestionWithCorrectAnswer
                   ].name
                 }
-                image={{ src: "/topics/freetext.png", alt: "Freitext" }}
+                image={{ src: "/question-card.png", alt: "Freitext-Frage" }}
                 href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.FreeformQuestionWithCorrectAnswer}`}
               />
             </Grid>
@@ -141,7 +144,7 @@ export default function FreePracticeSubpage({
           <Grid {...commonGridItemProps}>
             <CBInfoCard
               text={exercisesData[CBExerciseType.AIGeneratedQuestion].name}
-              image={{ src: "/topics/quiz.png", alt: "KI-generierte Fragen" }}
+              image={{ src: "/chat-card.png", alt: "KI-Fragen" }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.AIGeneratedQuestion}`}
             />
           </Grid>
@@ -154,7 +157,7 @@ export default function FreePracticeSubpage({
                 <CBInfoCard
                   text={exercisesData[CBExerciseType.LabelImage].name}
                   image={{
-                    src: "/topics/exercise.png",
+                    src: "/image-labelling-card.png",
                     alt: "Bild beschriften",
                   }}
                   href={
@@ -175,8 +178,8 @@ export default function FreePracticeSubpage({
                 <CBInfoCard
                   text={exercisesData[CBExerciseType.LabelImageVariation].name}
                   image={{
-                    src: "/topics/exercise.png",
-                    alt: "Bild beschriften (Variation)",
+                    src: "/image-variation-labelling-card.png",
+                    alt: "Bildvariation beschriften",
                   }}
                   href={
                     hasAccessToAI
@@ -192,7 +195,7 @@ export default function FreePracticeSubpage({
             <CBInfoCard
               text={exercisesData[CBExerciseType.ProtegeChat].name}
               image={{
-                src: "/topics/freetext.png",
+                src: "/protege-chat-card.png",
                 alt: "Protégé-Chat",
               }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChat}`}
