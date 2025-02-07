@@ -205,7 +205,7 @@ export const CBExerciseSequence = ({
     [CBExerciseType.ProtegeChat]: () => {
       return {
         title: "Protégé-Chat - Hilf der KI beim Verstehen.",
-        component: <CBProtegeChat />,
+        component: <CBProtegeChat onCompleteHref={onCompleteHref || ""} />,
       };
     },
   };

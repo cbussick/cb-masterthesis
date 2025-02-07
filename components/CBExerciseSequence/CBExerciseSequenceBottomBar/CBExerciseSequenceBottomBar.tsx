@@ -193,13 +193,15 @@ export const CBExerciseSequenceBottomBar = ({
           </Button>
         )}
 
-        <Button
-          onClick={onClickNext}
-          disabled={!isCurrentExerciseFinished}
-          endIcon={<ChevronRightRounded />}
-        >
-          Weiter
-        </Button>
+        {currentExercise.type !== CBExerciseType.ProtegeChat && (
+          <Button
+            onClick={onClickNext}
+            disabled={!isCurrentExerciseFinished}
+            endIcon={<ChevronRightRounded />}
+          >
+            Weiter
+          </Button>
+        )}
       </Stack>
     </Stack>
   );
