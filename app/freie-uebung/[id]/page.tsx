@@ -144,21 +144,26 @@ export default function FreePracticeSubpage({
             />
           </Grid>
 
-          <Grid {...commonGridItemProps}>
-            <Box
-              onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
-            >
-              <CBInfoCard
-                text={exercisesData[CBExerciseType.LabelImage].name}
-                image={{ src: "/topics/exercise.png", alt: "Bild beschriften" }}
-                href={
-                  hasAccessToAI
-                    ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
-                    : undefined
-                }
-              />
-            </Box>
-          </Grid>
+          {topic === CBTopic.Zelle && (
+            <Grid {...commonGridItemProps}>
+              <Box
+                onClick={hasAccessToAI ? undefined : () => setDialogOpen(true)}
+              >
+                <CBInfoCard
+                  text={exercisesData[CBExerciseType.LabelImage].name}
+                  image={{
+                    src: "/topics/exercise.png",
+                    alt: "Bild beschriften",
+                  }}
+                  href={
+                    hasAccessToAI
+                      ? `${CBRoute.FreieUebung}/${topic}/${CBExerciseType.LabelImage}`
+                      : undefined
+                  }
+                />
+              </Box>
+            </Grid>
+          )}
 
           {isImageVariationExerciseAvailable && (
             <Grid {...commonGridItemProps}>
