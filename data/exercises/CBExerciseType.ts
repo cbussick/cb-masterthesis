@@ -9,4 +9,5 @@ export enum CBExerciseType {
   LabelImage = "bild-beschriften",
   LabelImageVariation = "bild-variation-beschriften",
   ProtegeChat = "protege-chat",
+  ProtegeChatTeaching = "protege-chat-teaching",
 }

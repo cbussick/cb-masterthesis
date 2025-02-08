@@ -40,5 +40,8 @@ export const exercisesData: Record<CBExerciseType, CBExerciseData> = {
   [CBExerciseType.LabelImageVariation]: {
     name: "Bildvariation beschriften",
   },
-  [CBExerciseType.ProtegeChat]: { name: "Protégé-Chat" },
+  [CBExerciseType.ProtegeChat]: { name: "Protégé-Chat (Erklärung bewerten)" },
+  [CBExerciseType.ProtegeChatTeaching]: {
+    name: "Protégé-Chat (Thema erklären)",
+  },
 };

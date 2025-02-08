@@ -9,6 +9,7 @@ import {
 } from "@/data/exercises/CBFreeformQuestionExercise";
 import { CBLabelImageExerciseWithMetaData } from "@/data/exercises/CBLabelImageExercise";
 import { CBMatchingGameExerciseWithMetaData } from "@/data/exercises/CBMatchingGameExercise";
+import { CBProtegeChatExerciseWithMetaData } from "@/data/exercises/CBProtegeChatExercise";
 import { CBQuizExerciseWithMetaData } from "@/data/exercises/CBQuizExercise";
 import { CBSwiperExerciseWithMetaData } from "@/data/exercises/CBSwiperExercise";
 import { useCBExerciseSequenceSnackbar } from "@/ui/useCBExerciseSequenceSnackbar";
@@ -202,10 +203,28 @@ export const CBExerciseSequence = ({
         ),
       };
     },
-    [CBExerciseType.ProtegeChat]: () => {
+    [CBExerciseType.ProtegeChat]: (exercise) => {
+      const castExercise = exercise as CBProtegeChatExerciseWithMetaData;
       return {
         title: "Protégé-Chat - Hilf der KI beim Verstehen.",
-        component: <CBProtegeChat onCompleteHref={onCompleteHref || ""} />,
+        component: (
+          <CBProtegeChat
+            exercise={castExercise}
+            onCompleteHref={onCompleteHref || ""}
+          />
+        ),
+      };
+    },
+    [CBExerciseType.ProtegeChatTeaching]: (exercise) => {
+      const castExercise = exercise as CBProtegeChatExerciseWithMetaData;
+      return {
+        title: "Protégé-Chat - Hilf der KI beim Verstehen.",
+        component: (
+          <CBProtegeChat
+            exercise={castExercise}
+            onCompleteHref={onCompleteHref || ""}
+          />
+        ),
       };
     },
   };

@@ -30,7 +30,7 @@ Beurteilungsschritte:
 	• Punktzahl 4: Wenn Schüler B gemachte Fehler entdeckt und sie größtenteils korrekt verbessert hat.
 	• Punktzahl 5: Wenn Schüler B gemachte Fehler entdeckt und sie vollständig korrekt verbessert hat.
 Nachdem Sie die Antwort bewertet haben, geben Sie die Punktzahl in das Feld "evaluation" ein.
-Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen.
+Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen. Sprechen Sie dabei den Schüler direkt an.
 Falls die Bewertung eine 1 oder 2 ist, geben Sie Schüler B konstruktives Feedback, wie er seine Antworten an andere Schüler in Zukunft verbessern kann und ermutigen Sie ihn nicht aufzugeben.
 Falls die Bewertung eine 3 ist, geben Sie Schüler B konstruktives Feedback, wie er seine Antworten an andere Schüler verbessern kann und ermutigen Sie ihn weiterzumachen.
 Falls die Bewertung eine 4 oder 5 ist, geben Sie Schüler B positives Feedback und ermutigen Sie ihn sich weiter zu verbessern.

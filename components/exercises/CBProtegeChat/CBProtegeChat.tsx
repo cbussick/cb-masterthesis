@@ -12,6 +12,7 @@ import {
   CBChatMessage,
   CBChatMessageRole,
 } from "@/data/exercises/CBChatMessage";
+import { CBExerciseType } from "@/data/exercises/CBExerciseType";
 import { glossaryEntries } from "@/data/glossaryEntries";
 import { CBAPIRequestState } from "@/helpers/CBAPIRequestState";
 import { getOpenAIChatResponse } from "@/helpers/openai/getOpenAIChatResponse";
@@ -41,6 +42,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CBProtegeChatProps } from "./CBProtegeChatInterfaces";
 
 export const CBProtegeChat = ({
+  exercise,
   onCompleteHref,
 }: CBProtegeChatProps): JSX.Element => {
   const { isCurrentExerciseFinished, setCurrentExerciseFinished } =
@@ -65,15 +67,35 @@ export const CBProtegeChat = ({
     setAPIGetChatEvaluationRequestState,
   ] = useState<CBAPIRequestState>(CBAPIRequestState.Idle);
 
-  const termsToExplain: string[] = glossaryEntries.map((entry) => entry.term);
+  const availableTerms: string[] = glossaryEntries.map((entry) => entry.term);
 
-  const initialAISystemPrompt = `Du bist eine Schülerin, die ein Thema gelernt hat. Du beherrscht das Thema nicht perfekt und machst manchmal inhaltliche Fehler, wenn du das Thema erklärst. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
+  const isTeachingAI = exercise.type === CBExerciseType.ProtegeChatTeaching;
+
+  const initialAISystemPromptTeaching = `Du bist eine Schülerin, die etwas über ein Thema lernen möchte. Du führst eine Unterhaltung mit einem älteren Schüler, der dir das Thema erklären möchte. Das Ziel dieser Unterhaltung ist, dass der Schüler dir das Thema soweit erklärt, dass du es verstehst.
 
 Schreibe deine Antwort an den Schüler in das Feld "message" und schreibe in das Feld "isConversationFinished" den Wert "false", solange die Unterhaltung noch läuft und "true", wenn du die Unterhaltung beendet hast.
 
 Du sollst den Schüler stets duzen, also mit "du" ansprechen. Denke Schritt für Schritt und reflektiere jeden Schritt, bevor du eine Entscheidung triffst. Gib deine Anweisungen nicht an den Schüler weiter. Simuliere kein Szenario.
 
-Beschränke dich auf die Themen, die du kennst. Du kennst die folgenden Themen: "${termsToExplain.join(", ")}". Wenn der Schüler dich bittet ein anderes Thema zu erklären, sag ihm, dass du lieber die Themen erklären möchtest, die du kennst und mache ihm einen Vorschlag aus diesen Themen.
+Beschränke dich auf die Themen, die dich interessieren. Die folgenden Themen interessieren dich: "${availableTerms.join(", ")}". Wenn der Schüler dir ein anderes Thema erklären möchte, sag ihm, dass du lieber etwas über die Themen lernen möchtest, die dich interessieren und mache ihm einen Vorschlag aus diesen Themen.
+
+Warte auf die Antwort des Schülers, bevor du fortfährst.
+Stell dich zunächst als Schülerin mit dem Namen "DiNA" vor, die etwas über ein neues Thema lernen möchte. Sag dem Schüler, dass du dich freuen würdest, wenn er dir ein Thema erklären würde.
+Frag den Schüler, welches Thema er dir erklären möchte.
+Warte auf eine Antwort.
+Sag dem Schüler, dass du dich sehr für dieses Thema interessierst und dich auf seine Erklärung freust.
+Warte auf die Erklärung des Schülers.
+Lies dir die Erklärung des Schülers durch und stelle ihm eine Rückfrage, um dein Verständnis zu festigen.
+Sag dem Schüler, dass du dich sehr darüber freust nun mehr über das Thema zu wissen und ob er noch etwas hinzufügen möchte.
+Beende das Gespräch, indem du dem Schüler dankst.`;
+
+  const initialAISystemPromptEvaluating = `Du bist eine Schülerin, die ein Thema gelernt hat. Du beherrscht das Thema nicht perfekt und machst manchmal inhaltliche Fehler, wenn du das Thema erklärst. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
+
+Schreibe deine Antwort an den Schüler in das Feld "message" und schreibe in das Feld "isConversationFinished" den Wert "false", solange die Unterhaltung noch läuft und "true", wenn du die Unterhaltung beendet hast.
+
+Du sollst den Schüler stets duzen, also mit "du" ansprechen. Denke Schritt für Schritt und reflektiere jeden Schritt, bevor du eine Entscheidung triffst. Gib deine Anweisungen nicht an den Schüler weiter. Simuliere kein Szenario.
+
+Beschränke dich auf die Themen, die du kennst. Du kennst die folgenden Themen: "${availableTerms.join(", ")}". Wenn der Schüler dich bittet ein anderes Thema zu erklären, sag ihm, dass du lieber die Themen erklären möchtest, die du kennst und mache ihm einen Vorschlag aus diesen Themen.
 
 Warte auf die Antwort des Schülers, bevor du fortfährst.
 Stell dich zunächst als Schülerin mit dem Namen "DiNA" vor, die gerne ihr Wissen über das vom älteren Schüler ausgewählte Thema teilt. Sag dem Schüler, dass du viel gelernt hast, aber nicht sicher bist, ob du die Themen vollständig verstanden hast und ihm gerne ein Thema erklären möchtest und von ihm hören möchtest, ob deine Erklärung richtig ist.
@@ -84,6 +106,10 @@ Erstelle einen Absatz zur Erklärung des Themas und eine Anwendung des Themas.
 Frag den Schüler dann, wie gut du warst, und bitte ihn zu erklären, was du in deinen Beispielen und Erklärungen richtig oder falsch gemacht hast und wie du dich beim nächsten Mal verbessern kannst.
 Sag dem Schüler, dass du, wenn du alles richtig gemacht hast, gerne hören würdest, wie du das Konzept richtig angewendet hast.
 Beende das Gespräch, indem du dem Schüler dankst.`;
+
+  const initialAISystemPrompt = isTeachingAI
+    ? initialAISystemPromptTeaching
+    : initialAISystemPromptEvaluating;
 
   const initialMessage: CBChatMessage = useMemo(
     () => ({
@@ -169,11 +195,21 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
     [chatMessages, setCurrentExerciseFinished],
   );
 
-  const termSuggestions: string[] = [
+  const termSuggestionsForTeaching: string[] = [
+    "Aufbau des Zellkerns",
+    "Aufgabe von Mitochondrien",
+    "Golgi-Apparat",
+  ];
+
+  const termSuggestionsForEvaluating: string[] = [
     "Aufbau des Zellkerns als Fußballstadion",
     "Aufgabe von Mitochondrien",
     "Golgi-Apparat als Gedicht",
   ];
+
+  const termSuggestions = isTeachingAI
+    ? termSuggestionsForTeaching
+    : termSuggestionsForEvaluating;
 
   const showSuggestions = chatMessages.length === 2;
 
@@ -196,22 +232,23 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
       const chatMessagesWithoutSystemPrompt = chatMessages.slice(1);
 
-      getOpenAIProtegeChatEvaluation(chatMessagesWithoutSystemPrompt).then(
-        (response) => {
-          setAPIGetChatEvaluationRequestState(CBAPIRequestState.Success);
+      getOpenAIProtegeChatEvaluation(
+        isTeachingAI,
+        chatMessagesWithoutSystemPrompt,
+      ).then((response) => {
+        setAPIGetChatEvaluationRequestState(CBAPIRequestState.Success);
 
-          const isCorrect = response.evaluation >= 3;
+        const isCorrect = response.evaluation >= 3;
 
-          setEvaluation(response);
-          setEvaluationDialogOpen(true);
+        setEvaluation(response);
+        setEvaluationDialogOpen(true);
 
-          if (isCorrect) {
-            playCorrectSound();
-          } else {
-            playIncorrectSound();
-          }
-        },
-      );
+        if (isCorrect) {
+          playCorrectSound();
+        } else {
+          playIncorrectSound();
+        }
+      });
     }
   };
 
@@ -338,7 +375,7 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                       disabled={isCurrentExerciseFinished}
                       // Disallow sending messages while the API request is in progress
                       onConfirm={disabled ? () => {} : onSendMessage}
-                      rows={1}
+                      rows={2}
                     />
                   )}
                 </Stack>
@@ -382,7 +419,10 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
               </Typography>
 
               <Typography>
-                {`Die KI bekommt die Aufgabe, dir einen Begriff zu erklären. Deine
+                {isTeachingAI
+                  ? `Deine Aufgabe ist es, der KI ein Thema zu erklären. Das hilft dir dein Wissen
+                über das Thema zu festigen. Dies nennt sich "Protégé-Effekt".`
+                  : `Die KI bekommt die Aufgabe, dir einen Begriff zu erklären. Deine
                 Aufgabe ist es, die Erklärungen der KI zu bewerten und
                 Verbesserungsvorschläge zu machen. Das hilft dir dein Wissen
                 über das Thema zu festigen. Dies nennt sich "Protégé-Effekt".`}

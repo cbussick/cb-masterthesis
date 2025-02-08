@@ -49,6 +49,7 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
   [CBExerciseType.LabelImage]: [],
   [CBExerciseType.LabelImageVariation]: [],
   [CBExerciseType.ProtegeChat]: [],
+  [CBExerciseType.ProtegeChatTeaching]: [],
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
@@ -62,6 +63,7 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
   [CBExerciseType.ProtegeChat]: 1,
+  [CBExerciseType.ProtegeChatTeaching]: 1,
 };
 
 const getRandomExercises = (
@@ -202,11 +204,14 @@ export default function FreePracticeSequencePage({
 
         setExercises(exercisesWithMetaData);
       }
-    } else if (exerciseType === CBExerciseType.ProtegeChat) {
+    } else if (
+      exerciseType === CBExerciseType.ProtegeChat ||
+      exerciseType === CBExerciseType.ProtegeChatTeaching
+    ) {
       exercisesWithMetaData.push({
         id: "1",
         topic,
-        type: CBExerciseType.ProtegeChat,
+        type: exerciseType,
         isCompleted: false,
       });
 
