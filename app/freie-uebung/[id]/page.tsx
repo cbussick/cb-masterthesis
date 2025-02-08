@@ -195,23 +195,23 @@ export default function FreePracticeSubpage({
 
           <Grid {...commonGridItemProps}>
             <CBInfoCard
-              text={exercisesData[CBExerciseType.ProtegeChat].name}
-              image={{
-                src: "/protege-chat-card.png",
-                alt: "Protégé-Chat (Erklärung bewerten)",
-              }}
-              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChat}`}
-            />
-          </Grid>
-
-          <Grid {...commonGridItemProps}>
-            <CBInfoCard
               text={exercisesData[CBExerciseType.ProtegeChatTeaching].name}
               image={{
                 src: "/protege-chat-card05.png",
                 alt: "Protégé-Chat (Thema erklären)",
               }}
               href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChatTeaching}`}
+            />
+          </Grid>
+
+          <Grid {...commonGridItemProps}>
+            <CBInfoCard
+              text={exercisesData[CBExerciseType.ProtegeChat].name}
+              image={{
+                src: "/protege-chat-card.png",
+                alt: "Protégé-Chat (Erklärung bewerten)",
+              }}
+              href={`${CBRoute.FreieUebung}/${topic}/${CBExerciseType.ProtegeChat}`}
             />
           </Grid>
 

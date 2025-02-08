@@ -1,9 +1,11 @@
 "use client";
 
 import { CBChatMessageRole } from "@/data/exercises/CBChatMessage";
+import { useUser } from "@/firebase-client/useUser";
 import { Stack, Typography } from "@mui/material";
 import { motion, MotionProps, useAnimationControls } from "framer-motion";
 import { useEffect } from "react";
+import { CBAvatar } from "../CBAvatar/CBAvatar";
 import { CBChatMessageVisualizationProps } from "./CBChatMessageVisualizationInterfaces";
 
 const animationVariants: MotionProps["variants"] = {
@@ -16,6 +18,7 @@ const animationVariants: MotionProps["variants"] = {
 export const CBChatMessageVisualization = ({
   message,
 }: CBChatMessageVisualizationProps): JSX.Element => {
+  const { customData } = useUser();
   const animationControls = useAnimationControls();
 
   useEffect(() => {
@@ -40,13 +43,26 @@ export const CBChatMessageVisualization = ({
       animate={animationControls}
       variants={animationVariants}
     >
-      <Typography
-        sx={{
-          fontWeight: (t) => t.typography.fontWeightBold,
-        }}
-      >
-        {isAI ? "DiNA" : "Du"}
-      </Typography>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <CBAvatar
+          image={{
+            src: isAI ? "/logo/dina.svg" : customData.profilePicture,
+            alt: isAI ? "DiNA" : "Dein Profilbild",
+          }}
+          imageSize={35}
+          avatarProps={{
+            sx: { border: (t) => `2px solid ${t.palette.grey[300]}` },
+          }}
+        />
+
+        <Typography
+          sx={{
+            fontWeight: (t) => t.typography.fontWeightBold,
+          }}
+        >
+          {isAI ? "DiNA" : "Du"}
+        </Typography>
+      </Stack>
 
       <Typography sx={{ whiteSpace: "pre-wrap" }}>{message.content}</Typography>
     </Stack>

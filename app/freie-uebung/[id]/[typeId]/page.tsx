@@ -53,13 +53,13 @@ const exercisesMap: Record<CBExerciseType, CBExercise[]> = {
 };
 
 const exerciseAmountMap: Record<CBExerciseType, number> = {
-  [CBExerciseType.Quiz]: 10,
-  [CBExerciseType.AIQuiz]: 10,
+  [CBExerciseType.Quiz]: 5,
+  [CBExerciseType.AIQuiz]: 5,
   [CBExerciseType.FamilyTree]: 2,
   [CBExerciseType.MatchingGame]: 5,
-  [CBExerciseType.Swiper]: 10,
-  [CBExerciseType.FreeformQuestionWithCorrectAnswer]: 10,
-  [CBExerciseType.AIGeneratedQuestion]: 10,
+  [CBExerciseType.Swiper]: 5,
+  [CBExerciseType.FreeformQuestionWithCorrectAnswer]: 5,
+  [CBExerciseType.AIGeneratedQuestion]: 5,
   [CBExerciseType.LabelImage]: 1,
   [CBExerciseType.LabelImageVariation]: 1,
   [CBExerciseType.ProtegeChat]: 1,
@@ -67,13 +67,13 @@ const exerciseAmountMap: Record<CBExerciseType, number> = {
 };
 
 const getRandomExercises = (
-  amountOfExercises: number,
+  exerciseAmount: number,
   exercises: CBExerciseWithMetaData[],
 ): CBExerciseWithMetaData[] => {
   const randomExercises: CBExerciseWithMetaData[] = [];
   const usedIndexes: number[] = [];
   let i = 0;
-  while (i < amountOfExercises) {
+  while (i < exerciseAmount) {
     const randomIndex = Math.floor(Math.random() * exercises.length);
     if (!usedIndexes.includes(randomIndex)) {
       const randomExercise = exercises[randomIndex];

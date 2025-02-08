@@ -1,6 +1,5 @@
 "use client";
 
-import { CBAvatar } from "@/components/CBAvatar/CBAvatar";
 import { CBChatIsTypingIndicator } from "@/components/CBChatIsTypingIndicator/CBChatIsTypingIndicator";
 import { CBChatMessageSuggestion } from "@/components/CBChatMessageSuggestion/CBChatMessageSuggestion";
 import { CBChatMessageVisualization } from "@/components/CBChatMessageVisualization/CBChatMessageVisualization";
@@ -197,14 +196,14 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   const termSuggestionsForTeaching: string[] = [
     "Aufbau des Zellkerns",
-    "Aufgabe von Mitochondrien",
+    "Aufgabe des Mitochondrium",
     "Golgi-Apparat",
   ];
 
   const termSuggestionsForEvaluating: string[] = [
-    "Aufbau des Zellkerns als Fußballstadion",
-    "Aufgabe von Mitochondrien",
-    "Golgi-Apparat als Gedicht",
+    "Aufbau des Zellkerns",
+    "Aufgabe des Mitochondrium",
+    "Golgi-Apparat",
   ];
 
   const termSuggestions = isTeachingAI
@@ -291,18 +290,9 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
                 alignItems: "center",
                 border: (t) => `2px solid ${t.palette.grey[300]}`,
                 borderRadius: 3,
-                py: 1,
-                px: 2,
+                p: 2,
               }}
             >
-              <CBAvatar
-                image={{ src: "/logo/dina.svg", alt: "DiNA" }}
-                imageSize={75}
-                avatarProps={{
-                  sx: { border: (t) => `2px solid ${t.palette.grey[300]}` },
-                }}
-              />
-
               <Stack
                 spacing={2}
                 sx={{
