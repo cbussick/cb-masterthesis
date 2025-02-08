@@ -25,7 +25,7 @@ Beurteilungsschritte:
 	• Punktzahl 2: Wenn die Antwort des Schülers zwar nicht der Musterlösung ähnlich ist, aber etwas anderes beschreibt, was im Bild zu sehen ist.
 	• Punktzahl 3: Wenn die Antwort des Schülers der Musterlösung ähnelt.
 Nachdem Sie die Antwort bewertet haben, geben Sie die Punktzahl in das Feld "evaluation" ein.
-Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen.
+Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen. Erwähnen Sie dabei nicht die Musterlösung.
 Falls die Bewertung eine 1 ist, geben Sie dem Schüler konstruktives Feedback, wie er seine Antworten in Zukunft verbessern kann und ermutigen Sie ihn nicht aufzugeben.
 Falls die Bewertung eine 2 oder 3 ist, geben Sie Schüler B positives Feedback und ermutigen Sie ihn sich weiter zu verbessern.
 Schreiben Sie dieses Feedback in das Feld "feedback".`,

@@ -43,7 +43,7 @@ export const CBLabelImage = ({
         setAPIRequestState(CBAPIRequestState.Success);
 
         setCurrentExerciseFinished(true);
-        const isCorrect = response.evaluation;
+        const isCorrect = response.evaluation >= 2;
 
         if (isCorrect) {
           onCompleteExercise({ exerciseId: exercise.id, isCorrect });

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const CBImageLabelEvaluationSchema = z.object({
-  evaluation: z.boolean(),
+  evaluation: z.number(),
   feedback: z.string(),
 });
 
