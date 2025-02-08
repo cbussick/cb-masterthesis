@@ -38,8 +38,8 @@ export const CBSignUpForm = (): JSX.Element => {
     watch,
   } = useForm<SignUpFormValues>();
 
-  const firstName = watch(firstNameId);
-  const lastName = watch(lastNameId);
+  // const firstName = watch(firstNameId);
+  // const lastName = watch(lastNameId);
   const email = watch(emailId);
   const name = watch(nameId);
   const password = watch(passwordId);
@@ -53,8 +53,10 @@ export const CBSignUpForm = (): JSX.Element => {
   const handleSignUp = () => {
     setLoading(true);
     signUpUser(
-      firstName,
-      lastName,
+      // firstName,
+      // lastName,
+      "test",
+      "test",
       email,
       password,
       name,
@@ -82,35 +84,39 @@ export const CBSignUpForm = (): JSX.Element => {
       <form onSubmit={handleSubmit(handleSignUp)} noValidate>
         <Stack spacing={3}>
           <Stack spacing={2}>
-            <TextField
-              label="Vorname"
-              type="text"
-              {...register(firstNameId, {
-                required: "Bitte gib deinen Vornamen ein",
-                pattern: {
-                  value: nameRegex,
-                  message: "Bitte gib einen gültigen Vornamen ein",
-                },
-              })}
-              error={!!errors.firstName}
-              helperText={errors.firstName?.message}
-              disabled={isLoading}
-            />
+            {false && (
+              <TextField
+                label="Vorname"
+                type="text"
+                {...register(firstNameId, {
+                  required: "Bitte gib deinen Vornamen ein",
+                  pattern: {
+                    value: nameRegex,
+                    message: "Bitte gib einen gültigen Vornamen ein",
+                  },
+                })}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+                disabled={isLoading}
+              />
+            )}
 
-            <TextField
-              label="Nachname"
-              type="text"
-              {...register(lastNameId, {
-                required: "Bitte gib deinen Nachnamen ein",
-                pattern: {
-                  value: nameRegex,
-                  message: "Bitte gib einen gültigen Nachnamen ein",
-                },
-              })}
-              error={!!errors.lastName}
-              helperText={errors.lastName?.message}
-              disabled={isLoading}
-            />
+            {false && (
+              <TextField
+                label="Nachname"
+                type="text"
+                {...register(lastNameId, {
+                  required: "Bitte gib deinen Nachnamen ein",
+                  pattern: {
+                    value: nameRegex,
+                    message: "Bitte gib einen gültigen Nachnamen ein",
+                  },
+                })}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+                disabled={isLoading}
+              />
+            )}
 
             <TextField
               label="E-Mail"
