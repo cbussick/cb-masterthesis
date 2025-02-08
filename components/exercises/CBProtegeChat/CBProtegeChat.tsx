@@ -197,14 +197,14 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   const termSuggestionsForTeaching: string[] = [
     "Aufbau des Zellkerns",
-    "Aufgabe von Mitochondrien",
+    "Aufgabe des Mitochondrium",
     "Golgi-Apparat",
   ];
 
   const termSuggestionsForEvaluating: string[] = [
-    "Aufbau des Zellkerns als Fußballstadion",
-    "Aufgabe von Mitochondrien",
-    "Golgi-Apparat als Gedicht",
+    "Aufbau des Zellkerns",
+    "Aufgabe des Mitochondrium",
+    "Golgi-Apparat",
   ];
 
   const termSuggestions = isTeachingAI
