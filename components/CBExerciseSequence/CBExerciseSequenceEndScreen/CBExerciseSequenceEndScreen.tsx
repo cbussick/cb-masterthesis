@@ -124,7 +124,7 @@ export const CBExerciseSequenceEndScreen = ({
               textAlign: "center",
             }}
           >
-            Nur noch ein paar Aufgaben, die du wiederholen musst!
+            Bleib dran, du schaffst das!
           </Typography>
         )}
 

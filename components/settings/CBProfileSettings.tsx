@@ -131,15 +131,19 @@ export const CBProfileSettings = (): JSX.Element => {
               onClickEdit={() => setEditingPassword(true)}
             />
 
-            <CBEditTextField
-              label="Vorname"
-              value={user.customData.firstName}
-            />
+            {false && (
+              <CBEditTextField
+                label="Vorname"
+                value={user.customData.firstName}
+              />
+            )}
 
-            <CBEditTextField
-              label="Nachname"
-              value={user.customData.lastName}
-            />
+            {false && (
+              <CBEditTextField
+                label="Nachname"
+                value={user.customData.lastName}
+              />
+            )}
 
             <CBEditTextField label="E-Mail" value={user.user.email || ""} />
 
