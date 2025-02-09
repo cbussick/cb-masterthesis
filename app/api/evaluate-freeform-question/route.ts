@@ -27,7 +27,7 @@ const examples: ChatCompletionMessageParam[] = [
   },
   {
     role: "assistant",
-    content: `{evaluation: 1, feedback: "Deine Antwort ist leider nicht richtig. Schutz ist nicht die Hauptfunktion des Endoplasmatischen Retikulums (ER). Schau dir die Funktionen des ER nochmal genau an – du schaffst das! 💪🏻"}`,
+    content: `{evaluation: 1, feedback: "Deine Antwort ist leider nicht richtig. Schutz ist nicht die Hauptfunktion des Endoplasmatischen Retikulums (ER). Schau dir die Funktionen des ER nochmal genau an – du schaffst das!"}`,
   },
   {
     role: "user",
