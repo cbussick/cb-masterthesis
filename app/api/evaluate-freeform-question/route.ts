@@ -27,7 +27,7 @@ const examples: ChatCompletionMessageParam[] = [
   },
   {
     role: "assistant",
-    content: `{evaluation: 1, feedback: "Deine Antwort ist leider nicht richtig. Schutz ist nicht die Hauptfunktion des Endoplasmatischen Retikulums (ER). Schau dir die Funktionen des ER nochmal genau an – du schaffst das! 💪🏻"}`,
+    content: `{evaluation: 1, feedback: "Deine Antwort ist leider nicht richtig. Schutz ist nicht die Hauptfunktion des Endoplasmatischen Retikulums (ER). Schau dir die Funktionen des ER nochmal genau an – du schaffst das!"}`,
   },
   {
     role: "user",
@@ -83,7 +83,7 @@ Beurteilungsschritte:
 	• Punktzahl 4: Wenn die Antwort gut geschrieben, klar und auf die Frage fokussiert ist. Sie bietet eine vollständige und umfassende Antwort mit geringem Verbesserungspotenzial.
 	• Punktzahl 5: Wenn die Antwort eine perfekte Antwort auf die Frage ist. Sie ist bewusst geschrieben, frei von irrelevanten Inhalten, von hoher Qualität und zeugt von Expertenwissen.
 Nachdem Sie die Antwort bewertet haben, geben Sie die Punktzahl in das Feld "evaluation" ein.
-Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen.
+Formulieren Sie zudem Feedback für den Schüler in maximal 2 Sätzen. Sprechen Sie dabei den Schüler direkt an und erwähnen Sie nicht die Begriffsdefinition.
 Falls die Bewertung eine 1 oder 2 ist, geben Sie dem Schüler konstruktives Feedback, wie er seine Antwort verbessern kann und ermutigen Sie ihn nicht aufzugeben.
 Falls die Bewertung eine 3 ist, geben Sie dem Schüler konstruktives Feedback, wie er seine Antwort verbessern kann und ermutigen Sie ihn weiterzumachen.
 Falls die Bewertung eine 4 oder 5 ist, geben Sie dem Schüler positives Feedback und ermutigen Sie ihn sich weiter zu verbessern.
