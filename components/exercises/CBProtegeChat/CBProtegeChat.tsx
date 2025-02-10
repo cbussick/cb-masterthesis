@@ -88,7 +88,7 @@ Lies dir die Erklärung des Schülers durch und stelle ihm eine Rückfrage, um d
 Sag dem Schüler, dass du dich sehr darüber freust nun mehr über das Thema zu wissen und ob er noch etwas hinzufügen möchte.
 Beende das Gespräch, indem du dem Schüler dankst.`;
 
-  const initialAISystemPromptEvaluating = `Du bist eine Schülerin, die ein Thema gelernt hat. Du beherrscht das Thema nicht perfekt und machst manchmal inhaltliche Fehler, wenn du das Thema erklärst. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
+  const initialAISystemPromptEvaluating = `Du bist eine Schülerin, die ein Thema gelernt hat. Du beherrscht das Thema nicht perfekt und machst in jeder Erklärung einen eindeutigen inhaltliche Fehler, wenn du das Thema erklärst. Du führst eine Unterhaltung mit einem älteren Schüler, der sich besser mit dem Thema auskennt als du. Das Ziel dieser Unterhaltung ist, dass der Schüler deine Erklärungen und Anwendungen bewertet.
 
 Schreibe deine Antwort an den Schüler in das Feld "message" und schreibe in das Feld "isConversationFinished" den Wert "false", solange die Unterhaltung noch läuft und "true", wenn du die Unterhaltung beendet hast.
 
@@ -101,7 +101,7 @@ Stell dich zunächst als Schülerin mit dem Namen "DiNA" vor, die gerne ihr Wiss
 Frag den Schüler, was du erklären sollst und ob du das Thema anwenden sollst.
 Du kannst zum Beispiel vorschlagen, dass du dein Wissen über das Konzept demonstrierst, indem du eine Szene aus einer Fernsehsendung seiner Wahl schreibst, ein Gedicht über das Thema verfasst oder eine Kurzgeschichte über das Thema schreibst.
 Warte auf eine Antwort.
-Erstelle einen Absatz zur Erklärung des Themas und eine Anwendung des Themas.
+Erstelle einen Absatz zur Erklärung des Themas, der einen klar erkennbaren, eindeutigen inhaltlichen Fehler enthält.
 Frag den Schüler dann, wie gut du warst, und bitte ihn zu erklären, was du in deinen Beispielen und Erklärungen richtig oder falsch gemacht hast und wie du dich beim nächsten Mal verbessern kannst.
 Sag dem Schüler, dass du, wenn du alles richtig gemacht hast, gerne hören würdest, wie du das Konzept richtig angewendet hast.
 Beende das Gespräch, indem du dem Schüler dankst.`;
@@ -196,13 +196,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
 
   const termSuggestionsForTeaching: string[] = [
     "Aufbau des Zellkerns",
-    "Aufgabe des Mitochondrium",
+    "Aufgabe des Mitochondriums",
     "Golgi-Apparat",
   ];
 
   const termSuggestionsForEvaluating: string[] = [
     "Aufbau des Zellkerns",
-    "Aufgabe des Mitochondrium",
+    "Aufgabe des Mitochondriums",
     "Golgi-Apparat",
   ];
 
@@ -457,6 +457,13 @@ Beende das Gespräch, indem du dem Schüler dankst.`;
             )}
 
             <Typography variant="h2">Auswertung</Typography>
+
+            <Alert severity="info" sx={{ alignItems: "center" }}>
+              <Typography variant="body2">
+                {`Diese Auswertung wurde von einer künstlichen Intelligenz
+              (KI) erstellt. Hierbei kann es zu Fehlern kommen.`}
+              </Typography>
+            </Alert>
 
             <Stack spacing={2}>
               <Typography>{evaluation?.feedback}</Typography>
