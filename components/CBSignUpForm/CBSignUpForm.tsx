@@ -6,7 +6,7 @@ import { signUpUser } from "@/firebase-client/signUpUser";
 import { CBUserRole } from "@/firebase-client/userRole";
 import { emailRegex, nameRegex, usernameRegex } from "@/helpers/regex";
 import { useSnackbar } from "@/ui/useSnackbar";
-import { Stack, TextField } from "@mui/material";
+import { Alert, Stack, TextField } from "@mui/material";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -130,7 +130,8 @@ export const CBSignUpForm = (): JSX.Element => {
               })}
               error={!!errors.email}
               helperText={errors.email?.message}
-              disabled={isLoading}
+              // disabled={isLoading}
+              disabled
             />
 
             <TextField
@@ -145,7 +146,8 @@ export const CBSignUpForm = (): JSX.Element => {
               })}
               error={!!errors.name}
               helperText={errors.name?.message}
-              disabled={isLoading}
+              // disabled={isLoading}
+              disabled
             />
 
             <TextField
@@ -156,11 +158,16 @@ export const CBSignUpForm = (): JSX.Element => {
               })}
               error={!!errors.password}
               helperText={errors.password?.message}
-              disabled={isLoading}
+              // disabled={isLoading}
+              disabled
             />
           </Stack>
 
-          <CBLoadingButton type="submit" isLoading={isLoading}>
+          <Alert severity="info">
+            Aktuell können keine neuen Accounts angelegt werden.
+          </Alert>
+
+          <CBLoadingButton type="submit" disabled isLoading={isLoading}>
             Registrieren
           </CBLoadingButton>
         </Stack>
