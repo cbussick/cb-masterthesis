@@ -27,7 +27,7 @@ export const getOpenAILabelImageExercise = async (
       image = await getOpenAIImageVariation(randomEntry.image1x1);
     }
   } else {
-    const generationPrompt = `Illustration of ${randomEntry?.term}, depicted in an educational style, perfect for a biology textbook. ONLY SHOW THE ILLUSTRATION, NOTHING ELSE. There should be no labels, no arrows, no text and no numbers ANYWHERE in the image, as the image is for an exercise where the student needs to describe the image on their own. Show the illustration in front of a neutral, white background.`;
+    const generationPrompt = `Illustration of ${randomEntry?.term}, depicted in an educational style, perfect for a biology textbook. There should be no labels, no arrows, no text and no numbers ANYWHERE in the image, as the image is for an exercise where the student needs to describe the image on their own. Show the illustration in front of a neutral, white background.`;
 
     image = await getOpenAIImage(generationPrompt);
   }
